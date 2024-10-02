@@ -19,6 +19,11 @@ editor:
 
 ## Description
 
+**Unlocking Analysis Results Datasets: A Practical Workshop for Creating and Utilizing ARDs for Clinical Reporting**
+
+The CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis summaries in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability.
+The newly released {cards} R package, a collaborative effort including Roche, GSK, and Novartis, offers a variety of functions for ARD generation. These range from basic univariate summaries like means and tabulations to complex multivariable summaries encompassing regression models and statistical tests.
+In this interactive workshop, attendees will learn about ARDs and how they fit into the larger CDISC Analysis Results Standard. They will get hands-on experience using {cards} to build ARDs for both simple and complex statistical summaries. Lastly, attendees will also be introduced to open-source tools for converting their ARDs into tables using the {gtsummary} and {tfrmt} R packages. Attendees will leave with a solid understanding of ARDs and the knowledge of how to integrate them into their daily work using open-source tools.
 
 ## Schedule
 
@@ -38,7 +43,7 @@ tibble::tribble(
     style = "vertical-align:top",
     locations = gt::cells_body(columns = gt::everything())
   ) |> 
-  gt::cols_label(time = gt::md("**Section**"), desc = gt::md("**Activity**")) |> 
+  gt::cols_label(time = gt::md("**Section**"), desc = gt::md("**Topic**")) |> 
   gt::fmt_markdown()
 ```
 
@@ -85,3 +90,6 @@ specializes in developing R-based tools.
 
 <br>
 
+## Workshop Assistant
+
+**Jack Talboys**
