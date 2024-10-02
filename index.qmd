@@ -1,6 +1,6 @@
 ---
-title: "Analysis Results Datasets (ARDs)"
-subtitle: "Workshop@[R in Pharma](https://events.zoom.us/ev/AvobJEOTVwkUnH6_TgLZDZJauk4dxfm5jCG8JFNN9zukOcsVLvTN~AmO5XY5HRBcxkKG6Hga1aXZaYtpBSER6jHms1seP-NNOA0dhcQZUGJ2NWg)"
+title: "Unlocking Analysis Results Datasets (ARDs)"
+subtitle: "A Practical Workshop for Creating and Utilizing ARDs for Clinical Reporting"
 engine: knitr
 editor: 
   markdown: 
@@ -11,15 +11,13 @@ editor:
 
 🗓️ October 28, 2024 \| Time TBA
 
-📝 [Workshop Registration](https://events.zoom.us/ev/AvobJEOTVwkUnH6_TgLZDZJauk4dxfm5jCG8JFNN9zukOcsVLvTN~AmO5XY5HRBcxkKG6Hga1aXZaYtpBSER6jHms1seP-NNOA0dhcQZUGJ2NWg)
+📝 [R in Pharma & Workshop Registration](https://events.zoom.us/ev/AvobJEOTVwkUnH6_TgLZDZJauk4dxfm5jCG8JFNN9zukOcsVLvTN~AmO5XY5HRBcxkKG6Hga1aXZaYtpBSER6jHms1seP-NNOA0dhcQZUGJ2NWg)
 
 🌐 Virtual and FREE!
 
 ------------------------------------------------------------------------
 
 ## Description
-
-**Unlocking Analysis Results Datasets: A Practical Workshop for Creating and Utilizing ARDs for Clinical Reporting**
 
 The CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis summaries in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability.
 The newly released {cards} R package, a collaborative effort including Roche, GSK, and Novartis, offers a variety of functions for ARD generation. These range from basic univariate summaries like means and tabulations to complex multivariable summaries encompassing regression models and statistical tests.
