@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.3",
+    "Version": "4.4.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -580,7 +580,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "f85812a3f6a04d51be696114d7fee366"
+      "Hash": "2ded97f46321346f8345fdabfc0b4bdf"
     },
     "sass": {
       "Package": "sass",
