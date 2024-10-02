@@ -26,6 +26,11 @@ editor:
 #| echo: false
 tibble::tribble(
   ~time, ~desc,
+  "Section 1", "Introduction to the Analysis Results Standard",
+  "Section 2", "The {cards} Package",
+  "Section 3", "The {cardx} Package",
+  "Section 4", "ARD Extras",
+  "Section 5", "ARD to Tables with {gtsummary} and {tfrmt}",
 ) |> 
   gt::gt() |> 
   gt::cols_align(align = "left") |> 
@@ -33,7 +38,7 @@ tibble::tribble(
     style = "vertical-align:top",
     locations = gt::cells_body(columns = gt::everything())
   ) |> 
-  gt::cols_label(time = gt::md("**Time**"), desc = gt::md("**Activity**")) |> 
+  gt::cols_label(time = gt::md("**Section**"), desc = gt::md("**Activity**")) |> 
   gt::fmt_markdown()
 ```
 
