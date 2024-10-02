@@ -24,7 +24,7 @@
     "href": "index.html#schedule",
     "title": "Analysis Results Datasets (ARDs)",
     "section": "Schedule",
-    "text": "Schedule\n\n\n\n\n\n\n\n\n\n\n\n\nTime\nActivity",
+    "text": "Schedule\n\n\n\n\n\n\n\n\n\n\n\n\nSection\nActivity\n\n\n\n\nSection 1\nIntroduction to the Analysis Results Standard\n\n\nSection 2\nThe {cards} Package\n\n\nSection 3\nThe {cardx} Package\n\n\nSection 4\nARD Extras\n\n\nSection 5\nARD to Tables with {gtsummary} and {tfrmt}",
     "crumbs": [
       "Home"
     ]
