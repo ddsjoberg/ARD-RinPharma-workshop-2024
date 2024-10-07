@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/index.html</loc>
-    <lastmod>2024-10-07T16:35:30.720Z</lastmod>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/index.html</loc>
+    <lastmod>2024-10-07T19:05:58.971Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides.html</loc>
+    <lastmod>2024-10-07T19:05:58.947Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/license.html</loc>
-    <lastmod>2024-10-07T16:35:30.720Z</lastmod>
+    <lastmod>2024-10-07T19:05:58.947Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/index.html</loc>
+    <lastmod>2024-10-07T19:05:58.947Z</lastmod>
   </url>
 </urlset>

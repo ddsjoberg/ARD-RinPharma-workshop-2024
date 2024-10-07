@@ -1,5 +1,214 @@
 [
   {
+    "objectID": "slides/index.html#this-workshop-is-for-you-if",
+    "href": "slides/index.html#this-workshop-is-for-you-if",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "This workshop is for you if…",
+    "text": "This workshop is for you if…\n\n\nYou want to learn about ARDs\nYou want to learn about new tools for working with ARDs\nYou want to learn how to make displays from ARDs\nYou want to practice coding with hands-on exercises"
+  },
+  {
+    "objectID": "slides/index.html#workshop-expectations",
+    "href": "slides/index.html#workshop-expectations",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Workshop expectations",
+    "text": "Workshop expectations\n\n\nWhat to do if you find a bug?\nAsk questions!\nLet us know in the chat if you need help\nBe respectful, follow the Terms and Conditions of R/Pharma https://rinpharma.com/terms/"
+  },
+  {
+    "objectID": "slides/index.html#instructors",
+    "href": "slides/index.html#instructors",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\n\n\n\n\n\n\nDaniel Sjoberg, Roche\n\n\n\n\n\n\n\nBecca Krouse, GSK\n\n\n\n\n\n\nWho are we? What do we do? Why are we here?"
+  },
+  {
+    "objectID": "slides/index.html#who-are-you",
+    "href": "slides/index.html#who-are-you",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Who are you?",
+    "text": "Who are you?\nlink to slido quiz"
+  },
+  {
+    "objectID": "slides/index.html#workshop-outline",
+    "href": "slides/index.html#workshop-outline",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Workshop outline",
+    "text": "Workshop outline\n\n\nAnalysis Results Standard (ARS) and Analysis Results Data (ARD)\n{cards} R package\n{cardx} R package\nTabling with {gtsummary} and {tfrmt}"
+  },
+  {
+    "objectID": "slides/index.html#working-environment",
+    "href": "slides/index.html#working-environment",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Working environment",
+    "text": "Working environment\n\n\nFor consistency, we will be working in RStudio Cloud\nEverything has been installed and set up for you\nFollowing the course, all content from this workshop will be available on GitHub"
+  },
+  {
+    "objectID": "slides/index.html#quick-warm-up",
+    "href": "slides/index.html#quick-warm-up",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Quick warm-up",
+    "text": "Quick warm-up\n\n\nRStudio cloud setup\nRunning a bit of code"
+  },
+  {
+    "objectID": "slides/index.html#analysis-results-standard-ars",
+    "href": "slides/index.html#analysis-results-standard-ars",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Analysis Results Standard (ARS)",
+    "text": "Analysis Results Standard (ARS)"
+  },
+  {
+    "objectID": "slides/index.html#analysis-results-standard-ars-1",
+    "href": "slides/index.html#analysis-results-standard-ars-1",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Analysis Results Standard (ARS)",
+    "text": "Analysis Results Standard (ARS)\n\nEmerging standard for prospectively encoding statistical analysis reporting pipeline in a machine-readable format.\nPrimary objectives are to leverage analysis results metadata to drive the automation of results and support storage, access, processing, traceability and reproducibility of results.\nLogical model that describes analysis results and associated metadata.\nFocus on concepts, not layout, e.g. the summary statistics, not how the results are shown in a table.\nLearn more at https://www.cdisc.org/events/webinar/analysis-results-standard-public-review"
+  },
+  {
+    "objectID": "slides/index.html#analysis-results-standard-ars-2",
+    "href": "slides/index.html#analysis-results-standard-ars-2",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Analysis Results Standard (ARS)",
+    "text": "Analysis Results Standard (ARS)\nExample ARS Flow"
+  },
+  {
+    "objectID": "slides/index.html#analysis-results-standard-ars-3",
+    "href": "slides/index.html#analysis-results-standard-ars-3",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Analysis Results Standard (ARS)",
+    "text": "Analysis Results Standard (ARS)\nExample ARS Flow"
+  },
+  {
+    "objectID": "slides/index.html#analysis-results-data-ard",
+    "href": "slides/index.html#analysis-results-data-ard",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Analysis Results Data (ARD)",
+    "text": "Analysis Results Data (ARD)\n\nEncodes statistical analysis outcomes in a machine-readable format.\nPrimary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability.\nThe ARD model specified how statistical results are saved into a structured format.\nThe ARD can be used to to subsequently create tables and figures."
+  },
+  {
+    "objectID": "slides/index.html#analysis-results-data-ard-1",
+    "href": "slides/index.html#analysis-results-data-ard-1",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Analysis Results Data (ARD)",
+    "text": "Analysis Results Data (ARD)\n\nAfter the initial creation of an ARD, the results can later be re-used again and again for subsequent reporting needs."
+  },
+  {
+    "objectID": "slides/index.html#a-few-notes-about-ards",
+    "href": "slides/index.html#a-few-notes-about-ards",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "A few notes about ARDs",
+    "text": "A few notes about ARDs\n\nQC is done on raw value\n\nYou don’t have to waste time trying to match formatting to match QC\n\nBut…\n\nQC will be more sensitive to floating point\nQC tolerance will need to be defined\n\nARD can be saved as a dataset (rds, xpt, etc) or json file"
+  },
+  {
+    "objectID": "slides/index.html#cards-r-package",
+    "href": "slides/index.html#cards-r-package",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards} R Package ",
+    "text": "{cards} R Package \nLet’s check out a simple example\n\nlibrary(cards)\n\n# create ARD with default summary statistics\nard_continuous(ADSL, variables = AGE)\n\n{cards} data frame: 8 x 8\n\n\n  variable   context stat_name stat_label   stat fmt_fn\n1      AGE continuo…         N          N    254      0\n2      AGE continuo…      mean       Mean 75.087      1\n3      AGE continuo…        sd         SD  8.246      1\n4      AGE continuo…    median     Median     77      1\n5      AGE continuo…       p25         Q1     70      1\n6      AGE continuo…       p75         Q3     81      1\n7      AGE continuo…       min        Min     51      1\n8      AGE continuo…       max        Max     89      1\n\n\nℹ 2 more variables: warning, error"
+  },
+  {
+    "objectID": "slides/index.html#cards-ard_continuous-arguments",
+    "href": "slides/index.html#cards-ard_continuous-arguments",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: ard_continuous() arguments",
+    "text": "{cards}: ard_continuous() arguments\n\n\nby: summary statistics are calculated by all combinations of the by variables, including unobserved factor levels\nstatistic: specify univariate summary statistics. Accepts any function, base R, from a package, or user-defined.\nfmt_fn: Override the default formatting functions, e.g. when you need\n\n\n\nADSL |&gt; \n  ard_continuous(\n    variables = AGE,\n    by = ARM,                               # stats by treatment arm\n    statistic = ~list(mean = \\(x) mean(x)), # return the mean\n    fmt_fn = ~list(mean = 0)                # format the result\n  ) |&gt; \n  apply_fmt_fn() # add a character column of rounded results\n\n{cards} data frame: 3 x 11\n\n\n  group1 group1_level variable stat_name stat_label   stat stat_fmt\n1    ARM      Placebo      AGE      mean       Mean 75.209       75\n2    ARM    Xanomeli…      AGE      mean       Mean 74.381       74\n3    ARM    Xanomeli…      AGE      mean       Mean 75.667       76\n\n\nℹ 4 more variables: context, fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/index.html#cards-ard_continuous-statistics",
+    "href": "slides/index.html#cards-ard_continuous-statistics",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: ard_continuous() statistics",
+    "text": "{cards}: ard_continuous() statistics\n\ntidy_ttest &lt;- function(x){\n  t.test(x) |&gt; broom::tidy()\n}\ntidy_ttest(ADSL$AGE)\n\n# A tibble: 1 × 8\n  estimate statistic   p.value parameter conf.low conf.high method   alternative\n     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      \n1     75.1      145. 1.33e-245       253     74.1      76.1 One Sam… two.sided  \n\nard_continuous(\n  data = ADSL,\n  variables = AGE,\n  statistic = ~ list(tidy_ttest = tidy_ttest)\n)\n\n  variable   context   stat_name stat_label      stat fmt_fn\n1      AGE continuo…    estimate   estimate    75.087      1\n2      AGE continuo…   statistic  statistic   145.119      1\n3      AGE continuo…     p.value    p.value         0      1\n4      AGE continuo…   parameter  parameter       253      1\n5      AGE continuo…    conf.low   conf.low    74.068      1\n6      AGE continuo…   conf.high  conf.high    76.106      1\n7      AGE continuo…      method     method One Samp…   &lt;fn&gt;\n8      AGE continuo… alternative  alternat… two.sided   &lt;fn&gt;"
+  },
+  {
+    "objectID": "slides/index.html#cards-ard_categorical",
+    "href": "slides/index.html#cards-ard_categorical",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: ard_categorical()",
+    "text": "{cards}: ard_categorical()\n\nADSL |&gt; \n  ard_categorical(\n    by = ARM,\n    variables = AGEGR1\n  ) |&gt; \n  dplyr::filter(stat_name %in% c(\"n\", \"p\")) |&gt; # keep most common stats \n  print(n = 8)\n\n{cards} data frame: 18 x 11\n\n\n  group1 group1_level variable variable_level stat_name stat_label  stat\n1    ARM      Placebo   AGEGR1            &lt;65         n          n    14\n2    ARM      Placebo   AGEGR1            &lt;65         p          % 0.163\n3    ARM    Xanomeli…   AGEGR1            &lt;65         n          n    11\n4    ARM    Xanomeli…   AGEGR1            &lt;65         p          % 0.131\n5    ARM    Xanomeli…   AGEGR1            &lt;65         n          n     8\n6    ARM    Xanomeli…   AGEGR1            &lt;65         p          % 0.095\n7    ARM      Placebo   AGEGR1            &gt;80         n          n    30\n8    ARM      Placebo   AGEGR1            &gt;80         p          % 0.349\n\n\nℹ 10 more rows\n\n\nℹ Use `print(n = ...)` to see more rows\n\n\nℹ 4 more variables: context, fmt_fn, warning, error\n\n\n\nAny unobserved levels of the variables will be present in the resulting ARD."
+  },
+  {
+    "objectID": "slides/index.html#cards-ard_dichotomous",
+    "href": "slides/index.html#cards-ard_dichotomous",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: ard_dichotomous()",
+    "text": "{cards}: ard_dichotomous()\n\nADSL |&gt; \n  ard_dichotomous(variables = AGEGR1, \n                  value = ~ \"&lt;65\") \n\n{cards} data frame: 3 x 9\n\n\n  variable variable_level   context stat_name stat_label stat\n1   AGEGR1            &lt;65 dichotom…         n          n   33\n2   AGEGR1            &lt;65 dichotom…         N          N  254\n3   AGEGR1            &lt;65 dichotom…         p          % 0.13\n\n\nℹ 3 more variables: fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/index.html#cards-other-summary-functions",
+    "href": "slides/index.html#cards-other-summary-functions",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: Other Summary Functions",
+    "text": "{cards}: Other Summary Functions\n\nard_hierarchical(): similar to ard_categorical(), but built for nested tabulations, e.g. AE terms within SOC\nard_complex(): similar to ard_continuous(), but the summary functions can be more complex and accepts other arguments like the full and subsetted (within the by groups) data sets.\nard_missing(): tabulates rates of missingness\n\nThe results from all these functions are entirely compatible with one another, and can be stacked into a single data frame."
+  },
+  {
+    "objectID": "slides/index.html#cards-other-functions",
+    "href": "slides/index.html#cards-other-functions",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: Other Functions",
+    "text": "{cards}: Other Functions\nIn addition to exporting functions to prepare summaries, {cards} exports many utilities for wrangling ARDs and creating new ARDs.\nConstructing: bind_ard(), tidy_as_ard(), nest_for_ard(), check_ard_structure(), and many more\nWrangling: shuffle_ard(), get_ard_statistics(), replace_null_statistic(), etc."
+  },
+  {
+    "objectID": "slides/index.html#exercise",
+    "href": "slides/index.html#exercise",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Exercise",
+    "text": "Exercise\ndemog summaries"
+  },
+  {
+    "objectID": "slides/index.html#cards-stacking-utilities",
+    "href": "slides/index.html#cards-stacking-utilities",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: Stacking utilities",
+    "text": "{cards}: Stacking utilities\n\n\ndata and .by are shared by all ard_* calls\nAdditional Options .overall, .missing, .attributes, and .total_n provide even more results\n\n\n\nADSL |&gt; \n  ard_stack( \n    .by = ARM,      \n    ard_continuous(variables = AGE), \n    ard_categorical(variables = c(AGEGR1, SEX))\n  )  \n\n{cards} data frame: 78 x 11\n\n\n   group1 group1_level variable variable_level stat_name stat_label   stat\n1     ARM      Placebo      AGE                        N          N     86\n2     ARM      Placebo      AGE                     mean       Mean 75.209\n3     ARM      Placebo      AGE                       sd         SD   8.59\n4     ARM      Placebo      AGE                   median     Median     76\n5     ARM      Placebo      AGE                      p25         Q1     69\n6     ARM      Placebo      AGE                      p75         Q3     82\n7     ARM      Placebo      AGE                      min        Min     52\n8     ARM      Placebo      AGE                      max        Max     89\n9     ARM    Xanomeli…      AGE                        N          N     84\n10    ARM    Xanomeli…      AGE                     mean       Mean 74.381\n\n\nℹ 68 more rows\n\n\nℹ Use `print(n = ...)` to see more rows\n\n\nℹ 4 more variables: context, fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/index.html#cards-ard_hierarchical",
+    "href": "slides/index.html#cards-ard_hierarchical",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: ard_hierarchical",
+    "text": "{cards}: ard_hierarchical\n\nThis function specializes in calculating participant-level rates.\n\nLevels of nesting are specified in variables, and rates will be returned for the lowest level variables\nid helps to check that no duplicate rows exist within the c(id, variables) columns\ndenominator dictates the denominator for the rates\n\n\n\nard_hierarchical(\n  data = ADAE |&gt;\n    dplyr::slice_tail(n = 1L, by = c(USUBJID, TRTA, AESOC, AEDECOD)),\n  variables = c(AESOC, AEDECOD),\n  by = TRTA,\n  id = USUBJID,\n  denominator = ADSL |&gt; dplyr::rename(TRTA = ARM)\n)\n\n   group1 group1_level group2 group2_level variable variable_level stat_name\n1    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n2    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         N\n3    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         p\n4    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n5    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         N\n6    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         p\n7    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n8    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         N\n9    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         p\n10   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n   stat_label  stat\n1           n     0\n2           N    86\n3           %     0\n4           n     1\n5           N    84\n6           % 0.012\n7           n     0\n8           N    84\n9           %     0\n10          n     1"
+  },
+  {
+    "objectID": "slides/index.html#cards-ard_hierarchical_count",
+    "href": "slides/index.html#cards-ard_hierarchical_count",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: ard_hierarchical_count",
+    "text": "{cards}: ard_hierarchical_count\n\nThis function specializes in calculating event-level frequencies.\n\n\nard_hierarchical_count(\n  data = ADAE,\n  variables = c(AESOC, AEDECOD),\n  by = TRTA\n)\n\n   group1 group1_level group2 group2_level variable variable_level stat_name\n1    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n2    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n3    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n4    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n5    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n6    TRTA    Xanomeli…  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n\n7    TRTA      Placebo  AESOC    SURGICAL…  AEDECOD      ACROCHOR…         n\n8    TRTA    Xanomeli…  AESOC    SURGICAL…  AEDECOD      ACROCHOR…         n\n9    TRTA    Xanomeli…  AESOC    SURGICAL…  AEDECOD      ACROCHOR…         n\n10   TRTA      Placebo  AESOC    SKIN AND…  AEDECOD      ACTINIC …         n\n   stat_label stat\n1           n    0\n2           n    1\n3           n    0\n4           n    1\n5           n    2\n6           n    3\n7           n    0\n8           n    1\n9           n    0\n10          n    0"
+  },
+  {
+    "objectID": "slides/index.html#cards-stacking-functions-for-ard_hierarchical_",
+    "href": "slides/index.html#cards-stacking-functions-for-ard_hierarchical_",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "{cards}: Stacking functions for ard_hierarchical_*",
+    "text": "{cards}: Stacking functions for ard_hierarchical_*"
+  },
+  {
+    "objectID": "slides/index.html#exercise-1",
+    "href": "slides/index.html#exercise-1",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Exercise",
+    "text": "Exercise\nAE summaries"
+  },
+  {
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Slides",
+    "section": "",
+    "text": "View slides in full screen",
+    "crumbs": [
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
+    "crumbs": [
+      "License"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Unlocking Analysis Results Datasets (ARDs)",
@@ -44,7 +253,7 @@
     "href": "index.html#instructors",
     "title": "Unlocking Analysis Results Datasets (ARDs)",
     "section": "Instructors",
-    "text": "Instructors\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.\n   \n\nBecca Krouse is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 13+ years in the field of clinical research and specializes in developing R-based tools.",
+    "text": "Instructors\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.\n   \n\nBecca Krouse is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 14+ years in the field of clinical research and specializes in developing R-based tools.",
     "crumbs": [
       "Home"
     ]
@@ -57,16 +266,6 @@
     "text": "Workshop Assistant\n\nJack Talboys is a Software Developer at Novartis, recently joining their Open-Source Enablement team. Before that he worked as a Data Scientist for Ascent, a Software Consultancy, building Shiny apps and R packages for companies across a range of industries including Insurance, Finance, and Pharma.",
     "crumbs": [
       "Home"
-    ]
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
-    "crumbs": [
-      "License"
     ]
   }
 ]
