@@ -32,8 +32,4 @@ fa_fill <- "#606060"
 ```
 
 
-{{< include 00-setup.qmd >}}
-
-{{< include 01-ars.qmd >}}
-
-{{< include 02-cards.qmd >}}
+{{< include 01-intro-cards.qmd >}}  
