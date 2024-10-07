@@ -32,6 +32,8 @@ website:
      - href: index.qmd
        text: Home
      - href: license.qmd
+     - href: slides.qmd
+       text: Slides
 
 format:
   html:
