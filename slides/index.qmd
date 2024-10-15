@@ -26,10 +26,14 @@ library(cards)
 library(cardx)
 library(gtsummary)
 library(tfrmt)
+library(tfrmtbuilder)
+library(gt)
 
 # fill for font awesome icons
 fa_fill <- "#606060"
+
 ```
 
+{{< include 01-intro-cards.qmd >}}
 
-{{< include 01-intro-cards.qmd >}}  
+{{< include 04-tables-tfrmt.qmd >}}
