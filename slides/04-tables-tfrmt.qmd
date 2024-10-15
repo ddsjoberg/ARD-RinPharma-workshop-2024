@@ -1,14 +1,20 @@
 
-# ARD-first Tables with {tfrmt}
+# ARD-first Tables with {tfrmt} {.black-header}
+
+```{css, echo=FALSE}
+.black-header h1 {
+ color: black;
+}
+```
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-![](images/tfrmt-hex.png){fig-align="center"}
+![](images/tfrmt-hex.png){fig-align="center" fig-height="100px"}
 :::
 
-::: {.column width="30%"}
+::: {.column}
 
 ::: {.fragment}
 - Metadata-driven table formatting
@@ -25,23 +31,43 @@
 :::
 
 
+## The {tfrmt} object
+
+- Pre-define the non-data components of your table
+- Pre-define how the data will be handled once added
+
+:::: {.columns}
+
+::: {.column width="40%"}
+![](images/tfrmt-help-1.png){fig-align="center" fig-height="80%"}
+:::
+
+::: {.column width="60%"}
+![](images/tfrmt-help-2.png){fig-align="center"}
+:::
+
+::::
+
+
 ```{r}
 #| echo: false
 d_demog <- tfrmt::data_demog |> 
-  dplyr::filter(!column=="p-value") |> 
-  dplyr::filter(!rowlbl2=="n") |>  
+  dplyr::filter(!column=="p-value",
+                !rowlbl2=="n",
+                !column=="Total", !rowlbl1=="Race (Origin)") |> 
   dplyr::mutate(column = gsub("Xanomeline ","", column)) |>  
   dplyr::bind_rows(
     dplyr::tibble(param = "bigN", 
-           column = c("High Dose","Low Dose","Placebo","Total"),
-           value = c(84,84,86,254))
+           column = c("High Dose","Low Dose","Placebo"),
+           value = c(84,84,86))
   ) |> 
   dplyr::ungroup() |>  
   dplyr::filter(is.na(rowlbl1) | rowlbl1 %in% c("Age (y)","Baseline BMI","Race (Origin)","Sex","Duration of disease"))
+
+d_demog_mock <- d_demog
 ```
 
-```{r}
-#| code-overflow: wrap
+```{r} 
 #| echo: false
 #| 
 tfrmt_demog <- tfrmt(
@@ -70,12 +96,10 @@ tfrmt_demog <- tfrmt(
   ,
   col_style_plan = col_style_plan(
     col_style_structure(align = c(".",","," "), col = c("Placebo", "Low Dose",
-                                                        "High Dose", "Total")),
+                                                        "High Dose")),
     col_style_structure(align = "left", col = c("rowlbl1","rowlbl2"))
   ),
-  
-  
-  big_n = big_n_structure(param_val  = "bigN")
+  big_n = big_n_structure(param_val  = "bigN", n_frmt = frmt("<br>N = xx"))
 )  
 ```
 
@@ -84,33 +108,31 @@ tfrmt_demog <- tfrmt(
 ```{r }
 #| echo: FALSE
 
-fontawesome::fa("recycle", height="5em")
+fontawesome::fa("recycle", height="5em", fill=fa_fill)
 ```
 
 
-## Use #1: Study planning (mocks) {auto-animate="true"}
+## Use #1: Study planning (mocks)  
 
 ```{r}
-#| output-location: "column"
-#| code-line-numbers: "1,4"
+#| output-location: "column-fragment"
 
 print_mock_gt(
-  tfrmt = tfrmt_demog, # tfrmt object 
-  .data = d_demog # ARD
+  tfrmt = tfrmt_demog, # tfrmt
+  .data = d_demog_mock # sample ARD
 )
-```
+``` 
 
 * If no data is supplied, {tfrmt} will generate some under the hood
 
-## Use #2: Final analysis {auto-animate="true"}
+## Use #2: Final analysis  
 
 ```{r}
-#| output-location: "column"
-#| code-line-numbers: "1,4"
+#| output-location: "column-fragment"
 
 print_to_gt(
   tfrmt = tfrmt_demog,
-  .data = d_demog
+  .data = d_demog # true ARD
 )
 ```
 
@@ -127,13 +149,13 @@ tfrmt_demog_custom <- tfrmt(
       footnote_plan = footnote_plan(
         footnote_structure("Data collected at Screening Visit")
       ),
-      big_n = big_n_structure(param_val = "bigN", n_frmt = frmt("\n(N = xx)")),
+      big_n = big_n_structure(param_val = "bigN", n_frmt = frmt("<br>(N = xx)")),
       row_grp_plan = row_grp_plan(
         row_grp_structure(group_val = ".default", element_block(post_space = " ")),
         label_loc = element_row_grp_loc(location = "indented")
       ),
       col_plan = col_plan(
-        `High Dose`, `Low Dose`, `Placebo`, `Total`,
+        `High Dose`, `Low Dose`, `Placebo`,
         -grp,
         -starts_with("ord")
       ),
@@ -142,8 +164,8 @@ tfrmt_demog_custom <- tfrmt(
 ```
 
 ```{r}
-#| output-location: "column"
-#| code-line-numbers: "2,4"
+#| output-location: "column-fragment"
+#| code-line-numbers: "2-4"
  
 tfrmt_demog |> 
   layer_tfrmt(
@@ -160,8 +182,7 @@ tfrmt_demog |>
 ## Save metadata for reuse
 
 ```{r}
-#| output-location: "column"
-#| code-line-numbers: "2"
+#| output-location: "column-fragment"
 
 tfrmt_demog |> 
   tfrmt_to_json()
@@ -173,10 +194,18 @@ tfrmt_demog |>
 
 # Now, let's format a display, 1 piece at a time
 
-## Creating a {tfrmt} table: A progression
+## Creating a {tfrmt} table step-by-step
 
 ```{r}
 #| echo: false
+
+
+gt_style_slides <- function(x){
+  x |> 
+    tab_options(
+      table.font.size = 20 
+    ) 
+}
 
 # demog data
 adsl <- pharmaverseadam::adsl |>
@@ -244,7 +273,7 @@ tfrmt_demog <- tfrmt(
  
 ```{r}   
 #| output-location: "column"
-#| code-line-numbers: "2,3,4,5,6,7"
+#| code-line-numbers: "2-7"
 
 tfrmt_demog <- tfrmt(
   group = variable, 
@@ -259,16 +288,14 @@ print_to_gt(
   tfrmt = tfrmt_demog,
   .data = ard_demog
 ) |> 
-    tab_options(
-      table.font.size = 20
-    )
+   gt_style_slides()
 ```
 
 ## Ensure placement of all values (Big N)
 
 ```{r}
 #| output-location: "column"
-#| code-line-numbers: "3,4,5,6"
+#| code-line-numbers: "3-6"
 
 tfrmt_demog <- tfrmt_demog |>
   tfrmt(
@@ -282,23 +309,21 @@ print_to_gt(
   tfrmt = tfrmt_demog, 
   .data = ard_demog
   )|> 
-    tab_options(
-      table.font.size = 20
-    )
+   gt_style_slides()
 ```
 
 
 ## Select and reorder columns
 ```{r}
 #| output-location: "column"
-#| code-line-numbers: "3,4,5,6,7"
+#| code-line-numbers: "3-7"
 
 tfrmt_demog <- tfrmt_demog |>
   tfrmt(
     col_plan = col_plan(
-      - starts_with("ord"),
       Placebo,
-      Active
+      Active,
+      - starts_with("ord")
     )
   )
 
@@ -306,9 +331,7 @@ print_to_gt(
   tfrmt = tfrmt_demog, 
   .data = ard_demog
 )|> 
-    tab_options(
-      table.font.size = 20
-    )
+   gt_style_slides()
 ```
 
 
@@ -316,7 +339,7 @@ print_to_gt(
 
 ```{r}   
 #| output-location: "column"
-#| code-line-numbers: "3,4,5,6,7,8"
+#| code-line-numbers: "3-8"
 
 tfrmt_demog <- tfrmt_demog |>
   tfrmt(
@@ -332,9 +355,7 @@ print_to_gt(
   tfrmt = tfrmt_demog, 
   .data = ard_demog
 ) |> 
-  tab_options(
-    table.font.size = 20
-  )
+   gt_style_slides()
 ```
 
 
@@ -342,7 +363,7 @@ print_to_gt(
 
 ```{r}   
 #| output-location: "column"
-#| code-line-numbers: "4,5,6,7,8,9,10,11"
+#| code-line-numbers: "4-11"
 
 tfrmt_demog <- tfrmt_demog |>
   tfrmt(
@@ -363,15 +384,13 @@ print_to_gt(
   tfrmt = tfrmt_demog, 
   .data = ard_demog
   ) |> 
-  tab_options(
-    table.font.size = 20
-  )
+   gt_style_slides()
 ```
 
 ## Format the data values - Advanced
 ```{r}
 #| output-location: "column"
-#| code-line-numbers: "5,6,7,8,9,10,11,12,13,14,15,16,17,18,19"
+#| code-line-numbers: "5-19"
 
 tfrmt_demog <- tfrmt_demog |>
   tfrmt(
@@ -400,9 +419,7 @@ print_to_gt(
   tfrmt = tfrmt_demog, 
   .data = ard_demog
   ) |> 
-  tab_options(
-    table.font.size = 20
-  )
+   gt_style_slides()
 ```
 
 
@@ -426,9 +443,7 @@ print_to_gt(
   tfrmt = tfrmt_demog, 
   .data = ard_demog
   ) |> 
-  tab_options(
-    table.font.size = 20
-  )
+   gt_style_slides()
 
 ```
 
@@ -452,9 +467,7 @@ print_to_gt(
   tfrmt = tfrmt_demog, 
   .data = ard_demog
   ) |> 
-  tab_options(
-    table.font.size = 20
-  )
+   gt_style_slides()
 
 ```
 
@@ -476,11 +489,10 @@ print_to_gt(
   tfrmt = tfrmt_demog, 
   .data = ard_demog
   ) |> 
-  tab_options(
-    table.font.size = 20
-  )
+   gt_style_slides()
 
 ```
+ 
 
 ## Other features include:
 
@@ -495,7 +507,7 @@ print_to_gt(
 * Templating 
 
 
-# {tfrmtbuilder}: A Shiny interface 
+# The {tfrmtbuilder} App  {.black-header} 
 
 :::: {.columns}
 
@@ -504,7 +516,7 @@ print_to_gt(
 ![](images/tfrmtbuilder-hex.png){fig-align="center"}
 :::
 
-::: {.column width="30%"}
+::: {.column}
 - Point-and-click interface for {tfrmt}
 
 - Ability to create new or modify existing display
@@ -517,3 +529,11 @@ print_to_gt(
 :::
 
 ## Exercise
+
+1. Open R file `04-tables-tfrmt.R`
+
+2. Run the provided code, which will open the app in your browser
+
+3. Complete the steps to futher customize the table
+
+
