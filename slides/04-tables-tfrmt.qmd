@@ -1,0 +1,519 @@
+
+# ARD-first Tables with {tfrmt}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](images/tfrmt-hex.png){fig-align="center"}
+:::
+
+::: {.column width="30%"}
+
+::: {.fragment}
+- Metadata-driven table formatting
+
+- Easily create new and modify existing tables
+
+- Input: ARD with raw, numeric values ({cards}!)
+
+- Output: Formatted table via {gt}
+:::
+
+:::
+
+:::
+
+
+```{r}
+#| echo: false
+d_demog <- tfrmt::data_demog |> 
+  dplyr::filter(!column=="p-value") |> 
+  dplyr::filter(!rowlbl2=="n") |>  
+  dplyr::mutate(column = gsub("Xanomeline ","", column)) |>  
+  dplyr::bind_rows(
+    dplyr::tibble(param = "bigN", 
+           column = c("High Dose","Low Dose","Placebo","Total"),
+           value = c(84,84,86,254))
+  ) |> 
+  dplyr::ungroup() |>  
+  dplyr::filter(is.na(rowlbl1) | rowlbl1 %in% c("Age (y)","Baseline BMI","Race (Origin)","Sex","Duration of disease"))
+```
+
+```{r}
+#| code-overflow: wrap
+#| echo: false
+#| 
+tfrmt_demog <- tfrmt(
+  group = c(rowlbl1,grp),
+  label = rowlbl2,
+  column = column,
+  param = param,
+  value = value,
+  sorting_cols = c(ord1, ord2),
+  title = "Demographics Table",
+  body_plan = body_plan(
+    frmt_structure(group_val = ".default", label_val = ".default", 
+                   frmt_combine("{n} {pct}",
+                                n = frmt("xxx"),
+                                pct = frmt_when("==100" ~ "",
+                                                "==0" ~ "",
+                                                TRUE ~ frmt("(xx.x %)")))),
+    frmt_structure(group_val = ".default", label_val = "n", frmt("xxx")),
+    frmt_structure(group_val = ".default", label_val = c("Mean", "Median", "Min","Max"), frmt("xxx.x")),
+    frmt_structure(group_val = ".default", label_val = "SD", frmt("xxx.xx"))
+  ),
+  
+  col_plan = col_plan(-grp,
+                      -starts_with("ord")
+  )
+  ,
+  col_style_plan = col_style_plan(
+    col_style_structure(align = c(".",","," "), col = c("Placebo", "Low Dose",
+                                                        "High Dose", "Total")),
+    col_style_structure(align = "left", col = c("rowlbl1","rowlbl2"))
+  ),
+  
+  
+  big_n = big_n_structure(param_val  = "bigN")
+)  
+```
+
+# A quick tour of the many uses of {tfrmt}
+
+```{r }
+#| echo: FALSE
+
+fontawesome::fa("recycle", height="5em")
+```
+
+
+## Use #1: Study planning (mocks) {auto-animate="true"}
+
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "1,4"
+
+print_mock_gt(
+  tfrmt = tfrmt_demog, # tfrmt object 
+  .data = d_demog # ARD
+)
+```
+
+* If no data is supplied, {tfrmt} will generate some under the hood
+
+## Use #2: Final analysis {auto-animate="true"}
+
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "1,4"
+
+print_to_gt(
+  tfrmt = tfrmt_demog,
+  .data = d_demog
+)
+```
+
+* Full reuse of the original {tfrmt} object = reduced rework!
+
+## Use #3: Repurposed final table  {auto-animate="true"}
+
+```{r}
+#| echo: FALSE
+
+tfrmt_demog_custom <- tfrmt(
+      title = "Demographics Table",
+      subtitle = "Safety Population",
+      footnote_plan = footnote_plan(
+        footnote_structure("Data collected at Screening Visit")
+      ),
+      big_n = big_n_structure(param_val = "bigN", n_frmt = frmt("\n(N = xx)")),
+      row_grp_plan = row_grp_plan(
+        row_grp_structure(group_val = ".default", element_block(post_space = " ")),
+        label_loc = element_row_grp_loc(location = "indented")
+      ),
+      col_plan = col_plan(
+        `High Dose`, `Low Dose`, `Placebo`, `Total`,
+        -grp,
+        -starts_with("ord")
+      ),
+      page_plan = page_plan(max_rows = 20)  
+    )
+```
+
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "2,4"
+ 
+tfrmt_demog |> 
+  layer_tfrmt(
+    tfrmt_demog_custom  
+  )|> 
+  print_to_gt( 
+    .data = d_demog
+  ) |> 
+  grp_pull(1)
+```
+
+* *Layering* allows for custom tweaks while preserving the original metadata
+
+## Save metadata for reuse
+
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "2"
+
+tfrmt_demog |> 
+  tfrmt_to_json()
+```
+
+* Create a language-agnostic JSON file
+
+* Load JSON back into R and recreate the table with `json_to_tfrmt()`
+
+# Now, let's format a display, 1 piece at a time
+
+## Creating a {tfrmt} table: A progression
+
+```{r}
+#| echo: false
+
+# demog data
+adsl <- pharmaverseadam::adsl |>
+  dplyr::filter(SAFFL == "Y") |> 
+  dplyr::rename(
+    `Age (years)` = AGE,
+    `Age Group` = AGEGR1
+  ) |> 
+  dplyr::mutate(
+    TRT01A = ifelse(!TRT01A == "Placebo", "Active", TRT01A)
+  )
+ard_demog <- ard_stack(
+  data = adsl,
+  .by = TRT01A,
+  ard_continuous( variables = `Age (years)`,
+                  statistic = ~ continuous_summary_fns(c("median", "p25", "p75"))),
+  ard_categorical(variables = `Age Group`)
+) |>
+  shuffle_ard() |>
+  dplyr::mutate(stat_name = ifelse(variable=="TRT01A" & stat_name=="n", "bigN", stat_name),
+                ord1 = as.numeric(factor(variable, levels = c("Age (years)", "Age Group"))),
+                ord2 = as.numeric(factor(label, levels = c("18-64",">64"))))|>
+  dplyr::filter(stat_name=="bigN" |
+                  (! variable == "TRT01A" & ! stat_name=="N")) |> 
+  dplyr::select(-context) |> 
+  dplyr::mutate(stat = ifelse(stat_name=="p", stat*100, stat),
+                label = dplyr::case_when(
+                  stat_name %in% c("p25","p75") ~ "Q1, Q3", 
+                  TRUE ~ label
+                ))
+
+```
+
+
+::: {.fragment}
+
+```{r}  
+head(ard_demog)
+```
+
+:::
+
+<br>
+
+::: {.fragment}
+
+
+```{r}  
+#| eval: false
+
+tfrmt_demog <- tfrmt(
+  group = variable, 
+  label = label, 
+  column = TRT01A,
+  param = stat_name,
+  value = stat, 
+  sorting_cols = c(ord1, ord2) 
+)
+
+```
+
+:::
+
+## Ensure placement of all values (Main)
+ 
+```{r}   
+#| output-location: "column"
+#| code-line-numbers: "2,3,4,5,6,7"
+
+tfrmt_demog <- tfrmt(
+  group = variable, 
+  label = label, 
+  column = TRT01A,
+  param = stat_name,
+  value = stat, 
+  sorting_cols = c(ord1, ord2) 
+)
+
+print_to_gt(
+  tfrmt = tfrmt_demog,
+  .data = ard_demog
+) |> 
+    tab_options(
+      table.font.size = 20
+    )
+```
+
+## Ensure placement of all values (Big N)
+
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "3,4,5,6"
+
+tfrmt_demog <- tfrmt_demog |>
+  tfrmt(
+    big_n = big_n_structure(
+      param_val = "bigN",
+      n_frmt = frmt("<br>N = xx")
+      )
+  )
+
+print_to_gt(
+  tfrmt = tfrmt_demog, 
+  .data = ard_demog
+  )|> 
+    tab_options(
+      table.font.size = 20
+    )
+```
+
+
+## Select and reorder columns
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "3,4,5,6,7"
+
+tfrmt_demog <- tfrmt_demog |>
+  tfrmt(
+    col_plan = col_plan(
+      - starts_with("ord"),
+      Placebo,
+      Active
+    )
+  )
+
+print_to_gt(
+  tfrmt = tfrmt_demog, 
+  .data = ard_demog
+)|> 
+    tab_options(
+      table.font.size = 20
+    )
+```
+
+
+## Format the data values - Basic
+
+```{r}   
+#| output-location: "column"
+#| code-line-numbers: "3,4,5,6,7,8"
+
+tfrmt_demog <- tfrmt_demog |>
+  tfrmt(
+    body_plan = body_plan(
+      frmt_structure(
+        group_val = ".default", 
+        label_val = ".default", 
+        frmt("x.x"))
+    )
+  )
+
+print_to_gt(
+  tfrmt = tfrmt_demog, 
+  .data = ard_demog
+) |> 
+  tab_options(
+    table.font.size = 20
+  )
+```
+
+
+## Format the data values - Advanced
+
+```{r}   
+#| output-location: "column"
+#| code-line-numbers: "4,5,6,7,8,9,10,11"
+
+tfrmt_demog <- tfrmt_demog |>
+  tfrmt(
+    body_plan = body_plan(
+      frmt_structure(
+        group_val = ".default", 
+        label_val = ".default",
+        frmt_combine("{n} ({p}%)",
+                     n = frmt("xx"),
+                     p = frmt("xx.x")
+                     
+        )
+      )
+    )
+  )
+
+print_to_gt(
+  tfrmt = tfrmt_demog, 
+  .data = ard_demog
+  ) |> 
+  tab_options(
+    table.font.size = 20
+  )
+```
+
+## Format the data values - Advanced
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "5,6,7,8,9,10,11,12,13,14,15,16,17,18,19"
+
+tfrmt_demog <- tfrmt_demog |>
+  tfrmt(
+    body_plan = body_plan(
+      
+      frmt_structure(
+        group_val = ".default", 
+        label_val = "Median",
+        frmt("xx.x")
+      ),
+      
+      frmt_structure(
+        group_val = ".default",
+        label_val = ".default",
+        frmt_combine(
+          expression = "{p25}, {p75}",                
+          p25 = frmt("xx.x"),                     
+          p75 = frmt("xx.x")                      
+        )
+      )
+      
+    )
+  )
+  
+print_to_gt(
+  tfrmt = tfrmt_demog, 
+  .data = ard_demog
+  ) |> 
+  tab_options(
+    table.font.size = 20
+  )
+```
+
+
+## Align the columns
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "3,4,5,6,7,8,9"
+
+tfrmt_demog <- tfrmt_demog |>
+  tfrmt(
+    col_style_plan = col_style_plan(
+      col_style_structure(
+        col = c("Placebo", 
+                "Active"),
+        align = " "
+      )
+    )
+  )
+  
+print_to_gt(
+  tfrmt = tfrmt_demog, 
+  .data = ard_demog
+  ) |> 
+  tab_options(
+    table.font.size = 20
+  )
+
+```
+
+## Add footnotes
+
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "3,4,5,6,7,8"
+
+tfrmt_demog <- tfrmt_demog |>
+  tfrmt(
+    footnote_plan = footnote_plan(
+      footnote_structure(
+        "Pooled High and Low Dose",
+        column_val = "Active"
+      )
+    )
+  )
+  
+print_to_gt(
+  tfrmt = tfrmt_demog, 
+  .data = ard_demog
+  ) |> 
+  tab_options(
+    table.font.size = 20
+  )
+
+```
+
+
+## Add titles
+
+
+```{r}
+#| output-location: "column"
+#| code-line-numbers: "3,4"
+
+tfrmt_demog <- tfrmt_demog |>
+  tfrmt(
+    title = "Demographic Table",
+    subtitle = "Safety Population"
+  )
+  
+print_to_gt(
+  tfrmt = tfrmt_demog, 
+  .data = ard_demog
+  ) |> 
+  tab_options(
+    table.font.size = 20
+  )
+
+```
+
+## Other features include:
+
+* Transform values in the formatting
+
+* Row group formatting 
+
+* Pagination
+
+* Multi-positional column alignment
+
+* Templating 
+
+
+# {tfrmtbuilder}: A Shiny interface 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](images/tfrmtbuilder-hex.png){fig-align="center"}
+:::
+
+::: {.column width="30%"}
+- Point-and-click interface for {tfrmt}
+
+- Ability to create new or modify existing display
+
+- Eases learning curve for new users
+
+- Empowers non-programmers
+:::
+
+:::
+
+## Exercise
