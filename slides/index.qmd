@@ -34,6 +34,7 @@ fa_fill <- "#606060"
 
 ```
 
-{{< include 01-intro-cards.qmd >}}
+{{< include 01-intro-cards/intro.qmd >}}
+{{< include 01-intro-cards/cards.qmd >}}
 
-{{< include 04-tables-tfrmt.qmd >}}
+{{< include 04-tables-tfrmt/tfrmt.qmd >}}
