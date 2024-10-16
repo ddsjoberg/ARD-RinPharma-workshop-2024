@@ -1,0 +1,21 @@
+---
+title: "{cardx} & other extras"
+author: "Daniel D. Sjoberg and Becca Krouse"
+logo: "images/cardx-hex.png"
+editor: source
+engine: knitr
+format: 
+  revealjs: 
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    chalkboard: true
+execute:
+  echo: true
+  freeze: false
+cache: false
+---
+
+{{< include 01-cardx.qmd >}}  
+
+{{< include 02-extras.qmd >}}  

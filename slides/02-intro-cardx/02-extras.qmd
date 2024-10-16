@@ -1,0 +1,70 @@
+## When things go wrong 😱
+
+What happens when statistics are un-calculable? 
+
+```{r}
+#| message: true
+ard_gone_wrong <- 
+  cards::ADSL |> 
+  cards::ard_continuous(
+    by = ARM,
+    variable = AGEGR1,
+    statistic = ~list(kurtosis = \(x) e1071::kurtosis(x))
+  ) |> 
+  cards::replace_null_statistic()
+ard_gone_wrong
+```
+
+::: {.fragment}
+
+```r
+cards::print_ard_conditions(ard_gone_wrong)
+```
+
+![](images/ard-error-msg.png)
+
+:::
+
+::: {.notes}
+
+- Where is the statistic? `AGEGR1` is _character_
+
+- Even when there are errors or warnings, we still get the ARD with the expected structure returned.
+
+  - THIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.
+  
+  - This allows you to design everything up-front.
+  
+- We can also report these warnings and errors back to users. <!CLICK!>
+
+:::
+
+## Mock ARDs
+
+Like mock tables, mock ARDs are often useful as well
+
+```{r}
+#| message: true
+cards::bind_ard(
+  cards::mock_categorical(variables = list(AGEGR1 = c("<65", ">=65"))),
+  cards::mock_continuous(variables = "AGE")
+) |> 
+  cards::apply_fmt_fn()
+```
+
+## Mock ARDs
+
+```{r}
+#| message: true
+cards::bind_ard(
+  cards::mock_continuous(variables = "AGE", 
+                         by = list(ARM = c("Drug A", "Drug B"))),
+  cards::mock_categorical(variables = list(AGEGR1 = c("<65", ">=65")),
+                          by = list(ARM = c("Drug A", "Drug B")))
+) |> 
+  gtsummary::tbl_ard_summary(
+    by = ARM,
+    type  = AGE ~ "continuous2",
+    statistic = AGE ~ c("{N}", "{mean} ({sd})", "{median} ({p25}, {p75})")
+  )
+```
