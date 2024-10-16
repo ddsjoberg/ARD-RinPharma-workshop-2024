@@ -189,6 +189,125 @@
     "text": "Exercise\nAE summaries"
   },
   {
+    "objectID": "slides/index.html#the-tfrmt-object",
+    "href": "slides/index.html#the-tfrmt-object",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "The {tfrmt} object",
+    "text": "The {tfrmt} object\n\nPre-define the non-data components of your table\nPre-define how the data will be handled once added"
+  },
+  {
+    "objectID": "slides/index.html#use-1-study-planning-mocks",
+    "href": "slides/index.html#use-1-study-planning-mocks",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Use #1: Study planning (mocks)",
+    "text": "Use #1: Study planning (mocks)\n\n\nprint_mock_gt(\n  tfrmt = tfrmt_demog, # tfrmt\n  .data = d_demog_mock # sample ARD\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDemographics Table\n\n\n\nPlaceboN = xx\nLow DoseN = xx\nHigh DoseN = xx\n\n\n\n\nAge (y)     \n\n\n\n\n\n\n\n\n  Mean      \nxxx.x       \nxxx.x       \nxxx.x       \n\n\n  SD        \nxxx.xx      \nxxx.xx      \nxxx.xx      \n\n\n  Median    \nxxx.x       \nxxx.x       \nxxx.x       \n\n\n  Min       \nxxx.x       \nxxx.x       \nxxx.x       \n\n\n  Max       \nxxx.x       \nxxx.x       \nxxx.x       \n\n\n  &lt;65 yrs   \nxxx (xx.x %)\nxxx (xx.x %)\nxxx (xx.x %)\n\n\n  65-80 yrs \nxxx (xx.x %)\nxxx (xx.x %)\nxxx (xx.x %)\n\n\n  &gt;80 yrs   \nxxx (xx.x %)\nxxx (xx.x %)\nxxx (xx.x %)\n\n\nSex         \n\n\n\n\n\n\n\n\n  Male      \nxxx (xx.x %)\nxxx (xx.x %)\nxxx (xx.x %)\n\n\n  Female    \nxxx (xx.x %)\nxxx (xx.x %)\nxxx (xx.x %)\n\n\nBaseline BMI\n\n\n\n\n\n\n\n\n  Mean      \nxxx.x       \nxxx.x       \nxxx.x       \n\n\n  SD        \nxxx.xx      \nxxx.xx      \nxxx.xx      \n\n\n  Median    \nxxx.x       \nxxx.x       \nxxx.x       \n\n\n  Min       \nxxx.x       \nxxx.x       \nxxx.x       \n\n\n  Max       \nxxx.x       \nxxx.x       \nxxx.x       \n\n\n  &lt;25       \nxxx (xx.x %)\nxxx (xx.x %)\nxxx (xx.x %)\n\n\n  25-&lt;30    \nxxx (xx.x %)\nxxx (xx.x %)\nxxx (xx.x %)\n\n\n  &gt;=30      \nxxx (xx.x %)\nxxx (xx.x %)\nxxx (xx.x %)\n\n\n\n\n\n\n\n\nIf no data is supplied, {tfrmt} will generate some under the hood"
+  },
+  {
+    "objectID": "slides/index.html#use-2-final-analysis",
+    "href": "slides/index.html#use-2-final-analysis",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Use #2: Final analysis",
+    "text": "Use #2: Final analysis\n\n\nprint_to_gt(\n  tfrmt = tfrmt_demog,\n  .data = d_demog # true ARD\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDemographics Table\n\n\n\nPlaceboN = 86\nLow DoseN = 84\nHigh DoseN = 84\n\n\n\n\nAge (y)     \n\n\n\n\n\n\n\n\n  Mean      \n75.2       \n75.7       \n74.4       \n\n\n  SD        \n 8.59      \n 8.29      \n 7.89      \n\n\n  Median    \n76.0       \n77.5       \n76.0       \n\n\n  Min       \n52.0       \n51.0       \n56.0       \n\n\n  Max       \n89.0       \n88.0       \n88.0       \n\n\n  &lt;65 yrs   \n14 (16.3 %)\n 8 ( 9.5 %)\n11 (13.1 %)\n\n\n  65-80 yrs \n42 (48.8 %)\n47 (56.0 %)\n55 (65.5 %)\n\n\n  &gt;80 yrs   \n30 (34.9 %)\n29 (34.5 %)\n18 (21.4 %)\n\n\nSex         \n\n\n\n\n\n\n\n\n  Male      \n33 (38.4 %)\n34 (40.5 %)\n44 (52.4 %)\n\n\n  Female    \n53 (61.6 %)\n50 (59.5 %)\n40 (47.6 %)\n\n\nBaseline BMI\n\n\n\n\n\n\n\n\n  Mean      \n23.6       \n25.1       \n25.3       \n\n\n  SD        \n 3.67      \n 4.27      \n 4.16      \n\n\n  Median    \n23.4       \n24.3       \n24.8       \n\n\n  Min       \n15.1       \n17.7       \n13.7       \n\n\n  Max       \n33.3       \n40.1       \n34.5       \n\n\n  &lt;25       \n59 (68.6 %)\n47 (56.0 %)\n44 (52.4 %)\n\n\n  25-&lt;30    \n21 (24.4 %)\n27 (32.1 %)\n28 (33.3 %)\n\n\n  &gt;=30      \n 6 ( 7.0 %)\n10 (11.9 %)\n12 (14.3 %)\n\n\n\n\n\n\n\n\nFull reuse of the original {tfrmt} object = reduced rework!"
+  },
+  {
+    "objectID": "slides/index.html#use-3-repurposed-final-table",
+    "href": "slides/index.html#use-3-repurposed-final-table",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Use #3: Repurposed final table",
+    "text": "Use #3: Repurposed final table\n\n\ntfrmt_demog |&gt; \n  layer_tfrmt(\n    tfrmt_demog_custom  \n  )|&gt; \n  print_to_gt( \n    .data = d_demog\n  ) |&gt; \n  grp_pull(1)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDemographics Table\n\n\nSafety Population\n\n\n\nHigh Dose(N = 84)\nLow Dose(N = 84)\nPlacebo(N = 86)\n\n\n\n\nAge (y)    \n\n\n\n\n\n\n\n\n  Mean     \n74.4       \n75.7       \n75.2       \n\n\n  SD       \n 7.89      \n 8.29      \n 8.59      \n\n\n  Median   \n76.0       \n77.5       \n76.0       \n\n\n  Min      \n56.0       \n51.0       \n52.0       \n\n\n  Max      \n88.0       \n88.0       \n89.0       \n\n\n           \n           \n           \n           \n\n\n  &lt;65 yrs  \n11 (13.1 %)\n 8 ( 9.5 %)\n14 (16.3 %)\n\n\n  65-80 yrs\n55 (65.5 %)\n47 (56.0 %)\n42 (48.8 %)\n\n\n  &gt;80 yrs  \n18 (21.4 %)\n29 (34.5 %)\n30 (34.9 %)\n\n\n           \n           \n           \n           \n\n\nSex        \n\n\n\n\n\n\n\n\n  Male     \n44 (52.4 %)\n34 (40.5 %)\n33 (38.4 %)\n\n\n  Female   \n40 (47.6 %)\n50 (59.5 %)\n53 (61.6 %)\n\n\n           \n           \n           \n           \n\n\n\nData collected at Screening Visit\n\n\n\n\n\n\n\n\n\nLayering allows for custom tweaks while preserving the original metadata"
+  },
+  {
+    "objectID": "slides/index.html#save-metadata-for-reuse",
+    "href": "slides/index.html#save-metadata-for-reuse",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Save metadata for reuse",
+    "text": "Save metadata for reuse\n\n\ntfrmt_demog |&gt; \n  tfrmt_to_json()\n\n\n{\n  \"group\": [\"rowlbl1\", \"grp\"],\n  \"label\": [\"rowlbl2\"],\n  \"param\": [\"param\"],\n  \"value\": [\"value\"],\n  \"column\": [\"column\"],\n  \"title\": [\"Demographics Table\"],\n  \"body_plan\": [\n    {\n      \"group_val\": [\".default\"],\n      \"label_val\": [\".default\"],\n      \"param_val\": [\"n\", \"pct\"],\n      \"frmt_combine\": {\n        \"expression\": [\"{n} {pct}\"],\n        \"frmt_ls\": {\n          \"n\": {\n            \"frmt\": {\n              \"expression\": [\"xxx\"],\n              \"missing\": {},\n              \"scientific\": {},\n              \"transform\": {}\n            }\n          },\n          \"pct\": {\n            \"frmt_when\": {\n              \"frmt_ls\": {\n                \"==100\": [\"\"],\n                \"==0\": [\"\"],\n                \"TRUE\": {\n                  \"frmt\": {\n                    \"expression\": [\"(xx.x %)\"],\n                    \"missing\": {},\n                    \"scientific\": {},\n                    \"transform\": {}\n                  }\n                }\n              },\n              \"missing\": {}\n            }\n          }\n        },\n        \"missing\": {}\n      }\n    },\n    {\n      \"group_val\": [\".default\"],\n      \"label_val\": [\"n\"],\n      \"param_val\": [\".default\"],\n      \"frmt\": {\n        \"expression\": [\"xxx\"],\n        \"missing\": {},\n        \"scientific\": {},\n        \"transform\": {}\n      }\n    },\n    {\n      \"group_val\": [\".default\"],\n      \"label_val\": [\"Mean\", \"Median\", \"Min\", \"Max\"],\n      \"param_val\": [\".default\"],\n      \"frmt\": {\n        \"expression\": [\"xxx.x\"],\n        \"missing\": {},\n        \"scientific\": {},\n        \"transform\": {}\n      }\n    },\n    {\n      \"group_val\": [\".default\"],\n      \"label_val\": [\"SD\"],\n      \"param_val\": [\".default\"],\n      \"frmt\": {\n        \"expression\": [\"xxx.xx\"],\n        \"missing\": {},\n        \"scientific\": {},\n        \"transform\": {}\n      }\n    }\n  ],\n  \"col_style_plan\": [\n    {\n      \"cols\": [\n        [\"Placebo\"],\n        [\"Low Dose\"],\n        [\"High Dose\"]\n      ],\n      \"align\": [\".\", \",\", \" \"],\n      \"type\": [\"char\"],\n      \"width\": {}\n    },\n    {\n      \"cols\": [\n        [\"rowlbl1\"],\n        [\"rowlbl2\"]\n      ],\n      \"align\": [\"left\"],\n      \"type\": [\"char\"],\n      \"width\": {}\n    }\n  ],\n  \"col_plan\": {\n    \"col_plan\": {\n      \"dots\": [\n        [\"-grp\"],\n        [\"-starts_with(\\\"ord\\\")\"]\n      ],\n      \".drop\": [false]\n    }\n  },\n  \"sorting_cols\": [\"ord1\", \"ord2\"],\n  \"big_n\": {\n    \"param_val\": [\"bigN\"],\n    \"n_frmt\": {\n      \"expression\": [\"&lt;br&gt;N = xx\"],\n      \"missing\": {},\n      \"scientific\": {},\n      \"transform\": {}\n    },\n    \"by_page\": [false]\n  }\n} \n\n\n\nCreate a language-agnostic JSON file\nLoad JSON back into R and recreate the table with json_to_tfrmt()"
+  },
+  {
+    "objectID": "slides/index.html#creating-a-tfrmt-table-step-by-step",
+    "href": "slides/index.html#creating-a-tfrmt-table-step-by-step",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Creating a {tfrmt} table step-by-step",
+    "text": "Creating a {tfrmt} table step-by-step\n\n\nhead(ard_demog)\n\n# A tibble: 6 × 7\n  TRT01A  variable    label  stat_name  stat  ord1  ord2\n  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Active  Age (years) Median median       77     1    NA\n2 Active  Age (years) Q1, Q3 p25          71     1    NA\n3 Active  Age (years) Q1, Q3 p75          81     1    NA\n4 Placebo Age (years) Median median       76     1    NA\n5 Placebo Age (years) Q1, Q3 p25          69     1    NA\n6 Placebo Age (years) Q1, Q3 p75          82     1    NA\n\n\n\n\n\n\ntfrmt_demog &lt;- tfrmt(\n  group = variable, \n  label = label, \n  column = TRT01A,\n  param = stat_name,\n  value = stat, \n  sorting_cols = c(ord1, ord2) \n)"
+  },
+  {
+    "objectID": "slides/index.html#ensure-placement-of-all-values-main",
+    "href": "slides/index.html#ensure-placement-of-all-values-main",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Ensure placement of all values (Main)",
+    "text": "Ensure placement of all values (Main)\n\n\ntfrmt_demog &lt;- tfrmt(\n  group = variable, \n  label = label, \n  column = TRT01A,\n  param = stat_name,\n  value = stat, \n  sorting_cols = c(ord1, ord2) \n)\n\nprint_to_gt(\n  tfrmt = tfrmt_demog,\n  .data = ard_demog\n) |&gt; \n   gt_style_slides()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nord1\nord2\nActive\nPlacebo\n\n\n\n\nAge (years)\n\n\n\n\n\n\n\n\n\n\n  Median\n1\nNA\n77\n76\n\n\n  Q1, Q3\n1\nNA\n71, 81\n69, 82\n\n\nAge Group\n\n\n\n\n\n\n\n\n\n\n  18-64\n2\n1\n19, 11.3095238095238\n14, 16.2790697674419\n\n\n  &gt;64\n2\n2\n149, 88.6904761904762\n72, 83.7209302325581\n\n\nTRT01A\n\n\n\n\n\n\n\n\n\n\n  Active\nNA\nNA\n168\n\n\n\n  Placebo\nNA\nNA\n\n86"
+  },
+  {
+    "objectID": "slides/index.html#ensure-placement-of-all-values-big-n",
+    "href": "slides/index.html#ensure-placement-of-all-values-big-n",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Ensure placement of all values (Big N)",
+    "text": "Ensure placement of all values (Big N)\n\n\ntfrmt_demog &lt;- tfrmt_demog |&gt;\n  tfrmt(\n    big_n = big_n_structure(\n      param_val = \"bigN\",\n      n_frmt = frmt(\"&lt;br&gt;N = xx\")\n      )\n  )\n\nprint_to_gt(\n  tfrmt = tfrmt_demog, \n  .data = ard_demog\n  )|&gt; \n   gt_style_slides()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nord1\nord2\nActiveN = 168\nPlaceboN = 86\n\n\n\n\nAge (years)\n\n\n\n\n\n\n\n\n\n\n  Median\n1\nNA\n77\n76\n\n\n  Q1, Q3\n1\nNA\n71, 81\n69, 82\n\n\nAge Group\n\n\n\n\n\n\n\n\n\n\n  18-64\n2\n1\n19, 11.3095238095238\n14, 16.2790697674419\n\n\n  &gt;64\n2\n2\n149, 88.6904761904762\n72, 83.7209302325581"
+  },
+  {
+    "objectID": "slides/index.html#select-and-reorder-columns",
+    "href": "slides/index.html#select-and-reorder-columns",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Select and reorder columns",
+    "text": "Select and reorder columns\n\n\ntfrmt_demog &lt;- tfrmt_demog |&gt;\n  tfrmt(\n    col_plan = col_plan(\n      Placebo,\n      Active,\n      - starts_with(\"ord\")\n    )\n  )\n\nprint_to_gt(\n  tfrmt = tfrmt_demog, \n  .data = ard_demog\n)|&gt; \n   gt_style_slides()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlaceboN = 86\nActiveN = 168\n\n\n\n\nAge (years)\n\n\n\n\n\n\n  Median\n76\n77\n\n\n  Q1, Q3\n69, 82\n71, 81\n\n\nAge Group\n\n\n\n\n\n\n  18-64\n14, 16.2790697674419\n19, 11.3095238095238\n\n\n  &gt;64\n72, 83.7209302325581\n149, 88.6904761904762"
+  },
+  {
+    "objectID": "slides/index.html#format-the-data-values---basic",
+    "href": "slides/index.html#format-the-data-values---basic",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Format the data values - Basic",
+    "text": "Format the data values - Basic\n\n\ntfrmt_demog &lt;- tfrmt_demog |&gt;\n  tfrmt(\n    body_plan = body_plan(\n      frmt_structure(\n        group_val = \".default\", \n        label_val = \".default\", \n        frmt(\"x.x\"))\n    )\n  )\n\nprint_to_gt(\n  tfrmt = tfrmt_demog, \n  .data = ard_demog\n) |&gt; \n   gt_style_slides()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlaceboN = 86\nActiveN = 168\n\n\n\n\nAge (years)\n\n\n\n\n\n\n  Median\n76.0\n77.0\n\n\n  Q1, Q3\n69.0, 82.0\n71.0, 81.0\n\n\nAge Group\n\n\n\n\n\n\n  18-64\n14.0, 16.3\n19.0, 11.3\n\n\n  &gt;64\n72.0, 83.7\n149.0, 88.7"
+  },
+  {
+    "objectID": "slides/index.html#format-the-data-values---advanced",
+    "href": "slides/index.html#format-the-data-values---advanced",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Format the data values - Advanced",
+    "text": "Format the data values - Advanced\n\n\ntfrmt_demog &lt;- tfrmt_demog |&gt;\n  tfrmt(\n    body_plan = body_plan(\n      frmt_structure(\n        group_val = \".default\", \n        label_val = \".default\",\n        frmt_combine(\"{n} ({p}%)\",\n                     n = frmt(\"xx\"),\n                     p = frmt(\"xx.x\")\n                     \n        )\n      )\n    )\n  )\n\nprint_to_gt(\n  tfrmt = tfrmt_demog, \n  .data = ard_demog\n  ) |&gt; \n   gt_style_slides()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlaceboN = 86\nActiveN = 168\n\n\n\n\nAge (years)\n\n\n\n\n\n\n  Median\n76.0\n77.0\n\n\n  Q1, Q3\n69.0, 82.0\n71.0, 81.0\n\n\nAge Group\n\n\n\n\n\n\n  18-64\n14 (16.3%)\n19 (11.3%)\n\n\n  &gt;64\n72 (83.7%)\n149 (88.7%)"
+  },
+  {
+    "objectID": "slides/index.html#format-the-data-values---advanced-1",
+    "href": "slides/index.html#format-the-data-values---advanced-1",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Format the data values - Advanced",
+    "text": "Format the data values - Advanced\n\n\ntfrmt_demog &lt;- tfrmt_demog |&gt;\n  tfrmt(\n    body_plan = body_plan(\n      \n      frmt_structure(\n        group_val = \".default\", \n        label_val = \"Median\",\n        frmt(\"xx.x\")\n      ),\n      \n      frmt_structure(\n        group_val = \".default\",\n        label_val = \".default\",\n        frmt_combine(\n          expression = \"{p25}, {p75}\",                \n          p25 = frmt(\"xx.x\"),                     \n          p75 = frmt(\"xx.x\")                      \n        )\n      )\n      \n    )\n  )\n  \nprint_to_gt(\n  tfrmt = tfrmt_demog, \n  .data = ard_demog\n  ) |&gt; \n   gt_style_slides()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlaceboN = 86\nActiveN = 168\n\n\n\n\nAge (years)\n\n\n\n\n\n\n  Median\n76.0\n77.0\n\n\n  Q1, Q3\n69.0, 82.0\n71.0, 81.0\n\n\nAge Group\n\n\n\n\n\n\n  18-64\n14 (16.3%)\n19 (11.3%)\n\n\n  &gt;64\n72 (83.7%)\n149 (88.7%)"
+  },
+  {
+    "objectID": "slides/index.html#align-the-columns",
+    "href": "slides/index.html#align-the-columns",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Align the columns",
+    "text": "Align the columns\n\n\ntfrmt_demog &lt;- tfrmt_demog |&gt;\n  tfrmt(\n    col_style_plan = col_style_plan(\n      col_style_structure(\n        col = c(\"Placebo\", \n                \"Active\"),\n        align = \" \"\n      )\n    )\n  )\n  \nprint_to_gt(\n  tfrmt = tfrmt_demog, \n  .data = ard_demog\n  ) |&gt; \n   gt_style_slides()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlaceboN = 86\nActiveN = 168\n\n\n\n\nAge (years)\n\n\n\n\n\n\n  Median\n 76.0        \n 77.0        \n\n\n  Q1, Q3\n69.0, 82.0   \n71.0, 81.0   \n\n\nAge Group\n\n\n\n\n\n\n  18-64\n   14 (16.3%)\n   19 (11.3%)\n\n\n  &gt;64\n   72 (83.7%)\n  149 (88.7%)"
+  },
+  {
+    "objectID": "slides/index.html#add-footnotes",
+    "href": "slides/index.html#add-footnotes",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Add footnotes",
+    "text": "Add footnotes\n\n\ntfrmt_demog &lt;- tfrmt_demog |&gt;\n  tfrmt(\n    footnote_plan = footnote_plan(\n      footnote_structure(\n        \"Pooled High and Low Dose\",\n        column_val = \"Active\"\n      )\n    )\n  )\n  \nprint_to_gt(\n  tfrmt = tfrmt_demog, \n  .data = ard_demog\n  ) |&gt; \n   gt_style_slides()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlaceboN = 86\nActiveN = 1681\n\n\n\n\nAge (years)\n\n\n\n\n\n\n  Median\n 76.0        \n 77.0        \n\n\n  Q1, Q3\n69.0, 82.0   \n71.0, 81.0   \n\n\nAge Group\n\n\n\n\n\n\n  18-64\n   14 (16.3%)\n   19 (11.3%)\n\n\n  &gt;64\n   72 (83.7%)\n  149 (88.7%)\n\n\n\n1 Pooled High and Low Dose"
+  },
+  {
+    "objectID": "slides/index.html#add-titles",
+    "href": "slides/index.html#add-titles",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Add titles",
+    "text": "Add titles\n\n\ntfrmt_demog &lt;- tfrmt_demog |&gt;\n  tfrmt(\n    title = \"Demographic Table\",\n    subtitle = \"Safety Population\"\n  )\n  \nprint_to_gt(\n  tfrmt = tfrmt_demog, \n  .data = ard_demog\n  ) |&gt; \n   gt_style_slides()\n\n\n\n\n\n\n\n\n\n\n\n\n\nDemographic Table\n\n\nSafety Population\n\n\n\nPlaceboN = 86\nActiveN = 1681\n\n\n\n\nAge (years)\n\n\n\n\n\n\n  Median\n 76.0        \n 77.0        \n\n\n  Q1, Q3\n69.0, 82.0   \n71.0, 81.0   \n\n\nAge Group\n\n\n\n\n\n\n  18-64\n   14 (16.3%)\n   19 (11.3%)\n\n\n  &gt;64\n   72 (83.7%)\n  149 (88.7%)\n\n\n\n1 Pooled High and Low Dose"
+  },
+  {
+    "objectID": "slides/index.html#other-features-include",
+    "href": "slides/index.html#other-features-include",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Other features include:",
+    "text": "Other features include:\n\nTransform values in the formatting\nRow group formatting\nPagination\nMulti-positional column alignment\nTemplating"
+  },
+  {
+    "objectID": "slides/index.html#exercise-2",
+    "href": "slides/index.html#exercise-2",
+    "title": "Unlocking Analysis Results Datasets",
+    "section": "Exercise",
+    "text": "Exercise\n\nOpen R file 04-tables-tfrmt.R\nRun the provided code, which will open the app in your browser\nComplete the steps to futher customize the table"
+  },
+  {
     "objectID": "slides.html",
     "href": "slides.html",
     "title": "Slides",
@@ -233,7 +352,7 @@
     "href": "index.html#schedule",
     "title": "Unlocking Analysis Results Datasets (ARDs)",
     "section": "Schedule",
-    "text": "Schedule\n\n\n\n\n\n\n\n\n\n\n\n\nSection\nTopic\n\n\n\n\nSection 1\nIntroduction to the Analysis Results Standard\n\n\nSection 2\nThe {cards} Package\n\n\nSection 3\nThe {cardx} Package\n\n\nSection 4\nARD Extras\n\n\nSection 5\nARD to Tables with {gtsummary} and {tfrmt}",
+    "text": "Schedule\n\n\n\n\n\n\n\n\nSection\nTopic\n\n\n\n\nSection 1\nIntroduction to the Analysis Results Standard\n\n\nSection 2\nThe {cards} Package\n\n\nSection 3\nThe {cardx} Package\n\n\nSection 4\nARD Extras\n\n\nSection 5\nARD to Tables with {gtsummary} and {tfrmt}",
     "crumbs": [
       "Home"
     ]
