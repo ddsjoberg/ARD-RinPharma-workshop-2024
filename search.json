@@ -126,6 +126,76 @@
     "text": "Exercise\n\nOpen R file 04-tables-tfrmt.R\nRun the provided code, which will open the app in your browser\nComplete the steps to futher customize the table"
   },
   {
+    "objectID": "slides/02-intro-cardx/01-cardx.html",
+    "href": "slides/02-intro-cardx/01-cardx.html",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "Extension of the {cards} package, providing additional functions to create Analysis Results Datasets (ARDs)\nThe {cardx} package exports many ard_*() function for statistical methods.\n\n\n\n\n\n\n\n\n\n\nExports ARD frameworks for statistical analyses from mayn packages\n\n\n  - {stats}\n  - {car}\n  - {effectsize}\n  - {emmeans}\n  - {geepack}\n  - {lme4}\n  - {parameters}\n  - {smd}\n  - {survey}\n  - {survival}\n\n\nThis list is growing 🌱\n\n\n\n\n\n\nWe see the results like the mean difference, the confidence interval, and p-value as expected.\nAnd we also see the function’s inputs, which is incredibly useful for re-use, e.g. we know the we did not use equal variances.\n\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cardx::ard_stats_t_test(by = ARM, variables = AGE)\n\n{cards} data frame: 14 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE stats_t_…    estimate  Mean Dif…    -1.286\n2     ARM      AGE stats_t_…   estimate1  Group 1 …    74.381\n3     ARM      AGE stats_t_…   estimate2  Group 2 …    75.667\n4     ARM      AGE stats_t_…   statistic  t Statis…     -1.03\n5     ARM      AGE stats_t_…     p.value    p-value     0.304\n6     ARM      AGE stats_t_…   parameter  Degrees …   165.595\n7     ARM      AGE stats_t_…    conf.low  CI Lower…     -3.75\n8     ARM      AGE stats_t_…   conf.high  CI Upper…     1.179\n9     ARM      AGE stats_t_…      method     method Welch Tw…\n10    ARM      AGE stats_t_… alternative  alternat… two.sided\n11    ARM      AGE stats_t_…          mu    H0 Mean         0\n12    ARM      AGE stats_t_…      paired  Paired t…     FALSE\n13    ARM      AGE stats_t_…   var.equal  Equal Va…     FALSE\n14    ARM      AGE stats_t_…  conf.level  CI Confi…      0.95\n\n\nℹ 3 more variables: fmt_fn, warning, error\n\n\n\n\n\n\nWhat to do if a method you need is not implemented?\nIt’s simple to wrap existing framework to customize.\nOne-sample t-test example utilizing cards::ard_continuous().\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_continuous(\n    variables = AGE,\n    statistic = everything() ~ list(t_test = \\(x) t.test(x) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(context = \"t_test_one_sample\")\n\n{cards} data frame: 8 x 8\n\n\n  variable   context   stat_name stat_label      stat fmt_fn\n1      AGE t_test_o…    estimate   estimate    75.024      1\n2      AGE t_test_o…   statistic  statistic     120.2      1\n3      AGE t_test_o…     p.value    p.value         0      1\n4      AGE t_test_o…   parameter  parameter       167      1\n5      AGE t_test_o…    conf.low   conf.low    73.792      1\n6      AGE t_test_o…   conf.high  conf.high    76.256      1\n7      AGE t_test_o…      method     method One Samp…   &lt;fn&gt;\n8      AGE t_test_o… alternative  alternat… two.sided   &lt;fn&gt;\n\n\nℹ 2 more variables: warning, error\n\n\n\n\n\n\nHow to modify if we need a two-sample test, or more generally accessing other columns in the data frame.\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_complex(\n    variables = AGE,\n    statistic = \n      ~ list(t_test = \\(x, data, ...) t.test(x ~ data$ARM) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(group1 = \"ARM\", context = \"t_test_two_sample\") |&gt; \n  cards::tidy_ard_column_order()\n\n{cards} data frame: 10 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE t_test_t…    estimate   estimate    -1.286\n2     ARM      AGE t_test_t…   estimate1  estimate1    74.381\n3     ARM      AGE t_test_t…   estimate2  estimate2    75.667\n4     ARM      AGE t_test_t…   statistic  statistic     -1.03\n5     ARM      AGE t_test_t…     p.value    p.value     0.304\n6     ARM      AGE t_test_t…   parameter  parameter   165.595\n7     ARM      AGE t_test_t…    conf.low   conf.low     -3.75\n8     ARM      AGE t_test_t…   conf.high  conf.high     1.179\n9     ARM      AGE t_test_t…      method     method Welch Tw…\n10    ARM      AGE t_test_t… alternative  alternat… two.sided\n\n\nℹ 3 more variables: fmt_fn, warning, error\n\n\n\n\n\n\nIncludes functionality to summarize nearly every type of regression model in the R ecosystem:\n\n\nbetareg::betareg(), biglm::bigglm(), brms::brm(), cmprsk::crr(), fixest::feglm(), fixest::femlm(), fixest::feNmlm(), fixest::feols(), gam::gam(), geepack::geeglm(), glmmTMB::glmmTMB(), lavaan::lavaan(), lfe::felm(), lme4::glmer.nb(), lme4::glmer(), lme4::lmer(), logitr::logitr(), MASS::glm.nb(), MASS::polr(), mgcv::gam(), mice::mira, mmrm::mmrm(), multgee::nomLORgee(), multgee::ordLORgee(), nnet::multinom(), ordinal::clm(), ordinal::clmm(), parsnip::model_fit, plm::plm(), pscl::hurdle(), pscl::zeroinfl(), rstanarm::stan_glm(), stats::aov(), stats::glm(), stats::lm(), stats::nls(), survey::svycoxph(), survey::svyglm(), survey::svyolr(), survival::cch(), survival::clogit(), survival::coxph(), survival::survreg(), tidycmprsk::crr(), VGAM::vglm() (and more)\n\n\n\n\n\nlibrary(survival)\n\n# build model\nmod &lt;- pharmaverseadam::adtte_onco |&gt; \n  dplyr::filter(PARAM %in% \"Progression Free Survival\") |&gt;\n  coxph(ggsurvfit::Surv_CNSR() ~ ARM, data = _)\n\n# put model in a summary table\ntbl &lt;- gtsummary::tbl_regression(mod, exponentiate = TRUE) |&gt; \n  gtsummary::add_n(location = c('label', 'level')) |&gt; \n  gtsummary::add_nevent(location = c('label', 'level'))\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nEvent N\nHR1\n95% CI1\np-value\n\n\n\n\nDescription of Planned Arm\n254\n6\n\n\n\n\n\n\n\n\n    Placebo\n86\n3\n—\n—\n\n\n\n\n    Xanomeline High Dose\n84\n2\n3.00\n0.39, 22.9\n0.3\n\n\n    Xanomeline Low Dose\n84\n1\n1.27\n0.11, 14.3\n0.8\n\n\n\n1 HR = Hazard Ratio, CI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\n\nThe cardx::ard_regression() does a lot for us in the background.\n\nIdentifies the variable from the regression terms (i.e. groups levels of the same variable)\nIdentifies reference groups from categorical covariates\nFinds variable labels from the source data frames\nKnows the total N of the model, the number of events, and can do the same for each level of categorical variables\nContextually aware of slopes, odds ratios, hazard ratios, and incidence rate ratios\nAnd much much more.\n\n\n\n\nTODO: Add on top of the demographics exercise Becca will write and we’ll add p-values comparing between treatment groups.\n\n\n\n−+\n08:00"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/01-cardx.html#cardx",
+    "href": "slides/02-intro-cardx/01-cardx.html#cardx",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "Extension of the {cards} package, providing additional functions to create Analysis Results Datasets (ARDs)\nThe {cardx} package exports many ard_*() function for statistical methods."
+  },
+  {
+    "objectID": "slides/02-intro-cardx/01-cardx.html#cardx-1",
+    "href": "slides/02-intro-cardx/01-cardx.html#cardx-1",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "Exports ARD frameworks for statistical analyses from mayn packages\n\n\n  - {stats}\n  - {car}\n  - {effectsize}\n  - {emmeans}\n  - {geepack}\n  - {lme4}\n  - {parameters}\n  - {smd}\n  - {survey}\n  - {survival}\n\n\nThis list is growing 🌱"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/01-cardx.html#cardx-t-test-example",
+    "href": "slides/02-intro-cardx/01-cardx.html#cardx-t-test-example",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "We see the results like the mean difference, the confidence interval, and p-value as expected.\nAnd we also see the function’s inputs, which is incredibly useful for re-use, e.g. we know the we did not use equal variances.\n\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cardx::ard_stats_t_test(by = ARM, variables = AGE)\n\n{cards} data frame: 14 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE stats_t_…    estimate  Mean Dif…    -1.286\n2     ARM      AGE stats_t_…   estimate1  Group 1 …    74.381\n3     ARM      AGE stats_t_…   estimate2  Group 2 …    75.667\n4     ARM      AGE stats_t_…   statistic  t Statis…     -1.03\n5     ARM      AGE stats_t_…     p.value    p-value     0.304\n6     ARM      AGE stats_t_…   parameter  Degrees …   165.595\n7     ARM      AGE stats_t_…    conf.low  CI Lower…     -3.75\n8     ARM      AGE stats_t_…   conf.high  CI Upper…     1.179\n9     ARM      AGE stats_t_…      method     method Welch Tw…\n10    ARM      AGE stats_t_… alternative  alternat… two.sided\n11    ARM      AGE stats_t_…          mu    H0 Mean         0\n12    ARM      AGE stats_t_…      paired  Paired t…     FALSE\n13    ARM      AGE stats_t_…   var.equal  Equal Va…     FALSE\n14    ARM      AGE stats_t_…  conf.level  CI Confi…      0.95\n\n\nℹ 3 more variables: fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/01-cardx.html#cardx-t-test-example-1",
+    "href": "slides/02-intro-cardx/01-cardx.html#cardx-t-test-example-1",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "What to do if a method you need is not implemented?\nIt’s simple to wrap existing framework to customize.\nOne-sample t-test example utilizing cards::ard_continuous().\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_continuous(\n    variables = AGE,\n    statistic = everything() ~ list(t_test = \\(x) t.test(x) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(context = \"t_test_one_sample\")\n\n{cards} data frame: 8 x 8\n\n\n  variable   context   stat_name stat_label      stat fmt_fn\n1      AGE t_test_o…    estimate   estimate    75.024      1\n2      AGE t_test_o…   statistic  statistic     120.2      1\n3      AGE t_test_o…     p.value    p.value         0      1\n4      AGE t_test_o…   parameter  parameter       167      1\n5      AGE t_test_o…    conf.low   conf.low    73.792      1\n6      AGE t_test_o…   conf.high  conf.high    76.256      1\n7      AGE t_test_o…      method     method One Samp…   &lt;fn&gt;\n8      AGE t_test_o… alternative  alternat… two.sided   &lt;fn&gt;\n\n\nℹ 2 more variables: warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/01-cardx.html#cardx-t-test-example-2",
+    "href": "slides/02-intro-cardx/01-cardx.html#cardx-t-test-example-2",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "How to modify if we need a two-sample test, or more generally accessing other columns in the data frame.\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_complex(\n    variables = AGE,\n    statistic = \n      ~ list(t_test = \\(x, data, ...) t.test(x ~ data$ARM) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(group1 = \"ARM\", context = \"t_test_two_sample\") |&gt; \n  cards::tidy_ard_column_order()\n\n{cards} data frame: 10 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE t_test_t…    estimate   estimate    -1.286\n2     ARM      AGE t_test_t…   estimate1  estimate1    74.381\n3     ARM      AGE t_test_t…   estimate2  estimate2    75.667\n4     ARM      AGE t_test_t…   statistic  statistic     -1.03\n5     ARM      AGE t_test_t…     p.value    p.value     0.304\n6     ARM      AGE t_test_t…   parameter  parameter   165.595\n7     ARM      AGE t_test_t…    conf.low   conf.low     -3.75\n8     ARM      AGE t_test_t…   conf.high  conf.high     1.179\n9     ARM      AGE t_test_t…      method     method Welch Tw…\n10    ARM      AGE t_test_t… alternative  alternat… two.sided\n\n\nℹ 3 more variables: fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/01-cardx.html#cardx-regression",
+    "href": "slides/02-intro-cardx/01-cardx.html#cardx-regression",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "Includes functionality to summarize nearly every type of regression model in the R ecosystem:\n\n\nbetareg::betareg(), biglm::bigglm(), brms::brm(), cmprsk::crr(), fixest::feglm(), fixest::femlm(), fixest::feNmlm(), fixest::feols(), gam::gam(), geepack::geeglm(), glmmTMB::glmmTMB(), lavaan::lavaan(), lfe::felm(), lme4::glmer.nb(), lme4::glmer(), lme4::lmer(), logitr::logitr(), MASS::glm.nb(), MASS::polr(), mgcv::gam(), mice::mira, mmrm::mmrm(), multgee::nomLORgee(), multgee::ordLORgee(), nnet::multinom(), ordinal::clm(), ordinal::clmm(), parsnip::model_fit, plm::plm(), pscl::hurdle(), pscl::zeroinfl(), rstanarm::stan_glm(), stats::aov(), stats::glm(), stats::lm(), stats::nls(), survey::svycoxph(), survey::svyglm(), survey::svyolr(), survival::cch(), survival::clogit(), survival::coxph(), survival::survreg(), tidycmprsk::crr(), VGAM::vglm() (and more)"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/01-cardx.html#cardx-regression-example",
+    "href": "slides/02-intro-cardx/01-cardx.html#cardx-regression-example",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "library(survival)\n\n# build model\nmod &lt;- pharmaverseadam::adtte_onco |&gt; \n  dplyr::filter(PARAM %in% \"Progression Free Survival\") |&gt;\n  coxph(ggsurvfit::Surv_CNSR() ~ ARM, data = _)\n\n# put model in a summary table\ntbl &lt;- gtsummary::tbl_regression(mod, exponentiate = TRUE) |&gt; \n  gtsummary::add_n(location = c('label', 'level')) |&gt; \n  gtsummary::add_nevent(location = c('label', 'level'))\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nEvent N\nHR1\n95% CI1\np-value\n\n\n\n\nDescription of Planned Arm\n254\n6\n\n\n\n\n\n\n\n\n    Placebo\n86\n3\n—\n—\n\n\n\n\n    Xanomeline High Dose\n84\n2\n3.00\n0.39, 22.9\n0.3\n\n\n    Xanomeline Low Dose\n84\n1\n1.27\n0.11, 14.3\n0.8\n\n\n\n1 HR = Hazard Ratio, CI = Confidence Interval"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/01-cardx.html#cardx-regression-example-1",
+    "href": "slides/02-intro-cardx/01-cardx.html#cardx-regression-example-1",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "The cardx::ard_regression() does a lot for us in the background.\n\nIdentifies the variable from the regression terms (i.e. groups levels of the same variable)\nIdentifies reference groups from categorical covariates\nFinds variable labels from the source data frames\nKnows the total N of the model, the number of events, and can do the same for each level of categorical variables\nContextually aware of slopes, odds ratios, hazard ratios, and incidence rate ratios\nAnd much much more."
+  },
+  {
+    "objectID": "slides/02-intro-cardx/01-cardx.html#cardx-exercise",
+    "href": "slides/02-intro-cardx/01-cardx.html#cardx-exercise",
+    "title": "{cardx} (read: extra cards)",
+    "section": "",
+    "text": "TODO: Add on top of the demographics exercise Becca will write and we’ll add p-values comparing between treatment groups.\n\n\n\n−+\n08:00"
+  },
+  {
     "objectID": "slides/01-intro-cards/index.html#this-workshop-is-for-you-if",
     "href": "slides/01-intro-cards/index.html#this-workshop-is-for-you-if",
     "title": "Unlocking Analysis Results Datasets",
@@ -315,73 +385,97 @@
     "text": "Exercise\nAE summaries"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "objectID": "slides/02-intro-cardx/index.html#cardx",
+    "href": "slides/02-intro-cardx/index.html#cardx",
+    "title": "{cardx} & other extras",
+    "section": "{cardx}",
+    "text": "{cardx}\n\nExtension of the {cards} package, providing additional functions to create Analysis Results Datasets (ARDs)\nThe {cardx} package exports many ard_*() function for statistical methods."
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-1",
+    "href": "slides/02-intro-cardx/index.html#cardx-1",
+    "title": "{cardx} & other extras",
+    "section": "{cardx}",
+    "text": "{cardx}\n\nExports ARD frameworks for statistical analyses from mayn packages\n\n\n  - {stats}\n  - {car}\n  - {effectsize}\n  - {emmeans}\n  - {geepack}\n  - {lme4}\n  - {parameters}\n  - {smd}\n  - {survey}\n  - {survival}\n\n\nThis list is growing 🌱"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-t-test-example",
+    "href": "slides/02-intro-cardx/index.html#cardx-t-test-example",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} t-test Example",
+    "text": "{cardx} t-test Example\n\n\nWe see the results like the mean difference, the confidence interval, and p-value as expected.\nAnd we also see the function’s inputs, which is incredibly useful for re-use, e.g. we know the we did not use equal variances.\n\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cardx::ard_stats_t_test(by = ARM, variables = AGE)\n\n{cards} data frame: 14 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE stats_t_…    estimate  Mean Dif…    -1.286\n2     ARM      AGE stats_t_…   estimate1  Group 1 …    74.381\n3     ARM      AGE stats_t_…   estimate2  Group 2 …    75.667\n4     ARM      AGE stats_t_…   statistic  t Statis…     -1.03\n5     ARM      AGE stats_t_…     p.value    p-value     0.304\n6     ARM      AGE stats_t_…   parameter  Degrees …   165.595\n7     ARM      AGE stats_t_…    conf.low  CI Lower…     -3.75\n8     ARM      AGE stats_t_…   conf.high  CI Upper…     1.179\n9     ARM      AGE stats_t_…      method     method Welch Tw…\n10    ARM      AGE stats_t_… alternative  alternat… two.sided\n11    ARM      AGE stats_t_…          mu    H0 Mean         0\n12    ARM      AGE stats_t_…      paired  Paired t…     FALSE\n13    ARM      AGE stats_t_…   var.equal  Equal Va…     FALSE\n14    ARM      AGE stats_t_…  conf.level  CI Confi…      0.95\n\n\nℹ 3 more variables: fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-t-test-example-1",
+    "href": "slides/02-intro-cardx/index.html#cardx-t-test-example-1",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} t-test Example",
+    "text": "{cardx} t-test Example\n\nWhat to do if a method you need is not implemented?\nIt’s simple to wrap existing framework to customize.\nOne-sample t-test example utilizing cards::ard_continuous().\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_continuous(\n    variables = AGE,\n    statistic = everything() ~ list(t_test = \\(x) t.test(x) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(context = \"t_test_one_sample\")\n\n{cards} data frame: 8 x 8\n\n\n  variable   context   stat_name stat_label      stat fmt_fn\n1      AGE t_test_o…    estimate   estimate    75.024      1\n2      AGE t_test_o…   statistic  statistic     120.2      1\n3      AGE t_test_o…     p.value    p.value         0      1\n4      AGE t_test_o…   parameter  parameter       167      1\n5      AGE t_test_o…    conf.low   conf.low    73.792      1\n6      AGE t_test_o…   conf.high  conf.high    76.256      1\n7      AGE t_test_o…      method     method One Samp…   &lt;fn&gt;\n8      AGE t_test_o… alternative  alternat… two.sided   &lt;fn&gt;\n\n\nℹ 2 more variables: warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-t-test-example-2",
+    "href": "slides/02-intro-cardx/index.html#cardx-t-test-example-2",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} t-test Example",
+    "text": "{cardx} t-test Example\n\nHow to modify if we need a two-sample test, or more generally accessing other columns in the data frame.\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_complex(\n    variables = AGE,\n    statistic = \n      ~ list(t_test = \\(x, data, ...) t.test(x ~ data$ARM) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(group1 = \"ARM\", context = \"t_test_two_sample\") |&gt; \n  cards::tidy_ard_column_order()\n\n{cards} data frame: 10 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE t_test_t…    estimate   estimate    -1.286\n2     ARM      AGE t_test_t…   estimate1  estimate1    74.381\n3     ARM      AGE t_test_t…   estimate2  estimate2    75.667\n4     ARM      AGE t_test_t…   statistic  statistic     -1.03\n5     ARM      AGE t_test_t…     p.value    p.value     0.304\n6     ARM      AGE t_test_t…   parameter  parameter   165.595\n7     ARM      AGE t_test_t…    conf.low   conf.low     -3.75\n8     ARM      AGE t_test_t…   conf.high  conf.high     1.179\n9     ARM      AGE t_test_t…      method     method Welch Tw…\n10    ARM      AGE t_test_t… alternative  alternat… two.sided\n\n\nℹ 3 more variables: fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-regression",
+    "href": "slides/02-intro-cardx/index.html#cardx-regression",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Regression",
+    "text": "{cardx} Regression\n\nIncludes functionality to summarize nearly every type of regression model in the R ecosystem:\n\n\nbetareg::betareg(), biglm::bigglm(), brms::brm(), cmprsk::crr(), fixest::feglm(), fixest::femlm(), fixest::feNmlm(), fixest::feols(), gam::gam(), geepack::geeglm(), glmmTMB::glmmTMB(), lavaan::lavaan(), lfe::felm(), lme4::glmer.nb(), lme4::glmer(), lme4::lmer(), logitr::logitr(), MASS::glm.nb(), MASS::polr(), mgcv::gam(), mice::mira, mmrm::mmrm(), multgee::nomLORgee(), multgee::ordLORgee(), nnet::multinom(), ordinal::clm(), ordinal::clmm(), parsnip::model_fit, plm::plm(), pscl::hurdle(), pscl::zeroinfl(), rstanarm::stan_glm(), stats::aov(), stats::glm(), stats::lm(), stats::nls(), survey::svycoxph(), survey::svyglm(), survey::svyolr(), survival::cch(), survival::clogit(), survival::coxph(), survival::survreg(), tidycmprsk::crr(), VGAM::vglm() (and more)"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-regression-example",
+    "href": "slides/02-intro-cardx/index.html#cardx-regression-example",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Regression Example",
+    "text": "{cardx} Regression Example\n\nlibrary(survival)\n\n# build model\nmod &lt;- pharmaverseadam::adtte_onco |&gt; \n  dplyr::filter(PARAM %in% \"Progression Free Survival\") |&gt;\n  coxph(ggsurvfit::Surv_CNSR() ~ ARM, data = _)\n\n# put model in a summary table\ntbl &lt;- gtsummary::tbl_regression(mod, exponentiate = TRUE) |&gt; \n  gtsummary::add_n(location = c('label', 'level')) |&gt; \n  gtsummary::add_nevent(location = c('label', 'level'))\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nEvent N\nHR1\n95% CI1\np-value\n\n\n\n\nDescription of Planned Arm\n254\n6\n\n\n\n\n\n\n\n\n    Placebo\n86\n3\n—\n—\n\n\n\n\n    Xanomeline High Dose\n84\n2\n3.00\n0.39, 22.9\n0.3\n\n\n    Xanomeline Low Dose\n84\n1\n1.27\n0.11, 14.3\n0.8\n\n\n\n1 HR = Hazard Ratio, CI = Confidence Interval"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-regression-example-1",
+    "href": "slides/02-intro-cardx/index.html#cardx-regression-example-1",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Regression Example",
+    "text": "{cardx} Regression Example\nThe cardx::ard_regression() does a lot for us in the background.\n\nIdentifies the variable from the regression terms (i.e. groups levels of the same variable)\nIdentifies reference groups from categorical covariates\nFinds variable labels from the source data frames\nKnows the total N of the model, the number of events, and can do the same for each level of categorical variables\nContextually aware of slopes, odds ratios, hazard ratios, and incidence rate ratios\nAnd much much more."
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-exercise",
+    "href": "slides/02-intro-cardx/index.html#cardx-exercise",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Exercise",
+    "text": "{cardx} Exercise\nTODO: Add on top of the demographics exercise Becca will write and we’ll add p-values comparing between treatment groups.\n\n\n\n−+\n08:00"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#when-things-go-wrong",
+    "href": "slides/02-intro-cardx/index.html#when-things-go-wrong",
+    "title": "{cardx} & other extras",
+    "section": "When things go wrong 😱",
+    "text": "When things go wrong 😱\nWhat happens when statistics are un-calculable?\n\nard_gone_wrong &lt;- \n  cards::ADSL |&gt; \n  cards::ard_continuous(\n    by = ARM,\n    variable = AGEGR1,\n    statistic = ~list(kurtosis = \\(x) e1071::kurtosis(x))\n  ) |&gt; \n  cards::replace_null_statistic()\nard_gone_wrong\n\n{cards} data frame: 3 x 10\n\n\n  group1 group1_level variable stat_name stat_label stat   warning     error\n1    ARM      Placebo   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n2    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n3    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n\n\nℹ 2 more variables: context, fmt_fn\n\n\n\ncards::print_ard_conditions(ard_gone_wrong)\n\n\n\n\nWhere is the statistic? AGEGR1 is character\nEven when there are errors or warnings, we still get the ARD with the expected structure returned.\n\nTHIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.\nThis allows you to design everything up-front.\n\nWe can also report these warnings and errors back to users. &lt;!CLICK!&gt;"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#mock-ards",
+    "href": "slides/02-intro-cardx/index.html#mock-ards",
+    "title": "{cardx} & other extras",
+    "section": "Mock ARDs",
+    "text": "Mock ARDs\nLike mock tables, mock ARDs are often useful as well\n\ncards::bind_ard(\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\"))),\n  cards::mock_continuous(variables = \"AGE\")\n) |&gt; \n  cards::apply_fmt_fn()\n\n{cards} data frame: 14 x 10\n\n\n   variable variable_level stat_name stat_label stat stat_fmt\n1    AGEGR1            &lt;65         n          n            xx\n2    AGEGR1            &lt;65         p          %          xx.x\n3    AGEGR1            &lt;65         N          N            xx\n4    AGEGR1           &gt;=65         n          n            xx\n5    AGEGR1           &gt;=65         p          %          xx.x\n6    AGEGR1           &gt;=65         N          N            xx\n7       AGE                        N          N            xx\n8       AGE                     mean       Mean          xx.x\n9       AGE                       sd         SD          xx.x\n10      AGE                   median     Median          xx.x\n11      AGE                      p25         Q1          xx.x\n12      AGE                      p75         Q3          xx.x\n13      AGE                      min        Min          xx.x\n14      AGE                      max        Max          xx.x\n\n\nℹ 4 more variables: context, fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#mock-ards-1",
+    "href": "slides/02-intro-cardx/index.html#mock-ards-1",
+    "title": "{cardx} & other extras",
+    "section": "Mock ARDs",
+    "text": "Mock ARDs\n\ncards::bind_ard(\n  cards::mock_continuous(variables = \"AGE\", \n                         by = list(ARM = c(\"Drug A\", \"Drug B\"))),\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\")),\n                          by = list(ARM = c(\"Drug A\", \"Drug B\")))\n) |&gt; \n  gtsummary::tbl_ard_summary(\n    by = ARM,\n    type  = AGE ~ \"continuous2\",\n    statistic = AGE ~ c(\"{N}\", \"{mean} ({sd})\", \"{median} ({p25}, {p75})\")\n  )\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nAGE\n\n\n\n\n\n\n    N\nxx\nxx\n\n\n    Mean (SD)\nxx.x (xx.x)\nxx.x (xx.x)\n\n\n    Median (Q1, Q3)\nxx.x (xx.x, xx.x)\nxx.x (xx.x, xx.x)\n\n\nAGEGR1\n\n\n\n\n\n\n    &lt;65\nxx (xx.x%)\nxx (xx.x%)\n\n\n    &gt;=65\nxx (xx.x%)\nxx (xx.x%)\n\n\n\n1 n (%)"
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
     "section": "",
-    "text": "🗓️ October 28, 2024 | Time TBA\n📝 R in Pharma & Workshop Registration\n🌐 Virtual and FREE!",
+    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
     "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#description",
-    "href": "index.html#description",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Description",
-    "text": "Description\nThe CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis summaries in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability. The newly released {cards} R package, a collaborative effort including Roche, GSK, and Novartis, offers a variety of functions for ARD generation. These range from basic univariate summaries like means and tabulations to complex multivariable summaries encompassing regression models and statistical tests. In this interactive workshop, attendees will learn about ARDs and how they fit into the larger CDISC Analysis Results Standard. They will get hands-on experience using {cards} to build ARDs for both simple and complex statistical summaries. Lastly, attendees will also be introduced to open-source tools for converting their ARDs into tables using the {gtsummary} and {tfrmt} R packages. Attendees will leave with a solid understanding of ARDs and the knowledge of how to integrate them into their daily work using open-source tools.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#schedule",
-    "href": "index.html#schedule",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\n\n\n\n\n\nSection\nTopic\n\n\n\n\nSection 1a\nIntroduction to the Analysis Results Standard\n\n\nSection 1b\nThe {cards} Package\n\n\nSection 2\nThe {cardx} Package\n\n\nSection 3\nARD Extras\n\n\nSection 4\nARD to Tables with {gtsummary} and {tfrmt}",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#pre-work",
-    "href": "index.html#pre-work",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Pre-work",
-    "text": "Pre-work\n\nBookmark this site. You’ll reference it throughout the workshop.\nSign up for a free Posit Cloud account.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#instructors",
-    "href": "index.html#instructors",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Instructors",
-    "text": "Instructors\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.\n   \n\nBecca Krouse is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 14+ years in the field of clinical research and specializes in developing R-based tools.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#workshop-assistant",
-    "href": "index.html#workshop-assistant",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Workshop Assistant",
-    "text": "Workshop Assistant\n\nJack Talboys is a Software Developer at Novartis, recently joining their Open-Source Enablement team. Before that he worked as a Data Scientist for Ascent, a Software Consultancy, building Shiny apps and R packages for companies across a range of industries including Insurance, Finance, and Pharma.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "slides_1.html",
-    "href": "slides_1.html",
-    "title": "Slides Part 1",
-    "section": "",
-    "text": "View slides in full screen",
-    "crumbs": [
-      "Slides Part 1"
+      "License"
     ]
   },
   {
@@ -490,23 +584,63 @@
     "text": "A few notes about ARDs\n\nQC is done on raw value\n\nYou don’t have to waste time trying to match formatting to match QC\n\nBut…\n\nQC will be more sensitive to floating point\nQC tolerance will need to be defined\n\nARD can be saved as a dataset (rds, xpt, etc) or json file"
   },
   {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
     "section": "",
-    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
+    "text": "🗓️ October 28, 2024 | 13:00-16:00 EDT\n📝 R in Pharma & Workshop Registration\n🌐 Virtual and FREE!",
     "crumbs": [
-      "License"
+      "Home"
     ]
   },
   {
-    "objectID": "slides_4.html",
-    "href": "slides_4.html",
-    "title": "Slides Part 4",
-    "section": "",
-    "text": "View slides in full screen",
+    "objectID": "index.html#description",
+    "href": "index.html#description",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Description",
+    "text": "Description\nThe CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis summaries in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability. The newly released {cards} R package, a collaborative effort including Roche, GSK, and Novartis, offers a variety of functions for ARD generation. These range from basic univariate summaries like means and tabulations to complex multivariable summaries encompassing regression models and statistical tests. In this interactive workshop, attendees will learn about ARDs and how they fit into the larger CDISC Analysis Results Standard. They will get hands-on experience using {cards} to build ARDs for both simple and complex statistical summaries. Lastly, attendees will also be introduced to open-source tools for converting their ARDs into tables using the {gtsummary} and {tfrmt} R packages. Attendees will leave with a solid understanding of ARDs and the knowledge of how to integrate them into their daily work using open-source tools.",
     "crumbs": [
-      "Slides Part 4"
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\n\n\n\n\n\nSection\nTopic\n\n\n\n\nSection 1\nIntroduction to the Analysis Results Standard and {cards}\n\n\nSection 2\nIntroduction to the {cardx} Package and ARD Extras\n\n\nSection 3\nARD to Tables with {gtsummary}\n\n\nSection 4\nARD to Tables with {tfrmt}",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#pre-work",
+    "href": "index.html#pre-work",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Pre-work",
+    "text": "Pre-work\n\nBookmark this site. You’ll reference it throughout the workshop.\nSign up for a free Posit Cloud account.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#instructors",
+    "href": "index.html#instructors",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Instructors",
+    "text": "Instructors\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.\n   \n\nBecca Krouse is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 14+ years in the field of clinical research and specializes in developing R-based tools.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#workshop-assistant",
+    "href": "index.html#workshop-assistant",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Workshop Assistant",
+    "text": "Workshop Assistant\n\nJack Talboys is a Software Developer at Novartis, recently joining their Open-Source Enablement team. Before that he worked as a Data Scientist for Ascent, a Software Consultancy, building Shiny apps and R packages for companies across a range of industries including Insurance, Finance, and Pharma.",
+    "crumbs": [
+      "Home"
     ]
   },
   {
@@ -627,6 +761,34 @@
     "title": "Unlocking Analysis Results Datasets",
     "section": "Exercise",
     "text": "Exercise\n\nOpen R file 04-tables-tfrmt.R\nRun the provided code, which will open the app in your browser\nComplete the steps to futher customize the table"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/02-extras.html",
+    "href": "slides/02-intro-cardx/02-extras.html",
+    "title": "Analysis Results Datasets",
+    "section": "",
+    "text": "What happens when statistics are un-calculable?\n\nard_gone_wrong &lt;- \n  cards::ADSL |&gt; \n  cards::ard_continuous(\n    by = ARM,\n    variable = AGEGR1,\n    statistic = ~list(kurtosis = \\(x) e1071::kurtosis(x))\n  ) |&gt; \n  cards::replace_null_statistic()\nard_gone_wrong\n\n{cards} data frame: 3 x 10\n\n\n  group1 group1_level variable stat_name stat_label stat   warning     error\n1    ARM      Placebo   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n2    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n3    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n\n\nℹ 2 more variables: context, fmt_fn\n\n\n\ncards::print_ard_conditions(ard_gone_wrong)\n\n\n\n\nWhere is the statistic? AGEGR1 is character\nEven when there are errors or warnings, we still get the ARD with the expected structure returned.\n\nTHIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.\nThis allows you to design everything up-front.\n\nWe can also report these warnings and errors back to users. &lt;!CLICK!&gt;"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/02-extras.html#when-things-go-wrong",
+    "href": "slides/02-intro-cardx/02-extras.html#when-things-go-wrong",
+    "title": "Analysis Results Datasets",
+    "section": "",
+    "text": "What happens when statistics are un-calculable?\n\nard_gone_wrong &lt;- \n  cards::ADSL |&gt; \n  cards::ard_continuous(\n    by = ARM,\n    variable = AGEGR1,\n    statistic = ~list(kurtosis = \\(x) e1071::kurtosis(x))\n  ) |&gt; \n  cards::replace_null_statistic()\nard_gone_wrong\n\n{cards} data frame: 3 x 10\n\n\n  group1 group1_level variable stat_name stat_label stat   warning     error\n1    ARM      Placebo   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n2    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n3    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n\n\nℹ 2 more variables: context, fmt_fn\n\n\n\ncards::print_ard_conditions(ard_gone_wrong)\n\n\n\n\nWhere is the statistic? AGEGR1 is character\nEven when there are errors or warnings, we still get the ARD with the expected structure returned.\n\nTHIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.\nThis allows you to design everything up-front.\n\nWe can also report these warnings and errors back to users. &lt;!CLICK!&gt;"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/02-extras.html#mock-ards",
+    "href": "slides/02-intro-cardx/02-extras.html#mock-ards",
+    "title": "Analysis Results Datasets",
+    "section": "Mock ARDs",
+    "text": "Mock ARDs\nLike mock tables, mock ARDs are often useful as well\n\ncards::bind_ard(\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\"))),\n  cards::mock_continuous(variables = \"AGE\")\n) |&gt; \n  cards::apply_fmt_fn()\n\n{cards} data frame: 14 x 10\n\n\n   variable variable_level stat_name stat_label stat stat_fmt\n1    AGEGR1            &lt;65         n          n            xx\n2    AGEGR1            &lt;65         p          %          xx.x\n3    AGEGR1            &lt;65         N          N            xx\n4    AGEGR1           &gt;=65         n          n            xx\n5    AGEGR1           &gt;=65         p          %          xx.x\n6    AGEGR1           &gt;=65         N          N            xx\n7       AGE                        N          N            xx\n8       AGE                     mean       Mean          xx.x\n9       AGE                       sd         SD          xx.x\n10      AGE                   median     Median          xx.x\n11      AGE                      p25         Q1          xx.x\n12      AGE                      p75         Q3          xx.x\n13      AGE                      min        Min          xx.x\n14      AGE                      max        Max          xx.x\n\n\nℹ 4 more variables: context, fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/02-extras.html#mock-ards-1",
+    "href": "slides/02-intro-cardx/02-extras.html#mock-ards-1",
+    "title": "Analysis Results Datasets",
+    "section": "Mock ARDs",
+    "text": "Mock ARDs\n\ncards::bind_ard(\n  cards::mock_continuous(variables = \"AGE\", \n                         by = list(ARM = c(\"Drug A\", \"Drug B\"))),\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\")),\n                          by = list(ARM = c(\"Drug A\", \"Drug B\")))\n) |&gt; \n  gtsummary::tbl_ard_summary(\n    by = ARM,\n    type  = AGE ~ \"continuous2\",\n    statistic = AGE ~ c(\"{N}\", \"{mean} ({sd})\", \"{median} ({p25}, {p75})\")\n  )\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nAGE\n\n\n\n\n\n\n    N\nxx\nxx\n\n\n    Mean (SD)\nxx.x (xx.x)\nxx.x (xx.x)\n\n\n    Median (Q1, Q3)\nxx.x (xx.x, xx.x)\nxx.x (xx.x, xx.x)\n\n\nAGEGR1\n\n\n\n\n\n\n    &lt;65\nxx (xx.x%)\nxx (xx.x%)\n\n\n    &gt;=65\nxx (xx.x%)\nxx (xx.x%)\n\n\n\n1 n (%)"
   },
   {
     "objectID": "slides/01-intro-cards/cards.html",
