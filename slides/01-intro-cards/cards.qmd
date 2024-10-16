@@ -102,7 +102,14 @@ Wrangling: `shuffle_ard()`, `get_ard_statistics()`, `replace_null_statistic()`, 
 
 ## Exercise
 
-demog summaries
+```{r}
+#| echo: false
+#| cache: false
+library(countdown)
+countdown(minutes = 8, play_sound = TRUE)
+```
+
+TODO: Demographic summary exercise
 
 ## {cards}: Stacking utilities
 
@@ -137,7 +144,7 @@ This function specializes in calculating **participant**-level rates.
 
 :::
 
-```{r}
+```{r} 
 ard_hierarchical(
   data = ADAE |>
     dplyr::slice_tail(n = 1L, by = c(USUBJID, TRTA, AESOC, AEDECOD)),
@@ -164,9 +171,65 @@ ard_hierarchical_count(
 )
 ```
 
-## {cards}: Stacking functions for `ard_hierarchical_*`
+## Hierarchical summaries many ways
+
+- Displays for hierarchical data typically report on each level of the hierarchy (Any AE Overall, by System Organ Class, by Preferred Term,...)
+
+- This can mean several calls to the `ard_hierchical_*` functions 
+
+- Further, subject-level summaries require a different subset of the data each time. For example, to calculate Overall rates, we need to subset to 1 record per subject in ADAE. 
+
+::: {.fragment}
+- Is there an easier way?
+:::
+
+## {cards}: Stacking function for `ard_hierarchical()`
+
+TODO: figure out a better way to show the data
+
+::: {.small}
+
+- `ard_hierarchical` stacking functions simplify this multi-step process into a single step
+
+- The `id` argument is used to subset the data along the way
+
+:::
+
+```{r}
+ard_hier <- ard_stack_hierarchical(
+  data = ADAE,
+  variables = c(AESOC, AEDECOD),
+  by = TRTA,
+  id = USUBJID,
+  denominator = ADSL |> dplyr::rename(TRTA = ARM)
+)
+```
+
+## {cards}: Stacking function for `ard_hierarchical_count()`
+
+::: {.small}
+
+- Below is the stacking function for event-level summaries, aligned with `ard_hierarchical_count()`
+
+:::
+
+```{r}
+ard_stack_hierarchical_count(
+  data = ADAE,
+  variables = c(AESOC, AEDECOD),
+  by = TRTA, 
+  denominator = ADSL |> dplyr::rename(TRTA = ARM)
+)
+```
 
 
-## Exercise 
+## Exercise
 
-AE summaries
+```{r}
+#| echo: false
+#| cache: false
+library(countdown)
+countdown(minutes = 8, play_sound = TRUE)
+```
+
+TODO: AE summary exercise
