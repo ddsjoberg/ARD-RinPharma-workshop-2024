@@ -65,6 +65,21 @@ d_demog <- tfrmt::data_demog |>
   dplyr::filter(is.na(rowlbl1) | rowlbl1 %in% c("Age (y)","Baseline BMI","Race (Origin)","Sex","Duration of disease"))
 
 d_demog_mock <- d_demog
+
+
+
+gt_style_slides <- function(x){
+  x |>   
+    tab_style(
+      style = cell_text(font = c(google_font("Google Sans Mono"),
+                                 c("Courier", default_fonts()))),
+      locations = list(cells_body(), cells_row_groups(), cells_stub(),
+                       cells_column_labels(), cells_column_spanners(),
+                       cells_title(), cells_footnotes()
+                       )
+    )
+}
+
 ```
 
 ```{r} 
@@ -120,7 +135,8 @@ fontawesome::fa("recycle", height="5em", fill=fa_fill)
 print_mock_gt(
   tfrmt = tfrmt_demog, # tfrmt
   .data = d_demog_mock # sample ARD
-)
+)|> 
+   gt_style_slides()
 ``` 
 
 * If no data is supplied, {tfrmt} will generate some under the hood
@@ -133,7 +149,8 @@ print_mock_gt(
 print_to_gt(
   tfrmt = tfrmt_demog,
   .data = d_demog # true ARD
-)
+)|> 
+   gt_style_slides()
 ```
 
 * Full reuse of the original {tfrmt} object = reduced rework!
@@ -174,7 +191,8 @@ tfrmt_demog |>
   print_to_gt( 
     .data = d_demog
   ) |> 
-  grp_pull(1)
+  grp_pull(1)|> 
+   gt_style_slides()
 ```
 
 * *Layering* allows for custom tweaks while preserving the original metadata
@@ -198,15 +216,6 @@ tfrmt_demog |>
 
 ```{r}
 #| echo: false
-
-
-gt_style_slides <- function(x){
-  x |> 
-    tab_options(
-      table.font.size = 20
-    ) 
-}
-
 # demog data
 adsl <- pharmaverseadam::adsl |>
   dplyr::filter(SAFFL == "Y") |> 
@@ -233,10 +242,23 @@ ard_demog <- ard_stack(
   dplyr::select(-context) |> 
   dplyr::mutate(stat = ifelse(stat_name=="p", stat*100, stat),
                 label = dplyr::case_when(
-                  stat_name %in% c("p25","p75") ~ "Q1, Q3", 
+                  stat_name %in% c("p25","p75") ~ "[Q1, Q3]", 
                   TRUE ~ label
                 ))
-
+gt_style_slides <- function(x){
+  x |> 
+    tab_options(
+      table.font.size = 20
+    ) |> 
+    tab_style(
+      style = cell_text(font = c(google_font("Google Sans Mono"),
+                                 c("Courier", default_fonts()))),
+      locations = list(cells_body(), cells_row_groups(), cells_stub(),
+                       cells_column_labels(), cells_column_spanners(),
+                       cells_title(), cells_footnotes()
+                       )
+    )
+}
 ```
 
 
@@ -347,7 +369,7 @@ tfrmt_demog <- tfrmt_demog |>
       frmt_structure(
         group_val = ".default", 
         label_val = ".default", 
-        frmt("x.x"))
+        frmt("x.xx"))
     )
   )
 
@@ -406,7 +428,7 @@ tfrmt_demog <- tfrmt_demog |>
         group_val = ".default",
         label_val = ".default",
         frmt_combine(
-          expression = "{p25}, {p75}",                
+          expression = "[{p25}, {p75}]",                
           p25 = frmt("xx.x"),                     
           p75 = frmt("xx.x")                      
         )
