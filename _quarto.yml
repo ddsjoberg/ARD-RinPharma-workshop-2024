@@ -11,7 +11,7 @@ website:
   description: "R in Pharma Workshop 2024"
   favicon: "images/cards-hex.png"
 
-  repo-url: https://github.com/posit-conf-2024/pharmaverse
+  repo-url: https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024
   repo-actions: [edit, issue]
 
   page-footer:
@@ -32,9 +32,10 @@ website:
      - href: index.qmd
        text: Home
      - href: license.qmd
-     - href: slides.qmd
-       text: Slides
-
+     - href: slides_1.qmd
+       text: Slides Part 1
+     - href: slides_4.qmd
+       text: Slides Part 4
 format:
   html:
     theme: [cosmo, theme.scss]

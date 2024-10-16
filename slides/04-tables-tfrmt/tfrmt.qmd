@@ -51,7 +51,9 @@
 
 ```{r}
 #| echo: false
-d_demog <- tfrmt::data_demog |> 
+library(tfrmt) 
+
+d_demog <- data_demog |> 
   dplyr::filter(!column=="p-value",
                 !rowlbl2=="n",
                 !column=="Total", !rowlbl1=="Race (Origin)") |> 
@@ -70,21 +72,24 @@ d_demog_mock <- d_demog
 
 gt_style_slides <- function(x){
   x |>   
-    tab_style(
-      style = cell_text(font = c(google_font("Google Sans Mono"),
-                                 c("Courier", default_fonts()))),
-      locations = list(cells_body(), cells_row_groups(), cells_stub(),
-                       cells_column_labels(), cells_column_spanners(),
-                       cells_title(), cells_footnotes()
-                       )
+    gt::tab_style(
+      style = gt::cell_text(font = c(gt::google_font("Google Sans Mono"),
+                                     c("Courier", gt::default_fonts()))),
+      locations = list(gt::cells_body(), 
+                       gt::cells_row_groups(), 
+                       gt::cells_stub(),
+                       gt::cells_column_labels(),
+                       gt::cells_column_spanners(),
+                       gt::cells_title(), 
+                       gt::cells_footnotes()
+      )
     )
 }
 
 ```
 
 ```{r} 
-#| echo: false
-#| 
+#| echo: false 
 tfrmt_demog <- tfrmt(
   group = c(rowlbl1,grp),
   label = rowlbl2,
@@ -123,7 +128,7 @@ tfrmt_demog <- tfrmt(
 ```{r }
 #| echo: FALSE
 
-fontawesome::fa("recycle", height="5em", fill=fa_fill)
+fontawesome::fa("recycle", height="5em", fill="#606060")
 ```
 
 
@@ -131,6 +136,8 @@ fontawesome::fa("recycle", height="5em", fill=fa_fill)
 
 ```{r}
 #| output-location: "column-fragment"
+
+library(tfrmt)
 
 print_mock_gt(
   tfrmt = tfrmt_demog, # tfrmt
@@ -145,6 +152,8 @@ print_mock_gt(
 
 ```{r}
 #| output-location: "column-fragment"
+
+library(tfrmt)
 
 print_to_gt(
   tfrmt = tfrmt_demog,
@@ -183,7 +192,9 @@ tfrmt_demog_custom <- tfrmt(
 ```{r}
 #| output-location: "column-fragment"
 #| code-line-numbers: "2-4"
- 
+#| 
+library(tfrmt)
+
 tfrmt_demog |> 
   layer_tfrmt(
     tfrmt_demog_custom  
@@ -191,7 +202,7 @@ tfrmt_demog |>
   print_to_gt( 
     .data = d_demog
   ) |> 
-  grp_pull(1)|> 
+  gt::grp_pull(1)|> 
    gt_style_slides()
 ```
 
@@ -226,14 +237,14 @@ adsl <- pharmaverseadam::adsl |>
   dplyr::mutate(
     TRT01A = ifelse(!TRT01A == "Placebo", "Active", TRT01A)
   )
-ard_demog <- ard_stack(
+ard_demog <- cards::ard_stack(
   data = adsl,
   .by = TRT01A,
-  ard_continuous( variables = `Age (years)`,
-                  statistic = ~ continuous_summary_fns(c("median", "p25", "p75"))),
-  ard_categorical(variables = `Age Group`)
+  cards::ard_continuous( variables = `Age (years)`,
+                  statistic = ~ cards::continuous_summary_fns(c("median", "p25", "p75"))),
+  cards::ard_categorical(variables = `Age Group`)
 ) |>
-  shuffle_ard() |>
+  cards::shuffle_ard() |>
   dplyr::mutate(stat_name = ifelse(variable=="TRT01A" & stat_name=="n", "bigN", stat_name),
                 ord1 = as.numeric(factor(variable, levels = c("Age (years)", "Age Group"))),
                 ord2 = as.numeric(factor(label, levels = c("18-64",">64"))))|>
@@ -247,18 +258,23 @@ ard_demog <- ard_stack(
                 ))
 gt_style_slides <- function(x){
   x |> 
-    tab_options(
+    gt::tab_options(
       table.font.size = 20
-    ) |> 
-    tab_style(
-      style = cell_text(font = c(google_font("Google Sans Mono"),
-                                 c("Courier", default_fonts()))),
-      locations = list(cells_body(), cells_row_groups(), cells_stub(),
-                       cells_column_labels(), cells_column_spanners(),
-                       cells_title(), cells_footnotes()
-                       )
+    ) |>   
+    gt::tab_style(
+      style = gt::cell_text(font = c(gt::google_font("Google Sans Mono"),
+                                     c("Courier", gt::default_fonts()))),
+      locations = list(gt::cells_body(), 
+                       gt::cells_row_groups(), 
+                       gt::cells_stub(),
+                       gt::cells_column_labels(),
+                       gt::cells_column_spanners(),
+                       gt::cells_title(), 
+                       gt::cells_footnotes()
+      )
     )
 }
+
 ```
 
 
