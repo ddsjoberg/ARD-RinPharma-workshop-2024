@@ -32,10 +32,7 @@ website:
      - href: index.qmd
        text: Home
      - href: license.qmd
-     - href: slides_1.qmd
-       text: Slides Part 1
-     - href: slides_4.qmd
-       text: Slides Part 4
+
 format:
   html:
     theme: [cosmo, theme.scss]
