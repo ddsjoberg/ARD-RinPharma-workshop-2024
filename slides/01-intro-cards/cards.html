@@ -100,6 +100,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link href="../../site_libs/countdown-0.4.0/countdown.css" rel="stylesheet">
+<script src="../../site_libs/countdown-0.4.0/countdown.js"></script>
 
 
 </head>
@@ -176,7 +178,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#cards-stacking-utilities" id="toc-cards-stacking-utilities" class="nav-link" data-scroll-target="#cards-stacking-utilities">{cards}: Stacking utilities</a></li>
   <li><a href="#cards-ard_hierarchical" id="toc-cards-ard_hierarchical" class="nav-link" data-scroll-target="#cards-ard_hierarchical">{cards}: <code>ard_hierarchical</code></a></li>
   <li><a href="#cards-ard_hierarchical_count" id="toc-cards-ard_hierarchical_count" class="nav-link" data-scroll-target="#cards-ard_hierarchical_count">{cards}: <code>ard_hierarchical_count</code></a></li>
-  <li><a href="#cards-stacking-functions-for-ard_hierarchical_" id="toc-cards-stacking-functions-for-ard_hierarchical_" class="nav-link" data-scroll-target="#cards-stacking-functions-for-ard_hierarchical_">{cards}: Stacking functions for <code>ard_hierarchical_*</code></a></li>
+  <li><a href="#hierarchical-summaries-many-ways" id="toc-hierarchical-summaries-many-ways" class="nav-link" data-scroll-target="#hierarchical-summaries-many-ways">Hierarchical summaries many ways</a></li>
+  <li><a href="#cards-stacking-function-for-ard_hierarchical" id="toc-cards-stacking-function-for-ard_hierarchical" class="nav-link" data-scroll-target="#cards-stacking-function-for-ard_hierarchical">{cards}: Stacking function for <code>ard_hierarchical()</code></a></li>
+  <li><a href="#cards-stacking-function-for-ard_hierarchical_count" id="toc-cards-stacking-function-for-ard_hierarchical_count" class="nav-link" data-scroll-target="#cards-stacking-function-for-ard_hierarchical_count">{cards}: Stacking function for <code>ard_hierarchical_count()</code></a></li>
   <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise</a></li>
   </ul></li>
   </ul>
@@ -361,7 +365,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="exercise" class="level2">
 <h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
-<p>demog summaries</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_aee11af0" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">08</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+<p>TODO: Demographic summary exercise</p>
 </section>
 <section id="cards-stacking-utilities" class="level2">
 <h2 class="anchored" data-anchor-id="cards-stacking-utilities">{cards}: Stacking utilities</h2>
@@ -511,12 +523,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="cards-stacking-functions-for-ard_hierarchical_" class="level2">
-<h2 class="anchored" data-anchor-id="cards-stacking-functions-for-ard_hierarchical_">{cards}: Stacking functions for <code>ard_hierarchical_*</code></h2>
+<section id="hierarchical-summaries-many-ways" class="level2">
+<h2 class="anchored" data-anchor-id="hierarchical-summaries-many-ways">Hierarchical summaries many ways</h2>
+<ul>
+<li><p>Displays for hierarchical data typically report on each level of the hierarchy (Any AE Overall, by System Organ Class, by Preferred Term,…)</p></li>
+<li><p>This can mean several calls to the <code>ard_hierchical_*</code> functions</p></li>
+<li><p>Further, subject-level summaries require a different subset of the data each time. For example, to calculate Overall rates, we need to subset to 1 record per subject in ADAE.</p></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Is there an easier way?</li>
+</ul>
+</div>
+</section>
+<section id="cards-stacking-function-for-ard_hierarchical" class="level2">
+<h2 class="anchored" data-anchor-id="cards-stacking-function-for-ard_hierarchical">{cards}: Stacking function for <code>ard_hierarchical()</code></h2>
+<p>TODO: figure out a better way to show the data</p>
+<div class="small">
+<ul>
+<li><p><code>ard_hierarchical</code> stacking functions simplify this multi-step process into a single step</p></li>
+<li><p>The <code>id</code> argument is used to subset the data along the way</p></li>
+</ul>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>ard_hier <span class="ot">&lt;-</span> <span class="fu">ard_stack_hierarchical</span>(</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ADAE,</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> TRTA,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> USUBJID,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">denominator =</span> ADSL <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">TRTA =</span> ARM)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cards-stacking-function-for-ard_hierarchical_count" class="level2">
+<h2 class="anchored" data-anchor-id="cards-stacking-function-for-ard_hierarchical_count">{cards}: Stacking function for <code>ard_hierarchical_count()</code></h2>
+<div class="small">
+<ul>
+<li>Below is the stacking function for event-level summaries, aligned with <code>ard_hierarchical_count()</code></li>
+</ul>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ard_stack_hierarchical_count</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ADAE,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> TRTA, </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">denominator =</span> ADSL <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">TRTA =</span> ARM)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 804 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level group2 group2_level variable variable_level stat_name
+1    TRTA      Placebo   &lt;NA&gt;                 AESOC      CARDIAC …         n
+2    TRTA      Placebo   &lt;NA&gt;                 AESOC      CONGENIT…         n
+3    TRTA      Placebo   &lt;NA&gt;                 AESOC      EAR AND …         n
+4    TRTA      Placebo   &lt;NA&gt;                 AESOC      EYE DISO…         n
+5    TRTA      Placebo   &lt;NA&gt;                 AESOC      GASTROIN…         n
+6    TRTA      Placebo   &lt;NA&gt;                 AESOC      GENERAL …         n
+7    TRTA      Placebo   &lt;NA&gt;                 AESOC      HEPATOBI…         n
+8    TRTA      Placebo   &lt;NA&gt;                 AESOC      IMMUNE S…         n
+9    TRTA      Placebo   &lt;NA&gt;                 AESOC      INFECTIO…         n
+10   TRTA      Placebo   &lt;NA&gt;                 AESOC      INJURY, …         n
+   stat_label stat
+1           n   27
+2           n    0
+3           n    2
+4           n    8
+5           n   26
+6           n   48
+7           n    1
+8           n    0
+9           n   35
+10          n    9</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ 794 more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ 4 more variables: context, fmt_fn, warning, error</code></pre>
+</div>
+</div>
 </section>
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise</h2>
-<p>AE summaries</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_a378cc16" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">08</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+<p>TODO: AE summary exercise</p>
 
 
 </section>
