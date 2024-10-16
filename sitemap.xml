@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/index.html</loc>
-    <lastmod>2024-10-16T12:28:26.901Z</lastmod>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/04-tables-tfrmt/tfrmt.html</loc>
+    <lastmod>2024-10-16T19:59:55.572Z</lastmod>
   </url>
   <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides.html</loc>
-    <lastmod>2024-10-16T12:28:26.881Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/license.html</loc>
-    <lastmod>2024-10-16T12:28:26.881Z</lastmod>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/01-intro-cards/index.html</loc>
+    <lastmod>2024-10-16T19:59:55.568Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/index.html</loc>
-    <lastmod>2024-10-16T12:28:26.881Z</lastmod>
+    <lastmod>2024-10-16T19:59:55.552Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides_1.html</loc>
+    <lastmod>2024-10-16T19:59:55.572Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/01-intro-cards/intro.html</loc>
+    <lastmod>2024-10-16T19:59:55.568Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/license.html</loc>
+    <lastmod>2024-10-16T19:59:55.552Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides_4.html</loc>
+    <lastmod>2024-10-16T19:59:55.572Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/04-tables-tfrmt/index.html</loc>
+    <lastmod>2024-10-16T19:59:55.572Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/01-intro-cards/cards.html</loc>
+    <lastmod>2024-10-16T19:59:55.552Z</lastmod>
   </url>
 </urlset>
