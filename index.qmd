@@ -29,11 +29,10 @@ In this interactive workshop, attendees will learn about ARDs and how they fit i
 #| echo: false
 tibble::tribble(
   ~time, ~desc,
-  "Section 1a", "Introduction to the Analysis Results Standard",
-  "Section 1b", "The {cards} Package",
-  "Section 2", "The {cardx} Package",
-  "Section 3", "ARD Extras",
-  "Section 4", "ARD to Tables with {gtsummary} and {tfrmt}",
+  "Section 1", "Introduction to the Analysis Results Standard and {cards}",
+  "Section 2", "Introduction to the {cardx} Package and ARD Extras",
+  "Section 3", "ARD to Tables with {gtsummary}",
+  "Section 4", "ARD to Tables with {tfrmt}",
 ) |> 
   gt::gt() |> 
   gt::cols_align(align = "left") |> 

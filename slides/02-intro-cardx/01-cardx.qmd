@@ -128,48 +128,16 @@ The `cardx::ard_regression()` does **a lot** for us in the background.
 - Identifies reference groups from categorical covariates
 - Finds variable labels from the source data frames
 - Knows the total N of the model, the number of events, and can do the same for each level of categorical variables
+- Contextually aware of slopes, odds ratios, hazard ratios, and incidence rate ratios
 - And much _**much**_ more.
   
 ## {cardx} Exercise
 
 TODO: Add on top of the demographics exercise Becca will write and we'll add p-values comparing between treatment groups.
 
-## When things go wrong 😱
-
-What happens when statistics are un-calculable? 
-
 ```{r}
-#| message: true
-ard_gone_wrong <- 
-  cards::ADSL |> 
-  cards::ard_continuous(
-    variable = AGEGR1,
-    statistic = ~list(kurtosis = \(x) e1071::kurtosis(x))
-  )
-ard_gone_wrong
+#| echo: false
+#| cache: false
+library(countdown)
+countdown(minutes = 8, play_sound = TRUE)
 ```
-
-::: {.fragment}
-
-```r
-cards::print_ard_conditions(ard_gone_wrong)
-```
-
-![](images/ard-error-msg.png)
-
-:::
-
-::: {.notes}
-
-- Where is the statistic? `AGEGR1` is _character_
-
-- Even when there are errors or warnings, we still get the ARD with the expected structure returned.
-
-  - THIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.
-  
-  - This allows you to design everything up-front.
-  
-- We can also report these warnings and errors back to users. <!CLICK!>
-
-:::
-
