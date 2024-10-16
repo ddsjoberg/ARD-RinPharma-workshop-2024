@@ -203,7 +203,7 @@ tfrmt_demog |>
 gt_style_slides <- function(x){
   x |> 
     tab_options(
-      table.font.size = 20 
+      table.font.size = 20
     ) 
 }
 
