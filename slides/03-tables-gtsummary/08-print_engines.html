@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Unlocking Analysis Results Datasets (ARDs) – Analysis Results Datasets</title>
+<title>print_engines – Analysis Results Datasets</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./license.html" rel="next">
-<link href="./images/cards-hex.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/cards-hex.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -80,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -94,8 +127,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
-      <img src="./images/cards-hex.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../images/cards-hex.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
       <div class="sidebar-tools-main">
     <a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024" title="GitHub" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
@@ -110,13 +143,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./license.html" class="sidebar-item-text sidebar-link">
+  <a href="../../license.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">License</span></a>
   </div>
 </li>
@@ -130,67 +163,57 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description">Description</a></li>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
-  <li><a href="#pre-work" id="toc-pre-work" class="nav-link" data-scroll-target="#pre-work">Pre-work</a></li>
-  <li><a href="#instructors" id="toc-instructors" class="nav-link" data-scroll-target="#instructors">Instructors</a></li>
-  <li><a href="#workshop-assistant" id="toc-workshop-assistant" class="nav-link" data-scroll-target="#workshop-assistant">Workshop Assistant</a></li>
+  <li><a href="#gtsummary-print-engines" id="toc-gtsummary-print-engines" class="nav-link active" data-scroll-target="#gtsummary-print-engines">{gtsummary} print engines</a>
+  <ul class="collapse">
+  <li><a href="#gtsummary-print-engines-1" id="toc-gtsummary-print-engines-1" class="nav-link" data-scroll-target="#gtsummary-print-engines-1">{gtsummary} print engines</a></li>
+  <li><a href="#gtsummary-print-engines-2" id="toc-gtsummary-print-engines-2" class="nav-link" data-scroll-target="#gtsummary-print-engines-2">{gtsummary} print engines</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/edit/main/slides/03-tables-gtsummary/08-print_engines.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Unlocking Analysis Results Datasets (ARDs)</h1>
-<p class="subtitle lead">A Practical Workshop for Creating and Utilizing ARDs for Clinical Reporting</p>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<hr>
-<p>🗓️ October 28, 2024 | 13:00-16:00 EDT</p>
-<p>📝 <a href="https://events.zoom.us/ev/AvobJEOTVwkUnH6_TgLZDZJauk4dxfm5jCG8JFNN9zukOcsVLvTN~AmO5XY5HRBcxkKG6Hga1aXZaYtpBSER6jHms1seP-NNOA0dhcQZUGJ2NWg">R in Pharma &amp; Workshop Registration</a></p>
-<p>🌐 Virtual and FREE!</p>
-<hr>
-<section id="description" class="level2">
-<h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>The CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis summaries in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability. The newly released {cards} R package, a collaborative effort including Roche, GSK, and Novartis, offers a variety of functions for ARD generation. These range from basic univariate summaries like means and tabulations to complex multivariable summaries encompassing regression models and statistical tests. In this interactive workshop, attendees will learn about ARDs and how they fit into the larger CDISC Analysis Results Standard. They will get hands-on experience using {cards} to build ARDs for both simple and complex statistical summaries. Lastly, attendees will also be introduced to open-source tools for converting their ARDs into tables using the {gtsummary} and {tfrmt} R packages. Attendees will leave with a solid understanding of ARDs and the knowledge of how to integrate them into their daily work using open-source tools.</p>
+<section id="gtsummary-print-engines" class="level1">
+<h1>{gtsummary} print engines</h1>
+<section id="gtsummary-print-engines-1" class="level2">
+<h2 class="anchored" data-anchor-id="gtsummary-print-engines-1">{gtsummary} print engines</h2>
+<p><img src="images/gtsummary_rmarkdown.png" class="img-fluid"></p>
 </section>
-<section id="schedule" class="level2">
-<h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
-<div class="cell">
+<section id="gtsummary-print-engines-2" class="level2">
+<h2 class="anchored" data-anchor-id="gtsummary-print-engines-2">{gtsummary} print engines</h2>
+<p>Use any print engine to customize table</p>
+<div class="cell" data-output-location="column">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>trial <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">select</span>(age, grade) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">tbl_summary</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="fu">as_gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">cols_width</span>(label <span class="sc">~</span> <span class="fu">px</span>(<span class="dv">300</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="fu">cols_align</span>(<span class="at">columns =</span> stat_0, </span>
+<span id="cb1-9"><a href="#cb1-9"></a>             <span class="at">align =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="vprvlfzoen" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vprvlfzoen table {
+<div id="jcqxowmgej" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jcqxowmgej table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vprvlfzoen thead, #vprvlfzoen tbody, #vprvlfzoen tfoot, #vprvlfzoen tr, #vprvlfzoen td, #vprvlfzoen th {
+#jcqxowmgej thead, #jcqxowmgej tbody, #jcqxowmgej tfoot, #jcqxowmgej tr, #jcqxowmgej td, #jcqxowmgej th {
   border-style: none;
 }
 
-#vprvlfzoen p {
+#jcqxowmgej p {
   margin: 0;
   padding: 0;
 }
 
-#vprvlfzoen .gt_table {
+#jcqxowmgej .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -216,12 +239,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_caption {
+#jcqxowmgej .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vprvlfzoen .gt_title {
+#jcqxowmgej .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -233,7 +256,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#vprvlfzoen .gt_subtitle {
+#jcqxowmgej .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -245,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#vprvlfzoen .gt_heading {
+#jcqxowmgej .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -257,13 +280,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_bottom_border {
+#jcqxowmgej .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_col_headings {
+#jcqxowmgej .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -278,7 +301,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_col_heading {
+#jcqxowmgej .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -298,7 +321,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#vprvlfzoen .gt_column_spanner_outer {
+#jcqxowmgej .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -310,15 +333,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#vprvlfzoen .gt_column_spanner_outer:first-child {
+#jcqxowmgej .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vprvlfzoen .gt_column_spanner_outer:last-child {
+#jcqxowmgej .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vprvlfzoen .gt_column_spanner {
+#jcqxowmgej .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -330,11 +353,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#vprvlfzoen .gt_spanner_row {
+#jcqxowmgej .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vprvlfzoen .gt_group_heading {
+#jcqxowmgej .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -360,7 +383,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#vprvlfzoen .gt_empty_group_heading {
+#jcqxowmgej .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -375,15 +398,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#vprvlfzoen .gt_from_md > :first-child {
+#jcqxowmgej .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vprvlfzoen .gt_from_md > :last-child {
+#jcqxowmgej .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vprvlfzoen .gt_row {
+#jcqxowmgej .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -402,7 +425,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#vprvlfzoen .gt_stub {
+#jcqxowmgej .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -415,7 +438,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#vprvlfzoen .gt_stub_row_group {
+#jcqxowmgej .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -429,15 +452,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#vprvlfzoen .gt_row_group_first td {
+#jcqxowmgej .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vprvlfzoen .gt_row_group_first th {
+#jcqxowmgej .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vprvlfzoen .gt_summary_row {
+#jcqxowmgej .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -447,16 +470,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#vprvlfzoen .gt_first_summary_row {
+#jcqxowmgej .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_first_summary_row.thick {
+#jcqxowmgej .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vprvlfzoen .gt_last_summary_row {
+#jcqxowmgej .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -466,7 +489,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_grand_summary_row {
+#jcqxowmgej .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -476,7 +499,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#vprvlfzoen .gt_first_grand_summary_row {
+#jcqxowmgej .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -486,7 +509,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_last_grand_summary_row_top {
+#jcqxowmgej .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -496,11 +519,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_striped {
+#jcqxowmgej .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vprvlfzoen .gt_table_body {
+#jcqxowmgej .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -509,7 +532,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_footnotes {
+#jcqxowmgej .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -523,7 +546,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_footnote {
+#jcqxowmgej .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -532,7 +555,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#vprvlfzoen .gt_sourcenotes {
+#jcqxowmgej .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -546,7 +569,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#vprvlfzoen .gt_sourcenote {
+#jcqxowmgej .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -554,72 +577,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#vprvlfzoen .gt_left {
+#jcqxowmgej .gt_left {
   text-align: left;
 }
 
-#vprvlfzoen .gt_center {
+#jcqxowmgej .gt_center {
   text-align: center;
 }
 
-#vprvlfzoen .gt_right {
+#jcqxowmgej .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vprvlfzoen .gt_font_normal {
+#jcqxowmgej .gt_font_normal {
   font-weight: normal;
 }
 
-#vprvlfzoen .gt_font_bold {
+#jcqxowmgej .gt_font_bold {
   font-weight: bold;
 }
 
-#vprvlfzoen .gt_font_italic {
+#jcqxowmgej .gt_font_italic {
   font-style: italic;
 }
 
-#vprvlfzoen .gt_super {
+#jcqxowmgej .gt_super {
   font-size: 65%;
 }
 
-#vprvlfzoen .gt_footnote_marks {
+#jcqxowmgej .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vprvlfzoen .gt_asterisk {
+#jcqxowmgej .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vprvlfzoen .gt_indent_1 {
+#jcqxowmgej .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vprvlfzoen .gt_indent_2 {
+#jcqxowmgej .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vprvlfzoen .gt_indent_3 {
+#jcqxowmgej .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vprvlfzoen .gt_indent_4 {
+#jcqxowmgej .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vprvlfzoen .gt_indent_5 {
+#jcqxowmgej .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vprvlfzoen .katex-display {
+#jcqxowmgej .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vprvlfzoen div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jcqxowmgej div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -627,56 +650,50 @@ ul.task-list li input[type="checkbox"] {
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_col_headings">
-<th id="time" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Section</strong></th>
-<th id="desc" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Topic</strong></th>
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_0" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>N = 200</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="time" style="vertical-align: top">Section 1</td>
-<td class="gt_row gt_left" headers="desc" style="vertical-align: top">Introduction to the Analysis Results Standard and {cards}</td>
+<td class="gt_row gt_left" headers="label">Age</td>
+<td class="gt_row gt_left" headers="stat_0">47 (38, 57)</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="time" style="vertical-align: top">Section 2</td>
-<td class="gt_row gt_left" headers="desc" style="vertical-align: top">Introduction to the {cardx} Package and ARD Extras</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_left" headers="stat_0">11</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="time" style="vertical-align: top">Section 3</td>
-<td class="gt_row gt_left" headers="desc" style="vertical-align: top">ARD to Tables with {gtsummary}</td>
+<td class="gt_row gt_left" headers="label">Grade</td>
+<td class="gt_row gt_left" headers="stat_0"><br>
+</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="time" style="vertical-align: top">Section 4</td>
-<td class="gt_row gt_left" headers="desc" style="vertical-align: top">ARD to Tables with {tfrmt}</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;I</td>
+<td class="gt_row gt_left" headers="stat_0">68 (34%)</td>
 </tr>
-</tbody>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;II</td>
+<td class="gt_row gt_left" headers="stat_0">68 (34%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;III</td>
+<td class="gt_row gt_left" headers="stat_0">64 (32%)</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="odd">
+<td colspan="2" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Median (Q1, Q3); n (%)</td>
+</tr>
+</tfoot>
+
 </table>
 
 </div>
 </div>
 </div>
-</section>
-<section id="pre-work" class="level2">
-<h2 class="anchored" data-anchor-id="pre-work">Pre-work</h2>
-<ul class="task-list">
-<li><p><label><input type="checkbox">Bookmark this site. You’ll reference it throughout the workshop.</label></p></li>
-<li><p><label><input type="checkbox">Sign up for a <em>free</em> <a href="https://posit.cloud/">Posit Cloud</a> account.</label></p></li>
-</ul>
-</section>
-<section id="instructors" class="level2">
-<h2 class="anchored" data-anchor-id="instructors">Instructors</h2>
-<p><img src="images/dan-circle.png" class="img-fluid" style="float:left;padding: 0 10px 0 0;" alt="Headshot of Daniel Sjoberg" width="150"></p>
-<p><a href="https://www.danieldsjoberg.com/"><strong>Daniel D. Sjoberg</strong></a> (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on <a href="https://cran.r-project.org/web/packages/">CRAN</a>, <a href="https://ddsjoberg.r-universe.dev/ui#packages">R-Universe</a>, and <a href="https://github.com/ddsjoberg">GitHub</a>. He’s a co-organizer of <a href="https://rainbowr.netlify.app/">rainbowR</a> (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the <a href="https://rconsortium.github.io/RMedicine_website/">R Medicine Conference</a>. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.</p>
-<p><a href="https://www.danieldsjoberg.com/"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#606060;overflow:visible;position:relative;"><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"></path></svg></a> <a href="https://mastodon.social/@ddsjoberg"><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#606060;overflow:visible;position:relative;"><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"></path></svg></a> <a href="https://www.linkedin.com/in/ddsjoberg/"><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#606060;overflow:visible;position:relative;"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg></a> <a href="https://github.com/ddsjoberg/"><svg aria-hidden="true" role="img" viewbox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#606060;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></a></p>
-<p><img src="images/becca.png" class="img-fluid" style="float:left;padding: 0 20px 0 20px;" alt="Headshot of Becca Krouse" width="140"></p>
-<p><strong>Becca Krouse</strong> is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 14+ years in the field of clinical research and specializes in developing R-based tools.</p>
-<p><br></p>
-</section>
-<section id="workshop-assistant" class="level2">
-<h2 class="anchored" data-anchor-id="workshop-assistant">Workshop Assistant</h2>
-<p><img src="images/jack-circle.png" class="img-fluid" style="float:left;padding: 0 20px 0 20px;" alt="Headshot of Jack Talboys" width="140"></p>
-<p><strong>Jack Talboys</strong> is a Software Developer at Novartis, recently joining their Open-Source Enablement team. Before that he worked as a Data Scientist for Ascent, a Software Consultancy, building Shiny apps and R packages for companies across a range of industries including Insurance, Finance, and Pharma.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1100,15 +1117,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./license.html" class="pagination-link" aria-label="License">
-        <span class="nav-page-text">License</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1117,7 +1125,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/edit/main/slides/03-tables-gtsummary/08-print_engines.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
