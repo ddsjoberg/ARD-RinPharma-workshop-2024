@@ -66,11 +66,13 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="../../site_libs/countdown-0.4.0/countdown.css" rel="stylesheet">
+<script src="../../site_libs/countdown-0.4.0/countdown.js"></script>
 
 
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar docked slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -150,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="toc-actions"><ul><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/edit/main/slides/01-intro-cards/intro.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 
@@ -179,68 +181,80 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="instructors" class="level2">
 <h2 class="anchored" data-anchor-id="instructors">Instructors</h2>
-<div>
-
+<div class="columns">
+<div class="column">
+<div class="larger">
+<p>Who are we?</p>
+<p>What do we do?</p>
+<p>Why are we here?</p>
 </div>
-<div class="quarto-layout-panel" data-layout="[1, 1]">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+</div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/dan-circle.png" class="img-fluid figure-img" alt="Headshot of Daniel Sjoberg" width="400"></p>
+<p><img src="images/dan-circle.png" class="img-fluid figure-img" alt="Headshot of Daniel Sjoberg" width="300"></p>
 <figcaption>Daniel Sjoberg, Roche</figcaption>
 </figure>
 </div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+</div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/becca.png" class="img-fluid figure-img" alt="Headshot of Becca Krouse" width="300"></p>
+<p><img src="images/becca.png" class="img-fluid figure-img" alt="Headshot of Becca Krouse" width="200"></p>
 <figcaption>Becca Krouse, GSK</figcaption>
 </figure>
 </div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/jack-circle.png" class="img-fluid figure-img" alt="Headshot of Jack Talboys" width="200"></p>
+<figcaption>Jack Talboys, Novartis</figcaption>
+</figure>
 </div>
 </div>
-</div>
-<div class="larger">
-<p>Who are we? What do we do? Why are we here?</p>
 </div>
 </section>
 <section id="who-are-you" class="level2">
 <h2 class="anchored" data-anchor-id="who-are-you">Who are you?</h2>
-<p>link to slido quiz</p>
+<div class="larger">
+<p>Slido quiz time!</p>
+</div>
 </section>
 <section id="workshop-outline" class="level2">
 <h2 class="anchored" data-anchor-id="workshop-outline">Workshop outline</h2>
 <div class="larger">
-<ul>
-<li><p>Analysis Results Standard (ARS) and Analysis Results Data (ARD)</p></li>
-<li><p>{cards} R package</p></li>
-<li><p>{cardx} R package</p></li>
-<li><p>Tabling with {gtsummary} and {tfrmt}</p></li>
-</ul>
+<ol type="1">
+<li><p>Introduction to the Analysis Results Standard and {cards}</p></li>
+<li><p>Introduction to the {cardx} Package and ARD Extras</p></li>
+<li><p>ARD to Tables with {gtsummary}</p></li>
+<li><p>ARD to Tables with {tfrmt}</p></li>
+</ol>
 </div>
 </section>
 <section id="working-environment" class="level2">
 <h2 class="anchored" data-anchor-id="working-environment">Working environment</h2>
-<div class="larger">
 <ul>
 <li><p>For consistency, we will be working in RStudio Cloud</p></li>
 <li><p>Everything has been installed and set up for you</p></li>
 <li><p>Following the course, all content from this workshop will be available on GitHub</p></li>
 </ul>
-</div>
 </section>
 <section id="quick-warm-up" class="level2">
 <h2 class="anchored" data-anchor-id="quick-warm-up">Quick warm-up</h2>
-<div class="larger">
-<ul>
-<li><p>RStudio cloud setup</p></li>
-<li><p>Running a bit of code</p></li>
-</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_f8bc9321" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
+</div>
+</div>
+<ul>
+<li><p>Navigate to Posit Cloud link</p></li>
+<li><p>Click on the Project to make a personal copy</p></li>
+<li><p>Open <code>exercises/00-warmup.R</code></p></li>
+<li><p>Complete the exercise</p></li>
+</ul>
 </section>
-<section id="analysis-results-standard" class="level1">
+<section id="analysis-results-standard" class="level1 page-columns page-full">
 <h1>Analysis Results Standard</h1>
 <section id="analysis-results-standard-ars" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-results-standard-ars">Analysis Results Standard (ARS)</h2>
@@ -255,16 +269,25 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </section>
-<section id="analysis-results-standard-ars-1" class="level2">
+<section id="analysis-results-standard-ars-1" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="analysis-results-standard-ars-1">Analysis Results Standard (ARS)</h2>
-<ul>
+<div class="incremental">
+<ul class="incremental">
 <li><p>Emerging standard for <strong>prospectively</strong> encoding statistical analysis reporting pipeline in a machine-readable format.</p></li>
-<li><p>Primary objectives are to leverage analysis results metadata to drive the automation of results and support storage, access, processing, traceability and reproducibility of results.</p></li>
 <li><p>Logical model that describes analysis results and associated metadata.</p></li>
-<li><p>Focus on concepts, <em>not layout</em>, e.g.&nbsp;the summary statistics, not how the results are shown in a table.</p></li>
-<li><p>Learn more at <a href="https://www.cdisc.org/events/webinar/analysis-results-standard-public-review">https://www.cdisc.org/events/webinar/analysis-results-standard-public-review</a></p></li>
+<li><p>Primary objectives:</p>
+<ul class="incremental">
+<li><p>Leverage analysis results <strong>metadata</strong> to drive <strong>automation</strong> of results</p></li>
+<li><p>Support storage, access, processing, traceability and reproducibility of results</p></li>
+</ul></li>
 </ul>
-</section>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<ul>
+<li>Learn more at <a href="https://www.cdisc.org/events/webinar/analysis-results-standard-public-review">https://www.cdisc.org/events/webinar/analysis-results-standard-public-review</a></li>
+</ul>
+</div></div></section>
 <section id="analysis-results-standard-ars-2" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-results-standard-ars-2">Analysis Results Standard (ARS)</h2>
 <p>Example ARS Flow</p>
@@ -285,12 +308,14 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="analysis-results-data-ard" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-results-data-ard">Analysis Results Data (ARD)</h2>
-<ul>
+<div class="incremental">
+<ul class="incremental">
 <li><p>Encodes statistical analysis outcomes in a machine-readable format.</p></li>
-<li><p>Primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability.</p></li>
-<li><p>The ARD model specified how statistical results are saved into a structured format.</p></li>
+<li><p>The ARD model specifies how statistical results are saved into a structured format.</p></li>
 <li><p>The ARD can be used to to subsequently create tables and figures.</p></li>
+<li><p>The ARD does <em>not</em> describe the layout of the results</p></li>
 </ul>
+</div>
 </section>
 <section id="analysis-results-data-ard-1" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-results-data-ard-1">Analysis Results Data (ARD)</h2>
@@ -305,18 +330,22 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="a-few-notes-about-ards" class="level2">
 <h2 class="anchored" data-anchor-id="a-few-notes-about-ards">A few notes about ARDs</h2>
-<ul>
-<li>QC is done on raw value
-<ul>
-<li>You don’t have to waste time trying to match formatting to match QC</li>
+<div class="incremental">
+<ul class="incremental">
+<li><p>Rethinking QC</p>
+<ul class="incremental">
+<li><p>QC can be focused on the raw value, not the formatted display</p>
+<ul class="incremental">
+<li><p>You don’t have to waste time trying to match formatting to match QC</p></li>
+<li><p>But…QC will be more sensitive to floating point</p></li>
 </ul></li>
-<li>But…
-<ul>
-<li>QC will be more sensitive to floating point</li>
-<li>QC tolerance will need to be defined</li>
 </ul></li>
+<li><p>Flexible data file types</p>
+<ul class="incremental">
 <li>ARD can be saved as a dataset (rds, xpt, etc) or json file</li>
+</ul></li>
 </ul>
+</div>
 
 
 </section>
