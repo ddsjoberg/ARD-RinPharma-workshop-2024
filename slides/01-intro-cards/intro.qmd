@@ -29,43 +29,58 @@ https://rinpharma.com/terms/
 
 ## Instructors
 
-::: {layout="[1, 1]"}
+:::: {.columns}
 
-![Daniel Sjoberg, Roche](images/dan-circle.png){fig-alt="Headshot of Daniel Sjoberg" width="400"}
+::: {.column}
+:::{.larger}
+Who are we? 
 
+What do we do? 
 
-![Becca Krouse, GSK](images/becca.png){fig-alt="Headshot of Becca Krouse" width="300"}
-
-:::
-
-::: {.larger}
-Who are we?
-What do we do?
 Why are we here?
 :::
+:::
+
+::: {.column}
+
+![Daniel Sjoberg, Roche](images/dan-circle.png){fig-alt="Headshot of Daniel Sjoberg" width="300"}
+:::
+::: {.column}
+
+![Becca Krouse, GSK](images/becca.png){fig-alt="Headshot of Becca Krouse" width="200"}
+:::
+
+::: {.column}
+
+![Jack Talboys, Novartis](images/jack-circle.png){fig-alt="Headshot of Jack Talboys" width="200"}
+
+:::
+
+::::
 
 ## Who are you?
 
-link to slido quiz
+::: {.larger}
 
+Slido quiz time!
+
+:::
 
 ## Workshop outline
 
 ::: {.larger}
 
-- Analysis Results Standard (ARS) and Analysis Results Data (ARD)
+1. Introduction to the Analysis Results Standard and {cards}
 
-- {cards} R package
+2. Introduction to the {cardx} Package and ARD Extras
 
-- {cardx} R package
+3. ARD to Tables with {gtsummary}
 
-- Tabling with {gtsummary} and {tfrmt}
+4. ARD to Tables with {tfrmt}
 
 :::
 
 ## Working environment
-
-::: {.larger}
 
 - For consistency, we will be working in RStudio Cloud  
 
@@ -73,17 +88,23 @@ link to slido quiz
 
 - Following the course, all content from this workshop will be available on GitHub 
 
-:::
 
 ## Quick warm-up
 
-::: {.larger}
+```{r}
+#| echo: false
+#| cache: false
+library(countdown)
+countdown(minutes = 5, play_sound = TRUE)
+```
 
-- RStudio cloud setup
+- Navigate to Posit Cloud link
 
-- Running a bit of code
+- Click on the Project to make a personal copy
 
-:::
+- Open `exercises/00-warmup.R`
+
+- Complete the exercise
 
 
 # Analysis Results Standard
@@ -97,16 +118,23 @@ link to slido quiz
 
 ## Analysis Results Standard (ARS)
 
--   Emerging standard for **prospectively** encoding statistical analysis reporting pipeline in a machine-readable format.
+::: {.incremental}
 
--   Primary objectives are to leverage analysis results metadata to drive the automation of results and support storage, access, processing, traceability and reproducibility of results.
+-   Emerging standard for **prospectively** encoding statistical analysis reporting pipeline in a machine-readable format.
 
 -   Logical model that describes analysis results and associated metadata.
 
--   Focus on concepts, _not layout_, e.g. the summary statistics, not how the results are shown in a table. 
+-   Primary objectives:
 
+    -   Leverage analysis results **metadata** to drive **automation** of results 
+  
+    -   Support storage, access, processing, traceability and reproducibility of results
+  
+:::
+
+::: aside
 -   Learn more at [https://www.cdisc.org/events/webinar/analysis-results-standard-public-review](https://www.cdisc.org/events/webinar/analysis-results-standard-public-review) 
-
+:::
 
 ## Analysis Results Standard (ARS)
 
@@ -122,14 +150,17 @@ Example ARS Flow
 
 ## Analysis Results Data (ARD)
 
-* Encodes statistical analysis outcomes in a machine-readable format.
+::: {.incremental}
 
-* Primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability.
+-   Encodes statistical analysis outcomes in a machine-readable format.
 
-* The ARD model specified how statistical results are saved into a structured format.
+-   The ARD model specifies how statistical results are saved into a structured format.
 
-* The ARD can be used to to subsequently create tables and figures.
+-   The ARD can be used to to subsequently create tables and figures.
 
+-   The ARD does *not* describe the layout of the results
+
+:::
 
 ## Analysis Results Data (ARD)
 
@@ -139,11 +170,18 @@ Example ARS Flow
 
 ## A few notes about ARDs
 
-* QC is done on raw value 
-    * You don’t have to waste time trying to match formatting to match QC
+:::{.incremental}
 
-* But… 
-    * QC will be more sensitive to floating point
-    * QC tolerance will need to be defined
+-   Rethinking QC
 
-* ARD can be saved as a dataset (rds, xpt, etc) or json file
+    -   QC can be focused on the raw value, not the formatted display
+  
+        -   You don’t have to waste time trying to match formatting to match QC
+    
+        -   But...QC will be more sensitive to floating point
+    
+-   Flexible data file types
+
+    -   ARD can be saved as a dataset (rds, xpt, etc) or json file
+  
+:::
