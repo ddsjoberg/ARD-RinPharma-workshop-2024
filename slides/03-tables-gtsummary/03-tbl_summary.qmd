@@ -2,6 +2,14 @@
 
 ## Basic tbl_summary()
 
+```{r}
+#| echo: false
+library(gtsummary)
+sm_trial <-
+  trial |> 
+  dplyr::select(trt, age, grade, response)
+```
+
 ::: columns
 ::: {.column width="50%"}
 ```{r}
@@ -432,6 +440,7 @@ And a detailed `tbl_summary()` vignette at <http://www.danieldsjoberg.com/gtsumm
 ```{r}
 #| echo: false
 #| cache: false
+library(countdown)
 countdown(minutes = 10)
 ```
 

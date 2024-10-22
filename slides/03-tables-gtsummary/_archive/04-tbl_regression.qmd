@@ -122,8 +122,9 @@ countdown(minutes = 8)
 ```{r}
 #| output-location: "column"
 tbl_uvreg <- 
-  sm_trial |> 
+  trial |> 
   tbl_uvregression(
+    include = c(trt, age, grade),
     method = glm,
     y = response,
     method.args = 

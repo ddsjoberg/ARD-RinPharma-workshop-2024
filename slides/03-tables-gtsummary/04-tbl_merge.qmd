@@ -4,6 +4,7 @@
 
 ```{r}
 #| label: 'tbl_merge'
+library(gtsummary)
 tbl_n <- 
   tbl_summary(trial, include = grade, statistic = grade ~ "{n}") |> 
   modify_header(all_stat_cols() ~ "**N**") |> # update column header

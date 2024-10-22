@@ -14,6 +14,7 @@
 
 ```{r}
 #| output-location: "column"
+library(gtsummary)
 reset_gtsummary_theme()
 
 trial |> 
