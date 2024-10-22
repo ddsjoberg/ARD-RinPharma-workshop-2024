@@ -1,0 +1,9 @@
+install.packages(c("devtools",
+                   "tidyverse",
+                   "cards",
+                   "cardx",
+                   "gt",
+                   "gtsummary",
+                   "tfrmt",
+                   "tfrmtbuilder"))
+devtools::install_github("insightsengineering/crane")
