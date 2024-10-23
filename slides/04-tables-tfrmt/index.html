@@ -407,29 +407,38 @@ Daniel D. Sjoberg and Becca Krouse
 
 </section>
 <section>
-<section id="ard-first-tables-with-tfrmt" class="title-slide slide level1 black-header center">
-<h1>ARD-first Tables with {tfrmt}</h1>
+<section id="ard-to-tables-with-tfrmt" class="title-slide slide level1 center">
+<h1>ARD to Tables with {tfrmt}</h1>
+
+</section>
+<section id="workshop-outline" class="slide level2">
+<h2>Workshop outline</h2>
+<ol type="1">
+<li><p>Introduction to the Analysis Results Standard and {cards}</p></li>
+<li><p>Introduction to the {cardx} Package and ARD Extras</p></li>
+<li><p>ARD to Tables with {gtsummary}</p></li>
+</ol>
+<p><strong>4. ARD to Tables with {tfrmt}</strong></p>
+</section>
+<section id="ard-first-tables-with-tfrmt" class="slide level2 black-header">
+<h2>ARD-first Tables with {tfrmt}</h2>
 <div class="cell">
 <style type="text/css">
-.black-header h1 {
+.black-header h2 {
  color: black;
 }
 </style>
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/tfrmt-hex.png" class="quarto-figure quarto-figure-center" data-fig-height="100px"></p>
-</figure>
-</div>
+<p><img data-src="images/tfrmt-hex.png" data-align="center" height="500"></p>
 </div><div class="column">
-<div class="fragment">
+<div>
 <ul>
-<li><p>Metadata-driven table formatting</p></li>
-<li><p>Easily create new and modify existing tables</p></li>
-<li><p>Input: ARD with raw, numeric values ({cards}!)</p></li>
-<li><p>Output: Formatted table via {gt}</p></li>
+<li class="fragment"><p>Metadata-driven table formatting</p></li>
+<li class="fragment"><p>Easily create new and modify existing tables</p></li>
+<li class="fragment"><p>Input: ARD with raw, numeric values ({cards}!)</p></li>
+<li class="fragment"><p>Output: Formatted table via {gt}</p></li>
 </ul>
 </div>
 </div></div>
@@ -442,11 +451,7 @@ Daniel D. Sjoberg and Becca Krouse
 </ul>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/tfrmt-help-1.png" class="quarto-figure quarto-figure-center" data-fig-height="80%"></p>
-</figure>
-</div>
+<p><img data-src="images/tfrmt-help-1.png" data-align="center" height="500"></p>
 </div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -477,24 +482,24 @@ Daniel D. Sjoberg and Becca Krouse
 <span id="cb1-7"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
-<div id="bbxchsrrpt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ttnqziglwu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bbxchsrrpt table {
+#ttnqziglwu table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bbxchsrrpt thead, #bbxchsrrpt tbody, #bbxchsrrpt tfoot, #bbxchsrrpt tr, #bbxchsrrpt td, #bbxchsrrpt th {
+#ttnqziglwu thead, #ttnqziglwu tbody, #ttnqziglwu tfoot, #ttnqziglwu tr, #ttnqziglwu td, #ttnqziglwu th {
   border-style: none;
 }
 
-#bbxchsrrpt p {
+#ttnqziglwu p {
   margin: 0;
   padding: 0;
 }
 
-#bbxchsrrpt .gt_table {
+#ttnqziglwu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -520,12 +525,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_caption {
+#ttnqziglwu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bbxchsrrpt .gt_title {
+#ttnqziglwu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -537,7 +542,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#bbxchsrrpt .gt_subtitle {
+#ttnqziglwu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -549,7 +554,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#bbxchsrrpt .gt_heading {
+#ttnqziglwu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -561,13 +566,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_bottom_border {
+#ttnqziglwu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_col_headings {
+#ttnqziglwu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -582,7 +587,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_col_heading {
+#ttnqziglwu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -602,7 +607,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#bbxchsrrpt .gt_column_spanner_outer {
+#ttnqziglwu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -614,15 +619,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#bbxchsrrpt .gt_column_spanner_outer:first-child {
+#ttnqziglwu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bbxchsrrpt .gt_column_spanner_outer:last-child {
+#ttnqziglwu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bbxchsrrpt .gt_column_spanner {
+#ttnqziglwu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -634,11 +639,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#bbxchsrrpt .gt_spanner_row {
+#ttnqziglwu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bbxchsrrpt .gt_group_heading {
+#ttnqziglwu .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -664,7 +669,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#bbxchsrrpt .gt_empty_group_heading {
+#ttnqziglwu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -679,15 +684,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#bbxchsrrpt .gt_from_md > :first-child {
+#ttnqziglwu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bbxchsrrpt .gt_from_md > :last-child {
+#ttnqziglwu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bbxchsrrpt .gt_row {
+#ttnqziglwu .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -706,7 +711,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#bbxchsrrpt .gt_stub {
+#ttnqziglwu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -719,7 +724,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bbxchsrrpt .gt_stub_row_group {
+#ttnqziglwu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -733,15 +738,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#bbxchsrrpt .gt_row_group_first td {
+#ttnqziglwu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bbxchsrrpt .gt_row_group_first th {
+#ttnqziglwu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bbxchsrrpt .gt_summary_row {
+#ttnqziglwu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -751,16 +756,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bbxchsrrpt .gt_first_summary_row {
+#ttnqziglwu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_first_summary_row.thick {
+#ttnqziglwu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bbxchsrrpt .gt_last_summary_row {
+#ttnqziglwu .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -770,7 +775,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_grand_summary_row {
+#ttnqziglwu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -780,7 +785,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bbxchsrrpt .gt_first_grand_summary_row {
+#ttnqziglwu .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -790,7 +795,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_last_grand_summary_row_top {
+#ttnqziglwu .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -800,11 +805,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_striped {
+#ttnqziglwu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bbxchsrrpt .gt_table_body {
+#ttnqziglwu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -813,7 +818,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_footnotes {
+#ttnqziglwu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -827,7 +832,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_footnote {
+#ttnqziglwu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -836,7 +841,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bbxchsrrpt .gt_sourcenotes {
+#ttnqziglwu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -850,7 +855,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#bbxchsrrpt .gt_sourcenote {
+#ttnqziglwu .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -858,72 +863,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bbxchsrrpt .gt_left {
+#ttnqziglwu .gt_left {
   text-align: left;
 }
 
-#bbxchsrrpt .gt_center {
+#ttnqziglwu .gt_center {
   text-align: center;
 }
 
-#bbxchsrrpt .gt_right {
+#ttnqziglwu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bbxchsrrpt .gt_font_normal {
+#ttnqziglwu .gt_font_normal {
   font-weight: normal;
 }
 
-#bbxchsrrpt .gt_font_bold {
+#ttnqziglwu .gt_font_bold {
   font-weight: bold;
 }
 
-#bbxchsrrpt .gt_font_italic {
+#ttnqziglwu .gt_font_italic {
   font-style: italic;
 }
 
-#bbxchsrrpt .gt_super {
+#ttnqziglwu .gt_super {
   font-size: 65%;
 }
 
-#bbxchsrrpt .gt_footnote_marks {
+#ttnqziglwu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bbxchsrrpt .gt_asterisk {
+#ttnqziglwu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bbxchsrrpt .gt_indent_1 {
+#ttnqziglwu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bbxchsrrpt .gt_indent_2 {
+#ttnqziglwu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bbxchsrrpt .gt_indent_3 {
+#ttnqziglwu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bbxchsrrpt .gt_indent_4 {
+#ttnqziglwu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bbxchsrrpt .gt_indent_5 {
+#ttnqziglwu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bbxchsrrpt .katex-display {
+#ttnqziglwu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bbxchsrrpt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ttnqziglwu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1092,37 +1097,37 @@ Daniel D. Sjoberg and Becca Krouse
 <li>If no data is supplied, {tfrmt} will generate some under the hood</li>
 </ul>
 </section>
-<section id="use-2-final-analysis" class="slide level2">
-<h2>Use #2: Final analysis</h2>
+<section id="use-2-final-analysis" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Use #2: Final analysis</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tfrmt)</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb2-4"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog,</span>
-<span id="cb2-5"><a></a>  <span class="at">.data =</span> d_demog <span class="co"># true ARD</span></span>
-<span id="cb2-6"><a></a>)<span class="sc">|&gt;</span> </span>
-<span id="cb2-7"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a></a><span class="fu">library</span>(tfrmt)</span>
+<span id="cb2-2" class="hljs-ln-code"><a></a></span>
+<span id="cb2-3" class="hljs-ln-code"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb2-4" class="hljs-ln-code"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog,</span>
+<span id="cb2-5" class="hljs-ln-code"><a></a>  <span class="at">.data =</span> d_demog <span class="co"># true ARD</span></span>
+<span id="cb2-6" class="hljs-ln-code"><a></a>)<span class="sc">|&gt;</span> </span>
+<span id="cb2-7" class="hljs-ln-code"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
-<div id="fonziwyigm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="idgbfrmydg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fonziwyigm table {
+#idgbfrmydg table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fonziwyigm thead, #fonziwyigm tbody, #fonziwyigm tfoot, #fonziwyigm tr, #fonziwyigm td, #fonziwyigm th {
+#idgbfrmydg thead, #idgbfrmydg tbody, #idgbfrmydg tfoot, #idgbfrmydg tr, #idgbfrmydg td, #idgbfrmydg th {
   border-style: none;
 }
 
-#fonziwyigm p {
+#idgbfrmydg p {
   margin: 0;
   padding: 0;
 }
 
-#fonziwyigm .gt_table {
+#idgbfrmydg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1148,12 +1153,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_caption {
+#idgbfrmydg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fonziwyigm .gt_title {
+#idgbfrmydg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1165,7 +1170,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#fonziwyigm .gt_subtitle {
+#idgbfrmydg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1177,7 +1182,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#fonziwyigm .gt_heading {
+#idgbfrmydg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1189,13 +1194,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_bottom_border {
+#idgbfrmydg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_col_headings {
+#idgbfrmydg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1210,7 +1215,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_col_heading {
+#idgbfrmydg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1230,7 +1235,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#fonziwyigm .gt_column_spanner_outer {
+#idgbfrmydg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1242,15 +1247,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#fonziwyigm .gt_column_spanner_outer:first-child {
+#idgbfrmydg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fonziwyigm .gt_column_spanner_outer:last-child {
+#idgbfrmydg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fonziwyigm .gt_column_spanner {
+#idgbfrmydg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1262,11 +1267,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#fonziwyigm .gt_spanner_row {
+#idgbfrmydg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fonziwyigm .gt_group_heading {
+#idgbfrmydg .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1292,7 +1297,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#fonziwyigm .gt_empty_group_heading {
+#idgbfrmydg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1307,15 +1312,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#fonziwyigm .gt_from_md > :first-child {
+#idgbfrmydg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fonziwyigm .gt_from_md > :last-child {
+#idgbfrmydg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fonziwyigm .gt_row {
+#idgbfrmydg .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1334,7 +1339,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#fonziwyigm .gt_stub {
+#idgbfrmydg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1347,7 +1352,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fonziwyigm .gt_stub_row_group {
+#idgbfrmydg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1361,15 +1366,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#fonziwyigm .gt_row_group_first td {
+#idgbfrmydg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fonziwyigm .gt_row_group_first th {
+#idgbfrmydg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fonziwyigm .gt_summary_row {
+#idgbfrmydg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1379,16 +1384,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fonziwyigm .gt_first_summary_row {
+#idgbfrmydg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_first_summary_row.thick {
+#idgbfrmydg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fonziwyigm .gt_last_summary_row {
+#idgbfrmydg .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1398,7 +1403,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_grand_summary_row {
+#idgbfrmydg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1408,7 +1413,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fonziwyigm .gt_first_grand_summary_row {
+#idgbfrmydg .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1418,7 +1423,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_last_grand_summary_row_top {
+#idgbfrmydg .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1428,11 +1433,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_striped {
+#idgbfrmydg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fonziwyigm .gt_table_body {
+#idgbfrmydg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1441,7 +1446,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_footnotes {
+#idgbfrmydg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1455,7 +1460,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_footnote {
+#idgbfrmydg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -1464,7 +1469,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fonziwyigm .gt_sourcenotes {
+#idgbfrmydg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1478,7 +1483,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fonziwyigm .gt_sourcenote {
+#idgbfrmydg .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -1486,72 +1491,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fonziwyigm .gt_left {
+#idgbfrmydg .gt_left {
   text-align: left;
 }
 
-#fonziwyigm .gt_center {
+#idgbfrmydg .gt_center {
   text-align: center;
 }
 
-#fonziwyigm .gt_right {
+#idgbfrmydg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fonziwyigm .gt_font_normal {
+#idgbfrmydg .gt_font_normal {
   font-weight: normal;
 }
 
-#fonziwyigm .gt_font_bold {
+#idgbfrmydg .gt_font_bold {
   font-weight: bold;
 }
 
-#fonziwyigm .gt_font_italic {
+#idgbfrmydg .gt_font_italic {
   font-style: italic;
 }
 
-#fonziwyigm .gt_super {
+#idgbfrmydg .gt_super {
   font-size: 65%;
 }
 
-#fonziwyigm .gt_footnote_marks {
+#idgbfrmydg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fonziwyigm .gt_asterisk {
+#idgbfrmydg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fonziwyigm .gt_indent_1 {
+#idgbfrmydg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fonziwyigm .gt_indent_2 {
+#idgbfrmydg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fonziwyigm .gt_indent_3 {
+#idgbfrmydg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fonziwyigm .gt_indent_4 {
+#idgbfrmydg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fonziwyigm .gt_indent_5 {
+#idgbfrmydg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fonziwyigm .katex-display {
+#idgbfrmydg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fonziwyigm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#idgbfrmydg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1737,24 +1742,24 @@ Daniel D. Sjoberg and Becca Krouse
 <span id="cb3-11" class="hljs-ln-code"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
-<div id="roaehjuxsx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tlkrxwgbcu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#roaehjuxsx table {
+#tlkrxwgbcu table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#roaehjuxsx thead, #roaehjuxsx tbody, #roaehjuxsx tfoot, #roaehjuxsx tr, #roaehjuxsx td, #roaehjuxsx th {
+#tlkrxwgbcu thead, #tlkrxwgbcu tbody, #tlkrxwgbcu tfoot, #tlkrxwgbcu tr, #tlkrxwgbcu td, #tlkrxwgbcu th {
   border-style: none;
 }
 
-#roaehjuxsx p {
+#tlkrxwgbcu p {
   margin: 0;
   padding: 0;
 }
 
-#roaehjuxsx .gt_table {
+#tlkrxwgbcu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1780,12 +1785,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_caption {
+#tlkrxwgbcu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#roaehjuxsx .gt_title {
+#tlkrxwgbcu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1797,7 +1802,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#roaehjuxsx .gt_subtitle {
+#tlkrxwgbcu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1809,7 +1814,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#roaehjuxsx .gt_heading {
+#tlkrxwgbcu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1821,13 +1826,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_bottom_border {
+#tlkrxwgbcu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_col_headings {
+#tlkrxwgbcu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1842,7 +1847,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_col_heading {
+#tlkrxwgbcu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1862,7 +1867,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#roaehjuxsx .gt_column_spanner_outer {
+#tlkrxwgbcu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1874,15 +1879,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#roaehjuxsx .gt_column_spanner_outer:first-child {
+#tlkrxwgbcu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#roaehjuxsx .gt_column_spanner_outer:last-child {
+#tlkrxwgbcu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#roaehjuxsx .gt_column_spanner {
+#tlkrxwgbcu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1894,11 +1899,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#roaehjuxsx .gt_spanner_row {
+#tlkrxwgbcu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#roaehjuxsx .gt_group_heading {
+#tlkrxwgbcu .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1924,7 +1929,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#roaehjuxsx .gt_empty_group_heading {
+#tlkrxwgbcu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1939,15 +1944,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#roaehjuxsx .gt_from_md > :first-child {
+#tlkrxwgbcu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#roaehjuxsx .gt_from_md > :last-child {
+#tlkrxwgbcu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#roaehjuxsx .gt_row {
+#tlkrxwgbcu .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1966,7 +1971,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#roaehjuxsx .gt_stub {
+#tlkrxwgbcu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1979,7 +1984,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#roaehjuxsx .gt_stub_row_group {
+#tlkrxwgbcu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1993,15 +1998,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#roaehjuxsx .gt_row_group_first td {
+#tlkrxwgbcu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#roaehjuxsx .gt_row_group_first th {
+#tlkrxwgbcu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#roaehjuxsx .gt_summary_row {
+#tlkrxwgbcu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2011,16 +2016,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#roaehjuxsx .gt_first_summary_row {
+#tlkrxwgbcu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_first_summary_row.thick {
+#tlkrxwgbcu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#roaehjuxsx .gt_last_summary_row {
+#tlkrxwgbcu .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2030,7 +2035,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_grand_summary_row {
+#tlkrxwgbcu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2040,7 +2045,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#roaehjuxsx .gt_first_grand_summary_row {
+#tlkrxwgbcu .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2050,7 +2055,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_last_grand_summary_row_top {
+#tlkrxwgbcu .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2060,11 +2065,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_striped {
+#tlkrxwgbcu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#roaehjuxsx .gt_table_body {
+#tlkrxwgbcu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2073,7 +2078,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_footnotes {
+#tlkrxwgbcu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2087,7 +2092,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_footnote {
+#tlkrxwgbcu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -2096,7 +2101,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#roaehjuxsx .gt_sourcenotes {
+#tlkrxwgbcu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2110,7 +2115,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#roaehjuxsx .gt_sourcenote {
+#tlkrxwgbcu .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -2118,72 +2123,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#roaehjuxsx .gt_left {
+#tlkrxwgbcu .gt_left {
   text-align: left;
 }
 
-#roaehjuxsx .gt_center {
+#tlkrxwgbcu .gt_center {
   text-align: center;
 }
 
-#roaehjuxsx .gt_right {
+#tlkrxwgbcu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#roaehjuxsx .gt_font_normal {
+#tlkrxwgbcu .gt_font_normal {
   font-weight: normal;
 }
 
-#roaehjuxsx .gt_font_bold {
+#tlkrxwgbcu .gt_font_bold {
   font-weight: bold;
 }
 
-#roaehjuxsx .gt_font_italic {
+#tlkrxwgbcu .gt_font_italic {
   font-style: italic;
 }
 
-#roaehjuxsx .gt_super {
+#tlkrxwgbcu .gt_super {
   font-size: 65%;
 }
 
-#roaehjuxsx .gt_footnote_marks {
+#tlkrxwgbcu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#roaehjuxsx .gt_asterisk {
+#tlkrxwgbcu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#roaehjuxsx .gt_indent_1 {
+#tlkrxwgbcu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#roaehjuxsx .gt_indent_2 {
+#tlkrxwgbcu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#roaehjuxsx .gt_indent_3 {
+#tlkrxwgbcu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#roaehjuxsx .gt_indent_4 {
+#tlkrxwgbcu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#roaehjuxsx .gt_indent_5 {
+#tlkrxwgbcu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#roaehjuxsx .katex-display {
+#tlkrxwgbcu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#roaehjuxsx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tlkrxwgbcu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2321,12 +2326,40 @@ Daniel D. Sjoberg and Becca Krouse
 <li><em>Layering</em> allows for custom tweaks while preserving the original metadata</li>
 </ul>
 </section>
+<section id="templates-the-possibilities" class="slide level2">
+<h2>Templates: the possibilities</h2>
+<ul>
+<li><p>Organization standards can be capture as <em>templates</em></p></li>
+<li><p>With layering, teams can customize <em>only</em> the bits that need changing</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># create a template as a function</span></span>
+<span id="cb4-2"><a></a>tfrmt_demog_therapyarea <span class="ot">&lt;-</span> <span class="cf">function</span>(tfrmt_obj){</span>
+<span id="cb4-3"><a></a>  </span>
+<span id="cb4-4"><a></a>  tfrmt_demog_ta <span class="ot">&lt;-</span> <span class="fu">tfrmt</span>( </span>
+<span id="cb4-5"><a></a>    <span class="co"># define the formatting specific to the TA</span></span>
+<span id="cb4-6"><a></a>  )</span>
+<span id="cb4-7"><a></a>  </span>
+<span id="cb4-8"><a></a>  <span class="fu">layer_tfrmt</span>(<span class="at">x =</span> tfrmt_obj, <span class="at">y =</span> tfrmt_demog_ta)</span>
+<span id="cb4-9"><a></a>}</span>
+<span id="cb4-10"><a></a></span>
+<span id="cb4-11"><a></a><span class="co"># combine many templates together</span></span>
+<span id="cb4-12"><a></a>tfrmt_demog_org <span class="sc">|&gt;</span> </span>
+<span id="cb4-13"><a></a>  tfrmt_demog_therapyarea <span class="sc">|&gt;</span> </span>
+<span id="cb4-14"><a></a>    tfrmt_demog_study <span class="sc">|&gt;</span> </span>
+<span id="cb4-15"><a></a>      <span class="fu">print_to_gt</span>(</span>
+<span id="cb4-16"><a></a>        <span class="at">.data =</span> demog_data</span>
+<span id="cb4-17"><a></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="save-metadata-for-reuse" class="slide level2">
 <h2>Save metadata for reuse</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>tfrmt_demog <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a></a>  <span class="fu">tfrmt_to_json</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">library</span>(tfrmt)</span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a>tfrmt_demog <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a></a>  <span class="fu">tfrmt_to_json</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
@@ -2465,7 +2498,7 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Creating a {tfrmt} table step-by-step</h2>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">head</span>(ard_demog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">head</span>(ard_demog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 7
   TRT01A  variable    label    stat_name  stat  ord1  ord2
@@ -2482,14 +2515,14 @@ Daniel D. Sjoberg and Becca Krouse
 <p><br></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> <span class="fu">tfrmt</span>(</span>
-<span id="cb8-2"><a></a>  <span class="at">group =</span> variable, </span>
-<span id="cb8-3"><a></a>  <span class="at">label =</span> label, </span>
-<span id="cb8-4"><a></a>  <span class="at">column =</span> TRT01A,</span>
-<span id="cb8-5"><a></a>  <span class="at">param =</span> stat_name,</span>
-<span id="cb8-6"><a></a>  <span class="at">value =</span> stat, </span>
-<span id="cb8-7"><a></a>  <span class="at">sorting_cols =</span> <span class="fu">c</span>(ord1, ord2) </span>
-<span id="cb8-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> <span class="fu">tfrmt</span>(</span>
+<span id="cb9-2"><a></a>  <span class="at">group =</span> variable, </span>
+<span id="cb9-3"><a></a>  <span class="at">label =</span> label, </span>
+<span id="cb9-4"><a></a>  <span class="at">column =</span> TRT01A,</span>
+<span id="cb9-5"><a></a>  <span class="at">param =</span> stat_name,</span>
+<span id="cb9-6"><a></a>  <span class="at">value =</span> stat, </span>
+<span id="cb9-7"><a></a>  <span class="at">sorting_cols =</span> <span class="fu">c</span>(ord1, ord2) </span>
+<span id="cb9-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -2497,40 +2530,40 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Ensure placement of all values (Main)</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="2-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> <span class="fu">tfrmt</span>(</span>
-<span id="cb9-2"><a></a>  <span class="at">group =</span> variable, </span>
-<span id="cb9-3"><a></a>  <span class="at">label =</span> label, </span>
-<span id="cb9-4"><a></a>  <span class="at">column =</span> TRT01A,</span>
-<span id="cb9-5"><a></a>  <span class="at">param =</span> stat_name,</span>
-<span id="cb9-6"><a></a>  <span class="at">value =</span> stat, </span>
-<span id="cb9-7"><a></a>  <span class="at">sorting_cols =</span> <span class="fu">c</span>(ord1, ord2) </span>
-<span id="cb9-8"><a></a>)</span>
-<span id="cb9-9"><a></a></span>
-<span id="cb9-10"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb9-11"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog,</span>
-<span id="cb9-12"><a></a>  <span class="at">.data =</span> ard_demog</span>
-<span id="cb9-13"><a></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb9-14"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="2-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> <span class="fu">tfrmt</span>(</span>
+<span id="cb10-2"><a></a>  <span class="at">group =</span> variable, </span>
+<span id="cb10-3"><a></a>  <span class="at">label =</span> label, </span>
+<span id="cb10-4"><a></a>  <span class="at">column =</span> TRT01A,</span>
+<span id="cb10-5"><a></a>  <span class="at">param =</span> stat_name,</span>
+<span id="cb10-6"><a></a>  <span class="at">value =</span> stat, </span>
+<span id="cb10-7"><a></a>  <span class="at">sorting_cols =</span> <span class="fu">c</span>(ord1, ord2) </span>
+<span id="cb10-8"><a></a>)</span>
+<span id="cb10-9"><a></a></span>
+<span id="cb10-10"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb10-11"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog,</span>
+<span id="cb10-12"><a></a>  <span class="at">.data =</span> ard_demog</span>
+<span id="cb10-13"><a></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-14"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<div id="bqcfrtrewh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rfenulpezx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bqcfrtrewh table {
+#rfenulpezx table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bqcfrtrewh thead, #bqcfrtrewh tbody, #bqcfrtrewh tfoot, #bqcfrtrewh tr, #bqcfrtrewh td, #bqcfrtrewh th {
+#rfenulpezx thead, #rfenulpezx tbody, #rfenulpezx tfoot, #rfenulpezx tr, #rfenulpezx td, #rfenulpezx th {
   border-style: none;
 }
 
-#bqcfrtrewh p {
+#rfenulpezx p {
   margin: 0;
   padding: 0;
 }
 
-#bqcfrtrewh .gt_table {
+#rfenulpezx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2556,12 +2589,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_caption {
+#rfenulpezx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bqcfrtrewh .gt_title {
+#rfenulpezx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2573,7 +2606,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#bqcfrtrewh .gt_subtitle {
+#rfenulpezx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2585,7 +2618,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#bqcfrtrewh .gt_heading {
+#rfenulpezx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2597,13 +2630,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_bottom_border {
+#rfenulpezx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_col_headings {
+#rfenulpezx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2618,7 +2651,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_col_heading {
+#rfenulpezx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2638,7 +2671,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#bqcfrtrewh .gt_column_spanner_outer {
+#rfenulpezx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2650,15 +2683,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#bqcfrtrewh .gt_column_spanner_outer:first-child {
+#rfenulpezx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bqcfrtrewh .gt_column_spanner_outer:last-child {
+#rfenulpezx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bqcfrtrewh .gt_column_spanner {
+#rfenulpezx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2670,11 +2703,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#bqcfrtrewh .gt_spanner_row {
+#rfenulpezx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bqcfrtrewh .gt_group_heading {
+#rfenulpezx .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2700,7 +2733,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#bqcfrtrewh .gt_empty_group_heading {
+#rfenulpezx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2715,15 +2748,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#bqcfrtrewh .gt_from_md > :first-child {
+#rfenulpezx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bqcfrtrewh .gt_from_md > :last-child {
+#rfenulpezx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bqcfrtrewh .gt_row {
+#rfenulpezx .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2742,7 +2775,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#bqcfrtrewh .gt_stub {
+#rfenulpezx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2755,7 +2788,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bqcfrtrewh .gt_stub_row_group {
+#rfenulpezx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2769,15 +2802,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#bqcfrtrewh .gt_row_group_first td {
+#rfenulpezx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bqcfrtrewh .gt_row_group_first th {
+#rfenulpezx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bqcfrtrewh .gt_summary_row {
+#rfenulpezx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2787,16 +2820,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bqcfrtrewh .gt_first_summary_row {
+#rfenulpezx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_first_summary_row.thick {
+#rfenulpezx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bqcfrtrewh .gt_last_summary_row {
+#rfenulpezx .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2806,7 +2839,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_grand_summary_row {
+#rfenulpezx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2816,7 +2849,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bqcfrtrewh .gt_first_grand_summary_row {
+#rfenulpezx .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2826,7 +2859,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_last_grand_summary_row_top {
+#rfenulpezx .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2836,11 +2869,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_striped {
+#rfenulpezx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bqcfrtrewh .gt_table_body {
+#rfenulpezx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2849,7 +2882,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_footnotes {
+#rfenulpezx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2863,7 +2896,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_footnote {
+#rfenulpezx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -2872,7 +2905,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bqcfrtrewh .gt_sourcenotes {
+#rfenulpezx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2886,7 +2919,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#bqcfrtrewh .gt_sourcenote {
+#rfenulpezx .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -2894,72 +2927,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#bqcfrtrewh .gt_left {
+#rfenulpezx .gt_left {
   text-align: left;
 }
 
-#bqcfrtrewh .gt_center {
+#rfenulpezx .gt_center {
   text-align: center;
 }
 
-#bqcfrtrewh .gt_right {
+#rfenulpezx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bqcfrtrewh .gt_font_normal {
+#rfenulpezx .gt_font_normal {
   font-weight: normal;
 }
 
-#bqcfrtrewh .gt_font_bold {
+#rfenulpezx .gt_font_bold {
   font-weight: bold;
 }
 
-#bqcfrtrewh .gt_font_italic {
+#rfenulpezx .gt_font_italic {
   font-style: italic;
 }
 
-#bqcfrtrewh .gt_super {
+#rfenulpezx .gt_super {
   font-size: 65%;
 }
 
-#bqcfrtrewh .gt_footnote_marks {
+#rfenulpezx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bqcfrtrewh .gt_asterisk {
+#rfenulpezx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bqcfrtrewh .gt_indent_1 {
+#rfenulpezx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bqcfrtrewh .gt_indent_2 {
+#rfenulpezx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bqcfrtrewh .gt_indent_3 {
+#rfenulpezx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bqcfrtrewh .gt_indent_4 {
+#rfenulpezx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bqcfrtrewh .gt_indent_5 {
+#rfenulpezx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bqcfrtrewh .katex-display {
+#rfenulpezx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bqcfrtrewh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rfenulpezx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3068,39 +3101,39 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Ensure placement of all values (Big N)</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="3-6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a></a>  <span class="fu">tfrmt</span>(</span>
-<span id="cb10-3"><a></a>    <span class="at">big_n =</span> <span class="fu">big_n_structure</span>(</span>
-<span id="cb10-4"><a></a>      <span class="at">param_val =</span> <span class="st">"bigN"</span>,</span>
-<span id="cb10-5"><a></a>      <span class="at">n_frmt =</span> <span class="fu">frmt</span>(<span class="st">"&lt;br&gt;N = xx"</span>)</span>
-<span id="cb10-6"><a></a>      )</span>
-<span id="cb10-7"><a></a>  )</span>
-<span id="cb10-8"><a></a></span>
-<span id="cb10-9"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb10-10"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
-<span id="cb10-11"><a></a>  <span class="at">.data =</span> ard_demog</span>
-<span id="cb10-12"><a></a>  )<span class="sc">|&gt;</span> </span>
-<span id="cb10-13"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="3-6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a></a>  <span class="fu">tfrmt</span>(</span>
+<span id="cb11-3"><a></a>    <span class="at">big_n =</span> <span class="fu">big_n_structure</span>(</span>
+<span id="cb11-4"><a></a>      <span class="at">param_val =</span> <span class="st">"bigN"</span>,</span>
+<span id="cb11-5"><a></a>      <span class="at">n_frmt =</span> <span class="fu">frmt</span>(<span class="st">"&lt;br&gt;N = xx"</span>)</span>
+<span id="cb11-6"><a></a>      )</span>
+<span id="cb11-7"><a></a>  )</span>
+<span id="cb11-8"><a></a></span>
+<span id="cb11-9"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb11-10"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
+<span id="cb11-11"><a></a>  <span class="at">.data =</span> ard_demog</span>
+<span id="cb11-12"><a></a>  )<span class="sc">|&gt;</span> </span>
+<span id="cb11-13"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<div id="vwbkcqaexv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gqoecyyayx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#vwbkcqaexv table {
+#gqoecyyayx table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vwbkcqaexv thead, #vwbkcqaexv tbody, #vwbkcqaexv tfoot, #vwbkcqaexv tr, #vwbkcqaexv td, #vwbkcqaexv th {
+#gqoecyyayx thead, #gqoecyyayx tbody, #gqoecyyayx tfoot, #gqoecyyayx tr, #gqoecyyayx td, #gqoecyyayx th {
   border-style: none;
 }
 
-#vwbkcqaexv p {
+#gqoecyyayx p {
   margin: 0;
   padding: 0;
 }
 
-#vwbkcqaexv .gt_table {
+#gqoecyyayx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3126,12 +3159,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_caption {
+#gqoecyyayx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vwbkcqaexv .gt_title {
+#gqoecyyayx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3143,7 +3176,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#vwbkcqaexv .gt_subtitle {
+#gqoecyyayx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3155,7 +3188,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#vwbkcqaexv .gt_heading {
+#gqoecyyayx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3167,13 +3200,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_bottom_border {
+#gqoecyyayx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_col_headings {
+#gqoecyyayx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3188,7 +3221,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_col_heading {
+#gqoecyyayx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3208,7 +3241,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#vwbkcqaexv .gt_column_spanner_outer {
+#gqoecyyayx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3220,15 +3253,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#vwbkcqaexv .gt_column_spanner_outer:first-child {
+#gqoecyyayx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vwbkcqaexv .gt_column_spanner_outer:last-child {
+#gqoecyyayx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vwbkcqaexv .gt_column_spanner {
+#gqoecyyayx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3240,11 +3273,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#vwbkcqaexv .gt_spanner_row {
+#gqoecyyayx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vwbkcqaexv .gt_group_heading {
+#gqoecyyayx .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3270,7 +3303,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#vwbkcqaexv .gt_empty_group_heading {
+#gqoecyyayx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3285,15 +3318,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#vwbkcqaexv .gt_from_md > :first-child {
+#gqoecyyayx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vwbkcqaexv .gt_from_md > :last-child {
+#gqoecyyayx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vwbkcqaexv .gt_row {
+#gqoecyyayx .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3312,7 +3345,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#vwbkcqaexv .gt_stub {
+#gqoecyyayx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3325,7 +3358,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vwbkcqaexv .gt_stub_row_group {
+#gqoecyyayx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3339,15 +3372,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#vwbkcqaexv .gt_row_group_first td {
+#gqoecyyayx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vwbkcqaexv .gt_row_group_first th {
+#gqoecyyayx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vwbkcqaexv .gt_summary_row {
+#gqoecyyayx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3357,16 +3390,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vwbkcqaexv .gt_first_summary_row {
+#gqoecyyayx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_first_summary_row.thick {
+#gqoecyyayx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vwbkcqaexv .gt_last_summary_row {
+#gqoecyyayx .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3376,7 +3409,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_grand_summary_row {
+#gqoecyyayx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3386,7 +3419,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vwbkcqaexv .gt_first_grand_summary_row {
+#gqoecyyayx .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3396,7 +3429,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_last_grand_summary_row_top {
+#gqoecyyayx .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3406,11 +3439,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_striped {
+#gqoecyyayx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vwbkcqaexv .gt_table_body {
+#gqoecyyayx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3419,7 +3452,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_footnotes {
+#gqoecyyayx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3433,7 +3466,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_footnote {
+#gqoecyyayx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -3442,7 +3475,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vwbkcqaexv .gt_sourcenotes {
+#gqoecyyayx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3456,7 +3489,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vwbkcqaexv .gt_sourcenote {
+#gqoecyyayx .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -3464,72 +3497,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vwbkcqaexv .gt_left {
+#gqoecyyayx .gt_left {
   text-align: left;
 }
 
-#vwbkcqaexv .gt_center {
+#gqoecyyayx .gt_center {
   text-align: center;
 }
 
-#vwbkcqaexv .gt_right {
+#gqoecyyayx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vwbkcqaexv .gt_font_normal {
+#gqoecyyayx .gt_font_normal {
   font-weight: normal;
 }
 
-#vwbkcqaexv .gt_font_bold {
+#gqoecyyayx .gt_font_bold {
   font-weight: bold;
 }
 
-#vwbkcqaexv .gt_font_italic {
+#gqoecyyayx .gt_font_italic {
   font-style: italic;
 }
 
-#vwbkcqaexv .gt_super {
+#gqoecyyayx .gt_super {
   font-size: 65%;
 }
 
-#vwbkcqaexv .gt_footnote_marks {
+#gqoecyyayx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vwbkcqaexv .gt_asterisk {
+#gqoecyyayx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vwbkcqaexv .gt_indent_1 {
+#gqoecyyayx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vwbkcqaexv .gt_indent_2 {
+#gqoecyyayx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vwbkcqaexv .gt_indent_3 {
+#gqoecyyayx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vwbkcqaexv .gt_indent_4 {
+#gqoecyyayx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vwbkcqaexv .gt_indent_5 {
+#gqoecyyayx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vwbkcqaexv .katex-display {
+#gqoecyyayx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vwbkcqaexv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gqoecyyayx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3613,40 +3646,40 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Select and reorder columns</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="3-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a></a>  <span class="fu">tfrmt</span>(</span>
-<span id="cb11-3"><a></a>    <span class="at">col_plan =</span> <span class="fu">col_plan</span>(</span>
-<span id="cb11-4"><a></a>      Placebo,</span>
-<span id="cb11-5"><a></a>      Active,</span>
-<span id="cb11-6"><a></a>      <span class="sc">-</span> <span class="fu">starts_with</span>(<span class="st">"ord"</span>)</span>
-<span id="cb11-7"><a></a>    )</span>
-<span id="cb11-8"><a></a>  )</span>
-<span id="cb11-9"><a></a></span>
-<span id="cb11-10"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb11-11"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
-<span id="cb11-12"><a></a>  <span class="at">.data =</span> ard_demog</span>
-<span id="cb11-13"><a></a>)<span class="sc">|&gt;</span> </span>
-<span id="cb11-14"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="3-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a></a>  <span class="fu">tfrmt</span>(</span>
+<span id="cb12-3"><a></a>    <span class="at">col_plan =</span> <span class="fu">col_plan</span>(</span>
+<span id="cb12-4"><a></a>      Placebo,</span>
+<span id="cb12-5"><a></a>      Active,</span>
+<span id="cb12-6"><a></a>      <span class="sc">-</span> <span class="fu">starts_with</span>(<span class="st">"ord"</span>)</span>
+<span id="cb12-7"><a></a>    )</span>
+<span id="cb12-8"><a></a>  )</span>
+<span id="cb12-9"><a></a></span>
+<span id="cb12-10"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb12-11"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
+<span id="cb12-12"><a></a>  <span class="at">.data =</span> ard_demog</span>
+<span id="cb12-13"><a></a>)<span class="sc">|&gt;</span> </span>
+<span id="cb12-14"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<div id="srzgoivsnq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="unnqnkzpvg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#srzgoivsnq table {
+#unnqnkzpvg table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#srzgoivsnq thead, #srzgoivsnq tbody, #srzgoivsnq tfoot, #srzgoivsnq tr, #srzgoivsnq td, #srzgoivsnq th {
+#unnqnkzpvg thead, #unnqnkzpvg tbody, #unnqnkzpvg tfoot, #unnqnkzpvg tr, #unnqnkzpvg td, #unnqnkzpvg th {
   border-style: none;
 }
 
-#srzgoivsnq p {
+#unnqnkzpvg p {
   margin: 0;
   padding: 0;
 }
 
-#srzgoivsnq .gt_table {
+#unnqnkzpvg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3672,12 +3705,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_caption {
+#unnqnkzpvg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#srzgoivsnq .gt_title {
+#unnqnkzpvg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3689,7 +3722,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#srzgoivsnq .gt_subtitle {
+#unnqnkzpvg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3701,7 +3734,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#srzgoivsnq .gt_heading {
+#unnqnkzpvg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3713,13 +3746,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_bottom_border {
+#unnqnkzpvg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_col_headings {
+#unnqnkzpvg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3734,7 +3767,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_col_heading {
+#unnqnkzpvg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3754,7 +3787,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#srzgoivsnq .gt_column_spanner_outer {
+#unnqnkzpvg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3766,15 +3799,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#srzgoivsnq .gt_column_spanner_outer:first-child {
+#unnqnkzpvg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#srzgoivsnq .gt_column_spanner_outer:last-child {
+#unnqnkzpvg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#srzgoivsnq .gt_column_spanner {
+#unnqnkzpvg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3786,11 +3819,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#srzgoivsnq .gt_spanner_row {
+#unnqnkzpvg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#srzgoivsnq .gt_group_heading {
+#unnqnkzpvg .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3816,7 +3849,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#srzgoivsnq .gt_empty_group_heading {
+#unnqnkzpvg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3831,15 +3864,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#srzgoivsnq .gt_from_md > :first-child {
+#unnqnkzpvg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#srzgoivsnq .gt_from_md > :last-child {
+#unnqnkzpvg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#srzgoivsnq .gt_row {
+#unnqnkzpvg .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3858,7 +3891,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#srzgoivsnq .gt_stub {
+#unnqnkzpvg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3871,7 +3904,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#srzgoivsnq .gt_stub_row_group {
+#unnqnkzpvg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3885,15 +3918,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#srzgoivsnq .gt_row_group_first td {
+#unnqnkzpvg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#srzgoivsnq .gt_row_group_first th {
+#unnqnkzpvg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#srzgoivsnq .gt_summary_row {
+#unnqnkzpvg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3903,16 +3936,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#srzgoivsnq .gt_first_summary_row {
+#unnqnkzpvg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_first_summary_row.thick {
+#unnqnkzpvg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#srzgoivsnq .gt_last_summary_row {
+#unnqnkzpvg .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3922,7 +3955,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_grand_summary_row {
+#unnqnkzpvg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3932,7 +3965,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#srzgoivsnq .gt_first_grand_summary_row {
+#unnqnkzpvg .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3942,7 +3975,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_last_grand_summary_row_top {
+#unnqnkzpvg .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -3952,11 +3985,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_striped {
+#unnqnkzpvg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#srzgoivsnq .gt_table_body {
+#unnqnkzpvg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3965,7 +3998,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_footnotes {
+#unnqnkzpvg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3979,7 +4012,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_footnote {
+#unnqnkzpvg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -3988,7 +4021,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#srzgoivsnq .gt_sourcenotes {
+#unnqnkzpvg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4002,7 +4035,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#srzgoivsnq .gt_sourcenote {
+#unnqnkzpvg .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -4010,72 +4043,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#srzgoivsnq .gt_left {
+#unnqnkzpvg .gt_left {
   text-align: left;
 }
 
-#srzgoivsnq .gt_center {
+#unnqnkzpvg .gt_center {
   text-align: center;
 }
 
-#srzgoivsnq .gt_right {
+#unnqnkzpvg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#srzgoivsnq .gt_font_normal {
+#unnqnkzpvg .gt_font_normal {
   font-weight: normal;
 }
 
-#srzgoivsnq .gt_font_bold {
+#unnqnkzpvg .gt_font_bold {
   font-weight: bold;
 }
 
-#srzgoivsnq .gt_font_italic {
+#unnqnkzpvg .gt_font_italic {
   font-style: italic;
 }
 
-#srzgoivsnq .gt_super {
+#unnqnkzpvg .gt_super {
   font-size: 65%;
 }
 
-#srzgoivsnq .gt_footnote_marks {
+#unnqnkzpvg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#srzgoivsnq .gt_asterisk {
+#unnqnkzpvg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#srzgoivsnq .gt_indent_1 {
+#unnqnkzpvg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#srzgoivsnq .gt_indent_2 {
+#unnqnkzpvg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#srzgoivsnq .gt_indent_3 {
+#unnqnkzpvg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#srzgoivsnq .gt_indent_4 {
+#unnqnkzpvg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#srzgoivsnq .gt_indent_5 {
+#unnqnkzpvg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#srzgoivsnq .katex-display {
+#unnqnkzpvg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#srzgoivsnq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#unnqnkzpvg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4139,41 +4172,41 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Format the data values - Basic</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="3-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a></a>  <span class="fu">tfrmt</span>(</span>
-<span id="cb12-3"><a></a>    <span class="at">body_plan =</span> <span class="fu">body_plan</span>(</span>
-<span id="cb12-4"><a></a>      <span class="fu">frmt_structure</span>(</span>
-<span id="cb12-5"><a></a>        <span class="at">group_val =</span> <span class="st">".default"</span>, </span>
-<span id="cb12-6"><a></a>        <span class="at">label_val =</span> <span class="st">".default"</span>, </span>
-<span id="cb12-7"><a></a>        <span class="fu">frmt</span>(<span class="st">"x.xx"</span>))</span>
-<span id="cb12-8"><a></a>    )</span>
-<span id="cb12-9"><a></a>  )</span>
-<span id="cb12-10"><a></a></span>
-<span id="cb12-11"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb12-12"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
-<span id="cb12-13"><a></a>  <span class="at">.data =</span> ard_demog</span>
-<span id="cb12-14"><a></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb12-15"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="3-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a></a>  <span class="fu">tfrmt</span>(</span>
+<span id="cb13-3"><a></a>    <span class="at">body_plan =</span> <span class="fu">body_plan</span>(</span>
+<span id="cb13-4"><a></a>      <span class="fu">frmt_structure</span>(</span>
+<span id="cb13-5"><a></a>        <span class="at">group_val =</span> <span class="st">".default"</span>, </span>
+<span id="cb13-6"><a></a>        <span class="at">label_val =</span> <span class="st">".default"</span>, </span>
+<span id="cb13-7"><a></a>        <span class="fu">frmt</span>(<span class="st">"x.xx"</span>))</span>
+<span id="cb13-8"><a></a>    )</span>
+<span id="cb13-9"><a></a>  )</span>
+<span id="cb13-10"><a></a></span>
+<span id="cb13-11"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb13-12"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
+<span id="cb13-13"><a></a>  <span class="at">.data =</span> ard_demog</span>
+<span id="cb13-14"><a></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb13-15"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<div id="vdbifkjmai" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tdnqtjzzgu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#vdbifkjmai table {
+#tdnqtjzzgu table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vdbifkjmai thead, #vdbifkjmai tbody, #vdbifkjmai tfoot, #vdbifkjmai tr, #vdbifkjmai td, #vdbifkjmai th {
+#tdnqtjzzgu thead, #tdnqtjzzgu tbody, #tdnqtjzzgu tfoot, #tdnqtjzzgu tr, #tdnqtjzzgu td, #tdnqtjzzgu th {
   border-style: none;
 }
 
-#vdbifkjmai p {
+#tdnqtjzzgu p {
   margin: 0;
   padding: 0;
 }
 
-#vdbifkjmai .gt_table {
+#tdnqtjzzgu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4199,12 +4232,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_caption {
+#tdnqtjzzgu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vdbifkjmai .gt_title {
+#tdnqtjzzgu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4216,7 +4249,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#vdbifkjmai .gt_subtitle {
+#tdnqtjzzgu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4228,7 +4261,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#vdbifkjmai .gt_heading {
+#tdnqtjzzgu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4240,13 +4273,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_bottom_border {
+#tdnqtjzzgu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_col_headings {
+#tdnqtjzzgu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4261,7 +4294,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_col_heading {
+#tdnqtjzzgu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4281,7 +4314,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#vdbifkjmai .gt_column_spanner_outer {
+#tdnqtjzzgu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4293,15 +4326,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#vdbifkjmai .gt_column_spanner_outer:first-child {
+#tdnqtjzzgu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vdbifkjmai .gt_column_spanner_outer:last-child {
+#tdnqtjzzgu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vdbifkjmai .gt_column_spanner {
+#tdnqtjzzgu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4313,11 +4346,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#vdbifkjmai .gt_spanner_row {
+#tdnqtjzzgu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vdbifkjmai .gt_group_heading {
+#tdnqtjzzgu .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4343,7 +4376,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#vdbifkjmai .gt_empty_group_heading {
+#tdnqtjzzgu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4358,15 +4391,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#vdbifkjmai .gt_from_md > :first-child {
+#tdnqtjzzgu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vdbifkjmai .gt_from_md > :last-child {
+#tdnqtjzzgu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vdbifkjmai .gt_row {
+#tdnqtjzzgu .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4385,7 +4418,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#vdbifkjmai .gt_stub {
+#tdnqtjzzgu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4398,7 +4431,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vdbifkjmai .gt_stub_row_group {
+#tdnqtjzzgu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4412,15 +4445,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#vdbifkjmai .gt_row_group_first td {
+#tdnqtjzzgu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vdbifkjmai .gt_row_group_first th {
+#tdnqtjzzgu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vdbifkjmai .gt_summary_row {
+#tdnqtjzzgu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4430,16 +4463,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vdbifkjmai .gt_first_summary_row {
+#tdnqtjzzgu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_first_summary_row.thick {
+#tdnqtjzzgu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vdbifkjmai .gt_last_summary_row {
+#tdnqtjzzgu .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4449,7 +4482,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_grand_summary_row {
+#tdnqtjzzgu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4459,7 +4492,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vdbifkjmai .gt_first_grand_summary_row {
+#tdnqtjzzgu .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4469,7 +4502,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_last_grand_summary_row_top {
+#tdnqtjzzgu .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4479,11 +4512,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_striped {
+#tdnqtjzzgu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vdbifkjmai .gt_table_body {
+#tdnqtjzzgu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4492,7 +4525,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_footnotes {
+#tdnqtjzzgu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4506,7 +4539,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_footnote {
+#tdnqtjzzgu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -4515,7 +4548,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vdbifkjmai .gt_sourcenotes {
+#tdnqtjzzgu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4529,7 +4562,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vdbifkjmai .gt_sourcenote {
+#tdnqtjzzgu .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -4537,72 +4570,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vdbifkjmai .gt_left {
+#tdnqtjzzgu .gt_left {
   text-align: left;
 }
 
-#vdbifkjmai .gt_center {
+#tdnqtjzzgu .gt_center {
   text-align: center;
 }
 
-#vdbifkjmai .gt_right {
+#tdnqtjzzgu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vdbifkjmai .gt_font_normal {
+#tdnqtjzzgu .gt_font_normal {
   font-weight: normal;
 }
 
-#vdbifkjmai .gt_font_bold {
+#tdnqtjzzgu .gt_font_bold {
   font-weight: bold;
 }
 
-#vdbifkjmai .gt_font_italic {
+#tdnqtjzzgu .gt_font_italic {
   font-style: italic;
 }
 
-#vdbifkjmai .gt_super {
+#tdnqtjzzgu .gt_super {
   font-size: 65%;
 }
 
-#vdbifkjmai .gt_footnote_marks {
+#tdnqtjzzgu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vdbifkjmai .gt_asterisk {
+#tdnqtjzzgu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vdbifkjmai .gt_indent_1 {
+#tdnqtjzzgu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vdbifkjmai .gt_indent_2 {
+#tdnqtjzzgu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vdbifkjmai .gt_indent_3 {
+#tdnqtjzzgu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vdbifkjmai .gt_indent_4 {
+#tdnqtjzzgu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vdbifkjmai .gt_indent_5 {
+#tdnqtjzzgu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vdbifkjmai .katex-display {
+#tdnqtjzzgu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vdbifkjmai div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tdnqtjzzgu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4666,46 +4699,46 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Format the data values - Advanced</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="4-11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a></a>  <span class="fu">tfrmt</span>(</span>
-<span id="cb13-3"><a></a>    <span class="at">body_plan =</span> <span class="fu">body_plan</span>(</span>
-<span id="cb13-4"><a></a>      <span class="fu">frmt_structure</span>(</span>
-<span id="cb13-5"><a></a>        <span class="at">group_val =</span> <span class="st">".default"</span>, </span>
-<span id="cb13-6"><a></a>        <span class="at">label_val =</span> <span class="st">".default"</span>,</span>
-<span id="cb13-7"><a></a>        <span class="fu">frmt_combine</span>(<span class="st">"{n} ({p}%)"</span>,</span>
-<span id="cb13-8"><a></a>                     <span class="at">n =</span> <span class="fu">frmt</span>(<span class="st">"xx"</span>),</span>
-<span id="cb13-9"><a></a>                     <span class="at">p =</span> <span class="fu">frmt</span>(<span class="st">"xx.x"</span>)</span>
-<span id="cb13-10"><a></a>                     </span>
-<span id="cb13-11"><a></a>        )</span>
-<span id="cb13-12"><a></a>      )</span>
-<span id="cb13-13"><a></a>    )</span>
-<span id="cb13-14"><a></a>  )</span>
-<span id="cb13-15"><a></a></span>
-<span id="cb13-16"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb13-17"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
-<span id="cb13-18"><a></a>  <span class="at">.data =</span> ard_demog</span>
-<span id="cb13-19"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb13-20"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="4-11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a></a>  <span class="fu">tfrmt</span>(</span>
+<span id="cb14-3"><a></a>    <span class="at">body_plan =</span> <span class="fu">body_plan</span>(</span>
+<span id="cb14-4"><a></a>      <span class="fu">frmt_structure</span>(</span>
+<span id="cb14-5"><a></a>        <span class="at">group_val =</span> <span class="st">".default"</span>, </span>
+<span id="cb14-6"><a></a>        <span class="at">label_val =</span> <span class="st">".default"</span>,</span>
+<span id="cb14-7"><a></a>        <span class="fu">frmt_combine</span>(<span class="st">"{n} ({p}%)"</span>,</span>
+<span id="cb14-8"><a></a>                     <span class="at">n =</span> <span class="fu">frmt</span>(<span class="st">"xx"</span>),</span>
+<span id="cb14-9"><a></a>                     <span class="at">p =</span> <span class="fu">frmt</span>(<span class="st">"xx.x"</span>)</span>
+<span id="cb14-10"><a></a>                     </span>
+<span id="cb14-11"><a></a>        )</span>
+<span id="cb14-12"><a></a>      )</span>
+<span id="cb14-13"><a></a>    )</span>
+<span id="cb14-14"><a></a>  )</span>
+<span id="cb14-15"><a></a></span>
+<span id="cb14-16"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb14-17"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
+<span id="cb14-18"><a></a>  <span class="at">.data =</span> ard_demog</span>
+<span id="cb14-19"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb14-20"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<div id="fpzyavtidq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ajkugzynum" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fpzyavtidq table {
+#ajkugzynum table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fpzyavtidq thead, #fpzyavtidq tbody, #fpzyavtidq tfoot, #fpzyavtidq tr, #fpzyavtidq td, #fpzyavtidq th {
+#ajkugzynum thead, #ajkugzynum tbody, #ajkugzynum tfoot, #ajkugzynum tr, #ajkugzynum td, #ajkugzynum th {
   border-style: none;
 }
 
-#fpzyavtidq p {
+#ajkugzynum p {
   margin: 0;
   padding: 0;
 }
 
-#fpzyavtidq .gt_table {
+#ajkugzynum .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4731,12 +4764,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_caption {
+#ajkugzynum .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fpzyavtidq .gt_title {
+#ajkugzynum .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4748,7 +4781,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#fpzyavtidq .gt_subtitle {
+#ajkugzynum .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4760,7 +4793,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#fpzyavtidq .gt_heading {
+#ajkugzynum .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4772,13 +4805,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_bottom_border {
+#ajkugzynum .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_col_headings {
+#ajkugzynum .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4793,7 +4826,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_col_heading {
+#ajkugzynum .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4813,7 +4846,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#fpzyavtidq .gt_column_spanner_outer {
+#ajkugzynum .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4825,15 +4858,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#fpzyavtidq .gt_column_spanner_outer:first-child {
+#ajkugzynum .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fpzyavtidq .gt_column_spanner_outer:last-child {
+#ajkugzynum .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fpzyavtidq .gt_column_spanner {
+#ajkugzynum .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4845,11 +4878,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#fpzyavtidq .gt_spanner_row {
+#ajkugzynum .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fpzyavtidq .gt_group_heading {
+#ajkugzynum .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4875,7 +4908,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#fpzyavtidq .gt_empty_group_heading {
+#ajkugzynum .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4890,15 +4923,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#fpzyavtidq .gt_from_md > :first-child {
+#ajkugzynum .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fpzyavtidq .gt_from_md > :last-child {
+#ajkugzynum .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fpzyavtidq .gt_row {
+#ajkugzynum .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4917,7 +4950,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#fpzyavtidq .gt_stub {
+#ajkugzynum .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4930,7 +4963,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fpzyavtidq .gt_stub_row_group {
+#ajkugzynum .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4944,15 +4977,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#fpzyavtidq .gt_row_group_first td {
+#ajkugzynum .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fpzyavtidq .gt_row_group_first th {
+#ajkugzynum .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fpzyavtidq .gt_summary_row {
+#ajkugzynum .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4962,16 +4995,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fpzyavtidq .gt_first_summary_row {
+#ajkugzynum .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_first_summary_row.thick {
+#ajkugzynum .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fpzyavtidq .gt_last_summary_row {
+#ajkugzynum .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -4981,7 +5014,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_grand_summary_row {
+#ajkugzynum .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4991,7 +5024,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fpzyavtidq .gt_first_grand_summary_row {
+#ajkugzynum .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -5001,7 +5034,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_last_grand_summary_row_top {
+#ajkugzynum .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -5011,11 +5044,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_striped {
+#ajkugzynum .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fpzyavtidq .gt_table_body {
+#ajkugzynum .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5024,7 +5057,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_footnotes {
+#ajkugzynum .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5038,7 +5071,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_footnote {
+#ajkugzynum .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -5047,7 +5080,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fpzyavtidq .gt_sourcenotes {
+#ajkugzynum .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5061,7 +5094,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fpzyavtidq .gt_sourcenote {
+#ajkugzynum .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -5069,72 +5102,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fpzyavtidq .gt_left {
+#ajkugzynum .gt_left {
   text-align: left;
 }
 
-#fpzyavtidq .gt_center {
+#ajkugzynum .gt_center {
   text-align: center;
 }
 
-#fpzyavtidq .gt_right {
+#ajkugzynum .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fpzyavtidq .gt_font_normal {
+#ajkugzynum .gt_font_normal {
   font-weight: normal;
 }
 
-#fpzyavtidq .gt_font_bold {
+#ajkugzynum .gt_font_bold {
   font-weight: bold;
 }
 
-#fpzyavtidq .gt_font_italic {
+#ajkugzynum .gt_font_italic {
   font-style: italic;
 }
 
-#fpzyavtidq .gt_super {
+#ajkugzynum .gt_super {
   font-size: 65%;
 }
 
-#fpzyavtidq .gt_footnote_marks {
+#ajkugzynum .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fpzyavtidq .gt_asterisk {
+#ajkugzynum .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fpzyavtidq .gt_indent_1 {
+#ajkugzynum .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fpzyavtidq .gt_indent_2 {
+#ajkugzynum .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fpzyavtidq .gt_indent_3 {
+#ajkugzynum .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fpzyavtidq .gt_indent_4 {
+#ajkugzynum .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fpzyavtidq .gt_indent_5 {
+#ajkugzynum .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fpzyavtidq .katex-display {
+#ajkugzynum .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fpzyavtidq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ajkugzynum div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5198,54 +5231,54 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Format the data values - Advanced</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="5-19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a></a>  <span class="fu">tfrmt</span>(</span>
-<span id="cb14-3"><a></a>    <span class="at">body_plan =</span> <span class="fu">body_plan</span>(</span>
-<span id="cb14-4"><a></a>      </span>
-<span id="cb14-5"><a></a>      <span class="fu">frmt_structure</span>(</span>
-<span id="cb14-6"><a></a>        <span class="at">group_val =</span> <span class="st">".default"</span>, </span>
-<span id="cb14-7"><a></a>        <span class="at">label_val =</span> <span class="st">"Median"</span>,</span>
-<span id="cb14-8"><a></a>        <span class="fu">frmt</span>(<span class="st">"xx.x"</span>)</span>
-<span id="cb14-9"><a></a>      ),</span>
-<span id="cb14-10"><a></a>      </span>
-<span id="cb14-11"><a></a>      <span class="fu">frmt_structure</span>(</span>
-<span id="cb14-12"><a></a>        <span class="at">group_val =</span> <span class="st">".default"</span>,</span>
-<span id="cb14-13"><a></a>        <span class="at">label_val =</span> <span class="st">".default"</span>,</span>
-<span id="cb14-14"><a></a>        <span class="fu">frmt_combine</span>(</span>
-<span id="cb14-15"><a></a>          <span class="at">expression =</span> <span class="st">"[{p25}, {p75}]"</span>,                </span>
-<span id="cb14-16"><a></a>          <span class="at">p25 =</span> <span class="fu">frmt</span>(<span class="st">"xx.x"</span>),                     </span>
-<span id="cb14-17"><a></a>          <span class="at">p75 =</span> <span class="fu">frmt</span>(<span class="st">"xx.x"</span>)                      </span>
-<span id="cb14-18"><a></a>        )</span>
-<span id="cb14-19"><a></a>      )</span>
-<span id="cb14-20"><a></a>      </span>
-<span id="cb14-21"><a></a>    )</span>
-<span id="cb14-22"><a></a>  )</span>
-<span id="cb14-23"><a></a>  </span>
-<span id="cb14-24"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb14-25"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
-<span id="cb14-26"><a></a>  <span class="at">.data =</span> ard_demog</span>
-<span id="cb14-27"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb14-28"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="5-19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a></a>  <span class="fu">tfrmt</span>(</span>
+<span id="cb15-3"><a></a>    <span class="at">body_plan =</span> <span class="fu">body_plan</span>(</span>
+<span id="cb15-4"><a></a>      </span>
+<span id="cb15-5"><a></a>      <span class="fu">frmt_structure</span>(</span>
+<span id="cb15-6"><a></a>        <span class="at">group_val =</span> <span class="st">".default"</span>, </span>
+<span id="cb15-7"><a></a>        <span class="at">label_val =</span> <span class="st">"Median"</span>,</span>
+<span id="cb15-8"><a></a>        <span class="fu">frmt</span>(<span class="st">"xx.x"</span>)</span>
+<span id="cb15-9"><a></a>      ),</span>
+<span id="cb15-10"><a></a>      </span>
+<span id="cb15-11"><a></a>      <span class="fu">frmt_structure</span>(</span>
+<span id="cb15-12"><a></a>        <span class="at">group_val =</span> <span class="st">".default"</span>,</span>
+<span id="cb15-13"><a></a>        <span class="at">label_val =</span> <span class="st">".default"</span>,</span>
+<span id="cb15-14"><a></a>        <span class="fu">frmt_combine</span>(</span>
+<span id="cb15-15"><a></a>          <span class="at">expression =</span> <span class="st">"[{p25}, {p75}]"</span>,                </span>
+<span id="cb15-16"><a></a>          <span class="at">p25 =</span> <span class="fu">frmt</span>(<span class="st">"xx.x"</span>),                     </span>
+<span id="cb15-17"><a></a>          <span class="at">p75 =</span> <span class="fu">frmt</span>(<span class="st">"xx.x"</span>)                      </span>
+<span id="cb15-18"><a></a>        )</span>
+<span id="cb15-19"><a></a>      )</span>
+<span id="cb15-20"><a></a>      </span>
+<span id="cb15-21"><a></a>    )</span>
+<span id="cb15-22"><a></a>  )</span>
+<span id="cb15-23"><a></a>  </span>
+<span id="cb15-24"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb15-25"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
+<span id="cb15-26"><a></a>  <span class="at">.data =</span> ard_demog</span>
+<span id="cb15-27"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb15-28"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<div id="ulwajryequ" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="elxmjqbzsx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ulwajryequ table {
+#elxmjqbzsx table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ulwajryequ thead, #ulwajryequ tbody, #ulwajryequ tfoot, #ulwajryequ tr, #ulwajryequ td, #ulwajryequ th {
+#elxmjqbzsx thead, #elxmjqbzsx tbody, #elxmjqbzsx tfoot, #elxmjqbzsx tr, #elxmjqbzsx td, #elxmjqbzsx th {
   border-style: none;
 }
 
-#ulwajryequ p {
+#elxmjqbzsx p {
   margin: 0;
   padding: 0;
 }
 
-#ulwajryequ .gt_table {
+#elxmjqbzsx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5271,12 +5304,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_caption {
+#elxmjqbzsx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ulwajryequ .gt_title {
+#elxmjqbzsx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5288,7 +5321,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#ulwajryequ .gt_subtitle {
+#elxmjqbzsx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5300,7 +5333,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#ulwajryequ .gt_heading {
+#elxmjqbzsx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5312,13 +5345,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_bottom_border {
+#elxmjqbzsx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_col_headings {
+#elxmjqbzsx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5333,7 +5366,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_col_heading {
+#elxmjqbzsx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5353,7 +5386,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#ulwajryequ .gt_column_spanner_outer {
+#elxmjqbzsx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5365,15 +5398,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#ulwajryequ .gt_column_spanner_outer:first-child {
+#elxmjqbzsx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ulwajryequ .gt_column_spanner_outer:last-child {
+#elxmjqbzsx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ulwajryequ .gt_column_spanner {
+#elxmjqbzsx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5385,11 +5418,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#ulwajryequ .gt_spanner_row {
+#elxmjqbzsx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ulwajryequ .gt_group_heading {
+#elxmjqbzsx .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -5415,7 +5448,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#ulwajryequ .gt_empty_group_heading {
+#elxmjqbzsx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5430,15 +5463,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#ulwajryequ .gt_from_md > :first-child {
+#elxmjqbzsx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ulwajryequ .gt_from_md > :last-child {
+#elxmjqbzsx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ulwajryequ .gt_row {
+#elxmjqbzsx .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -5457,7 +5490,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#ulwajryequ .gt_stub {
+#elxmjqbzsx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5470,7 +5503,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#ulwajryequ .gt_stub_row_group {
+#elxmjqbzsx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5484,15 +5517,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#ulwajryequ .gt_row_group_first td {
+#elxmjqbzsx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ulwajryequ .gt_row_group_first th {
+#elxmjqbzsx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ulwajryequ .gt_summary_row {
+#elxmjqbzsx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5502,16 +5535,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#ulwajryequ .gt_first_summary_row {
+#elxmjqbzsx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_first_summary_row.thick {
+#elxmjqbzsx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ulwajryequ .gt_last_summary_row {
+#elxmjqbzsx .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -5521,7 +5554,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_grand_summary_row {
+#elxmjqbzsx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5531,7 +5564,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#ulwajryequ .gt_first_grand_summary_row {
+#elxmjqbzsx .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -5541,7 +5574,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_last_grand_summary_row_top {
+#elxmjqbzsx .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -5551,11 +5584,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_striped {
+#elxmjqbzsx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ulwajryequ .gt_table_body {
+#elxmjqbzsx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5564,7 +5597,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_footnotes {
+#elxmjqbzsx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5578,7 +5611,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_footnote {
+#elxmjqbzsx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -5587,7 +5620,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#ulwajryequ .gt_sourcenotes {
+#elxmjqbzsx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5601,7 +5634,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#ulwajryequ .gt_sourcenote {
+#elxmjqbzsx .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -5609,72 +5642,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#ulwajryequ .gt_left {
+#elxmjqbzsx .gt_left {
   text-align: left;
 }
 
-#ulwajryequ .gt_center {
+#elxmjqbzsx .gt_center {
   text-align: center;
 }
 
-#ulwajryequ .gt_right {
+#elxmjqbzsx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ulwajryequ .gt_font_normal {
+#elxmjqbzsx .gt_font_normal {
   font-weight: normal;
 }
 
-#ulwajryequ .gt_font_bold {
+#elxmjqbzsx .gt_font_bold {
   font-weight: bold;
 }
 
-#ulwajryequ .gt_font_italic {
+#elxmjqbzsx .gt_font_italic {
   font-style: italic;
 }
 
-#ulwajryequ .gt_super {
+#elxmjqbzsx .gt_super {
   font-size: 65%;
 }
 
-#ulwajryequ .gt_footnote_marks {
+#elxmjqbzsx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ulwajryequ .gt_asterisk {
+#elxmjqbzsx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ulwajryequ .gt_indent_1 {
+#elxmjqbzsx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ulwajryequ .gt_indent_2 {
+#elxmjqbzsx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ulwajryequ .gt_indent_3 {
+#elxmjqbzsx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ulwajryequ .gt_indent_4 {
+#elxmjqbzsx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ulwajryequ .gt_indent_5 {
+#elxmjqbzsx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ulwajryequ .katex-display {
+#elxmjqbzsx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ulwajryequ div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#elxmjqbzsx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5738,42 +5771,42 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Align the columns</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="3,4,5,6,7,8,9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a></a>  <span class="fu">tfrmt</span>(</span>
-<span id="cb15-3"><a></a>    <span class="at">col_style_plan =</span> <span class="fu">col_style_plan</span>(</span>
-<span id="cb15-4"><a></a>      <span class="fu">col_style_structure</span>(</span>
-<span id="cb15-5"><a></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"Placebo"</span>, </span>
-<span id="cb15-6"><a></a>                <span class="st">"Active"</span>),</span>
-<span id="cb15-7"><a></a>        <span class="at">align =</span> <span class="st">" "</span></span>
-<span id="cb15-8"><a></a>      )</span>
-<span id="cb15-9"><a></a>    )</span>
-<span id="cb15-10"><a></a>  )</span>
-<span id="cb15-11"><a></a>  </span>
-<span id="cb15-12"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb15-13"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
-<span id="cb15-14"><a></a>  <span class="at">.data =</span> ard_demog</span>
-<span id="cb15-15"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb15-16"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="3,4,5,6,7,8,9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a></a>  <span class="fu">tfrmt</span>(</span>
+<span id="cb16-3"><a></a>    <span class="at">col_style_plan =</span> <span class="fu">col_style_plan</span>(</span>
+<span id="cb16-4"><a></a>      <span class="fu">col_style_structure</span>(</span>
+<span id="cb16-5"><a></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"Placebo"</span>, </span>
+<span id="cb16-6"><a></a>                <span class="st">"Active"</span>),</span>
+<span id="cb16-7"><a></a>        <span class="at">align =</span> <span class="st">" "</span></span>
+<span id="cb16-8"><a></a>      )</span>
+<span id="cb16-9"><a></a>    )</span>
+<span id="cb16-10"><a></a>  )</span>
+<span id="cb16-11"><a></a>  </span>
+<span id="cb16-12"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb16-13"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
+<span id="cb16-14"><a></a>  <span class="at">.data =</span> ard_demog</span>
+<span id="cb16-15"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb16-16"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<div id="vcahhmdtdy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ukicddyqjj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#vcahhmdtdy table {
+#ukicddyqjj table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vcahhmdtdy thead, #vcahhmdtdy tbody, #vcahhmdtdy tfoot, #vcahhmdtdy tr, #vcahhmdtdy td, #vcahhmdtdy th {
+#ukicddyqjj thead, #ukicddyqjj tbody, #ukicddyqjj tfoot, #ukicddyqjj tr, #ukicddyqjj td, #ukicddyqjj th {
   border-style: none;
 }
 
-#vcahhmdtdy p {
+#ukicddyqjj p {
   margin: 0;
   padding: 0;
 }
 
-#vcahhmdtdy .gt_table {
+#ukicddyqjj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5799,12 +5832,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_caption {
+#ukicddyqjj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vcahhmdtdy .gt_title {
+#ukicddyqjj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5816,7 +5849,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#vcahhmdtdy .gt_subtitle {
+#ukicddyqjj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5828,7 +5861,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#vcahhmdtdy .gt_heading {
+#ukicddyqjj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5840,13 +5873,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_bottom_border {
+#ukicddyqjj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_col_headings {
+#ukicddyqjj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5861,7 +5894,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_col_heading {
+#ukicddyqjj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5881,7 +5914,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#vcahhmdtdy .gt_column_spanner_outer {
+#ukicddyqjj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5893,15 +5926,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#vcahhmdtdy .gt_column_spanner_outer:first-child {
+#ukicddyqjj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vcahhmdtdy .gt_column_spanner_outer:last-child {
+#ukicddyqjj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vcahhmdtdy .gt_column_spanner {
+#ukicddyqjj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5913,11 +5946,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#vcahhmdtdy .gt_spanner_row {
+#ukicddyqjj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vcahhmdtdy .gt_group_heading {
+#ukicddyqjj .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -5943,7 +5976,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#vcahhmdtdy .gt_empty_group_heading {
+#ukicddyqjj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5958,15 +5991,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#vcahhmdtdy .gt_from_md > :first-child {
+#ukicddyqjj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vcahhmdtdy .gt_from_md > :last-child {
+#ukicddyqjj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vcahhmdtdy .gt_row {
+#ukicddyqjj .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -5985,7 +6018,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#vcahhmdtdy .gt_stub {
+#ukicddyqjj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5998,7 +6031,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vcahhmdtdy .gt_stub_row_group {
+#ukicddyqjj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6012,15 +6045,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#vcahhmdtdy .gt_row_group_first td {
+#ukicddyqjj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vcahhmdtdy .gt_row_group_first th {
+#ukicddyqjj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vcahhmdtdy .gt_summary_row {
+#ukicddyqjj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6030,16 +6063,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vcahhmdtdy .gt_first_summary_row {
+#ukicddyqjj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_first_summary_row.thick {
+#ukicddyqjj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vcahhmdtdy .gt_last_summary_row {
+#ukicddyqjj .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -6049,7 +6082,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_grand_summary_row {
+#ukicddyqjj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6059,7 +6092,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vcahhmdtdy .gt_first_grand_summary_row {
+#ukicddyqjj .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -6069,7 +6102,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_last_grand_summary_row_top {
+#ukicddyqjj .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -6079,11 +6112,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_striped {
+#ukicddyqjj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vcahhmdtdy .gt_table_body {
+#ukicddyqjj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6092,7 +6125,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_footnotes {
+#ukicddyqjj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6106,7 +6139,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_footnote {
+#ukicddyqjj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -6115,7 +6148,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vcahhmdtdy .gt_sourcenotes {
+#ukicddyqjj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6129,7 +6162,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#vcahhmdtdy .gt_sourcenote {
+#ukicddyqjj .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -6137,72 +6170,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#vcahhmdtdy .gt_left {
+#ukicddyqjj .gt_left {
   text-align: left;
 }
 
-#vcahhmdtdy .gt_center {
+#ukicddyqjj .gt_center {
   text-align: center;
 }
 
-#vcahhmdtdy .gt_right {
+#ukicddyqjj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vcahhmdtdy .gt_font_normal {
+#ukicddyqjj .gt_font_normal {
   font-weight: normal;
 }
 
-#vcahhmdtdy .gt_font_bold {
+#ukicddyqjj .gt_font_bold {
   font-weight: bold;
 }
 
-#vcahhmdtdy .gt_font_italic {
+#ukicddyqjj .gt_font_italic {
   font-style: italic;
 }
 
-#vcahhmdtdy .gt_super {
+#ukicddyqjj .gt_super {
   font-size: 65%;
 }
 
-#vcahhmdtdy .gt_footnote_marks {
+#ukicddyqjj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vcahhmdtdy .gt_asterisk {
+#ukicddyqjj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vcahhmdtdy .gt_indent_1 {
+#ukicddyqjj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vcahhmdtdy .gt_indent_2 {
+#ukicddyqjj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vcahhmdtdy .gt_indent_3 {
+#ukicddyqjj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vcahhmdtdy .gt_indent_4 {
+#ukicddyqjj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vcahhmdtdy .gt_indent_5 {
+#ukicddyqjj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vcahhmdtdy .katex-display {
+#ukicddyqjj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vcahhmdtdy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ukicddyqjj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -6266,41 +6299,41 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Add footnotes</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="3,4,5,6,7,8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a></a>  <span class="fu">tfrmt</span>(</span>
-<span id="cb16-3"><a></a>    <span class="at">footnote_plan =</span> <span class="fu">footnote_plan</span>(</span>
-<span id="cb16-4"><a></a>      <span class="fu">footnote_structure</span>(</span>
-<span id="cb16-5"><a></a>        <span class="st">"Pooled High and Low Dose"</span>,</span>
-<span id="cb16-6"><a></a>        <span class="at">column_val =</span> <span class="st">"Active"</span></span>
-<span id="cb16-7"><a></a>      )</span>
-<span id="cb16-8"><a></a>    )</span>
-<span id="cb16-9"><a></a>  )</span>
-<span id="cb16-10"><a></a>  </span>
-<span id="cb16-11"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb16-12"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
-<span id="cb16-13"><a></a>  <span class="at">.data =</span> ard_demog</span>
-<span id="cb16-14"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb16-15"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17" data-code-line-numbers="3,4,5,6,7,8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a></a>  <span class="fu">tfrmt</span>(</span>
+<span id="cb17-3"><a></a>    <span class="at">footnote_plan =</span> <span class="fu">footnote_plan</span>(</span>
+<span id="cb17-4"><a></a>      <span class="fu">footnote_structure</span>(</span>
+<span id="cb17-5"><a></a>        <span class="st">"Pooled High and Low Dose"</span>,</span>
+<span id="cb17-6"><a></a>        <span class="at">column_val =</span> <span class="st">"Active"</span></span>
+<span id="cb17-7"><a></a>      )</span>
+<span id="cb17-8"><a></a>    )</span>
+<span id="cb17-9"><a></a>  )</span>
+<span id="cb17-10"><a></a>  </span>
+<span id="cb17-11"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb17-12"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
+<span id="cb17-13"><a></a>  <span class="at">.data =</span> ard_demog</span>
+<span id="cb17-14"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb17-15"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<div id="fadvmmfccf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xjfwryxwgc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fadvmmfccf table {
+#xjfwryxwgc table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fadvmmfccf thead, #fadvmmfccf tbody, #fadvmmfccf tfoot, #fadvmmfccf tr, #fadvmmfccf td, #fadvmmfccf th {
+#xjfwryxwgc thead, #xjfwryxwgc tbody, #xjfwryxwgc tfoot, #xjfwryxwgc tr, #xjfwryxwgc td, #xjfwryxwgc th {
   border-style: none;
 }
 
-#fadvmmfccf p {
+#xjfwryxwgc p {
   margin: 0;
   padding: 0;
 }
 
-#fadvmmfccf .gt_table {
+#xjfwryxwgc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -6326,12 +6359,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_caption {
+#xjfwryxwgc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fadvmmfccf .gt_title {
+#xjfwryxwgc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -6343,7 +6376,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#fadvmmfccf .gt_subtitle {
+#xjfwryxwgc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -6355,7 +6388,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#fadvmmfccf .gt_heading {
+#xjfwryxwgc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -6367,13 +6400,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_bottom_border {
+#xjfwryxwgc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_col_headings {
+#xjfwryxwgc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6388,7 +6421,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_col_heading {
+#xjfwryxwgc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6408,7 +6441,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#fadvmmfccf .gt_column_spanner_outer {
+#xjfwryxwgc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6420,15 +6453,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#fadvmmfccf .gt_column_spanner_outer:first-child {
+#xjfwryxwgc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fadvmmfccf .gt_column_spanner_outer:last-child {
+#xjfwryxwgc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fadvmmfccf .gt_column_spanner {
+#xjfwryxwgc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -6440,11 +6473,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#fadvmmfccf .gt_spanner_row {
+#xjfwryxwgc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fadvmmfccf .gt_group_heading {
+#xjfwryxwgc .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -6470,7 +6503,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#fadvmmfccf .gt_empty_group_heading {
+#xjfwryxwgc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -6485,15 +6518,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#fadvmmfccf .gt_from_md > :first-child {
+#xjfwryxwgc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fadvmmfccf .gt_from_md > :last-child {
+#xjfwryxwgc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fadvmmfccf .gt_row {
+#xjfwryxwgc .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -6512,7 +6545,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#fadvmmfccf .gt_stub {
+#xjfwryxwgc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6525,7 +6558,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fadvmmfccf .gt_stub_row_group {
+#xjfwryxwgc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6539,15 +6572,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#fadvmmfccf .gt_row_group_first td {
+#xjfwryxwgc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fadvmmfccf .gt_row_group_first th {
+#xjfwryxwgc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fadvmmfccf .gt_summary_row {
+#xjfwryxwgc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6557,16 +6590,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fadvmmfccf .gt_first_summary_row {
+#xjfwryxwgc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_first_summary_row.thick {
+#xjfwryxwgc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fadvmmfccf .gt_last_summary_row {
+#xjfwryxwgc .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -6576,7 +6609,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_grand_summary_row {
+#xjfwryxwgc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6586,7 +6619,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fadvmmfccf .gt_first_grand_summary_row {
+#xjfwryxwgc .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -6596,7 +6629,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_last_grand_summary_row_top {
+#xjfwryxwgc .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -6606,11 +6639,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_striped {
+#xjfwryxwgc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fadvmmfccf .gt_table_body {
+#xjfwryxwgc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6619,7 +6652,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_footnotes {
+#xjfwryxwgc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6633,7 +6666,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_footnote {
+#xjfwryxwgc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -6642,7 +6675,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fadvmmfccf .gt_sourcenotes {
+#xjfwryxwgc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6656,7 +6689,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#fadvmmfccf .gt_sourcenote {
+#xjfwryxwgc .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -6664,72 +6697,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#fadvmmfccf .gt_left {
+#xjfwryxwgc .gt_left {
   text-align: left;
 }
 
-#fadvmmfccf .gt_center {
+#xjfwryxwgc .gt_center {
   text-align: center;
 }
 
-#fadvmmfccf .gt_right {
+#xjfwryxwgc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fadvmmfccf .gt_font_normal {
+#xjfwryxwgc .gt_font_normal {
   font-weight: normal;
 }
 
-#fadvmmfccf .gt_font_bold {
+#xjfwryxwgc .gt_font_bold {
   font-weight: bold;
 }
 
-#fadvmmfccf .gt_font_italic {
+#xjfwryxwgc .gt_font_italic {
   font-style: italic;
 }
 
-#fadvmmfccf .gt_super {
+#xjfwryxwgc .gt_super {
   font-size: 65%;
 }
 
-#fadvmmfccf .gt_footnote_marks {
+#xjfwryxwgc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fadvmmfccf .gt_asterisk {
+#xjfwryxwgc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fadvmmfccf .gt_indent_1 {
+#xjfwryxwgc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fadvmmfccf .gt_indent_2 {
+#xjfwryxwgc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fadvmmfccf .gt_indent_3 {
+#xjfwryxwgc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fadvmmfccf .gt_indent_4 {
+#xjfwryxwgc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fadvmmfccf .gt_indent_5 {
+#xjfwryxwgc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fadvmmfccf .katex-display {
+#xjfwryxwgc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fadvmmfccf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xjfwryxwgc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -6798,37 +6831,37 @@ Daniel D. Sjoberg and Becca Krouse
 <h2>Add titles</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb17" data-code-line-numbers="3,4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a></a>  <span class="fu">tfrmt</span>(</span>
-<span id="cb17-3"><a></a>    <span class="at">title =</span> <span class="st">"Demographic Table"</span>,</span>
-<span id="cb17-4"><a></a>    <span class="at">subtitle =</span> <span class="st">"Safety Population"</span></span>
-<span id="cb17-5"><a></a>  )</span>
-<span id="cb17-6"><a></a>  </span>
-<span id="cb17-7"><a></a><span class="fu">print_to_gt</span>(</span>
-<span id="cb17-8"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
-<span id="cb17-9"><a></a>  <span class="at">.data =</span> ard_demog</span>
-<span id="cb17-10"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb17-11"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="3,4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>tfrmt_demog <span class="ot">&lt;-</span> tfrmt_demog <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a></a>  <span class="fu">tfrmt</span>(</span>
+<span id="cb18-3"><a></a>    <span class="at">title =</span> <span class="st">"Demographic Table"</span>,</span>
+<span id="cb18-4"><a></a>    <span class="at">subtitle =</span> <span class="st">"Safety Population"</span></span>
+<span id="cb18-5"><a></a>  )</span>
+<span id="cb18-6"><a></a>  </span>
+<span id="cb18-7"><a></a><span class="fu">print_to_gt</span>(</span>
+<span id="cb18-8"><a></a>  <span class="at">tfrmt =</span> tfrmt_demog, </span>
+<span id="cb18-9"><a></a>  <span class="at">.data =</span> ard_demog</span>
+<span id="cb18-10"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb18-11"><a></a>   <span class="fu">gt_style_slides</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<div id="tjnupjaoiw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="juhtltrrdl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#tjnupjaoiw table {
+#juhtltrrdl table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tjnupjaoiw thead, #tjnupjaoiw tbody, #tjnupjaoiw tfoot, #tjnupjaoiw tr, #tjnupjaoiw td, #tjnupjaoiw th {
+#juhtltrrdl thead, #juhtltrrdl tbody, #juhtltrrdl tfoot, #juhtltrrdl tr, #juhtltrrdl td, #juhtltrrdl th {
   border-style: none;
 }
 
-#tjnupjaoiw p {
+#juhtltrrdl p {
   margin: 0;
   padding: 0;
 }
 
-#tjnupjaoiw .gt_table {
+#juhtltrrdl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -6854,12 +6887,12 @@ Daniel D. Sjoberg and Becca Krouse
   border-left-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_caption {
+#juhtltrrdl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tjnupjaoiw .gt_title {
+#juhtltrrdl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -6871,7 +6904,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-width: 0;
 }
 
-#tjnupjaoiw .gt_subtitle {
+#juhtltrrdl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -6883,7 +6916,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-width: 0;
 }
 
-#tjnupjaoiw .gt_heading {
+#juhtltrrdl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -6895,13 +6928,13 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_bottom_border {
+#juhtltrrdl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_col_headings {
+#juhtltrrdl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6916,7 +6949,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_col_heading {
+#juhtltrrdl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6936,7 +6969,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#tjnupjaoiw .gt_column_spanner_outer {
+#juhtltrrdl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6948,15 +6981,15 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 4px;
 }
 
-#tjnupjaoiw .gt_column_spanner_outer:first-child {
+#juhtltrrdl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tjnupjaoiw .gt_column_spanner_outer:last-child {
+#juhtltrrdl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tjnupjaoiw .gt_column_spanner {
+#juhtltrrdl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -6968,11 +7001,11 @@ Daniel D. Sjoberg and Becca Krouse
   width: 100%;
 }
 
-#tjnupjaoiw .gt_spanner_row {
+#juhtltrrdl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tjnupjaoiw .gt_group_heading {
+#juhtltrrdl .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -6998,7 +7031,7 @@ Daniel D. Sjoberg and Becca Krouse
   text-align: left;
 }
 
-#tjnupjaoiw .gt_empty_group_heading {
+#juhtltrrdl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -7013,15 +7046,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: middle;
 }
 
-#tjnupjaoiw .gt_from_md > :first-child {
+#juhtltrrdl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tjnupjaoiw .gt_from_md > :last-child {
+#juhtltrrdl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tjnupjaoiw .gt_row {
+#juhtltrrdl .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -7040,7 +7073,7 @@ Daniel D. Sjoberg and Becca Krouse
   overflow-x: hidden;
 }
 
-#tjnupjaoiw .gt_stub {
+#juhtltrrdl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7053,7 +7086,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#tjnupjaoiw .gt_stub_row_group {
+#juhtltrrdl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7067,15 +7100,15 @@ Daniel D. Sjoberg and Becca Krouse
   vertical-align: top;
 }
 
-#tjnupjaoiw .gt_row_group_first td {
+#juhtltrrdl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tjnupjaoiw .gt_row_group_first th {
+#juhtltrrdl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tjnupjaoiw .gt_summary_row {
+#juhtltrrdl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7085,16 +7118,16 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#tjnupjaoiw .gt_first_summary_row {
+#juhtltrrdl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_first_summary_row.thick {
+#juhtltrrdl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tjnupjaoiw .gt_last_summary_row {
+#juhtltrrdl .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -7104,7 +7137,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_grand_summary_row {
+#juhtltrrdl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7114,7 +7147,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#tjnupjaoiw .gt_first_grand_summary_row {
+#juhtltrrdl .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -7124,7 +7157,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-top-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_last_grand_summary_row_top {
+#juhtltrrdl .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -7134,11 +7167,11 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_striped {
+#juhtltrrdl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tjnupjaoiw .gt_table_body {
+#juhtltrrdl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7147,7 +7180,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-bottom-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_footnotes {
+#juhtltrrdl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7161,7 +7194,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_footnote {
+#juhtltrrdl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -7170,7 +7203,7 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#tjnupjaoiw .gt_sourcenotes {
+#juhtltrrdl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7184,7 +7217,7 @@ Daniel D. Sjoberg and Becca Krouse
   border-right-color: #D3D3D3;
 }
 
-#tjnupjaoiw .gt_sourcenote {
+#juhtltrrdl .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -7192,72 +7225,72 @@ Daniel D. Sjoberg and Becca Krouse
   padding-right: 5px;
 }
 
-#tjnupjaoiw .gt_left {
+#juhtltrrdl .gt_left {
   text-align: left;
 }
 
-#tjnupjaoiw .gt_center {
+#juhtltrrdl .gt_center {
   text-align: center;
 }
 
-#tjnupjaoiw .gt_right {
+#juhtltrrdl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tjnupjaoiw .gt_font_normal {
+#juhtltrrdl .gt_font_normal {
   font-weight: normal;
 }
 
-#tjnupjaoiw .gt_font_bold {
+#juhtltrrdl .gt_font_bold {
   font-weight: bold;
 }
 
-#tjnupjaoiw .gt_font_italic {
+#juhtltrrdl .gt_font_italic {
   font-style: italic;
 }
 
-#tjnupjaoiw .gt_super {
+#juhtltrrdl .gt_super {
   font-size: 65%;
 }
 
-#tjnupjaoiw .gt_footnote_marks {
+#juhtltrrdl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tjnupjaoiw .gt_asterisk {
+#juhtltrrdl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tjnupjaoiw .gt_indent_1 {
+#juhtltrrdl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tjnupjaoiw .gt_indent_2 {
+#juhtltrrdl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tjnupjaoiw .gt_indent_3 {
+#juhtltrrdl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tjnupjaoiw .gt_indent_4 {
+#juhtltrrdl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tjnupjaoiw .gt_indent_5 {
+#juhtltrrdl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tjnupjaoiw .katex-display {
+#juhtltrrdl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tjnupjaoiw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#juhtltrrdl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
