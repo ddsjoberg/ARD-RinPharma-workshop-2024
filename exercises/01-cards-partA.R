@@ -40,39 +40,10 @@ ard_categorical(
   variables =
 )
 
-##  C. Since SEX is actually a dichotomous variable, let's switch to
-# `ard_dichotomous` to compute values for just one of its levels ("F") (hint: see
-# `https://insightsengineering.github.io/cards/latest-tag/articles/getting-started.html#dichotomous-summaries`
-# for an example)
-
-ard_dichotomous(
-  data = adsl,
-  by = ,
-  variables = ,
-  value = ~ ""  # complete the "" with the desired value
-)
-
-## D. By default, `ard_continuous` computes
-# "N","mean","sd","median","p25","p75","min","max". Suppose we only want to
-# compute a subset of these ("mean", "sd", "median", "p25", "p75"). Modify your
-# code from part A to compute just these summaries. (hint: modify the `statistic`
-# argument. see
-# `https://insightsengineering.github.io/cards/latest-tag/reference/summary_functions.html#ref-examples`
-# for an example)
-
-ard_continuous(
-  data = adsl,
-  by = ,
-  variables = ,
-  statistic = ~ continuous_summary_fns(  ) # complete the ( ) with the desired stats
-)
-
-
-## E. Perform all of the summaries in a single ard_stack call, including:
+## C. Perform all of the summaries in a single ard_stack() call, including:
 #   - summaries by TRT01A as performed above
-#      - continuous summaries from part D for AGE, BMI, HEIGHT, and WEIGHT
-#      - categorical summaries from part B for AGEGR1, RACE, ETHNIC
-#      - dichotomous summaries from part C for SEX
+#      - continuous summaries from part A for AGE, BMI, HEIGHT, and WEIGHT
+#      - categorical summaries from part B for AGEGR1, SEX, RACE, ETHNIC
 ard_stack(
   data = adsl,
   .by = ,
@@ -82,9 +53,9 @@ ard_stack(
 )
 
 
-## F. BONUS!
-#   For part D. above, add the following pieces
+## D. BONUS!
+#   For part C. above, add the following pieces
 #   - overall summaries for all of the variables
 #   - total N
-# (Hint: Modify the `overall` and `total` arguments, respectively)
+# (Hint: Modify the `.overall` and `.total_n` arguments, respectively)
 
