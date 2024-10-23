@@ -56,7 +56,7 @@ ard_stack(
 #   For part C. above, add the following pieces
 #   - overall summaries for all of the variables
 #   - total N
-# (Hint: Modify the `overall` and `total` arguments, respectively)
+# (Hint: Modify the `.overall` and `.total_n` arguments, respectively)
 ard_stack(
   data = adsl,
   .by = TRT01A,
