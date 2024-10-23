@@ -1,8 +1,20 @@
+# ARD to Tables with {tfrmt}
 
-# ARD-first Tables with {tfrmt} {.black-header}
+## Workshop outline
+
+1. Introduction to the Analysis Results Standard and {cards}
+
+2. Introduction to the {cardx} Package and ARD Extras
+
+3. ARD to Tables with {gtsummary}
+
+**4. ARD to Tables with {tfrmt}**
+
+
+## ARD-first Tables with {tfrmt} {.black-header}
 
 ```{css, echo=FALSE}
-.black-header h1 {
+.black-header h2 {
  color: black;
 }
 ```
@@ -11,19 +23,19 @@
 
 ::: {.column width="50%"}
 
-![](images/tfrmt-hex.png){fig-align="center" fig-height="100px"}
+![](images/tfrmt-hex.png){align="center" height="500"}
 :::
 
 ::: {.column}
 
-::: {.fragment}
-- Metadata-driven table formatting
+::: {.incremental}
+-   Metadata-driven table formatting
 
-- Easily create new and modify existing tables
+-   Easily create new and modify existing tables
 
-- Input: ARD with raw, numeric values ({cards}!)
+-   Input: ARD with raw, numeric values ({cards}!)
 
-- Output: Formatted table via {gt}
+-   Output: Formatted table via {gt}
 :::
 
 :::
@@ -39,7 +51,7 @@
 :::: {.columns}
 
 ::: {.column width="40%"}
-![](images/tfrmt-help-1.png){fig-align="center" fig-height="80%"}
+![](images/tfrmt-help-1.png){align="center" height="500"}
 :::
 
 ::: {.column width="60%"}
@@ -148,7 +160,7 @@ print_mock_gt(
 
 * If no data is supplied, {tfrmt} will generate some under the hood
 
-## Use #2: Final analysis  
+## Use #2: Final analysis {auto-animate="true"}
 
 ```{r}
 #| output-location: "column-fragment"
@@ -192,7 +204,7 @@ tfrmt_demog_custom <- tfrmt(
 ```{r}
 #| output-location: "column-fragment"
 #| code-line-numbers: "4-6"
-#| 
+ 
 library(tfrmt)
 
 tfrmt_demog |> 
@@ -208,10 +220,42 @@ tfrmt_demog |>
 
 * *Layering* allows for custom tweaks while preserving the original metadata
 
+## Templates: the possibilities
+
+- Organization standards can be capture as *templates*
+
+- With layering, teams can customize *only* the bits that need changing
+
+```{r}
+#| eval: FALSE
+
+# create a template as a function
+tfrmt_demog_therapyarea <- function(tfrmt_obj){
+  
+  tfrmt_demog_ta <- tfrmt( 
+    # define the formatting specific to the TA
+  )
+  
+  layer_tfrmt(x = tfrmt_obj, y = tfrmt_demog_ta)
+}
+
+# combine many templates together
+tfrmt_demog_org |> 
+  tfrmt_demog_therapyarea |> 
+    tfrmt_demog_study |> 
+      print_to_gt(
+        .data = demog_data
+      )
+
+```
+
+
 ## Save metadata for reuse
 
 ```{r}
 #| output-location: "column-fragment"
+#| 
+library(tfrmt)
 
 tfrmt_demog |> 
   tfrmt_to_json()

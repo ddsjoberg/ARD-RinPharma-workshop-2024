@@ -5,5 +5,6 @@ install.packages(c("devtools",
                    "gt",
                    "gtsummary",
                    "tfrmt",
-                   "tfrmtbuilder"))
+                   "tfrmtbuilder",
+                   "labelled"))
 devtools::install_github("insightsengineering/crane")

@@ -1,8 +1,19 @@
-# {cards} 
+# ARDs using {cards} 
 
-## {cards} R Package <a href="https://insightsengineering.github.io/cards/"><img src="https://insightsengineering.github.io/cards/latest-tag/logo.png" align="right" height="138" alt="cards website" /></a>
+<a href="https://insightsengineering.github.io/cards/"><img src="https://insightsengineering.github.io/cards/latest-tag/logo.png" align="right" height="138" alt="cards website" /></a>
 
-Let's check out a simple example 
+## {cards}: Introduction
+
+-   Part of the Pharmaverse
+
+-   Collaboration between Roche, GSK, Novartis
+
+-   Can be used within the ARS workflow and separately
+
+-   45k downloads per month 🤯
+
+
+## {cards}: `ard_continuous()`
 
 ```{r}
 #| message: true
@@ -38,28 +49,13 @@ ADSL |>
 
 ## {cards}: `ard_continuous()` statistics
 
-Subset the default list of "N", "mean", "sd", "median", "p25", "p75", "min", "max
-
 ```{r}
-ADSL |> 
-  ard_continuous( 
-    variables = AGE,
-    statistic = ~ continuous_summary_fns(c("mean","median"))
-  )
-```
-
-## {cards}: `ard_continuous()` statistics
-
-```{r}
-tidy_ttest <- function(x){
-  t.test(x) |> broom::tidy()
-}
-tidy_ttest(ADSL$AGE)
+cv <- function(x)  sd(x, na.rm = TRUE)/mean(x, na.rm = TRUE)
 
 ard_continuous(
   data = ADSL,
   variables = AGE,
-  statistic = ~ list(tidy_ttest = tidy_ttest)
+  statistic = ~ list(cv = cv)
 )
 
 ```
@@ -70,11 +66,39 @@ ard_continuous(
 ard_continuous(
   data = ADSL |> dplyr::mutate(AGE2 = AGE),
   variables = c(AGE, AGE2),
-  statistic = list(AGE = list(tidy_ttest = tidy_ttest),
-                   AGE2 = continuous_summary_fns())
+  statistic = list(AGE = list(cv = cv),
+                   AGE2 = continuous_summary_fns(c("mean","median")))
 )
 ```
 
+## {cards}: `ard_continuous()` fmt_fun
+
+Override the default formatting functions, during and after
+
+Method 1: 
+```{r}
+#| message: true
+ADSL |> 
+  ard_continuous(
+    variables = AGE,
+    by = ARM,                               
+    fmt_fn = ~list(mean = 0)                
+  ) |> 
+  apply_fmt_fn() # add a character column of rounded results
+```
+
+
+Method 2: 
+```{r}
+#| message: true
+ADSL |> 
+  ard_continuous(
+    variables = AGE,
+    by = ARM,                               
+  ) |> 
+  update_ard_fmt_fn(stat_names = "mean", fmt_fn = 0) |> 
+  apply_fmt_fn() 
+```
 
 ## {cards}: `ard_categorical()`
 
@@ -85,8 +109,7 @@ ADSL |>
     by = ARM,
     variables = AGEGR1,
     statistic = everything() ~ c("n","p") # keep most common stats 
-  ) |> 
-  print(n = 8)
+  ) 
 ```
 
 ::: {.small}
