@@ -7,6 +7,6 @@ library(dplyr)
 #   - Subset to the safety population (SAFFL == "Y")
 #   - calculate the number of unique subjects in each treatment group (TRT01A)  
 
-cards::ADSL |> 
+pharmaverseadam::adsl |> 
   filter(   ) |> 
   count(   )
