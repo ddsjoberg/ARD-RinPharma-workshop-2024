@@ -13,6 +13,20 @@ execute:
   echo: true
 ---
 
+## Workshop outline
+
+::: {.larger}
+
+1. Introduction to the Analysis Results Standard and {cards}
+
+2. Introduction to the {cardx} Package and ARD Extras
+
+3. _**ARD to Tables with {gtsummary}**_
+
+4. ARD to Tables with {tfrmt}
+
+:::
+
 {{< include 00-setup.qmd >}}
 
 {{< include 01-background.qmd >}}

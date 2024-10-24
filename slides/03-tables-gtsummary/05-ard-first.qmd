@@ -36,6 +36,7 @@ We can use the skills we learned earlier today to create ARDs for gtsummary tabl
 ```{r}
 #| label: 'ard_stack'
 #| output-location: "column"
+#| message: true
 library(cards)
 library(gtsummary)
 
@@ -43,10 +44,7 @@ ard <- ard_stack(
   data = trial, 
   ard_continuous(variables = age),
   ard_categorical(variables = grade),
-  ard_dichotomous(variables = response),
-  # add these for best-looking tables
-  .attributes = TRUE, 
-  .missing = TRUE 
+  .attributes=TRUE
 )
 ard
 ```
@@ -62,6 +60,7 @@ We can simply use the ARD from the previous slide, and pass it to `tbl_ard_summa
 ```{r}
 #| label: 'tbl_ard_summary'
 #| output-location: "column"
+#| message: true
 
 tbl_ard_summary(ard)
 ```
@@ -74,26 +73,20 @@ Now let's try a somewhat more complicated table.
 ```{r}
 #| label: 'tbl_ard_summary2'
 #| output-location: "slide"
-#| code-line-numbers: "|2|4|7|17|18|19|21"
+#| code-line-numbers: "|3|11|12|13"
 trial |> 
-  labelled::set_variable_labels(age = "Age, years") |> 
   ard_stack( 
     .by = trt,
-    ard_continuous(
-      variables = age,
-      fmt_fn = age ~ list(sd = 2)
-    ),
+    ard_continuous(variables = age),
     ard_categorical(variables = grade),
-    ard_dichotomous(variables = response),
-    # add these for best-looking tables
-    .attributes = TRUE, 
-    .missing = TRUE 
+    # add this for best-looking tables
+    .attributes = TRUE
   ) |> 
   tbl_ard_summary(
     by = trt,
     type = all_continuous() ~ "continuous2",
     statistic = all_continuous() ~ c("{mean} ({sd})", "{min} - {max}"),
-    missing = "no"
+    label = list(age = "Patient Age, yrs")
   ) |> 
   modify_caption("**Table 1. Subject Demographics**")
 ```
@@ -103,27 +96,23 @@ trial |>
 ```{r}
 #| label: 'tbl_ard_summary-mock'
 #| output-location: "slide"
-#| code-line-numbers: "15"
+#| code-line-numbers: "9-11"
 trial |> 
-  labelled::set_variable_labels(age = "Age, years") |> 
   ard_stack( 
     .by = trt,
-    ard_continuous(
-      variables = age,
-      fmt_fn = age ~ list(sd = 2)
-    ),
+    ard_continuous(variables = age),
     ard_categorical(variables = grade),
-    ard_dichotomous(variables = response),
-    # add these for best-looking tables
-    .attributes = TRUE, 
-    .missing = TRUE 
+    # add this for best-looking tables
+    .attributes = TRUE
   ) |> 
-  dplyr::mutate(fmt_fn = list(\(x) "xx.x")) |> 
+  update_ard_fmt_fn(stat_names = c("mean", "sd", "min", "max", "p"), 
+                    fmt_fn = \(x) "xx.x") |> 
+  update_ard_fmt_fn(stat_names = "n", fmt_fn = \(x) "xx") |> 
   tbl_ard_summary(
     by = trt,
     type = all_continuous() ~ "continuous2",
     statistic = all_continuous() ~ c("{mean} ({sd})", "{min} - {max}"),
-    missing = "no"
+    label = list(age = "Patient Age, yrs")
   ) |> 
   modify_header(all_stat_cols() ~ "**{level}**  \nN = xx")
 ```

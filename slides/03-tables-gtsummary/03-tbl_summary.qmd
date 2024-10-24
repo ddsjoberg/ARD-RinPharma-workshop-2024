@@ -63,7 +63,7 @@ tbl_summary(
 tbl_summary(
   sm_trial,
   by = trt,
-  type = age ~ "continuous2",
+  type = list(age = "continuous2"),
 )
 ```
 
@@ -88,12 +88,12 @@ tbl_summary(
 tbl_summary(
   sm_trial,
   by = trt,
-  type = age ~ "continuous2",
+  type = list(age = "continuous2"),
   statistic = 
     list(
-      age ~ c("{mean} ({sd})", 
+      age = c("{mean} ({sd})", 
               "{min}, {max}"), 
-      response ~ "{n} / {N} ({p}%)"
+      response = "{n} / {N} ({p}%)"
     ),
 )
 ```
@@ -121,15 +121,15 @@ tbl_summary(
 tbl_summary(
   sm_trial,
   by = trt,
-  type = age ~ "continuous2",
+  type = list(age = "continuous2"),
   statistic = 
     list(
-      age ~ c("{mean} ({sd})", 
+      age = c("{mean} ({sd})", 
               "{min}, {max}"), 
-      response ~ "{n} / {N} ({p}%)"
+      response = "{n} / {N} ({p}%)"
     ),
   label = 
-    grade ~ "Pathologic tumor grade",
+    list(grade = "Pathologic tumor grade"),
 )
 ```
 
@@ -157,16 +157,17 @@ tbl_summary(
 tbl_summary(
   sm_trial,
   by = trt,
-  type = age ~ "continuous2",
+  type = list(age = "continuous2"),
   statistic = 
     list(
-      age ~ c("{mean} ({sd})", 
+      age = c("{mean} ({sd})", 
               "{min}, {max}"), 
-      response ~ "{n} / {N} ({p}%)"
+      response = "{n} / {N} ({p}%)"
     ),
   label = 
-    grade ~ "Pathologic tumor grade",
-  digits = age ~ list(sd = 1) # report SD(age) to one decimal place
+    list(grade ~ "Pathologic tumor grade"),
+  digits = # report SD(age) to one decimal place
+    list(age = list(sd = 1)) 
 )
 ```
 
@@ -227,13 +228,11 @@ sm_trial |>
   tbl_summary(
     by = trt
   ) |> 
-  add_p() |> 
-  add_q(method = "fdr")
+  add_p()
 ```
 
--   `add_p()`: adds a column of p-values
-
--   `add_q()`: adds a column of p-values adjusted for multiple comparisons through a call to `p.adjust()`
+-   `add_p()`: adds a column of p-values 
+-   Function is customizable with many methods implemented internally, as well as extendable to any method you may be using
 
 ## Update tbl_summary() with add\_\*()  {auto-animate="true"}
 
@@ -412,10 +411,9 @@ sm_trial |>
 
 ```{r}
 #| label: 'summary-view-ard'
+#| message: true
 tbl <- tbl_summary(trial, by = trt) |> add_p()
-class(tbl$cards)
-names(tbl$cards)
-tbl$cards[["add_p"]][["age"]]
+gather_ard(tbl) |> purrr::pluck("add_p", "age")
 ```
 
 :::
@@ -431,11 +429,9 @@ And a detailed `tbl_summary()` vignette at <http://www.danieldsjoberg.com/gtsumm
 
 ## {gtsummary} Exercise 1
 
-1. Navigate to Posit Cloud script `04-gtsummary_exercise1.R`.
+1. Navigate to Posit Cloud script `03-gtsummary_partA.R`.
 
 2. Create the table outlined in the script.
-
-3. Add the "completed" sticky note to your laptop when complete.
 
 ```{r}
 #| echo: false
@@ -495,4 +491,33 @@ trial |>
 ```
 
 Naturally, you can change the statistics, and which appear in each column.
- 
+
+## Nested Summaries with tbl_hierarchical()
+
+```{r}
+#| label: 'tbl_hierarchical'
+#| eval: false
+ cards::ADAE |> 
+  tbl_hierarchical(
+    variables = c(AESOC, AEDECOD),
+    by = TRTA,
+    id = USUBJID,
+    denominator = cards::ADSL |> dplyr::rename(TRTA = ARM)
+  )
+```
+
+```{r}
+#| label: 'tbl_hierarchical2'
+#| echo: false
+ cards::ADAE |> 
+  dplyr::filter(AESOC %in% unique(AESOC)[1:2]) |> 
+  dplyr::group_by(AESOC) |> 
+  dplyr::filter(AEDECOD %in% unique(AEDECOD)[1:2]) |> 
+  dplyr::ungroup() |> 
+  tbl_hierarchical(
+    variables = c(AESOC, AEDECOD),
+    by = TRTA,
+    id = USUBJID,
+    denominator = cards::ADSL |> dplyr::rename(TRTA = ARM)
+  )
+```

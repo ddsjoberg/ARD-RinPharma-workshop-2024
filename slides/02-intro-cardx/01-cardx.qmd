@@ -133,8 +133,6 @@ The `cardx::ard_regression()` does **a lot** for us in the background.
   
 ## {cardx} Exercise
 
-## Exercise
-
 - Open `exercises/03-cardx.R` 
 
 - Compute the demographic summaries as described
