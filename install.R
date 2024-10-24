@@ -6,5 +6,6 @@ install.packages(c("devtools",
                    "gtsummary",
                    "tfrmt",
                    "tfrmtbuilder",
-                   "labelled"))
+                   "labelled",
+                   "pharmaverseadam"))
 devtools::install_github("insightsengineering/crane")
