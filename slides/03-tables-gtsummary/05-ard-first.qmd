@@ -80,15 +80,32 @@ trial |>
     ard_continuous(variables = age),
     ard_categorical(variables = grade),
     # add this for best-looking tables
-    .attributes = TRUE
+    .attributes = TRUE,
+    .overall = TRUE # get unstratified summary statistics
   ) |> 
   tbl_ard_summary(
     by = trt,
     type = all_continuous() ~ "continuous2",
     statistic = all_continuous() ~ c("{mean} ({sd})", "{min} - {max}"),
-    label = list(age = "Patient Age, yrs")
+    label = list(age = "Patient Age, yrs"),
+    overall = TRUE
   ) |> 
   modify_caption("**Table 1. Subject Demographics**")
+```
+
+## {gtsummary} Exercise 2
+
+1. Navigate to Posit Cloud script `05-gtsummary_exercise2.R`.
+
+2. Create the table outlined in the script.
+
+3. Add the "completed" sticky note to your laptop when complete.
+
+```{r}
+#| echo: false
+#| cache: false
+library(countdown)
+countdown(minutes = 10)
 ```
 
 ## ARD-first Table *Shells*
@@ -117,18 +134,3 @@ trial |>
   modify_header(all_stat_cols() ~ "**{level}**  \nN = xx")
 ```
 
-
-## {gtsummary} Exercise 2
-
-1. Navigate to Posit Cloud script `05-gtsummary_exercise2.R`.
-
-2. Create the table outlined in the script.
-
-3. Add the "completed" sticky note to your laptop when complete.
-
-```{r}
-#| echo: false
-#| cache: false
-library(countdown)
-countdown(minutes = 10)
-```
