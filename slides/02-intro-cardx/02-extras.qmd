@@ -68,3 +68,63 @@ cards::bind_ard(
     statistic = AGE ~ c("{N}", "{mean} ({sd})", "{median} ({p25}, {p75})")
   )
 ```
+
+## Other ARD Representations
+
+While the data frame-based ARD is easy to work with, language-agnostic representations are often useful.
+
+```{r}
+#| echo: false
+ard <- cards::ard_continuous(cards::ADSL, by = ARM, variables = AGE)
+
+# taken from SO https://stackoverflow.com/questions/23114654
+# this truncates the number of lines in a chunk output
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options)) # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) { # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+::: columns
+::: {.column width="50%"}
+
+**YAML**
+
+```{r, output.lines=15}
+cards::as_nested_list(ard) |> 
+  yaml::as.yaml() |> 
+  cat()
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+**JSON**
+
+```{r, output.lines=15}
+cards::as_nested_list(ard) |> 
+  jsonlite::toJSON(pretty = TRUE)
+ 
+```
+
+:::
+
+:::

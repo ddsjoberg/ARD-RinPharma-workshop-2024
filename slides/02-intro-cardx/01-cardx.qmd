@@ -10,7 +10,7 @@
 
 ## {cardx}
 
--   Exports ARD frameworks for statistical analyses from mayn packages 
+-   Exports ARD frameworks for statistical analyses from many packages 
 
 ::: {.larger}
 
@@ -27,7 +27,7 @@
 
 :::
 
--   This list is growing 🌱
+-   This list is growing (rather quickly) 🌱
 
 ## {cardx} t-test Example
 
@@ -133,7 +133,11 @@ The `cardx::ard_regression()` does **a lot** for us in the background.
   
 ## {cardx} Exercise
 
-TODO: Add on top of the demographics exercise Becca will write and we'll add p-values comparing between treatment groups.
+## Exercise
+
+- Open `exercises/03-cardx.R` 
+
+- Compute the demographic summaries as described
 
 ```{r}
 #| echo: false

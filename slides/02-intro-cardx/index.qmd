@@ -16,6 +16,21 @@ execute:
 cache: false
 ---
 
+## Workshop outline
+
+::: {.larger}
+
+1. Introduction to the Analysis Results Standard and {cards}
+
+2. _**Introduction to the {cardx} Package and ARD Extras**_
+
+3. ARD to Tables with {gtsummary}
+
+4. ARD to Tables with {tfrmt}
+
+:::
+
+
 {{< include 01-cardx.qmd >}}  
 
 {{< include 02-extras.qmd >}}  
