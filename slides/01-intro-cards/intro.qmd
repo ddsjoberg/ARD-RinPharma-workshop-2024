@@ -2,21 +2,17 @@
 
 ## This workshop is for you if...
 
-::: {.larger}
-- You want to learn about ARDs
+- You want to learn about ARDs 
 
 - You want to learn about new tools for working with ARDs
 
 - You want to learn how to make displays from ARDs
 
 - You want to practice coding with hands-on exercises
-:::
 
 ## Workshop expectations
 
-::: {.larger}
-
-- What to do if you find a bug? 
+- What to do if you find a bug? 🐛
 
 - Ask questions!
 
@@ -25,7 +21,6 @@
 - Be respectful, follow the Terms and Conditions of R/Pharma
 https://rinpharma.com/terms/
 
-:::
 
 ## Instructors
 
@@ -68,8 +63,6 @@ Slido quiz time!
 
 ## Workshop outline
 
-::: {.larger}
-
 1. Introduction to the Analysis Results Standard and {cards}
 
 2. Introduction to the {cardx} Package and ARD Extras
@@ -77,8 +70,6 @@ Slido quiz time!
 3. ARD to Tables with {gtsummary}
 
 4. ARD to Tables with {tfrmt}
-
-:::
 
 ## Working environment
 
@@ -102,7 +93,7 @@ countdown(minutes = 5, play_sound = TRUE)
 
 - Click on the Project to make a personal copy
 
-- Open `exercises/00-warmup.R`
+- Open `exercises/01-warmup.R`
 
 - Complete the exercise
 
@@ -142,11 +133,17 @@ Example ARS Flow
 
 ![](images/ars-example-flow.png){fig-align="center"}
 
+- The ARS provides a metadata-driven infrastructure for analysis
+
 ## Analysis Results Standard (ARS)
 
 Example ARS Flow
 
 ![](images/ars-example-flow-with-hex.png){fig-align="center"}
+
+- The ARS provides a metadata-driven infrastructure for analysis
+
+- {cards} serves as the engine for the analysis 
 
 ## Analysis Results Data (ARD)
 
