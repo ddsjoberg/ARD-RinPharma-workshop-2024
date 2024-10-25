@@ -3,6 +3,7 @@
 
 # Load libraries
 library(tfrmtbuilder)
+library(tfrmt)
 
 # Import ARD and tfrmt
 ard_demog <- readRDS("exercises/data/ard_demog.rds")
