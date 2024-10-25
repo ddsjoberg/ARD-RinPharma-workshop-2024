@@ -93,6 +93,30 @@ trial |>
   modify_caption("**Table 1. Subject Demographics**")
 ```
 
+
+## What About Other Tables?
+
+::: {.small}
+
+- While our examples have focused on simple demogranphics tables, the ARD structure is general and any statistic can be presented.
+
+:::
+
+```{r}
+trial |> 
+  cardx::ard_stats_t_test_onesample(by = c(trt, grade), variables = age) |> 
+  cards::update_ard_fmt_fn(stat_names = "p.value", 
+                           fmt_fn = label_style_pvalue(prepend_p = TRUE)) |> 
+  tbl_ard_continuous(
+    by = trt, 
+    include = grade,
+    variable = age,
+    statistic = ~"{estimate} ({conf.low}, {conf.high}; {p.value})"
+  ) |> 
+  modify_footnote(all_stat_cols() ~ "One-sample t-test")
+```
+
+
 ## {gtsummary} Exercise 2
 
 1. Navigate to Posit Cloud script `05-gtsummary_exercise2.R`.

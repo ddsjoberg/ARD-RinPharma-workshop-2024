@@ -525,6 +525,23 @@
       ],
       "Hash": "91570bba75d0c9d3f1040c835cee8fba"
     },
+    "crane": {
+      "Package": "crane",
+      "Version": "0.0.0.9002",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "crane",
+      "RemoteUsername": "insightsengineering",
+      "RemoteSha": "54b7a31ebc9ba285306728c0253aab67289ad1cc",
+      "Requirements": [
+        "dplyr",
+        "gt",
+        "gtsummary",
+        "rlang"
+      ],
+      "Hash": "4d5adcff155d5ca96d668b213da0a161"
+    },
     "crayon": {
       "Package": "crayon",
       "Version": "1.5.3",
@@ -1132,6 +1149,16 @@
         "vctrs"
       ],
       "Hash": "9171f898db9d9c4c1b2c745adc2c1ef1"
+    },
+    "here": {
+      "Package": "here",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "rprojroot"
+      ],
+      "Hash": "24b224366f9c2e7534d2344d10d59211"
     },
     "highr": {
       "Package": "highr",
