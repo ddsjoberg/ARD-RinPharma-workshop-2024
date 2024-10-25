@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>License – Analysis Results Datasets</title>
+<title>Exercises – Analysis Results Datasets</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,7 +29,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./exercises.html" rel="prev">
+<link href="./license.html" rel="next">
+<link href="./index.html" rel="prev">
 <link href="./images/cards-hex.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -80,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./license.html">License</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exercises.html">Exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,13 +117,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises.html" class="sidebar-item-text sidebar-link">
+  <a href="./exercises.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./license.html" class="sidebar-item-text sidebar-link active">
+  <a href="./license.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">License</span></a>
   </div>
 </li>
@@ -131,15 +132,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/edit/main/exercises.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">License</h1>
+<h1 class="title">Exercises</h1>
 </div>
 
 
@@ -156,10 +164,551 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src="https://i.creativecommons.org/l/by/4.0/88x31.png" class="img-fluid"></p>
-<p>This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
+<section id="warmup.r" class="level4">
+<h4 class="anchored" data-anchor-id="warmup.r"><code>00-warmup.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># Let's warm-up! 
+ 
+library(dplyr) 
+ 
+# Using dplyr: 
+#  - From the ADSL dataset: 
+#   - Subset to the safety population (SAFFL == "Y") 
+#   - calculate the number of unique subjects in each treatment group (TRT01A)   
+ 
+pharmaverseadam::adsl |&gt;  
+  filter(   ) |&gt;  
+  count(   ) </code></pre>
+</div>
+</div>
+</section>
+<section id="cards-parta.r" class="level4">
+<h4 class="anchored" data-anchor-id="cards-parta.r"><code>01-cards-partA.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># ARD Exercise: Demographic summaries using {cards} 
+ 
+# For this exercise, compute all the necessary summaries for a demographics table that includes age, age group, sex, race, ethnicity, bmi, height, and weight. We want to compute these summaries within each treatment group (High Dose, Low Dose, Placebo) and overall. 
+ 
+# Setup 
+## Load necessary packages 
+library(cards) 
+library(dplyr) 
+library(tidyr) 
+ 
+## Import data 
+adsl &lt;- pharmaverseadam::adsl |&gt; 
+  filter(SAFFL == "Y") |&gt; 
+  left_join( 
+    pharmaverseadam::advs |&gt; 
+      filter(PARAMCD %in% c("BMI", "HEIGHT", "WEIGHT"), !is.na(AVAL)) |&gt; 
+      group_by(USUBJID, PARAMCD) |&gt; 
+      arrange(ADY) |&gt; 
+      slice(1) |&gt; 
+      ungroup() |&gt; 
+      select(USUBJID, PARAMCD, AVAL) |&gt; 
+      pivot_wider(names_from = PARAMCD, values_from = AVAL), 
+    by = "USUBJID" 
+  ) 
+ 
+##  A. First, compute the continuous summaries for AGE, BMI, HEIGHT, WEIGHT by TRT01A 
+ 
+ard_continuous( 
+  data = adsl, 
+  by = , 
+  variables = 
+) 
+ 
+ 
+##  B. Next, compute the categorical summaries for AGEGR1, SEX, RACE, ETHNIC by TRT01A 
+ 
+ard_categorical( 
+  data = adsl, 
+  by = , 
+  variables = 
+) 
+ 
+## C. Perform all of the summaries in a single ard_stack() call, including: 
+#   - summaries by TRT01A as performed above 
+#      - continuous summaries from part A for AGE, BMI, HEIGHT, and WEIGHT 
+#      - categorical summaries from part B for AGEGR1, SEX, RACE, ETHNIC 
+ard_stack( 
+  data = adsl, 
+  .by = , 
+ 
+  # add ard_* calls here 
+ 
+) 
+ 
+ 
+## D. BONUS! 
+#   For part C. above, add the following pieces 
+#   - overall summaries for all of the variables 
+#   - total N 
+# (Hint: Modify the `.overall` and `.total_n` arguments, respectively) 
+ </code></pre>
+</div>
+</div>
+</section>
+<section id="cards-partb.r" class="level4">
+<h4 class="anchored" data-anchor-id="cards-partb.r"><code>01-cards-partB.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># Exercise: Adverse Events summaries using {cards} 
+ 
+# Load necessary packages 
+library(cards)  
+ 
+# Import data 
+adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y") 
+adae &lt;- pharmaverseadam::adae  
+ 
+# Exercise: 
+# Calculate the number and percentage of *unique* subjects with at least one AE: 
+#  - Overall 
+#  - By each SOC (AESOC) 
+#  - By each Preferred term (AEDECOD) within SOC (AESOC) 
+# By every combination of treatment group (TRT01A) and severity (AESEV) 
+ 
+ard_stack_hierarchical( 
+  data = , 
+  variables = , 
+  by = ,  
+  id = , 
+  denominator =  
+) </code></pre>
+</div>
+</div>
+</section>
+<section id="cardx.r" class="level4">
+<h4 class="anchored" data-anchor-id="cardx.r"><code>02-cardx.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># ARD Exercise: Demographic comparison with {cardx} 
+ 
+# In a previous exercise, you calculated summary deomgraphic statistics by treament arm 
+# Here, we will use a subset of those variables, and compare their values across treatment arms 
+# Variables: AGE, SEX, RACE 
+# Treatment variable: TRT01A 
+ 
+# Compare AGE with the Kruskal-Wallis test and SEX and AGE with Pearson's Chi-square test 
+# DISCLAIMER: Don't compare baseline characteristics in randomized trials in real life! 
+ 
+ 
+# Setup 
+ 
+## Import data 
+adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y") 
+ 
+##  A. First, compute the Kruskal-Wallis test for AGE by TRT01A 
+kruskal_ard &lt;-  
+  cardx::ard_stats_kruskal_test( 
+    data = ,  
+    by = , 
+    variables =  
+  ) 
+ 
+##  B. First, compute the Chi-squared test for SEX, RACE by TRT01A 
+chisq_ard &lt;-  
+  cardx::ard_stats_chisq_test( 
+    data = ,  
+    by = , 
+    variables =  
+  ) 
+   
+##  C. Combine your results with `cards::bind_ard()` and subset the ARD to include the rows with p-values only 
+final_ard &lt;-  
+  cards::bind_ard( 
+ 
+  ) |&gt;  
+  dplyr::filter() 
+ 
+##  Bonus. Which test returned a warning? If any, print the warning.  
+##         Note that the warning column is a list-column which requires special handling 
+ 
+ 
+ </code></pre>
+</div>
+</div>
+</section>
+<section id="gtsummary-parta.r" class="level4">
+<h4 class="anchored" data-anchor-id="gtsummary-parta.r"><code>03-gtsummary-partA.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># ARD Exercise: Demographic summary table using {gtsummary} 
+ 
+# For this exercise, create a summary table using `tbl_summary()` 
+#   1. Split summary statistics by TRT01A 
+#   2. Include AGE, SEX, and RACE. For AGE, display the "mean (sd)" and "median (p25, p75)" on separate rows 
+#      HINT: Use `type = AGE ~ 'continuous2'` and `statistic = AGE ~ c("{mean} ({sd})", "{median} ({p25}, {p75})")` 
+#   3. Include a column of overall results using `add_overall()` 
+#   BONUS: Use `cards::gather_ard()` to extract the ARD from the table object 
+ 
+# Setup 
+## Import data 
+library(gtsummary) 
+adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y") 
+ 
+# Create table 
+tbl &lt;- adsl |&gt;  
+  tbl_summary( 
+    by = , 
+    include = , 
+    type = , 
+    statistic =  
+  ) |&gt;  
+  add_overall() 
+tbl 
+ 
+# Extract ARD from tbl object </code></pre>
+</div>
+</div>
+</section>
+<section id="gtsummary-partb.r" class="level4">
+<h4 class="anchored" data-anchor-id="gtsummary-partb.r"><code>03-gtsummary-partB.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># ARD Exercise: Demographic summary table using {cards}+{gtsummary} 
+ 
+# For this exercise, create a summary table using `tbl_ard_summary()` 
+#   1. Split summary statistics by TRT01A 
+#   2. Include AGE, SEX, and RACE. For AGE, display the "mean (sd)" and "median (p25, p75)" on separate rows 
+#      HINT: Use `type = AGE ~ 'continuous2'` and `statistic = AGE ~ c("{mean} ({sd})", "{median} ({p25}, {p75})")` 
+#   3. Include a column of overall results using `tbl_ard_summary(overall=TRUE)` 
+ 
+# Setup 
+## Import data 
+library(cards) 
+library(gtsummary) 
+adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y") 
+ 
+# Create the ARD with the needed statistics 
+ard &lt;-  
+  ard_stack( 
+    adsl, 
+    .by = TRT01A, 
+    ard_continuous(variables = AGE), 
+    ard_categorical(variables = c(SEX, RACE)), 
+    .attributes = TRUE,  
+    .overall = TRUE 
+  ) 
+ 
+# Create table 
+ard |&gt;  
+  tbl_ard_summary( 
+    by = , 
+    include = , 
+    type = , 
+    statistic = , 
+    overall =  
+  ) 
+tbl </code></pre>
+</div>
+</div>
+</section>
+<section id="tables-tfrmt.r" class="level4">
+<h4 class="anchored" data-anchor-id="tables-tfrmt.r"><code>04-tables-tfrmt.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  
+# Setup - Modifying a table with {tfrmtbuilder} -------------------------------- 
+ 
+# Load libraries 
+library(tfrmtbuilder) 
+library(tfrmt) 
+ 
+# Import ARD and tfrmt 
+ard_demog &lt;- readRDS("exercises/data/ard_demog.rds") 
+tfrmt_demog &lt;- json_to_tfrmt("exercises/data/tfrmt_demog.json") 
+ 
+# Run app  
+tfrmtbuilder( 
+  tfrmt = tfrmt_demog, 
+  data = ard_demog, 
+  mockmode = FALSE # to create table with values 
+) 
+ 
+# Exercise - Modifying a table with {tfrmtbuilder} ----------------------------- 
+ 
+# 1.  Switch the order of treatment columns so Active is first 
+#      (hint: Column Plan) 
+ 
+# 2. Change the footnote marks to letters instead of numbers 
+#      (hint: Footnote Plan) 
+ 
+# 3. Split the table into 2 parts by setting a maximum of 3 rows 
+#      (hint: Page Plan) 
+  
+ 
+ </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="solutions" class="level3">
+<h3 class="anchored" data-anchor-id="solutions">Solutions</h3>
+<section id="warmup-answer-answer.r" class="level4">
+<h4 class="anchored" data-anchor-id="warmup-answer-answer.r"><code>00-warmup-answer-answer.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># Let's warm-up! 
+ 
+library(dplyr) 
+ 
+# Using dplyr: 
+#  - From the ADSL dataset: 
+#   - Subset to the safety population (SAFFL == "Y") 
+#   - calculate the number of unique subjects in each treatment group (TRT01A)   
+ 
+pharmaverseadam::adsl |&gt;  
+  filter(SAFFL == "Y") |&gt;  
+  count(TRT01A) </code></pre>
+</div>
+</div>
+</section>
+<section id="cards-parta-answer.r" class="level4">
+<h4 class="anchored" data-anchor-id="cards-parta-answer.r"><code>01-cards-partA-answer.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># ARD Exercise: Demographic summaries using {cards} 
+ 
+# For this exercise, compute all the necessary summaries for a demographics table that includes age, age group, sex, race, ethnicity, bmi, height, and weight. We want to compute these summaries within each treatment group (High Dose, Low Dose, Placebo) and overall. 
+ 
+# Setup 
+## Load necessary packages 
+library(cards) 
+library(dplyr) 
+library(tidyr) 
+ 
+## Import data 
+adsl &lt;- pharmaverseadam::adsl |&gt; 
+  filter(SAFFL == "Y") |&gt; 
+  left_join( 
+    pharmaverseadam::advs |&gt; 
+      filter(PARAMCD %in% c("BMI", "HEIGHT", "WEIGHT"), !is.na(AVAL)) |&gt; 
+      group_by(USUBJID, PARAMCD) |&gt; 
+      arrange(ADY) |&gt; 
+      slice(1) |&gt; 
+      ungroup() |&gt; 
+      select(USUBJID, PARAMCD, AVAL) |&gt; 
+      pivot_wider(names_from = PARAMCD, values_from = AVAL), 
+    by = "USUBJID" 
+  ) 
+ 
+##  A. First, compute the continuous summaries for AGE, BMI, HEIGHT, WEIGHT by TRT01A 
+ 
+ard_continuous( 
+  data = adsl, 
+  by = TRT01A, 
+  variables = c(AGE, BMI, HEIGHT, WEIGHT) 
+) 
+ 
+ 
+##  B. Next, compute the categorical summaries for AGEGR1, SEX, RACE, ETHNIC by TRT01A 
+ 
+ard_categorical( 
+  data = adsl, 
+  by = TRT01A, 
+  variables = c(AGEGR1, SEX, RACE, ETHNIC) 
+) 
+ 
+## C. Perform all of the summaries in a single ard_stack() call, including: 
+#   - summaries by TRT01A as performed above 
+#      - continuous summaries from part A for AGE, BMI, HEIGHT, and WEIGHT 
+#      - categorical summaries from part B for AGEGR1, SEX, RACE, ETHNIC 
+ard_stack( 
+  data = adsl, 
+  .by = TRT01A, 
+  ard_continuous( variables = c(AGE, BMI, HEIGHT, WEIGHT)), 
+  ard_categorical(variables = c(AGEGR1, SEX, RACE, ETHNIC)) 
+) 
+ 
+ 
+## D. BONUS! 
+#   For part C. above, add the following pieces 
+#   - overall summaries for all of the variables 
+#   - total N 
+# (Hint: Modify the `.overall` and `.total_n` arguments, respectively) 
+ard_stack( 
+  data = adsl, 
+  .by = TRT01A, 
+  ard_continuous( variables = c(AGE, BMI, HEIGHT, WEIGHT)), 
+  ard_categorical(variables = c(AGEGR1, SEX, RACE, ETHNIC)),  
+  .overall = TRUE, 
+  .total_n = TRUE 
+) 
+ </code></pre>
+</div>
+</div>
+</section>
+<section id="cards-partb-answer.r" class="level4">
+<h4 class="anchored" data-anchor-id="cards-partb-answer.r"><code>01-cards-partB-answer.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># Exercise: Adverse Events summaries using {cards} 
+ 
+# Load necessary packages 
+library(cards)  
+ 
+# Import data 
+adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y") 
+adae &lt;- pharmaverseadam::adae  
+ 
+# Exercise: 
+# Calculate the number and percentage of *unique* subjects (USUBJID) with at least one AE: 
+#  - Overall 
+#  - By each SOC (AESOC) 
+#  - By each Preferred term (AEDECOD) within SOC (AESOC) 
+# By every combination of treatment group (TRT01A) and severity (AESEV) 
+ 
+ard_stack_hierarchical( 
+  data = adae, 
+  variables = c(AESOC, AEDECOD), 
+  by = c(TRT01A, AESEV),  
+  id = USUBJID, 
+  denominator = adsl 
+) </code></pre>
+</div>
+</div>
+</section>
+<section id="cardx-answer.r" class="level4">
+<h4 class="anchored" data-anchor-id="cardx-answer.r"><code>02-cardx-answer.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># ARD Exercise: Demographic comparison with {cardx} 
+ 
+# In a previous exercise, you calculated summary deomgraphic statistics by treament arm 
+# Here, we will use a subset of those variables, and compare their values across treatment arms 
+# Variables: AGE, SEX, RACE 
+# Treatment variable: TRT01A 
+ 
+# Compare AGE with the Kruskal-Wallis test and SEX and AGE with Pearson's Chi-square test 
+# DISCLAIMER: Don't compare baseline characteristics in randomized trials in real life! 
+ 
+ 
+# Setup 
+ 
+## Import data 
+adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y") 
+ 
+##  A. First, compute the Kruskal-Wallis test for AGE by TRT01A 
+kruskal_ard &lt;-  
+  cardx::ard_stats_kruskal_test( 
+    data = adsl,  
+    by = TRT01A, 
+    variables = AGE 
+  ) 
+ 
+##  B. First, compute the Chi-squared test for SEX, RACE by TRT01A 
+chisq_ard &lt;-  
+  cardx::ard_stats_chisq_test( 
+    data = adsl,  
+    by = TRT01A, 
+    variables = c(SEX, RACE) 
+  ) 
+   
+##  C. Combine your results with `cards::bind_ard()` and subset the ARD to include the rows with p-values only 
+final_ard &lt;-  
+  cards::bind_ard( 
+    kruskal_ard,  
+    chisq_ard 
+  ) |&gt;  
+  dplyr::filter(stat_name == "p.value") 
+ 
+##  Bonus. Which test returned a warning? If any, print the warning.  
+##         Note that the warning column is a list-column which requires special handling 
+final_ard |&gt; cards::print_ard_conditions() 
+ 
+final_ard |&gt; 
+  dplyr::filter(purrr::map_lgl(warning, Negate(is.null))) |&gt;  
+  as.data.frame() 
+ 
+ </code></pre>
+</div>
+</div>
+</section>
+<section id="gtsummary-parta-answer.r" class="level4">
+<h4 class="anchored" data-anchor-id="gtsummary-parta-answer.r"><code>03-gtsummary-partA-answer.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># ARD Exercise: Demographic summary table using {gtsummary} 
+ 
+# For this exercise, create a summary table using `tbl_summary()` 
+#   1. Split summary statistics by TRT01A 
+#   2. Include AGE, SEX, and RACE. For AGE, display the "mean (sd)" and "median (p25, p75)" on separate rows 
+#      HINT: Use `type = AGE ~ 'continuous2'` and `statistic = AGE ~ c("{mean} ({sd})", "{median} ({p25}, {p75})")` 
+#   3. Include a column of overall results using `add_overall()` 
+#   BONUS: Use `cards::gather_ard()` to extract the ARD from the table object 
+ 
+# Setup 
+## Import data 
+library(gtsummary) 
+adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y") 
+ 
+# Create table 
+tbl &lt;- adsl |&gt;  
+  tbl_summary( 
+    by = TRT01A, 
+    include = c(AGE, SEX, RACE), 
+    type = AGE ~ 'continuous2', 
+    statistic = AGE ~ c("{mean} ({sd})", "{median} ({p25}, {p75})") 
+  ) |&gt;  
+  add_overall() 
+tbl 
+ 
+# Extract ARD from tbl object 
+gather_ard(tbl) </code></pre>
+</div>
+</div>
+</section>
+<section id="gtsummary-partb-answer.r" class="level4">
+<h4 class="anchored" data-anchor-id="gtsummary-partb-answer.r"><code>03-gtsummary-partB-answer.R</code></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># ARD Exercise: Demographic summary table using {cards}+{gtsummary} 
+ 
+# For this exercise, create a summary table using `tbl_ard_summary()` 
+#   1. Split summary statistics by TRT01A 
+#   2. Include AGE, SEX, and RACE. For AGE, display the "mean (sd)" and "median (p25, p75)" on separate rows 
+#      HINT: Use `type = AGE ~ 'continuous2'` and `statistic = AGE ~ c("{mean} ({sd})", "{median} ({p25}, {p75})")` 
+#   3. Include a column of overall results using `tbl_ard_summary(overall=TRUE)` 
+ 
+# Setup 
+## Import data 
+library(cards) 
+library(gtsummary) 
+adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y") 
+ 
+# Create the ARD with the needed statistics 
+ard &lt;-  
+  ard_stack( 
+    adsl, 
+    .by = TRT01A, 
+    ard_continuous(variables = AGE), 
+    ard_categorical(variables = c(SEX, RACE)), 
+    .attributes = TRUE,  
+    .overall = TRUE 
+  ) 
+ 
+# Create table 
+ard |&gt;  
+  tbl_ard_summary( 
+    by = TRT01A, 
+    include = c(AGE, SEX, RACE), 
+    type = AGE ~ 'continuous2', 
+    statistic = AGE ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"), 
+    overall = TRUE 
+  ) 
+tbl </code></pre>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -584,11 +1133,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./exercises.html" class="pagination-link" aria-label="Exercises">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercises</span>
+      <a href="./index.html" class="pagination-link" aria-label="Home">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Home</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./license.html" class="pagination-link" aria-label="License">
+        <span class="nav-page-text">License</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -599,7 +1151,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/edit/main/license.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/edit/main/exercises.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ddsjoberg/ARD-RinPharma-workshop-2024/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
