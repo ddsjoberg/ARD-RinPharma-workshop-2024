@@ -8,7 +8,8 @@ adsl <- pharmaverseadam::adsl |> dplyr::filter(SAFFL == "Y")
 adae <- pharmaverseadam::adae 
 
 # Exercise:
-# Calculate the number and percentage of *unique* subjects with at least one AE:
+
+# A. Calculate the number and percentage of *unique* subjects with at least one AE:
 #  - Overall
 #  - By each SOC (AESOC)
 #  - By each Preferred term (AEDECOD) within SOC (AESOC)
@@ -20,4 +21,4 @@ ard_stack_hierarchical(
   by = , 
   id = ,
   denominator = 
-)
+) 

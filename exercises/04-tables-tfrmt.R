@@ -27,5 +27,6 @@ tfrmtbuilder(
 # 3. Split the table into 2 parts by setting a maximum of 3 rows
 #      (hint: Page Plan)
  
+# 4. Export table (hint: Export tab)
 
 

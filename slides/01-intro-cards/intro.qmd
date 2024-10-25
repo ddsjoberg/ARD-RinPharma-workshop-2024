@@ -1,4 +1,5 @@
 
+# Introduction
 
 ## This workshop is for you if...
 
@@ -73,11 +74,13 @@ Slido quiz time!
 
 ## Working environment
 
-- For consistency, we will be working in RStudio Cloud  
+-   For consistency, we will be working in RStudio Cloud  
 
-- Everything has been installed and set up for you 
+-   Everything has been installed and set up for you 
 
-- Following the course, all content from this workshop will be available on GitHub 
+-   You can also opt to work in local RStudio
+
+-   Following the course, all content from this workshop will be available on the course website and GitHub 
 
 
 ## Quick warm-up
@@ -89,9 +92,15 @@ library(countdown)
 countdown(minutes = 5, play_sound = TRUE)
 ```
 
-- Navigate to Posit Cloud link
+-   If using Posit Cloud:
 
-- Click on the Project to make a personal copy
+    -   Navigate to Posit Cloud link
+
+    -   Click on the Project to make a personal copy
+  
+-   If using local RStudio:
+
+    -   Exercises can be found here: https://www.danieldsjoberg.com/ARD-RinPharma-workshop-2024/exercises.html
 
 - Open `exercises/01-warmup.R`
 
