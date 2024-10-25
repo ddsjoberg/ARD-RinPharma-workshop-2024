@@ -263,7 +263,9 @@ ard_categorical(
 C. Perform all of the summaries in a single ard_stack() call, including:
   
     - summaries by TRT01A as performed above
+    
     - continuous summaries from part A for AGE, BMI, HEIGHT, and WEIGHT
+    
     - categorical summaries from part B for AGEGR1, SEX, RACE, ETHNIC
 
 ```{r}
@@ -283,7 +285,9 @@ ard_stack(
 C. Perform all of the summaries in a single ard_stack() call, including:
    
     - summaries by TRT01A as performed above
+    
     - continuous summaries from part A for AGE, BMI, HEIGHT, and WEIGHT
+    
     - categorical summaries from part B for AGEGR1, SEX, RACE, ETHNIC
 
 ```{r}
@@ -301,7 +305,9 @@ D. BONUS!
    For part C. above, add the following pieces
    
     - overall summaries for all of the variables
+    
     - total N
+    
 (Hint: Modify the `.overall` and `.total_n` arguments, respectively)
 
 ```{r}
@@ -319,7 +325,9 @@ D. BONUS!
    For part C. above, add the following pieces
    
     - overall summaries for all of the variables
+    
     - total N
+    
 (Hint: Modify the `.overall` and `.total_n` arguments, respectively)
 
 ```{r}
@@ -500,14 +508,15 @@ adsl <- pharmaverseadam::adsl |> dplyr::filter(SAFFL == "Y")
 adae <- pharmaverseadam::adae 
 ```
 
+:::{.smaller}
 Calculate the number and percentage of *unique* subjects (USUBJID) with at least one AE:
   
-    - Overall
-    - By each SOC (AESOC)
-    - By each Preferred term (AEDECOD) within SOC (AESOC)
+- Overall
+- By each SOC (AESOC)
+- By each Preferred term (AEDECOD) within SOC (AESOC)
   
 By every combination of treatment group (TRT01A) and severity (AESEV)
-
+:::
 ```{r}
 #| eval: FALSE
 
@@ -523,14 +532,15 @@ ard_stack_hierarchical(
 
 ## Solutions for `01-cards-partB.R`
 
--   Calculate the number and percentage of *unique* subjects (USUBJID) with at least one AE:
+:::{.smaller}
+Calculate the number and percentage of *unique* subjects (USUBJID) with at least one AE:
   
-    -   Overall
-    -   By each SOC (AESOC)
-    -   By each Preferred term (AEDECOD) within SOC (AESOC)
+-   Overall
+-   By each SOC (AESOC)
+-   By each Preferred term (AEDECOD) within SOC (AESOC)
   
 By every combination of treatment group (TRT01A) and severity (AESEV)
-
+:::
 ```{r}
 ard_stack_hierarchical(
   data = adae,

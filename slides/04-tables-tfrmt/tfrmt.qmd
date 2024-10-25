@@ -659,7 +659,9 @@ print_to_gt(
 :::
 
 ```{r}
-adsl |> 
+library(cards)
+
+pharmaverseadam::adsl |> 
   ard_categorical(
     by = TRT01A,
     variables = c("AGEGR1","SEX")
@@ -675,7 +677,9 @@ adsl |>
 :::
 
 ```{r}
-adsl |> 
+library(cards)
+
+pharmaverseadam::adsl |> 
   ard_categorical(
     by = TRT01A,
     variables = c("AGEGR1","SEX")
@@ -692,14 +696,19 @@ adsl |>
 :::
 
 ```{r}
-my_ard <- adsl |> 
+#| output-location: "column"
+#| 
+library(cards)
+library(tfrmt)
+
+my_ard <- pharmaverseadam::adsl |> 
   ard_categorical(
     by = TRT01A,
     variables = c("AGEGR1","SEX")
   ) |>  
   shuffle_ard() |> 
-  filter(stat_name %in% c("n","p")) |> 
-  select(-context)
+  dplyr::filter(stat_name %in% c("n","p")) |> 
+  dplyr::select(-context)
 
 tfrmt(
   group = variable,
@@ -708,13 +717,16 @@ tfrmt(
   param = stat_name,
   value = stat,
   body_plan = body_plan(
-    frmt_structure(group_val = ".default", label_val = ".default", 
+    frmt_structure(group_val = ".default", 
+                   label_val = ".default", 
                    frmt_combine("{n} ({p}%)",
                                 n = frmt("xx"),
-                                p = frmt("xx", transform = ~.*100)))
+                                p = frmt("xx", 
+                                         transform = ~.*100)))
   )
 ) |> 
-  print_to_gt(my_ard)
+  print_to_gt(my_ard)|> 
+  gt_style_slides()
 ```
 
 
@@ -741,21 +753,21 @@ tfrmt(
 
 ## Exercise 🏃‍➡️
 
--   Open R file `exercises/04-tables-tfrmt.R`
+- Open R file `exercises/04-tables-tfrmt.R`
 
--   Run the provided code, which will open the app in your browser
+- Run the provided code, which will open the app in your browser
 
--   Complete the steps to further customize the table (hint: Edit tab):
+- Complete the steps to further customize the table (hint: Edit tab):
 
-    -   Switch the order of treatment columns so Active is first
+    1. Switch the order of treatment columns so Active is first
         (hint: Column Plan)
 
-    -   Change the footnote marks to letters instead of numbers
+    2. Change the footnote marks to letters instead of numbers
         (hint: Footnote Plan)
 
-    -   Split the table into 2 parts by setting a maximum of 3 rows
+    3. Split the table into 2 parts by setting a maximum of 3 rows
         (hint: Page Plan)
         
-    -   Export the table (hint: Export Tab)
+    4. Export the table (hint: Export Tab)
 
 
