@@ -171,9 +171,9 @@ reset_gtsummary_theme()
 
 - We can also use themes to help us write new functions with different default behavior.
 
-- In pharma we often want `tbl_summary(type = all_continuous() ~ "continuous2")`. That is, we want continuous summaries to appear on 2+ rows.
+- In pharma we often want `tbl_summary(type = all_continuous() ~ "continuous2")`. That is, continuous summaries to appear on 2+ rows.
 
-- Use the `gtsummary::with_gtsummary_theme()` function to help here! In the example below, `tbl_demographics()` wraps `tbl_summary()` changing some default behavior. (https://github.com/insightsengineering/crane)
+- Use the `with_gtsummary_theme()` function to help here! In the example below, `tbl_demographics()` wraps `tbl_summary()` changing some default behavior. (https://github.com/insightsengineering/crane)
 
 :::
 
@@ -184,4 +184,9 @@ crane::tbl_demographics(
   cards::ADSL,
   include = c(AGE, RACE)
 )
+```
+
+```{r}
+#| echo: false
+gtsummary::reset_gtsummary_theme()
 ```

@@ -123,8 +123,6 @@ trial |>
 
 2. Create the table outlined in the script.
 
-3. Add the "completed" sticky note to your laptop when complete.
-
 ```{r}
 #| echo: false
 #| cache: false

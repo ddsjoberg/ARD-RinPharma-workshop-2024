@@ -336,20 +336,6 @@ tbl
 
 -   Use `show_header_names()` to see the internal header names available for use in `modify_header()`
 
-## Column names
-
-```{r}
-#| label: 'column-names'
-#| message: true
-show_header_names(tbl)
-```
-
-<br><br>
-
-::: {.larger}
-`all_stat_cols()` selects columns `"stat_1"` and `"stat_2"`
-:::
-
 ## Update tbl_summary() with add\_\*()
 
 ```{r}
