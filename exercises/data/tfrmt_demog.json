@@ -87,6 +87,8 @@
   "col_plan": {
     "col_plan": {
       "dots": [
+        ["variable"],
+        ["label"],
         ["Placebo"],
         ["Active"],
         ["-starts_with(\"ord\")"]
