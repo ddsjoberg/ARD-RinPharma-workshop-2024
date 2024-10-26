@@ -267,7 +267,8 @@ adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y")
 adae &lt;- pharmaverseadam::adae  
  
 # Exercise: 
-# Calculate the number and percentage of *unique* subjects with at least one AE: 
+ 
+# A. Calculate the number and percentage of *unique* subjects with at least one AE: 
 #  - Overall 
 #  - By each SOC (AESOC) 
 #  - By each Preferred term (AEDECOD) within SOC (AESOC) 
@@ -279,7 +280,7 @@ ard_stack_hierarchical(
   by = ,  
   id = , 
   denominator =  
-) </code></pre>
+)  </code></pre>
 </div>
 </div>
 </section>
@@ -442,6 +443,7 @@ tfrmtbuilder(
 # 3. Split the table into 2 parts by setting a maximum of 3 rows 
 #      (hint: Page Plan) 
   
+# 4. Export table (hint: Export tab) 
  
  </code></pre>
 </div>
@@ -557,8 +559,7 @@ library(cards)
 adsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == "Y") 
 adae &lt;- pharmaverseadam::adae  
  
-# Exercise: 
-# Calculate the number and percentage of *unique* subjects (USUBJID) with at least one AE: 
+## A.  Calculate the number and percentage of *unique* subjects (USUBJID) with at least one AE: 
 #  - Overall 
 #  - By each SOC (AESOC) 
 #  - By each Preferred term (AEDECOD) within SOC (AESOC) 
@@ -570,7 +571,8 @@ ard_stack_hierarchical(
   by = c(TRT01A, AESEV),  
   id = USUBJID, 
   denominator = adsl 
-) </code></pre>
+) 
+  </code></pre>
 </div>
 </div>
 </section>

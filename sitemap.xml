@@ -1,87 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/03-tbl_summary.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/04-tables-tfrmt/tfrmt.html</loc>
+    <lastmod>2024-10-26T17:39:25.390Z</lastmod>
   </url>
   <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/01-intro-cards/cards.html</loc>
-    <lastmod>2024-10-25T18:12:45.343Z</lastmod>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/03-tbl_summary.html</loc>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/index.html</loc>
-    <lastmod>2024-10-25T18:12:45.415Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.386Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/02-intro-cardx/01-cardx.html</loc>
-    <lastmod>2024-10-25T18:12:45.359Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.326Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/02-intro-cardx/02-extras.html</loc>
-    <lastmod>2024-10-25T18:12:45.359Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.326Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/02-trial.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/04-tables-tfrmt/index.html</loc>
-    <lastmod>2024-10-25T18:12:45.423Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.390Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/index.html</loc>
-    <lastmod>2024-10-25T18:12:45.343Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/00-setup.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/09-summary.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/01-background.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/license.html</loc>
-    <lastmod>2024-10-25T18:12:45.343Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/01-intro-cards/intro.html</loc>
-    <lastmod>2024-10-25T18:12:45.359Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.310Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/08-print_engines.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/01-intro-cards/intro.html</loc>
+    <lastmod>2024-10-26T17:39:25.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/license.html</loc>
+    <lastmod>2024-10-26T17:39:25.310Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/01-background.html</loc>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/05-wrap-up/wrapup.html</loc>
+    <lastmod>2024-10-26T17:39:25.390Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/09-summary.html</loc>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/00-setup.html</loc>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/05-wrap-up/index.html</loc>
+    <lastmod>2024-10-26T17:39:25.390Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/02-intro-cardx/index.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/01-intro-cards/index.html</loc>
-    <lastmod>2024-10-25T18:12:45.359Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.326Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/04-tbl_merge.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/05-ard-first.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/03-tables-gtsummary/07-themes.html</loc>
-    <lastmod>2024-10-25T18:12:45.379Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.346Z</lastmod>
   </url>
   <url>
     <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/exercises.html</loc>
-    <lastmod>2024-10-25T18:12:45.335Z</lastmod>
+    <lastmod>2024-10-26T17:39:25.302Z</lastmod>
   </url>
   <url>
-    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/04-tables-tfrmt/tfrmt.html</loc>
-    <lastmod>2024-10-25T18:12:45.423Z</lastmod>
+    <loc>https://ddsjoberg.github.io/ARD-RinPharma-workshop-2024/slides/01-intro-cards/cards.html</loc>
+    <lastmod>2024-10-26T17:39:25.314Z</lastmod>
   </url>
 </urlset>

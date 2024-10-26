@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Daniel D. Sjoberg and Becca Krouse">
-  <title>Analysis Results Datasets – Unlocking Analysis Results Datasets</title>
+  <title>Analysis Results Datasets – Unlocking Analysis Results Datasets (ARDs)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -396,8 +396,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Unlocking Analysis Results Datasets</h1>
-  <p class="subtitle">Part 1</p>
+  <h1 class="title">Unlocking Analysis Results Datasets (ARDs)</h1>
+  <p class="subtitle">A Practical Workshop for Creating and Utilizing ARDs for Clinical Reporting</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -408,8 +408,13 @@ Daniel D. Sjoberg and Becca Krouse
 </div>
 
 </section>
-<section>
 <section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+
+<section>
+<section id="introduction-1" class="title-slide slide level1 center">
 <h1>Introduction</h1>
 
 </section>
@@ -483,22 +488,30 @@ Daniel D. Sjoberg and Becca Krouse
 <ul>
 <li><p>For consistency, we will be working in RStudio Cloud</p></li>
 <li><p>Everything has been installed and set up for you</p></li>
-<li><p>Following the course, all content from this workshop will be available on GitHub</p></li>
+<li><p>You can also opt to work in local RStudio</p></li>
+<li><p>Following the course, all content from this workshop will be available on the course website and GitHub</p></li>
 </ul>
 </section>
 <section id="quick-warm-up" class="slide level2">
 <h2>Quick warm-up</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_3547f6b2" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_be41414d" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 </div>
 </div>
 <ul>
+<li><p>If using Posit Cloud:</p>
+<ul>
 <li><p>Navigate to Posit Cloud link</p></li>
 <li><p>Click on the Project to make a personal copy</p></li>
+</ul></li>
+<li><p>If using local RStudio:</p>
+<ul>
+<li>Exercises can be found here: https://www.danieldsjoberg.com/ARD-RinPharma-workshop-2024/exercises.html</li>
+</ul></li>
 <li><p>Open <code>exercises/01-warmup.R</code></p></li>
 <li><p>Complete the exercise</p></li>
 </ul>
@@ -597,13 +610,14 @@ Daniel D. Sjoberg and Becca Krouse
 <section>
 <section id="ards-using-cards" class="title-slide slide level1 center">
 <h1>ARDs using {cards}</h1>
-<p><a href="https://insightsengineering.github.io/cards/"><img src="https://insightsengineering.github.io/cards/latest-tag/logo.png" align="right" height="138" alt="cards website"></a></p>
+<p><a href="https://insightsengineering.github.io/cards/"><img src="https://insightsengineering.github.io/cards/latest-tag/logo.png" align="center" height="300" alt="cards website"></a></p>
 </section>
 <section id="cards-introduction" class="slide level2">
 <h2>{cards}: Introduction</h2>
 <ul>
 <li><p>Part of the Pharmaverse</p></li>
 <li><p>Collaboration between Roche, GSK, Novartis</p></li>
+<li><p>Contains a variety of utilities for making ARDs</p></li>
 <li><p>Can be used within the ARS workflow and separately</p></li>
 <li><p>45k downloads per month 🤯</p></li>
 </ul>
@@ -614,7 +628,10 @@ Daniel D. Sjoberg and Becca Krouse
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a><span class="co"># create ARD with default summary statistics</span></span>
-<span id="cb1-4"><a></a><span class="fu">ard_continuous</span>(ADSL, <span class="at">variables =</span> AGE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a></a>ADSL <span class="sc">|&gt;</span> </span>
+<span id="cb1-5"><a></a>  <span class="fu">ard_continuous</span>(</span>
+<span id="cb1-6"><a></a>    <span class="at">variables =</span> AGE</span>
+<span id="cb1-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>{cards} data frame: 8 x 8</code></pre>
 </div>
@@ -634,32 +651,40 @@ Daniel D. Sjoberg and Becca Krouse
 </div>
 </div>
 </section>
-<section id="cards-ard_continuous-arguments" class="slide level2">
-<h2>{cards}: <code>ard_continuous()</code> arguments</h2>
+<section id="cards-ard_continuous-by-variable" class="slide level2">
+<h2>{cards}: <code>ard_continuous()</code> by variable</h2>
 <div class="small">
 <ul>
-<li><p><code>by</code>: summary statistics are calculated by all combinations of the by variables, including unobserved factor levels</p></li>
-<li><p><code>statistic</code>: specify univariate summary statistics. Accepts <em>any</em> function, base R, from a package, or user-defined.</p></li>
-<li><p><code>fmt_fn</code>: Override the default formatting functions, e.g.&nbsp;when you need</p></li>
+<li><code>by</code>: summary statistics are calculated by all combinations of the by variables, including unobserved factor levels</li>
 </ul>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a></a>  <span class="fu">ard_continuous</span>(</span>
 <span id="cb5-3"><a></a>    <span class="at">variables =</span> AGE,</span>
-<span id="cb5-4"><a></a>    <span class="at">by =</span> ARM,                               <span class="co"># stats by treatment arm</span></span>
-<span id="cb5-5"><a></a>    <span class="at">statistic =</span> <span class="sc">~</span><span class="fu">list</span>(<span class="at">mean =</span> \(x) <span class="fu">mean</span>(x)), <span class="co"># return the mean</span></span>
-<span id="cb5-6"><a></a>    <span class="at">fmt_fn =</span> <span class="sc">~</span><span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">0</span>)                <span class="co"># format the result</span></span>
-<span id="cb5-7"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb5-8"><a></a>  <span class="fu">apply_fmt_fn</span>() <span class="co"># add a character column of rounded results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a></a>    <span class="at">by =</span> ARM         <span class="co"># stats by treatment arm</span></span>
+<span id="cb5-5"><a></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 3 x 11</code></pre>
+<pre><code>{cards} data frame: 24 x 10</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  group1 group1_level variable stat_name stat_label   stat stat_fmt
-1    ARM      Placebo      AGE      mean       Mean 75.209       75
-2    ARM    Xanomeli…      AGE      mean       Mean 74.381       74
-3    ARM    Xanomeli…      AGE      mean       Mean 75.667       76</code></pre>
+<pre><code>   group1 group1_level variable stat_name stat_label   stat
+1     ARM      Placebo      AGE         N          N     86
+2     ARM      Placebo      AGE      mean       Mean 75.209
+3     ARM      Placebo      AGE        sd         SD   8.59
+4     ARM      Placebo      AGE    median     Median     76
+5     ARM      Placebo      AGE       p25         Q1     69
+6     ARM      Placebo      AGE       p75         Q3     82
+7     ARM      Placebo      AGE       min        Min     52
+8     ARM      Placebo      AGE       max        Max     89
+9     ARM    Xanomeli…      AGE         N          N     84
+10    ARM    Xanomeli…      AGE      mean       Mean 74.381</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ 14 more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ 4 more variables: context, fmt_fn, warning, error</code></pre>
@@ -668,49 +693,69 @@ Daniel D. Sjoberg and Becca Krouse
 </section>
 <section id="cards-ard_continuous-statistics" class="slide level2">
 <h2>{cards}: <code>ard_continuous()</code> statistics</h2>
+<div class="small">
+<ul>
+<li><code>statistic</code>: specify univariate summary statistics. Accepts <em>any</em> function, base R, from a package, or user-defined.</li>
+</ul>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>cv <span class="ot">&lt;-</span> <span class="cf">function</span>(x)  <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">/</span><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-2"><a></a></span>
-<span id="cb9-3"><a></a><span class="fu">ard_continuous</span>(</span>
-<span id="cb9-4"><a></a>  <span class="at">data =</span> ADSL,</span>
-<span id="cb9-5"><a></a>  <span class="at">variables =</span> AGE,</span>
-<span id="cb9-6"><a></a>  <span class="at">statistic =</span> <span class="sc">~</span> <span class="fu">list</span>(<span class="at">cv =</span> cv)</span>
-<span id="cb9-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>cv <span class="ot">&lt;-</span> <span class="cf">function</span>(x)  <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">/</span><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-2"><a></a></span>
+<span id="cb11-3"><a></a>ADSL <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a></a>  <span class="fu">ard_continuous</span>(  </span>
+<span id="cb11-5"><a></a>    <span class="at">variables =</span> AGE,</span>
+<span id="cb11-6"><a></a>    <span class="at">by =</span> ARM,</span>
+<span id="cb11-7"><a></a>    <span class="at">statistic =</span> <span class="sc">~</span> <span class="fu">list</span>(<span class="at">cv =</span> cv) <span class="co"># customize statistics</span></span>
+<span id="cb11-8"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  variable   context stat_name stat_label stat fmt_fn
-1      AGE continuo…        cv         cv 0.11      1</code></pre>
+<pre><code>  group1 group1_level variable stat_name stat_label  stat
+1    ARM      Placebo      AGE        cv         cv 0.114
+2    ARM    Xanomeli…      AGE        cv         cv 0.106
+3    ARM    Xanomeli…      AGE        cv         cv  0.11</code></pre>
 </div>
 </div>
 </section>
 <section id="cards-ard_continuous-statistics-1" class="slide level2">
 <h2>{cards}: <code>ard_continuous()</code> statistics</h2>
+<div class="small">
+<p>Customize the statistics returned for each variable</p>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">ard_continuous</span>(</span>
-<span id="cb11-2"><a></a>  <span class="at">data =</span> ADSL <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGE2 =</span> AGE),</span>
-<span id="cb11-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AGE, AGE2),</span>
-<span id="cb11-4"><a></a>  <span class="at">statistic =</span> <span class="fu">list</span>(<span class="at">AGE =</span> <span class="fu">list</span>(<span class="at">cv =</span> cv),</span>
-<span id="cb11-5"><a></a>                   <span class="at">AGE2 =</span> <span class="fu">continuous_summary_fns</span>(<span class="fu">c</span>(<span class="st">"mean"</span>,<span class="st">"median"</span>)))</span>
-<span id="cb11-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGE2 =</span> AGE) <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a></a>  <span class="fu">ard_continuous</span>(</span>
+<span id="cb13-4"><a></a>    <span class="at">variables =</span> <span class="fu">c</span>(AGE, AGE2),</span>
+<span id="cb13-5"><a></a>    <span class="at">by =</span> ARM,</span>
+<span id="cb13-6"><a></a>    <span class="at">statistic =</span> <span class="fu">list</span>(<span class="at">AGE =</span> <span class="fu">list</span>(<span class="at">cv =</span> cv),</span>
+<span id="cb13-7"><a></a>                     <span class="at">AGE2 =</span> <span class="fu">continuous_summary_fns</span>(<span class="fu">c</span>(<span class="st">"mean"</span>,<span class="st">"median"</span>)))</span>
+<span id="cb13-8"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  variable   context stat_name stat_label   stat fmt_fn
-1      AGE continuo…        cv         cv   0.11      1
-2     AGE2 continuo…      mean       Mean 75.087      1
-3     AGE2 continuo…    median     Median     77      1</code></pre>
+<pre><code>  group1 group1_level variable stat_name stat_label   stat
+1    ARM      Placebo      AGE        cv         cv  0.114
+2    ARM      Placebo     AGE2      mean       Mean 75.209
+3    ARM      Placebo     AGE2    median     Median     76
+4    ARM    Xanomeli…      AGE        cv         cv  0.106
+5    ARM    Xanomeli…     AGE2      mean       Mean 74.381
+6    ARM    Xanomeli…     AGE2    median     Median     76
+7    ARM    Xanomeli…      AGE        cv         cv   0.11
+8    ARM    Xanomeli…     AGE2      mean       Mean 75.667
+9    ARM    Xanomeli…     AGE2    median     Median   77.5</code></pre>
 </div>
 </div>
 </section>
-<section id="cards-ard_continuous-fmt_fun" class="slide level2">
-<h2>{cards}: <code>ard_continuous()</code> fmt_fun</h2>
-<p>Override the default formatting functions, during and after</p>
-<p>Method 1:</p>
+<section id="cards-ard_continuous-fmt_fn" class="slide level2">
+<h2>{cards}: <code>ard_continuous()</code> fmt_fn</h2>
+<div class="small">
+<p>Override the default formatting functions, method 1:</p>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a></a>  <span class="fu">ard_continuous</span>(</span>
-<span id="cb13-3"><a></a>    <span class="at">variables =</span> AGE,</span>
-<span id="cb13-4"><a></a>    <span class="at">by =</span> ARM,                               </span>
-<span id="cb13-5"><a></a>    <span class="at">fmt_fn =</span> <span class="sc">~</span><span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">0</span>)                </span>
-<span id="cb13-6"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb13-7"><a></a>  <span class="fu">apply_fmt_fn</span>() <span class="co"># add a character column of rounded results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a></a>  <span class="fu">ard_continuous</span>(</span>
+<span id="cb15-3"><a></a>    <span class="at">variables =</span> AGE,</span>
+<span id="cb15-4"><a></a>    <span class="at">by =</span> ARM,                               </span>
+<span id="cb15-5"><a></a>    <span class="at">fmt_fn =</span> <span class="sc">~</span><span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">0</span>)                </span>
+<span id="cb15-6"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb15-7"><a></a>  <span class="fu">apply_fmt_fn</span>() <span class="co"># add a character column of rounded results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>{cards} data frame: 24 x 11</code></pre>
 </div>
@@ -737,15 +782,20 @@ Daniel D. Sjoberg and Becca Krouse
 <pre><code>ℹ 4 more variables: context, fmt_fn, warning, error</code></pre>
 </div>
 </div>
-<p>Method 2:</p>
+</section>
+<section id="cards-ard_continuous-fmt_fn-1" class="slide level2">
+<h2>{cards}: <code>ard_continuous()</code> fmt_fn</h2>
+<div class="small">
+<p>Override the default formatting functions, method 2:</p>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
-<span id="cb19-2"><a></a>  <span class="fu">ard_continuous</span>(</span>
-<span id="cb19-3"><a></a>    <span class="at">variables =</span> AGE,</span>
-<span id="cb19-4"><a></a>    <span class="at">by =</span> ARM,                               </span>
-<span id="cb19-5"><a></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb19-6"><a></a>  <span class="fu">update_ard_fmt_fn</span>(<span class="at">stat_names =</span> <span class="st">"mean"</span>, <span class="at">fmt_fn =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb19-7"><a></a>  <span class="fu">apply_fmt_fn</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a></a>  <span class="fu">ard_continuous</span>(</span>
+<span id="cb21-3"><a></a>    <span class="at">variables =</span> AGE,</span>
+<span id="cb21-4"><a></a>    <span class="at">by =</span> ARM,                               </span>
+<span id="cb21-5"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb21-6"><a></a>  <span class="fu">update_ard_fmt_fn</span>(<span class="at">stat_names =</span> <span class="st">"mean"</span>, <span class="at">fmt_fn =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb21-7"><a></a>  <span class="fu">apply_fmt_fn</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>{cards} data frame: 24 x 11</code></pre>
 </div>
@@ -775,36 +825,38 @@ Daniel D. Sjoberg and Becca Krouse
 </section>
 <section id="cards-ard_categorical" class="slide level2">
 <h2>{cards}: <code>ard_categorical()</code></h2>
+<div class="small">
+<ul>
+<li>includes <code>n</code>, <code>%</code>, <code>N</code> by default</li>
+</ul>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
-<span id="cb25-2"><a></a>  <span class="fu">ard_categorical</span>(</span>
-<span id="cb25-3"><a></a>    <span class="at">by =</span> ARM,</span>
-<span id="cb25-4"><a></a>    <span class="at">variables =</span> AGEGR1,</span>
-<span id="cb25-5"><a></a>    <span class="at">statistic =</span> <span class="fu">everything</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"p"</span>) <span class="co"># keep most common stats </span></span>
-<span id="cb25-6"><a></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a></a>  <span class="fu">ard_categorical</span>(</span>
+<span id="cb27-3"><a></a>    <span class="at">by =</span> ARM,</span>
+<span id="cb27-4"><a></a>    <span class="at">variables =</span> AGEGR1</span>
+<span id="cb27-5"><a></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 18 x 11</code></pre>
+<pre><code>{cards} data frame: 27 x 11</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level variable variable_level stat_name stat_label  stat
 1     ARM      Placebo   AGEGR1            &lt;65         n          n    14
-2     ARM      Placebo   AGEGR1            &lt;65         p          % 0.163
-3     ARM    Xanomeli…   AGEGR1            &lt;65         n          n    11
-4     ARM    Xanomeli…   AGEGR1            &lt;65         p          % 0.131
-5     ARM    Xanomeli…   AGEGR1            &lt;65         n          n     8
-6     ARM    Xanomeli…   AGEGR1            &lt;65         p          % 0.095
-7     ARM      Placebo   AGEGR1            &gt;80         n          n    30
-8     ARM      Placebo   AGEGR1            &gt;80         p          % 0.349
-9     ARM    Xanomeli…   AGEGR1            &gt;80         n          n    18
-10    ARM    Xanomeli…   AGEGR1            &gt;80         p          % 0.214
-11    ARM    Xanomeli…   AGEGR1            &gt;80         n          n    29
-12    ARM    Xanomeli…   AGEGR1            &gt;80         p          % 0.345
-13    ARM      Placebo   AGEGR1          65-80         n          n    42
-14    ARM      Placebo   AGEGR1          65-80         p          % 0.488
-15    ARM    Xanomeli…   AGEGR1          65-80         n          n    55
-16    ARM    Xanomeli…   AGEGR1          65-80         p          % 0.655
-17    ARM    Xanomeli…   AGEGR1          65-80         n          n    47
-18    ARM    Xanomeli…   AGEGR1          65-80         p          %  0.56</code></pre>
+2     ARM      Placebo   AGEGR1            &lt;65         N          N    86
+3     ARM      Placebo   AGEGR1            &lt;65         p          % 0.163
+4     ARM    Xanomeli…   AGEGR1            &lt;65         n          n    11
+5     ARM    Xanomeli…   AGEGR1            &lt;65         N          N    84
+6     ARM    Xanomeli…   AGEGR1            &lt;65         p          % 0.131
+7     ARM    Xanomeli…   AGEGR1            &lt;65         n          n     8
+8     ARM    Xanomeli…   AGEGR1            &lt;65         N          N    84
+9     ARM    Xanomeli…   AGEGR1            &lt;65         p          % 0.095
+10    ARM      Placebo   AGEGR1            &gt;80         n          n    30</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ 17 more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ 4 more variables: context, fmt_fn, warning, error</code></pre>
@@ -814,72 +866,21 @@ Daniel D. Sjoberg and Becca Krouse
 <p><em>Any unobserved levels of the variables will be present in the resulting ARD.</em></p>
 </div>
 </section>
-<section id="cards-ard_dichotomous" class="slide level2">
-<h2>{cards}: <code>ard_dichotomous()</code></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
-<span id="cb29-2"><a></a>  <span class="fu">ard_dichotomous</span>(<span class="at">variables =</span> AGEGR1, </span>
-<span id="cb29-3"><a></a>                  <span class="at">value =</span> <span class="sc">~</span> <span class="st">"&lt;65"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 3 x 9</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  variable variable_level   context stat_name stat_label stat
-1   AGEGR1            &lt;65 dichotom…         n          n   33
-2   AGEGR1            &lt;65 dichotom…         N          N  254
-3   AGEGR1            &lt;65 dichotom…         p          % 0.13</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ℹ 3 more variables: fmt_fn, warning, error</code></pre>
-</div>
-</div>
-<p>By default, <code>value</code> will be set to the maximum</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
-<span id="cb33-2"><a></a>  <span class="fu">ard_dichotomous</span>(<span class="at">variables =</span> AGEGR1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 3 x 9</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  variable variable_level   context stat_name stat_label  stat
-1   AGEGR1          65-80 dichotom…         n          n   144
-2   AGEGR1          65-80 dichotom…         N          N   254
-3   AGEGR1          65-80 dichotom…         p          % 0.567</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ℹ 3 more variables: fmt_fn, warning, error</code></pre>
-</div>
-</div>
-</section>
 <section id="cards-other-summary-functions" class="slide level2">
 <h2>{cards}: Other Summary Functions</h2>
 <ul>
+<li><p><code>ard_dichotomous()</code>: similar to <code>ard_categorical()</code>, but for dichotomous summaries</p></li>
 <li><p><code>ard_hierarchical()</code>: similar to <code>ard_categorical()</code>, but built for nested tabulations, e.g.&nbsp;AE terms within SOC</p></li>
 <li><p><code>ard_complex()</code>: similar to <code>ard_continuous()</code>, but the summary functions can be more complex and accepts other arguments like the full and subsetted (within the by groups) data sets.</p></li>
 <li><p><code>ard_missing()</code>: tabulates rates of missingness</p></li>
 </ul>
-<p>The results from all these functions are entirely compatible with one another, and can be stacked into a single data frame.</p>
+<p>The results from all these functions are entirely compatible with one another, and can be stacked into a single data frame. 🥞</p>
 </section>
 <section id="cards-other-functions" class="slide level2">
 <h2>{cards}: Other Functions</h2>
 <p>In addition to exporting functions to prepare summaries, {cards} exports many utilities for wrangling ARDs and creating new ARDs.</p>
 <p>Constructing: <code>bind_ard()</code>, <code>tidy_as_ard()</code>, <code>nest_for_ard()</code>, <code>check_ard_structure()</code>, and many more</p>
 <p>Wrangling: <code>shuffle_ard()</code>, <code>get_ard_statistics()</code>, <code>replace_null_statistic()</code>, etc.</p>
-</section>
-<section id="exercise" class="slide level2">
-<h2>Exercise</h2>
-<ul>
-<li><p>Open <code>exercises/01-cards-partA.R</code></p></li>
-<li><p>Compute the demographic summaries as described</p></li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div class="countdown" id="timer_fa7ec8a5" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
 </section>
 <section id="cards-stacking-utilities" class="slide level2">
 <h2>{cards}: Stacking utilities</h2>
@@ -891,12 +892,12 @@ Daniel D. Sjoberg and Becca Krouse
 </ul>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
-<span id="cb37-2"><a></a>  <span class="fu">ard_stack</span>( </span>
-<span id="cb37-3"><a></a>    <span class="at">.by =</span> ARM,      </span>
-<span id="cb37-4"><a></a>    <span class="fu">ard_continuous</span>(<span class="at">variables =</span> AGE, <span class="at">statistic =</span> <span class="sc">~</span> <span class="fu">continuous_summary_fns</span>(<span class="fu">c</span>(<span class="st">"mean"</span>,<span class="st">"sd"</span>))), </span>
-<span id="cb37-5"><a></a>    <span class="fu">ard_categorical</span>(<span class="at">variables =</span> AGEGR1, <span class="at">statistic =</span> <span class="sc">~</span> <span class="st">"p"</span>)</span>
-<span id="cb37-6"><a></a>  )  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>ADSL <span class="sc">|&gt;</span> </span>
+<span id="cb33-2"><a></a>  <span class="fu">ard_stack</span>( </span>
+<span id="cb33-3"><a></a>    <span class="at">.by =</span> ARM,      </span>
+<span id="cb33-4"><a></a>    <span class="fu">ard_continuous</span>(<span class="at">variables =</span> AGE, <span class="at">statistic =</span> <span class="sc">~</span> <span class="fu">continuous_summary_fns</span>(<span class="fu">c</span>(<span class="st">"mean"</span>,<span class="st">"sd"</span>))), </span>
+<span id="cb33-5"><a></a>    <span class="fu">ard_categorical</span>(<span class="at">variables =</span> AGEGR1, <span class="at">statistic =</span> <span class="sc">~</span> <span class="st">"p"</span>)</span>
+<span id="cb33-6"><a></a>  )  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>{cards} data frame: 24 x 11</code></pre>
 </div>
@@ -924,6 +925,202 @@ Daniel D. Sjoberg and Becca Krouse
 </div>
 </div>
 </section>
+<section id="exercise" class="slide level2">
+<h2>Exercise 🏃‍➡️</h2>
+<ul>
+<li><p>Open <code>exercises/01-cards-partA.R</code></p></li>
+<li><p>Compute the demographic summaries as described</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_62d3a305" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section>
+<section id="solutions-for-01-cards-parta.r" class="slide level2">
+<h2>Solutions for <code>01-cards-partA.R</code></h2>
+</section>
+<section id="solutions-for-01-cards-parta.r-1" class="slide level2">
+<h2>Solutions for <code>01-cards-partA.R</code></h2>
+<p>A. First, compute the continuous summaries for AGE, BMI, HEIGHT, WEIGHT by TRT01A</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">ard_continuous</span>(</span>
+<span id="cb39-2"><a></a>  <span class="at">data =</span> adsl,</span>
+<span id="cb39-3"><a></a>  <span class="at">by =</span> ,</span>
+<span id="cb39-4"><a></a>  <span class="at">variables =</span></span>
+<span id="cb39-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solutions-for-01-cards-parta.r-2" class="slide level2">
+<h2>Solutions for <code>01-cards-partA.R</code></h2>
+<p>A. First, compute the continuous summaries for AGE, BMI, HEIGHT, WEIGHT by TRT01A</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">ard_continuous</span>(</span>
+<span id="cb40-2"><a></a>  <span class="at">data =</span> adsl,</span>
+<span id="cb40-3"><a></a>  <span class="at">by =</span> TRT01A,</span>
+<span id="cb40-4"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AGE, BMI, HEIGHT, WEIGHT)</span>
+<span id="cb40-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable stat_name stat_label   stat
+1  TRT01A      Placebo      AGE         N          N     86
+2  TRT01A      Placebo      AGE      mean       Mean 75.209
+3  TRT01A      Placebo      AGE        sd         SD   8.59
+4  TRT01A      Placebo      AGE    median     Median     76
+5  TRT01A      Placebo      AGE       p25         Q1     69
+6  TRT01A      Placebo      AGE       p75         Q3     82
+7  TRT01A      Placebo      AGE       min        Min     52
+8  TRT01A      Placebo      AGE       max        Max     89
+9  TRT01A      Placebo      BMI         N          N     86
+10 TRT01A      Placebo      BMI      mean       Mean 23.645</code></pre>
+</div>
+</div>
+</section>
+<section id="solutions-for-01-cards-parta.r-3" class="slide level2">
+<h2>Solutions for <code>01-cards-partA.R</code></h2>
+<p>B. Next, compute the categorical summaries for AGEGR1, SEX, RACE, ETHNIC by TRT01A</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">ard_categorical</span>(</span>
+<span id="cb42-2"><a></a>  <span class="at">data =</span> adsl,</span>
+<span id="cb42-3"><a></a>  <span class="at">by =</span> ,</span>
+<span id="cb42-4"><a></a>  <span class="at">variables =</span></span>
+<span id="cb42-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solutions-for-01-cards-parta.r-4" class="slide level2">
+<h2>Solutions for <code>01-cards-partA.R</code></h2>
+<p>B. Next, compute the categorical summaries for AGEGR1, SEX, RACE, ETHNIC by TRT01A</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">ard_categorical</span>(</span>
+<span id="cb43-2"><a></a>  <span class="at">data =</span> adsl,</span>
+<span id="cb43-3"><a></a>  <span class="at">by =</span> TRT01A,</span>
+<span id="cb43-4"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AGEGR1, SEX, RACE, ETHNIC)</span>
+<span id="cb43-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level stat_name stat_label  stat
+1  TRT01A      Placebo   AGEGR1            &gt;64         n          n    72
+2  TRT01A      Placebo   AGEGR1            &gt;64         N          N    86
+3  TRT01A      Placebo   AGEGR1            &gt;64         p          % 0.837
+4  TRT01A    Xanomeli…   AGEGR1            &gt;64         n          n    61
+5  TRT01A    Xanomeli…   AGEGR1            &gt;64         N          N    72
+6  TRT01A    Xanomeli…   AGEGR1            &gt;64         p          % 0.847
+7  TRT01A    Xanomeli…   AGEGR1            &gt;64         n          n    88
+8  TRT01A    Xanomeli…   AGEGR1            &gt;64         N          N    96
+9  TRT01A    Xanomeli…   AGEGR1            &gt;64         p          % 0.917
+10 TRT01A      Placebo   AGEGR1          18-64         n          n    14</code></pre>
+</div>
+</div>
+</section>
+<section id="solutions-for-01-cards-parta.r-5" class="slide level2">
+<h2>Solutions for <code>01-cards-partA.R</code></h2>
+<p>C. Perform all of the summaries in a single ard_stack() call, including:</p>
+<pre><code>- summaries by TRT01A as performed above
+
+- continuous summaries from part A for AGE, BMI, HEIGHT, and WEIGHT
+
+- categorical summaries from part B for AGEGR1, SEX, RACE, ETHNIC</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">ard_stack</span>(</span>
+<span id="cb46-2"><a></a>  <span class="at">data =</span> adsl,</span>
+<span id="cb46-3"><a></a>  <span class="at">.by =</span> ,</span>
+<span id="cb46-4"><a></a></span>
+<span id="cb46-5"><a></a>  <span class="co"># add ard_* calls here</span></span>
+<span id="cb46-6"><a></a></span>
+<span id="cb46-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solutions-for-01-cards-parta.r-6" class="slide level2">
+<h2>Solutions for <code>01-cards-partA.R</code></h2>
+<p>C. Perform all of the summaries in a single ard_stack() call, including:</p>
+<pre><code>- summaries by TRT01A as performed above
+
+- continuous summaries from part A for AGE, BMI, HEIGHT, and WEIGHT
+
+- categorical summaries from part B for AGEGR1, SEX, RACE, ETHNIC</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">ard_stack</span>(</span>
+<span id="cb48-2"><a></a>  <span class="at">data =</span> adsl,</span>
+<span id="cb48-3"><a></a>  <span class="at">.by =</span> TRT01A,</span>
+<span id="cb48-4"><a></a>  <span class="fu">ard_continuous</span>( <span class="at">variables =</span> <span class="fu">c</span>(AGE, BMI, HEIGHT, WEIGHT)),</span>
+<span id="cb48-5"><a></a>  <span class="fu">ard_categorical</span>(<span class="at">variables =</span> <span class="fu">c</span>(AGEGR1, SEX, RACE, ETHNIC))</span>
+<span id="cb48-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level stat_name stat_label   stat
+1  TRT01A      Placebo      AGE                        N          N     86
+2  TRT01A      Placebo      AGE                     mean       Mean 75.209
+3  TRT01A      Placebo      AGE                       sd         SD   8.59
+4  TRT01A      Placebo      AGE                   median     Median     76
+5  TRT01A      Placebo      AGE                      p25         Q1     69
+6  TRT01A      Placebo      AGE                      p75         Q3     82
+7  TRT01A      Placebo      AGE                      min        Min     52
+8  TRT01A      Placebo      AGE                      max        Max     89
+9  TRT01A    Xanomeli…      AGE                        N          N     72
+10 TRT01A    Xanomeli…      AGE                     mean       Mean 73.778</code></pre>
+</div>
+</div>
+</section>
+<section id="solutions-for-01-cards-parta.r-7" class="slide level2">
+<h2>Solutions for <code>01-cards-partA.R</code></h2>
+<p>D. BONUS! For part C. above, add the following pieces</p>
+<pre><code>- overall summaries for all of the variables
+
+- total N</code></pre>
+<p>(Hint: Modify the <code>.overall</code> and <code>.total_n</code> arguments, respectively)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="fu">ard_stack</span>(</span>
+<span id="cb51-2"><a></a>  <span class="at">data =</span> adsl,</span>
+<span id="cb51-3"><a></a>  <span class="at">.by =</span> TRT01A,</span>
+<span id="cb51-4"><a></a>  <span class="fu">ard_continuous</span>( <span class="at">variables =</span> <span class="fu">c</span>(AGE, BMI, HEIGHT, WEIGHT)),</span>
+<span id="cb51-5"><a></a>  <span class="fu">ard_categorical</span>(<span class="at">variables =</span> <span class="fu">c</span>(AGEGR1, SEX, RACE, ETHNIC))</span>
+<span id="cb51-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level stat_name stat_label   stat
+1  TRT01A      Placebo      AGE                        N          N     86
+2  TRT01A      Placebo      AGE                     mean       Mean 75.209
+3  TRT01A      Placebo      AGE                       sd         SD   8.59
+4  TRT01A      Placebo      AGE                   median     Median     76
+5  TRT01A      Placebo      AGE                      p25         Q1     69
+6  TRT01A      Placebo      AGE                      p75         Q3     82
+7  TRT01A      Placebo      AGE                      min        Min     52
+8  TRT01A      Placebo      AGE                      max        Max     89
+9  TRT01A    Xanomeli…      AGE                        N          N     72
+10 TRT01A    Xanomeli…      AGE                     mean       Mean 73.778</code></pre>
+</div>
+</div>
+</section>
+<section id="solutions-for-01-cards-parta.r-8" class="slide level2">
+<h2>Solutions for <code>01-cards-partA.R</code></h2>
+<p>D. BONUS! For part C. above, add the following pieces</p>
+<pre><code>- overall summaries for all of the variables
+
+- total N</code></pre>
+<p>(Hint: Modify the <code>.overall</code> and <code>.total_n</code> arguments, respectively)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="fu">ard_stack</span>(</span>
+<span id="cb54-2"><a></a>  <span class="at">data =</span> adsl,</span>
+<span id="cb54-3"><a></a>  <span class="at">.by =</span> TRT01A,</span>
+<span id="cb54-4"><a></a>  <span class="fu">ard_continuous</span>( <span class="at">variables =</span> <span class="fu">c</span>(AGE, BMI, HEIGHT, WEIGHT)),</span>
+<span id="cb54-5"><a></a>  <span class="fu">ard_categorical</span>(<span class="at">variables =</span> <span class="fu">c</span>(AGEGR1, SEX, RACE, ETHNIC)), </span>
+<span id="cb54-6"><a></a>  <span class="at">.overall =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb54-7"><a></a>  <span class="at">.total_n =</span> <span class="cn">TRUE</span></span>
+<span id="cb54-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level stat_name stat_label   stat
+1  TRT01A      Placebo      AGE                        N          N     86
+2  TRT01A      Placebo      AGE                     mean       Mean 75.209
+3  TRT01A      Placebo      AGE                       sd         SD   8.59
+4  TRT01A      Placebo      AGE                   median     Median     76
+5  TRT01A      Placebo      AGE                      p25         Q1     69
+6  TRT01A      Placebo      AGE                      p75         Q3     82
+7  TRT01A      Placebo      AGE                      min        Min     52
+8  TRT01A      Placebo      AGE                      max        Max     89
+9  TRT01A    Xanomeli…      AGE                        N          N     72
+10 TRT01A    Xanomeli…      AGE                     mean       Mean 73.778</code></pre>
+</div>
+</div>
+</section>
 <section id="cards-hierarchical-summary-functions" class="slide level2">
 <h2>{cards}: Hierarchical Summary Functions</h2>
 <p>Following hierarchical summary functions aid in nested tabulations (e.g.&nbsp;AE terms within SOC):</p>
@@ -943,13 +1140,13 @@ Daniel D. Sjoberg and Becca Krouse
 </ul>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">ard_hierarchical</span>(</span>
-<span id="cb43-2"><a></a>  <span class="at">data =</span> adae <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> <span class="fu">c</span>(USUBJID, TRTA, AESOC, AEDECOD)),</span>
-<span id="cb43-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
-<span id="cb43-4"><a></a>  <span class="at">by =</span> TRTA,</span>
-<span id="cb43-5"><a></a>  <span class="at">id =</span> USUBJID,</span>
-<span id="cb43-6"><a></a>  <span class="at">denominator =</span> ADSL <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">TRTA =</span> ARM)</span>
-<span id="cb43-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">ard_hierarchical</span>(</span>
+<span id="cb56-2"><a></a>  <span class="at">data =</span> adae <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> <span class="fu">c</span>(USUBJID, TRTA, AESOC, AEDECOD)),</span>
+<span id="cb56-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
+<span id="cb56-4"><a></a>  <span class="at">by =</span> TRTA,</span>
+<span id="cb56-5"><a></a>  <span class="at">id =</span> USUBJID,</span>
+<span id="cb56-6"><a></a>  <span class="at">denominator =</span> ADSL <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">TRTA =</span> ARM)</span>
+<span id="cb56-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level group2 group2_level variable variable_level stat_name
 1    TRTA      Placebo  AESOC    GENERAL …  AEDECOD      APPLICAT…         n
@@ -982,11 +1179,11 @@ Daniel D. Sjoberg and Becca Krouse
 <p>This function specializes in calculating <strong>event</strong>-level frequencies.</p>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="fu">ard_hierarchical_count</span>(</span>
-<span id="cb45-2"><a></a>  <span class="at">data =</span> adae,</span>
-<span id="cb45-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
-<span id="cb45-4"><a></a>  <span class="at">by =</span> TRTA</span>
-<span id="cb45-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="fu">ard_hierarchical_count</span>(</span>
+<span id="cb58-2"><a></a>  <span class="at">data =</span> adae,</span>
+<span id="cb58-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
+<span id="cb58-4"><a></a>  <span class="at">by =</span> TRTA</span>
+<span id="cb58-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level group2 group2_level variable variable_level stat_name
 1    TRTA      Placebo  AESOC    GENERAL …  AEDECOD      APPLICAT…         n
@@ -1035,13 +1232,13 @@ Daniel D. Sjoberg and Becca Krouse
 </ul>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">ard_stack_hierarchical</span>(</span>
-<span id="cb47-2"><a></a>  <span class="at">data =</span> adae,</span>
-<span id="cb47-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
-<span id="cb47-4"><a></a>  <span class="at">by =</span> TRTA,</span>
-<span id="cb47-5"><a></a>  <span class="at">id =</span> USUBJID,</span>
-<span id="cb47-6"><a></a>  <span class="at">denominator =</span> ADSL <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">TRTA =</span> ARM)</span>
-<span id="cb47-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">ard_stack_hierarchical</span>(</span>
+<span id="cb60-2"><a></a>  <span class="at">data =</span> adae,</span>
+<span id="cb60-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
+<span id="cb60-4"><a></a>  <span class="at">by =</span> TRTA,</span>
+<span id="cb60-5"><a></a>  <span class="at">id =</span> USUBJID,</span>
+<span id="cb60-6"><a></a>  <span class="at">denominator =</span> adsl</span>
+<span id="cb60-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1082,66 +1279,106 @@ Daniel D. Sjoberg and Becca Krouse
 </ul>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="fu">ard_stack_hierarchical_count</span>(</span>
-<span id="cb49-2"><a></a>  <span class="at">data =</span> ADAE,</span>
-<span id="cb49-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
-<span id="cb49-4"><a></a>  <span class="at">by =</span> TRTA, </span>
-<span id="cb49-5"><a></a>  <span class="at">denominator =</span> ADSL <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">TRTA =</span> ARM)</span>
-<span id="cb49-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="fu">ard_stack_hierarchical_count</span>(</span>
+<span id="cb62-2"><a></a>  <span class="at">data =</span> adae,</span>
+<span id="cb62-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
+<span id="cb62-4"><a></a>  <span class="at">by =</span> TRTA, </span>
+<span id="cb62-5"><a></a>  <span class="at">denominator =</span> adsl</span>
+<span id="cb62-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>   group1 group1_level group2 group2_level variable variable_level stat_name
-1    TRTA      Placebo   &lt;NA&gt;                 AESOC      GASTROIN…         n
-2    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n
-3    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      ABDOMINA…         n
-4    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      CONSTIPA…         n
-5    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      DIARRHOEA         n
-6    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      DYSPEPSIA         n
-7    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      DYSPHAGIA         n
-8    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      FLATULEN…         n
-9    TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      GASTROIN…         n
-10   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      GASTROOE…         n
-11   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      GLOSSITIS         n
-12   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      HIATUS H…         n
-13   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD         NAUSEA         n
-14   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      RECTAL H…         n
-15   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      SALIVARY…         n
-16   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      STOMACH …         n
-17   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD       VOMITING         n
-   stat_label stat
-1           n   26
-2           n    0
-3           n    1
-4           n    1
-5           n   10
-6           n    2
-7           n    0
-8           n    2
-9           n    0
-10          n    1
-11          n    1
-12          n    2
-13          n    3
-14          n    0
-15          n    0
-16          n    0
-17          n    3</code></pre>
+<pre><code>  group1 group1_level group2 group2_level variable variable_level stat_name
+1   TRTA      Placebo   &lt;NA&gt;                 AESOC      GASTROIN…         n
+2   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      DIARRHOEA         n
+3   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      DYSPEPSIA         n
+4   TRTA      Placebo  AESOC    GASTROIN…  AEDECOD      HIATUS H…         n
+  stat_label stat
+1          n   14
+2          n   10
+3          n    2
+4          n    2</code></pre>
 </div>
 </div>
 </section>
 <section id="exercise-1" class="slide level2">
-<h2>Exercise</h2>
+<h2>Exercise 🏃‍➡️</h2>
 <ul>
 <li><p>Open <code>exercises/01-cards-partB.R</code></p></li>
 <li><p>Compute the nested AE tabulations as described</p></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_5d9c15c0" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_d16f9766" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">08</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
+</div>
+</div>
+</section>
+<section id="solutions-for-01-cards-partb.r" class="slide level2">
+<h2>Solutions for <code>01-cards-partB.R</code></h2>
+<div class="smaller">
+<p>Calculate the number and percentage of <em>unique</em> subjects (USUBJID) with at least one AE:</p>
+<ul>
+<li>Overall</li>
+<li>By each SOC (AESOC)</li>
+<li>By each Preferred term (AEDECOD) within SOC (AESOC)</li>
+</ul>
+<p>By every combination of treatment group (TRT01A) and severity (AESEV)</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a><span class="fu">ard_stack_hierarchical</span>(</span>
+<span id="cb64-2"><a></a>  <span class="at">data =</span> ,</span>
+<span id="cb64-3"><a></a>  <span class="at">variables =</span> ,</span>
+<span id="cb64-4"><a></a>  <span class="at">by =</span> , </span>
+<span id="cb64-5"><a></a>  <span class="at">id =</span> ,</span>
+<span id="cb64-6"><a></a>  <span class="at">denominator =</span> </span>
+<span id="cb64-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solutions-for-01-cards-partb.r-1" class="slide level2">
+<h2>Solutions for <code>01-cards-partB.R</code></h2>
+<div class="smaller">
+<p>Calculate the number and percentage of <em>unique</em> subjects (USUBJID) with at least one AE:</p>
+<ul>
+<li>Overall</li>
+<li>By each SOC (AESOC)</li>
+<li>By each Preferred term (AEDECOD) within SOC (AESOC)</li>
+</ul>
+<p>By every combination of treatment group (TRT01A) and severity (AESEV)</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a><span class="fu">ard_stack_hierarchical</span>(</span>
+<span id="cb65-2"><a></a>  <span class="at">data =</span> adae,</span>
+<span id="cb65-3"><a></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
+<span id="cb65-4"><a></a>  <span class="at">by =</span> <span class="fu">c</span>(TRT01A, AESEV), </span>
+<span id="cb65-5"><a></a>  <span class="at">id =</span> USUBJID,</span>
+<span id="cb65-6"><a></a>  <span class="at">denominator =</span> adsl</span>
+<span id="cb65-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level group2 group2_level group3 group3_level variable
+1  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+2  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+3  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+4  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+5  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+6  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+7  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+8  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+9  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+10 TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC
+   variable_level stat_name stat_label  stat
+1       CARDIAC …         n          n     8
+2       CARDIAC …         N          N    86
+3       CARDIAC …         p          % 0.093
+4       CONGENIT…         n          n     0
+5       CONGENIT…         N          N    86
+6       CONGENIT…         p          %     0
+7       EAR AND …         n          n     1
+8       EAR AND …         N          N    86
+9       EAR AND …         p          % 0.012
+10      EYE DISO…         n          n     2</code></pre>
 </div>
 </div>
 
