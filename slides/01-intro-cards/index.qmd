@@ -19,22 +19,6 @@ cache: false
 
 # Introduction
 
-```{r}
-#| echo: false
-#| cache: false
-library(cards)
-library(cardx)
-library(gtsummary)
-library(tfrmt)
-library(tfrmtbuilder)
-library(gt)
-library(dplyr)
-library(tidyr)
-
-# fill for font awesome icons
-fa_fill <- "#606060"
-
-```
 
 {{< include intro.qmd >}}
 {{< include cards.qmd >}}
