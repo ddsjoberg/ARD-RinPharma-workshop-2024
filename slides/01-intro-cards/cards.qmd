@@ -193,6 +193,9 @@ countdown(minutes = 10, play_sound = TRUE)
 
 ```{r}
 #| echo: FALSE
+library(dplyr)
+library(tidyr)
+
 ## Import data
 adsl <- pharmaverseadam::adsl |>
   filter(SAFFL == "Y") |>
