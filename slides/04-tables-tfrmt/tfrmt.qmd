@@ -1,16 +1,3 @@
-# ARD to Tables with {tfrmt}
-
-## Workshop outline
-
-1. Introduction to the Analysis Results Standard and {cards}
-
-2. Introduction to the {cardx} Package and ARD Extras
-
-3. ARD to Tables with {gtsummary}
-
-**4. ARD to Tables with {tfrmt}**
-
-
 ## ARD-first Tables with {tfrmt} {.black-header}
 
 ```{css, echo=FALSE}
@@ -220,8 +207,34 @@ tfrmt_demog |>
 
 * *Layering* allows for custom tweaks while preserving the original metadata
 
-## Templates: the possibilities
 
+## Templates: the possibilities {auto-animate="true"}
+ 
+- Organization standards can be capture as *templates*
+
+```{r}
+#| eval: FALSE
+
+# create a template as a function
+tfrmt_demog_org <- function(tfrmt_obj){
+  
+  tfrmt_demog_org <- tfrmt( 
+    # define standard formatting for org
+  )
+  
+  layer_tfrmt(x = tfrmt_obj, y = tfrmt_demog_ta)
+}
+
+# Make a standard table
+tfrmt_demog_org() |>  
+  print_to_gt(
+    .data = demog_data
+  )
+
+```
+
+## Templates: the possibilities {auto-animate="true"}
+ 
 - Organization standards can be capture as *templates*
 
 - With layering, teams can customize *only* the bits that need changing
@@ -230,25 +243,52 @@ tfrmt_demog |>
 #| eval: FALSE
 
 # create a template as a function
-tfrmt_demog_therapyarea <- function(tfrmt_obj){
+tfrmt_demog_ta <- function(tfrmt_obj){
   
   tfrmt_demog_ta <- tfrmt( 
-    # define the formatting specific to the TA
+    # define the formatting specific to the therapeutic area
   )
   
   layer_tfrmt(x = tfrmt_obj, y = tfrmt_demog_ta)
 }
 
-# combine many templates together
-tfrmt_demog_org |> 
-  tfrmt_demog_therapyarea |> 
-    tfrmt_demog_study |> 
-      print_to_gt(
-        .data = demog_data
-      )
+# Layering multiple templates
+tfrmt_demog_org() |> 
+  tfrmt_demog_ta() |>  
+  print_to_gt(
+    .data = demog_data
+  )
 
 ```
 
+## Templates: the possibilities {auto-animate="true"}
+ 
+- Organization standards can be capture as *templates*
+
+- With layering, teams can customize *only* the bits that need changing
+
+```{r}
+#| eval: FALSE
+
+# create a template as a function
+tfrmt_demog_study <- function(tfrmt_obj){
+  
+  tfrmt_demog_study <- tfrmt( 
+    # define the formatting specific to the study
+  )
+  
+  layer_tfrmt(x = tfrmt_obj, y = tfrmt_demog_study)
+}
+
+# Layering multiple templates
+tfrmt_demog_org() |> 
+  tfrmt_demog_ta() |>  
+  tfrmt_demog_study() |> 
+  print_to_gt(
+    .data = demog_data
+  )
+
+```
 
 ## Save metadata for reuse
 
@@ -264,6 +304,15 @@ tfrmt_demog |>
 * Create a language-agnostic JSON file
 
 * Load JSON back into R and recreate the table with `json_to_tfrmt()`
+
+## Saving display
+
+-   `tfrmt::print_to_gt()` creates a {gt} object under the hood
+
+-   You can export the table to a variety of formats using `gt::gt_save()`
+
+![](images/gtsave.png){fig-align="center"}
+
 
 # Now, let's format a display, 1 piece at a time
 
@@ -588,6 +637,88 @@ print_to_gt(
 
 * Templating 
 
+## cards to tfrmt
+
+::: {.smaller}
+-   {cards} includes a helper function `shuffle_ard()` to transform native {cards} output to display-ready data
+
+-   This is also available as an argument `.shuffle` in `ard_stack()`
+:::
+
+```{r}
+library(cards)
+
+pharmaverseadam::adsl |> 
+  ard_categorical(
+    by = TRT01A,
+    variables = c("AGEGR1","SEX")
+  )
+```
+
+## cards to tfrmt {auto-animate="true"}
+
+::: {.smaller}
+-   {cards} includes a helper function `shuffle_ard()` to transform native {cards} output to display-ready data
+
+-   This is also available as an argument `.shuffle` in `ard_stack()`
+:::
+
+```{r}
+library(cards)
+
+pharmaverseadam::adsl |> 
+  ard_categorical(
+    by = TRT01A,
+    variables = c("AGEGR1","SEX")
+  ) |> 
+  shuffle_ard()
+```
+
+## cards to tfrmt {auto-animate="true"}
+
+::: {.smaller}
+-   {cards} includes a helper function `shuffle_ard()` to transform native {cards} output to display-ready data
+
+-   This is also available as an argument `.shuffle` in `ard_stack()`
+:::
+
+```{r}
+#| output-location: "column"
+#| 
+library(cards)
+library(tfrmt)
+
+my_ard <- pharmaverseadam::adsl |> 
+  ard_categorical(
+    by = TRT01A,
+    variables = c("AGEGR1","SEX")
+  ) |>  
+  shuffle_ard() |> 
+  dplyr::filter(stat_name %in% c("n","p")) |> 
+  dplyr::select(-context)
+
+tfrmt(
+  group = variable,
+  label = label,
+  column = TRT01A,
+  param = stat_name,
+  value = stat,
+  body_plan = body_plan(
+    frmt_structure(group_val = ".default", 
+                   label_val = ".default", 
+                   frmt_combine("{n} ({p}%)",
+                                n = frmt("xx"),
+                                p = frmt("xx", 
+                                         transform = ~.*100)))
+  )
+) |> 
+  print_to_gt(my_ard)|> 
+  gt_style_slides()|> 
+    gt::tab_options(
+      table.font.size = 15
+    )
+```
+
 
 # The {tfrmtbuilder} App  {.black-header} 
 
@@ -610,12 +741,23 @@ print_to_gt(
 
 :::
 
-## Exercise
+## Exercise 🏃‍➡️
 
-1. Open R file `04-tables-tfrmt.R`
+- Open R file `exercises/04-tables-tfrmt.R`
 
-2. Run the provided code, which will open the app in your browser
+- Run the provided code, which will open the app in your browser
 
-3. Complete the steps to futher customize the table
+- Complete the steps to further customize the table (hint: Edit tab):
+
+    1. Switch the order of treatment columns so Active is first
+        (hint: Column Plan)
+
+    2. Change the footnote marks to letters instead of numbers
+        (hint: Footnote Plan)
+
+    3. Split the table into 2 parts by setting a maximum of 3 rows
+        (hint: Page Plan)
+        
+    4. Export the table (hint: Export Tab)
 
 

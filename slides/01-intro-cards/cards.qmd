@@ -1,12 +1,14 @@
 # ARDs using {cards} 
 
-<a href="https://insightsengineering.github.io/cards/"><img src="https://insightsengineering.github.io/cards/latest-tag/logo.png" align="right" height="138" alt="cards website" /></a>
+<a href="https://insightsengineering.github.io/cards/"><img src="https://insightsengineering.github.io/cards/latest-tag/logo.png" align="center" height="300" alt="cards website" /></a>
 
 ## {cards}: Introduction
 
 -   Part of the Pharmaverse
 
 -   Collaboration between Roche, GSK, Novartis
+
+-   Contains a variety of utilities for making ARDs
 
 -   Can be used within the ARS workflow and separately
 
@@ -20,19 +22,17 @@
 library(cards)
 
 # create ARD with default summary statistics
-ard_continuous(ADSL, variables = AGE)
+ADSL |> 
+  ard_continuous(
+    variables = AGE
+  )
 ```
 
 
-## {cards}: `ard_continuous()` arguments
+## {cards}: `ard_continuous()` by variable
 
 ::: {.small}
 - `by`: summary statistics are calculated by all combinations of the by variables, including unobserved factor levels
-
-- `statistic`: specify univariate summary statistics. Accepts _any_ function, base R, from a package, or user-defined.
-
-- `fmt_fn`: Override the default formatting functions, e.g. when you need 
-
 :::
 
 ```{r}
@@ -40,42 +40,52 @@ ard_continuous(ADSL, variables = AGE)
 ADSL |> 
   ard_continuous(
     variables = AGE,
-    by = ARM,                               # stats by treatment arm
-    statistic = ~list(mean = \(x) mean(x)), # return the mean
-    fmt_fn = ~list(mean = 0)                # format the result
-  ) |> 
-  apply_fmt_fn() # add a character column of rounded results
+    by = ARM         # stats by treatment arm
+  ) 
 ```
 
 ## {cards}: `ard_continuous()` statistics
+
+::: {.small}
+- `statistic`: specify univariate summary statistics. Accepts _any_ function, base R, from a package, or user-defined.
+:::
+
 
 ```{r}
 cv <- function(x)  sd(x, na.rm = TRUE)/mean(x, na.rm = TRUE)
 
-ard_continuous(
-  data = ADSL,
-  variables = AGE,
-  statistic = ~ list(cv = cv)
-)
+ADSL |> 
+  ard_continuous(  
+    variables = AGE,
+    by = ARM,
+    statistic = ~ list(cv = cv) # customize statistics
+  )
 
 ```
 
 ## {cards}: `ard_continuous()` statistics
 
+::: {.small}
+Customize the statistics returned for each variable
+:::
+
 ```{r}
-ard_continuous(
-  data = ADSL |> dplyr::mutate(AGE2 = AGE),
-  variables = c(AGE, AGE2),
-  statistic = list(AGE = list(cv = cv),
-                   AGE2 = continuous_summary_fns(c("mean","median")))
-)
+ADSL |> 
+  dplyr::mutate(AGE2 = AGE) |> 
+  ard_continuous(
+    variables = c(AGE, AGE2),
+    by = ARM,
+    statistic = list(AGE = list(cv = cv),
+                     AGE2 = continuous_summary_fns(c("mean","median")))
+  )
 ```
 
-## {cards}: `ard_continuous()` fmt_fun
+## {cards}: `ard_continuous()` fmt_fn
 
-Override the default formatting functions, during and after
-
-Method 1: 
+::: {.small}
+Override the default formatting functions, method 1:
+:::
+ 
 ```{r}
 #| message: true
 ADSL |> 
@@ -87,8 +97,12 @@ ADSL |>
   apply_fmt_fn() # add a character column of rounded results
 ```
 
+## {cards}: `ard_continuous()` fmt_fn
 
-Method 2: 
+::: {.small}
+Override the default formatting functions, method 2:
+:::
+
 ```{r}
 #| message: true
 ADSL |> 
@@ -102,13 +116,16 @@ ADSL |>
 
 ## {cards}: `ard_categorical()`
 
+::: {.small}
+- includes `n`, `%`, `N` by default
+:::
+
 ```{r}
 #| message: true
 ADSL |> 
   ard_categorical(
     by = ARM,
-    variables = AGEGR1,
-    statistic = everything() ~ c("n","p") # keep most common stats 
+    variables = AGEGR1
   ) 
 ```
 
@@ -117,28 +134,10 @@ ADSL |>
 _Any unobserved levels of the variables will be present in the resulting ARD._
 :::
 
-## {cards}: `ard_dichotomous()`
-
-```{r}
-#| message: true
-
-ADSL |> 
-  ard_dichotomous(variables = AGEGR1, 
-                  value = ~ "<65") 
-
-```
-
-By default, `value` will be set to the maximum 
-
-```{r}
-#| message: true
-
-ADSL |> 
-  ard_dichotomous(variables = AGEGR1) 
-
-```
 
 ## {cards}: Other Summary Functions 
+
+- `ard_dichotomous()`: similar to `ard_categorical()`, but for dichotomous summaries
 
 - `ard_hierarchical()`: similar to `ard_categorical()`, but built for nested tabulations, e.g. AE terms within SOC
 
@@ -146,30 +145,16 @@ ADSL |>
 
 - `ard_missing()`: tabulates rates of missingness
 
-The results from all these functions are entirely compatible with one another, and can be stacked into a single data frame.
+The results from all these functions are entirely compatible with one another, and can be stacked into a single data frame. 🥞
 
 ## {cards}: Other Functions
 
-In addition to exporting functions to prepare summaries, {cards} exports many utilities for wrangling ARDs and creating new ARDs.
+In addition to exporting functions to prepare summaries, {cards} exports many utilities for wrangling ARDs and creating new ARDs. 
 
 Constructing: `bind_ard()`, `tidy_as_ard()`, `nest_for_ard()`, `check_ard_structure()`, and many more
 
 Wrangling: `shuffle_ard()`, `get_ard_statistics()`, `replace_null_statistic()`, etc.
 
-## Exercise
-
-- Open `exercises/01-cards-partA.R` 
-
-- Compute the demographic summaries as described
-
-```{r}
-#| echo: false
-#| cache: false
-library(countdown)
-countdown(minutes = 10, play_sound = TRUE)
-```
-
- 
 
 ## {cards}: Stacking utilities
 
@@ -189,6 +174,174 @@ ADSL |>
     ard_continuous(variables = AGE, statistic = ~ continuous_summary_fns(c("mean","sd"))), 
     ard_categorical(variables = AGEGR1, statistic = ~ "p")
   )  
+```
+
+## Exercise 🏃‍➡️
+
+- Open `exercises/01-cards-partA.R` 
+
+- Compute the demographic summaries as described
+
+```{r}
+#| echo: false
+#| cache: false
+library(countdown)
+countdown(minutes = 10, play_sound = TRUE)
+```
+
+## Solutions for `01-cards-partA.R`
+
+```{r}
+#| echo: FALSE
+library(dplyr)
+library(tidyr)
+
+## Import data
+adsl <- pharmaverseadam::adsl |>
+  filter(SAFFL == "Y") |>
+  left_join(
+    pharmaverseadam::advs |>
+      filter(PARAMCD %in% c("BMI", "HEIGHT", "WEIGHT"), !is.na(AVAL)) |>
+      group_by(USUBJID, PARAMCD) |>
+      arrange(ADY) |>
+      slice(1) |>
+      ungroup() |>
+      select(USUBJID, PARAMCD, AVAL) |>
+      pivot_wider(names_from = PARAMCD, values_from = AVAL),
+    by = "USUBJID"
+  )
+```
+
+## Solutions for `01-cards-partA.R`
+
+A. First, compute the continuous summaries for AGE, BMI, HEIGHT, WEIGHT by TRT01A
+
+```{r}
+#| eval: FALSE
+ard_continuous(
+  data = adsl,
+  by = ,
+  variables =
+)
+```
+
+## Solutions for `01-cards-partA.R` 
+
+A. First, compute the continuous summaries for AGE, BMI, HEIGHT, WEIGHT by TRT01A
+```{r}
+ard_continuous(
+  data = adsl,
+  by = TRT01A,
+  variables = c(AGE, BMI, HEIGHT, WEIGHT)
+)
+```
+
+## Solutions for `01-cards-partA.R`
+
+B. Next, compute the categorical summaries for AGEGR1, SEX, RACE, ETHNIC by TRT01A
+
+```{r}
+#| eval: FALSE
+ard_categorical(
+  data = adsl,
+  by = ,
+  variables =
+)
+```
+
+## Solutions for `01-cards-partA.R`
+
+B. Next, compute the categorical summaries for AGEGR1, SEX, RACE, ETHNIC by TRT01A
+
+```{r}
+ard_categorical(
+  data = adsl,
+  by = TRT01A,
+  variables = c(AGEGR1, SEX, RACE, ETHNIC)
+)
+```
+
+## Solutions for `01-cards-partA.R`
+
+C. Perform all of the summaries in a single ard_stack() call, including:
+  
+    - summaries by TRT01A as performed above
+    
+    - continuous summaries from part A for AGE, BMI, HEIGHT, and WEIGHT
+    
+    - categorical summaries from part B for AGEGR1, SEX, RACE, ETHNIC
+
+```{r}
+#| eval: FALSE
+ard_stack(
+  data = adsl,
+  .by = ,
+
+  # add ard_* calls here
+
+)
+```
+
+
+## Solutions for `01-cards-partA.R`
+
+C. Perform all of the summaries in a single ard_stack() call, including:
+   
+    - summaries by TRT01A as performed above
+    
+    - continuous summaries from part A for AGE, BMI, HEIGHT, and WEIGHT
+    
+    - categorical summaries from part B for AGEGR1, SEX, RACE, ETHNIC
+
+```{r}
+ard_stack(
+  data = adsl,
+  .by = TRT01A,
+  ard_continuous( variables = c(AGE, BMI, HEIGHT, WEIGHT)),
+  ard_categorical(variables = c(AGEGR1, SEX, RACE, ETHNIC))
+)
+```
+
+## Solutions for `01-cards-partA.R`
+
+D. BONUS!
+   For part C. above, add the following pieces
+   
+    - overall summaries for all of the variables
+    
+    - total N
+    
+(Hint: Modify the `.overall` and `.total_n` arguments, respectively)
+
+```{r}
+ard_stack(
+  data = adsl,
+  .by = TRT01A,
+  ard_continuous( variables = c(AGE, BMI, HEIGHT, WEIGHT)),
+  ard_categorical(variables = c(AGEGR1, SEX, RACE, ETHNIC))
+)
+```
+
+## Solutions for `01-cards-partA.R`
+
+D. BONUS!
+   For part C. above, add the following pieces
+   
+    - overall summaries for all of the variables
+    
+    - total N
+    
+(Hint: Modify the `.overall` and `.total_n` arguments, respectively)
+
+```{r}
+ard_stack(
+  data = adsl,
+  .by = TRT01A,
+  ard_continuous( variables = c(AGE, BMI, HEIGHT, WEIGHT)),
+  ard_categorical(variables = c(AGEGR1, SEX, RACE, ETHNIC)), 
+  .overall = TRUE,
+  .total_n = TRUE
+)
 ```
 
 
@@ -280,7 +433,7 @@ ard_stack_hierarchical(
   variables = c(AESOC, AEDECOD),
   by = TRTA,
   id = USUBJID,
-  denominator = ADSL |> dplyr::rename(TRTA = ARM)
+  denominator = adsl
 )
 ```
 
@@ -313,17 +466,17 @@ ard_hier |>
 ```{r}
 #| eval: FALSE
 ard_stack_hierarchical_count(
-  data = ADAE,
+  data = adae,
   variables = c(AESOC, AEDECOD),
   by = TRTA, 
-  denominator = ADSL |> dplyr::rename(TRTA = ARM)
+  denominator = adsl
 )
 ```
 
 ```{r}
 #| echo: FALSE
 ard_hier_c <- ard_stack_hierarchical_count(
-  data = ADAE,
+  data = adae,
   variables = c(AESOC, AEDECOD),
   by = TRTA, 
   denominator = ADSL |> dplyr::rename(TRTA = ARM)
@@ -337,7 +490,7 @@ ard_hier_c |>
 ```
 
 
-## Exercise
+## Exercise 🏃‍➡️
 
 - Open `exercises/01-cards-partB.R` 
 
@@ -349,4 +502,57 @@ ard_hier_c |>
 library(countdown)
 countdown(minutes = 8, play_sound = TRUE)
 ```
+
+## Solutions for `01-cards-partB.R`
+
+```{r}
+#| echo: FALSE
+adsl <- pharmaverseadam::adsl |> dplyr::filter(SAFFL == "Y")
+adae <- pharmaverseadam::adae 
+```
+
+:::{.smaller}
+Calculate the number and percentage of *unique* subjects (USUBJID) with at least one AE:
+  
+- Overall
+- By each SOC (AESOC)
+- By each Preferred term (AEDECOD) within SOC (AESOC)
+  
+By every combination of treatment group (TRT01A) and severity (AESEV)
+:::
+```{r}
+#| eval: FALSE
+
+ard_stack_hierarchical(
+  data = ,
+  variables = ,
+  by = , 
+  id = ,
+  denominator = 
+)
+```
+
+
+## Solutions for `01-cards-partB.R`
+
+:::{.smaller}
+Calculate the number and percentage of *unique* subjects (USUBJID) with at least one AE:
+  
+-   Overall
+-   By each SOC (AESOC)
+-   By each Preferred term (AEDECOD) within SOC (AESOC)
+  
+By every combination of treatment group (TRT01A) and severity (AESEV)
+:::
+```{r}
+ard_stack_hierarchical(
+  data = adae,
+  variables = c(AESOC, AEDECOD),
+  by = c(TRT01A, AESEV), 
+  id = USUBJID,
+  denominator = adsl
+)
+```
+
+
 

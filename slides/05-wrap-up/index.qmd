@@ -1,6 +1,6 @@
 ---
-title: "Unlocking Analysis Results Datasets (ARDs)"
-subtitle: "A Practical Workshop for Creating and Utilizing ARDs for Clinical Reporting"
+title: "Unlocking Analysis Results Datasets"
+subtitle: "Wrap-up"
 author: "Daniel D. Sjoberg and Becca Krouse"
 logo: "images/cards-hex.png"
 editor: source
@@ -17,9 +17,4 @@ execute:
 cache: false
 ---
 
-# Introduction
-
-
-{{< include intro.qmd >}}
-{{< include cards.qmd >}}
- 
+{{< include wrapup.qmd >}}

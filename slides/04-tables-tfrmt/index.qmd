@@ -1,8 +1,7 @@
 ---
-title: "Unlocking Analysis Results Datasets"
-subtitle: "Part 4"
+title: "ARD to Tables with {tfrmt}" 
 author: "Daniel D. Sjoberg and Becca Krouse"
-logo: "images/cards-hex.png"
+logo: "images/tfrmt-hex.png"
 editor: source
 engine: knitr
 format: 
@@ -17,20 +16,19 @@ execute:
 cache: false
 ---
 
+## Workshop outline
 
-```{r}
-#| echo: false
-#| cache: false
-library(cards)
-library(cardx)
-library(gtsummary)
-library(tfrmt)
-library(tfrmtbuilder)
-library(gt)
+::: {.larger}
 
-# fill for font awesome icons
-fa_fill <- "#606060"
+1. Introduction to the Analysis Results Standard and {cards}
 
-```
+2. Introduction to the {cardx} Package and ARD Extras
+
+3. ARD to Tables with {gtsummary}
+
+4. _**ARD to Tables with {tfrmt}**_
+
+:::
+
 
 {{< include tfrmt.qmd >}}

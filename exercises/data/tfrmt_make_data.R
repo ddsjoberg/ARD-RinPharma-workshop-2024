@@ -46,6 +46,8 @@ tfrmt_demog <- tfrmt(
     n_frmt = frmt("<br>N = xx")
   ),
   col_plan = col_plan(
+    variable, 
+    label,
     Placebo,
     Active,
     - starts_with("ord")
