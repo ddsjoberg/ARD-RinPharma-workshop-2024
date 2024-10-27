@@ -46,7 +46,8 @@ ard <- ard_stack(
   ard_categorical(variables = grade),
   .attributes=TRUE
 )
-ard
+
+ard |> print(n = 7)
 ```
 
 ::: aside
@@ -73,7 +74,7 @@ Now let's try a somewhat more complicated table.
 ```{r}
 #| label: 'tbl_ard_summary2'
 #| output-location: "slide"
-#| code-line-numbers: "|3|11|12|13"
+#| code-line-numbers: "|3|7-8|10-16|17"
 trial |> 
   ard_stack( 
     .by = trt,
@@ -98,11 +99,12 @@ trial |>
 
 ::: {.small}
 
-- While our examples have focused on simple demogranphics tables, the ARD structure is general and any statistic can be presented.
+- While our examples have focused on simple demographics tables, the ARD structure is general and any statistic can be presented.
 
 :::
 
 ```{r}
+#| code-line-numbers: "|2|3-4|5-10|11"
 trial |> 
   cardx::ard_stats_t_test_onesample(by = c(trt, grade), variables = age) |> 
   cards::update_ard_fmt_fn(stat_names = "p.value", 

@@ -38,7 +38,7 @@ Why are we here?
 
 ::: {.column}
 
-![Daniel Sjoberg, Roche](images/dan-circle.png){fig-alt="Headshot of Daniel Sjoberg" width="300"}
+![Daniel Sjoberg, Genentech](images/dan-circle.png){fig-alt="Headshot of Daniel Sjoberg" width="300"}
 :::
 ::: {.column}
 

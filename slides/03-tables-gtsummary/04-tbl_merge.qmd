@@ -2,17 +2,58 @@
 
 ## tbl_merge() for side-by-side tables
 
+::: {columns}
+
+::: {.column width="50%"}
+
 ```{r}
-#| label: 'tbl_merge'
+#| label: 'tbl_n'
 library(gtsummary)
 tbl_n <- 
-  tbl_summary(trial, include = grade, statistic = grade ~ "{n}") |> 
-  modify_header(all_stat_cols() ~ "**N**") |> # update column header
-  modify_footnote(all_stat_cols() ~ NA) # remove footnote
-tbl_age <-
-  tbl_continuous(trial, include = grade, variable = age, by = trt) |> 
-  modify_header(all_stat_cols() ~ "**{level}**") # update header
+  tbl_summary(
+    trial, 
+    include = grade, 
+    statistic = grade ~ "{n}"
+  ) |> 
+  modify_header( # update header
+    all_stat_cols() ~ "**N**"
+  ) |> 
+  modify_footnote( # rm footnote
+    all_stat_cols() ~ NA
+  ) 
+tbl_n
+```
 
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| label: 'tbl_age'
+tbl_age <-
+  tbl_continuous(
+    trial, 
+    include = grade, 
+    variable = age, 
+    by = trt
+  ) |> 
+  modify_header( # update header
+    all_stat_cols() ~ "**{level}**"
+  ) 
+
+
+
+tbl_age
+```
+
+:::
+:::
+
+
+## tbl_merge() for side-by-side tables
+
+```{r}
+#| label: 'tbl_merge'
 # combine the tables side by side
 list(tbl_n, tbl_age) |> 
   tbl_merge(tab_spanner = FALSE) # suppress default header

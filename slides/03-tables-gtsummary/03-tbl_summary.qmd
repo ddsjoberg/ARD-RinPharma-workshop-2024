@@ -165,7 +165,7 @@ tbl_summary(
       response = "{n} / {N} ({p}%)"
     ),
   label = 
-    list(grade ~ "Pathologic tumor grade"),
+    list(grade = "Pathologic tumor grade"),
   digits = # report SD(age) to one decimal place
     list(age = list(sd = 1)) 
 )
@@ -315,7 +315,7 @@ sm_trial |>
 ```{r}
 #| label: 'summary-modified'
 #| output-location: "column"
-#| code-line-numbers: "4,5,6,7,8,9,10,11,12,13"
+#| code-line-numbers: "4,5,6,7,8,9,10,11,12,13,14"
 tbl <-
   sm_trial |> 
   tbl_summary(by = trt, 
@@ -340,7 +340,7 @@ tbl
 
 ```{r}
 #| label: 'summary-with-difference'
-#| code-line-numbers: "12"
+#| code-line-numbers: "9"
 trial |>
   select(trt, marker, response) |>
   tbl_summary(

@@ -50,7 +50,7 @@ pharmaverseadam::adsl |>
 
 - _What to do if a method you need is not implemented?_
 
-- It's simple to wrap existing framework to customize.
+- It's simple to wrap existing frameworks to customize.
 
 - One-sample t-test example utilizing `cards::ard_continuous()`.
 
