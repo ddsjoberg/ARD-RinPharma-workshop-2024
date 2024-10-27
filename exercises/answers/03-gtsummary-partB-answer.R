@@ -32,4 +32,3 @@ ard |>
     statistic = AGE ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
     overall = TRUE
   )
-tbl

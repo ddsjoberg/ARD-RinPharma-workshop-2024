@@ -415,7 +415,7 @@ And a detailed `tbl_summary()` vignette at <http://www.danieldsjoberg.com/gtsumm
 
 ## {gtsummary} Exercise 1
 
-1. Navigate to Posit Cloud script `03-gtsummary_partA.R`.
+1. Navigate to Posit Cloud script `exercises/03-gtsummary_partA.R`.
 
 2. Create the table outlined in the script.
 
@@ -424,6 +424,37 @@ And a detailed `tbl_summary()` vignette at <http://www.danieldsjoberg.com/gtsumm
 #| cache: false
 library(countdown)
 countdown(minutes = 10)
+```
+
+## {gtsummary} Exercise 1 Solution
+
+Create a demographics tables split by TRT01A including AGE, SEX, RACE
+
+```{r}
+#| output-location: "slide"
+#| code-line-numbers: "|6-11|7|8|9|10|12"
+library(gtsummary) 
+adsl <- pharmaverseadam::adsl |> dplyr::filter(SAFFL == "Y") 
+ 
+# Create table 
+tbl <- adsl |>  
+  tbl_summary( 
+    by = TRT01A, 
+    include = c(AGE, SEX, RACE), 
+    type = AGE ~ 'continuous2', 
+    statistic = AGE ~ c("{mean} ({sd})", "{median} ({p25}, {p75})") 
+  ) |>  
+  add_overall() 
+tbl 
+```
+
+## {gtsummary} Exercise 1 Solution
+
+Extract ARD from table object
+
+
+```{r}
+gather_ard(tbl)[["tbl_summary"]] |> dplyr::select(-gts_column)
 ```
 
 ## Cross-tabulation with tbl_cross()
