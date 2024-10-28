@@ -973,53 +973,46 @@
     "text": "Thank you\n\n\n\n Ask on stackoverflow.com\n Use the gtsummary tag\n Thousands of posts!\n\n danieldsjoberg.com\n mastodon.social/@ddsjoberg\n linkedin.com/in/ddsjoberg/\n github.com/ddsjoberg\n\n\n\n\n\nbit.ly/rpharma-ard"
   },
   {
-    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html",
-    "href": "slides/03-tables-gtsummary/04-tbl_merge.html",
-    "title": "tbl_merge()/tbl_stack()",
+    "objectID": "slides/02-intro-cardx/02-extras.html",
+    "href": "slides/02-intro-cardx/02-extras.html",
+    "title": "Analysis Results Datasets",
     "section": "",
-    "text": "library(gtsummary)\ntbl_n &lt;- \n  tbl_summary(\n    trial, \n    include = grade, \n    statistic = grade ~ \"{n}\"\n  ) |&gt; \n  modify_header( # update header\n    all_stat_cols() ~ \"**N**\"\n  ) |&gt; \n  modify_footnote( # rm footnote\n    all_stat_cols() ~ NA\n  ) \ntbl_n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\n\n\n\n\nGrade\n\n\n\n\n    I\n68\n\n\n    II\n68\n\n\n    III\n64\n\n\n\n\n\n\n\n\n\n\ntbl_age &lt;-\n  tbl_continuous(\n    trial, \n    include = grade, \n    variable = age, \n    by = trt\n  ) |&gt; \n  modify_header( # update header\n    all_stat_cols() ~ \"**{level}**\"\n  ) \n\n\n\ntbl_age\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nGrade\n\n\n\n\n\n\n    I\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# combine the tables side by side\nlist(tbl_n, tbl_age) |&gt; \n  tbl_merge(tab_spanner = FALSE) # suppress default header\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nDrug A1\nDrug B1\n\n\n\n\nGrade\n\n\n\n\n\n\n\n\n    I\n68\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n68\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n64\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)\n\n\n\n\n\n\n\n\n\n\n\n\ntbl_drug_a &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug A\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\ntbl_drug_b &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug B\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\n\n# stack the two tables \nlist(tbl_drug_a, tbl_drug_b) |&gt; \n  tbl_stack(group_header = c(\"Drug A\", \"Drug B\")) |&gt; # optionally include headers for each table\n  modify_header(all_stat_cols() ~ \"**Outcome Rates**\")\n\nColumn headers among stacked tables differ. Headers from the first table are\nused.\nℹ Use `quiet = TRUE` to suppress this message.\n\n\n\n\n\n\n\n\nCharacteristic\nOutcome Rates1\n\n\n\n\nDrug A\n\n\nTumor Response\n28 (29%)\n\n\nPatient Died\n52 (53%)\n\n\nDrug B\n\n\nTumor Response\n33 (34%)\n\n\nPatient Died\n60 (59%)\n\n\n\n1 n (%)\n\n\n\n\n\n\n\n\n\n\n\n\ntbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death))\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\n\nDrug A\n\n\nDrug B\n\n\n\nn\n%\nn\n%\n\n\n\n\nTumor Response\n28\n29%\n33\n34%\n\n\nPatient Died\n52\n53%\n60\n59%\n\n\n\n\n\n\n\nThe default is to combine stratified tables with tbl_merge().\n\n\n\nWe can also stack the tables.\n\ntbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death)),\n  .combine_with = \"tbl_stack\"\n)\n\n\n\n\n\n\n\nCharacteristic\nn\n%\n\n\n\n\nDrug A\n\n\nTumor Response\n28\n29%\n\n\nPatient Died\n52\n53%\n\n\nDrug B\n\n\nTumor Response\n33\n34%\n\n\nPatient Died\n60\n59%\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMost of the tables we create in the pharma space come from a catalog of standard tables.\nCustom or one-off tables are often quite difficult and time intensive to create.\nThe {gtsummary} package makes it simple to break complex tables into their simple parts and cobble them together in the end.\nMoreover, the internal structure of a gtsummary table is super simple: a data frame and instructions on how to print that data frame to make it cute. If needed, you can directly modify the underlying data frame with modify_table_body().\n\n\n\ntrial |&gt; tbl_summary(include = c(age, grade), by = trt) |&gt; purrr::pluck(\"table_body\")\n\n# A tibble: 6 × 7\n  variable var_type    row_type var_label label   stat_1      stat_2     \n  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      \n1 age      continuous  label    Age       Age     46 (37, 60) 48 (39, 56)\n2 age      continuous  missing  Age       Unknown 7           4          \n3 grade    categorical label    Grade     Grade   &lt;NA&gt;        &lt;NA&gt;       \n4 grade    categorical level    Grade     I       35 (36%)    33 (32%)   \n5 grade    categorical level    Grade     II      32 (33%)    36 (35%)   \n6 grade    categorical level    Grade     III     31 (32%)    33 (32%)"
+    "text": "What happens when statistics are un-calculable?\n\nard_gone_wrong &lt;- \n  cards::ADSL |&gt; \n  cards::ard_continuous(\n    by = ARM,\n    variable = AGEGR1,\n    statistic = ~list(kurtosis = \\(x) e1071::kurtosis(x))\n  ) |&gt; \n  cards::replace_null_statistic()\nard_gone_wrong\n\n{cards} data frame: 3 x 10\n\n\n  group1 group1_level variable stat_name stat_label stat   warning     error\n1    ARM      Placebo   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n2    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n3    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n\n\nℹ 2 more variables: context, fmt_fn\n\n\n\ncards::print_ard_conditions(ard_gone_wrong)\n\n\n\n\nWhere is the statistic? AGEGR1 is character\nEven when there are errors or warnings, we still get the ARD with the expected structure returned.\n\nTHIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.\nThis allows you to design everything up-front.\n\nWe can also report these warnings and errors back to users. &lt;!CLICK!&gt;"
   },
   {
-    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_merge-for-side-by-side-tables",
-    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_merge-for-side-by-side-tables",
-    "title": "tbl_merge()/tbl_stack()",
+    "objectID": "slides/02-intro-cardx/02-extras.html#when-things-go-wrong",
+    "href": "slides/02-intro-cardx/02-extras.html#when-things-go-wrong",
+    "title": "Analysis Results Datasets",
     "section": "",
-    "text": "library(gtsummary)\ntbl_n &lt;- \n  tbl_summary(\n    trial, \n    include = grade, \n    statistic = grade ~ \"{n}\"\n  ) |&gt; \n  modify_header( # update header\n    all_stat_cols() ~ \"**N**\"\n  ) |&gt; \n  modify_footnote( # rm footnote\n    all_stat_cols() ~ NA\n  ) \ntbl_n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\n\n\n\n\nGrade\n\n\n\n\n    I\n68\n\n\n    II\n68\n\n\n    III\n64\n\n\n\n\n\n\n\n\n\n\ntbl_age &lt;-\n  tbl_continuous(\n    trial, \n    include = grade, \n    variable = age, \n    by = trt\n  ) |&gt; \n  modify_header( # update header\n    all_stat_cols() ~ \"**{level}**\"\n  ) \n\n\n\ntbl_age\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nGrade\n\n\n\n\n\n\n    I\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)"
+    "text": "What happens when statistics are un-calculable?\n\nard_gone_wrong &lt;- \n  cards::ADSL |&gt; \n  cards::ard_continuous(\n    by = ARM,\n    variable = AGEGR1,\n    statistic = ~list(kurtosis = \\(x) e1071::kurtosis(x))\n  ) |&gt; \n  cards::replace_null_statistic()\nard_gone_wrong\n\n{cards} data frame: 3 x 10\n\n\n  group1 group1_level variable stat_name stat_label stat   warning     error\n1    ARM      Placebo   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n2    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n3    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n\n\nℹ 2 more variables: context, fmt_fn\n\n\n\ncards::print_ard_conditions(ard_gone_wrong)\n\n\n\n\nWhere is the statistic? AGEGR1 is character\nEven when there are errors or warnings, we still get the ARD with the expected structure returned.\n\nTHIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.\nThis allows you to design everything up-front.\n\nWe can also report these warnings and errors back to users. &lt;!CLICK!&gt;"
   },
   {
-    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_merge-for-side-by-side-tables-1",
-    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_merge-for-side-by-side-tables-1",
-    "title": "tbl_merge()/tbl_stack()",
-    "section": "",
-    "text": "# combine the tables side by side\nlist(tbl_n, tbl_age) |&gt; \n  tbl_merge(tab_spanner = FALSE) # suppress default header\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nDrug A1\nDrug B1\n\n\n\n\nGrade\n\n\n\n\n\n\n\n\n    I\n68\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n68\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n64\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)"
+    "objectID": "slides/02-intro-cardx/02-extras.html#mock-ards",
+    "href": "slides/02-intro-cardx/02-extras.html#mock-ards",
+    "title": "Analysis Results Datasets",
+    "section": "Mock ARDs",
+    "text": "Mock ARDs\nLike mock tables, mock ARDs are often useful as well\n\ncards::bind_ard(\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\"))),\n  cards::mock_continuous(variables = \"AGE\")\n) |&gt; \n  cards::apply_fmt_fn()\n\n{cards} data frame: 14 x 10\n\n\n   variable variable_level stat_name stat_label stat stat_fmt\n1    AGEGR1            &lt;65         n          n            xx\n2    AGEGR1            &lt;65         p          %          xx.x\n3    AGEGR1            &lt;65         N          N            xx\n4    AGEGR1           &gt;=65         n          n            xx\n5    AGEGR1           &gt;=65         p          %          xx.x\n6    AGEGR1           &gt;=65         N          N            xx\n7       AGE                        N          N            xx\n8       AGE                     mean       Mean          xx.x\n9       AGE                       sd         SD          xx.x\n10      AGE                   median     Median          xx.x\n11      AGE                      p25         Q1          xx.x\n12      AGE                      p75         Q3          xx.x\n13      AGE                      min        Min          xx.x\n14      AGE                      max        Max          xx.x\n\n\nℹ 4 more variables: context, fmt_fn, warning, error"
   },
   {
-    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_stack-to-combine-vertically",
-    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_stack-to-combine-vertically",
-    "title": "tbl_merge()/tbl_stack()",
-    "section": "",
-    "text": "tbl_drug_a &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug A\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\ntbl_drug_b &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug B\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\n\n# stack the two tables \nlist(tbl_drug_a, tbl_drug_b) |&gt; \n  tbl_stack(group_header = c(\"Drug A\", \"Drug B\")) |&gt; # optionally include headers for each table\n  modify_header(all_stat_cols() ~ \"**Outcome Rates**\")\n\nColumn headers among stacked tables differ. Headers from the first table are\nused.\nℹ Use `quiet = TRUE` to suppress this message.\n\n\n\n\n\n\n\n\nCharacteristic\nOutcome Rates1\n\n\n\n\nDrug A\n\n\nTumor Response\n28 (29%)\n\n\nPatient Died\n52 (53%)\n\n\nDrug B\n\n\nTumor Response\n33 (34%)\n\n\nPatient Died\n60 (59%)\n\n\n\n1 n (%)"
+    "objectID": "slides/02-intro-cardx/02-extras.html#mock-ards-1",
+    "href": "slides/02-intro-cardx/02-extras.html#mock-ards-1",
+    "title": "Analysis Results Datasets",
+    "section": "Mock ARDs",
+    "text": "Mock ARDs\n\ncards::bind_ard(\n  cards::mock_continuous(variables = \"AGE\", \n                         by = list(ARM = c(\"Drug A\", \"Drug B\"))),\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\")),\n                          by = list(ARM = c(\"Drug A\", \"Drug B\")))\n) |&gt; \n  gtsummary::tbl_ard_summary(\n    by = ARM,\n    type  = AGE ~ \"continuous2\",\n    statistic = AGE ~ c(\"{N}\", \"{mean} ({sd})\", \"{median} ({p25}, {p75})\")\n  )\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nAGE\n\n\n\n\n\n\n    N\nxx\nxx\n\n\n    Mean (SD)\nxx.x (xx.x)\nxx.x (xx.x)\n\n\n    Median (Q1, Q3)\nxx.x (xx.x, xx.x)\nxx.x (xx.x, xx.x)\n\n\nAGEGR1\n\n\n\n\n\n\n    &lt;65\nxx (xx.x%)\nxx (xx.x%)\n\n\n    &gt;=65\nxx (xx.x%)\nxx (xx.x%)\n\n\n\n1 n (%)"
   },
   {
-    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_strata-for-stratified-tables",
-    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_strata-for-stratified-tables",
-    "title": "tbl_merge()/tbl_stack()",
-    "section": "",
-    "text": "tbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death))\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\n\nDrug A\n\n\nDrug B\n\n\n\nn\n%\nn\n%\n\n\n\n\nTumor Response\n28\n29%\n33\n34%\n\n\nPatient Died\n52\n53%\n60\n59%\n\n\n\n\n\n\n\nThe default is to combine stratified tables with tbl_merge()."
+    "objectID": "slides/02-intro-cardx/02-extras.html#other-ard-representations",
+    "href": "slides/02-intro-cardx/02-extras.html#other-ard-representations",
+    "title": "Analysis Results Datasets",
+    "section": "Other ARD Representations",
+    "text": "Other ARD Representations\nWhile the data frame-based ARD is easy to work with, language-agnostic representations are often useful.\n\n\nYAML\n\ncards::as_nested_list(ard) |&gt; \n  yaml::as.yaml() |&gt; \n  cat()\n\nvariable:\n  AGE:\n    group1:\n      ARM:\n        group1_level:\n          Placebo:\n            stat_name:\n              'N':\n                stat: 86\n                stat_fmt: '86'\n                warning: ~\n                error: ~\n                context: continuous\n              mean:\n                stat: 75.2093023\n...\n\n\n\nJSON\n\ncards::as_nested_list(ard) |&gt; \n  jsonlite::toJSON(pretty = TRUE)\n\n{\n  \"variable\": {\n    \"AGE\": {\n      \"group1\": {\n        \"ARM\": {\n          \"group1_level\": {\n            \"Placebo\": {\n              \"stat_name\": {\n                \"N\": {\n                  \"stat\": [86],\n                  \"stat_fmt\": [\"86\"],\n                  \"warning\": {},\n                  \"error\": {},\n                  \"context\": [\"continuous\"]\n                },\n..."
   },
   {
-    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_strata-for-stratified-tables-1",
-    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_strata-for-stratified-tables-1",
-    "title": "tbl_merge()/tbl_stack()",
-    "section": "",
-    "text": "We can also stack the tables.\n\ntbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death)),\n  .combine_with = \"tbl_stack\"\n)\n\n\n\n\n\n\n\nCharacteristic\nn\n%\n\n\n\n\nDrug A\n\n\nTumor Response\n28\n29%\n\n\nPatient Died\n52\n53%\n\n\nDrug B\n\n\nTumor Response\n33\n34%\n\n\nPatient Died\n60\n59%"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#cobbling-tables-together",
-    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#cobbling-tables-together",
-    "title": "tbl_merge()/tbl_stack()",
-    "section": "",
-    "text": "Most of the tables we create in the pharma space come from a catalog of standard tables.\nCustom or one-off tables are often quite difficult and time intensive to create.\nThe {gtsummary} package makes it simple to break complex tables into their simple parts and cobble them together in the end.\nMoreover, the internal structure of a gtsummary table is super simple: a data frame and instructions on how to print that data frame to make it cute. If needed, you can directly modify the underlying data frame with modify_table_body().\n\n\n\ntrial |&gt; tbl_summary(include = c(age, grade), by = trt) |&gt; purrr::pluck(\"table_body\")\n\n# A tibble: 6 × 7\n  variable var_type    row_type var_label label   stat_1      stat_2     \n  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      \n1 age      continuous  label    Age       Age     46 (37, 60) 48 (39, 56)\n2 age      continuous  missing  Age       Unknown 7           4          \n3 grade    categorical label    Grade     Grade   &lt;NA&gt;        &lt;NA&gt;       \n4 grade    categorical level    Grade     I       35 (36%)    33 (32%)   \n5 grade    categorical level    Grade     II      32 (33%)    36 (35%)   \n6 grade    categorical level    Grade     III     31 (32%)    33 (32%)"
+    "objectID": "slides/02-intro-cardx/02-extras.html#break",
+    "href": "slides/02-intro-cardx/02-extras.html#break",
+    "title": "Analysis Results Datasets",
+    "section": "Break",
+    "text": "Break\n\n\n\nSister Act 2: Back in the Habit\n\n\n\n−+\n10:00"
   },
   {
     "objectID": "slides/03-tables-gtsummary/02-trial.html",
@@ -1041,6 +1034,419 @@
     "title": "Analysis Results Datasets",
     "section": "Example Dataset",
     "text": "Example Dataset\n\n\nThis presentation will use a subset of the variables.\n\nsm_trial &lt;-\n  trial |&gt; \n  select(trt, age, grade, response)\n\n\n\n\n\n\n\n\n\n\nVariable\nLabel\n\n\n\n\ntrt\nChemotherapy Treatment\n\n\nage\nAge\n\n\ngrade\nGrade\n\n\nresponse\nTumor Response"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#workshop-outline",
+    "href": "slides/02-intro-cardx/index.html#workshop-outline",
+    "title": "{cardx} & other extras",
+    "section": "Workshop outline",
+    "text": "Workshop outline\n\n\nIntroduction to the Analysis Results Standard and {cards}\nIntroduction to the {cardx} Package and ARD Extras\nARD to Tables with {gtsummary}\nARD to Tables with {tfrmt}"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx",
+    "href": "slides/02-intro-cardx/index.html#cardx",
+    "title": "{cardx} & other extras",
+    "section": "{cardx}",
+    "text": "{cardx}\n\nExtension of the {cards} package, providing additional functions to create Analysis Results Datasets (ARDs)\nThe {cardx} package exports many ard_*() function for statistical methods."
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-1",
+    "href": "slides/02-intro-cardx/index.html#cardx-1",
+    "title": "{cardx} & other extras",
+    "section": "{cardx}",
+    "text": "{cardx}\n\nExports ARD frameworks for statistical analyses from many packages\n\n\n  - {stats}\n  - {car}\n  - {effectsize}\n  - {emmeans}\n  - {geepack}\n  - {lme4}\n  - {parameters}\n  - {smd}\n  - {survey}\n  - {survival}\n\n\nThis list is growing (rather quickly) 🌱"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-t-test-example",
+    "href": "slides/02-intro-cardx/index.html#cardx-t-test-example",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} t-test Example",
+    "text": "{cardx} t-test Example\n\n\nWe see the results like the mean difference, the confidence interval, and p-value as expected.\nAnd we also see the function’s inputs, which is incredibly useful for re-use, e.g. we know the we did not use equal variances.\n\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cardx::ard_stats_t_test(by = ARM, variables = AGE)\n\n{cards} data frame: 14 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE stats_t_…    estimate  Mean Dif…    -1.286\n2     ARM      AGE stats_t_…   estimate1  Group 1 …    74.381\n3     ARM      AGE stats_t_…   estimate2  Group 2 …    75.667\n4     ARM      AGE stats_t_…   statistic  t Statis…     -1.03\n5     ARM      AGE stats_t_…     p.value    p-value     0.304\n6     ARM      AGE stats_t_…   parameter  Degrees …   165.595\n7     ARM      AGE stats_t_…    conf.low  CI Lower…     -3.75\n8     ARM      AGE stats_t_…   conf.high  CI Upper…     1.179\n9     ARM      AGE stats_t_…      method     method Welch Tw…\n10    ARM      AGE stats_t_… alternative  alternat… two.sided\n11    ARM      AGE stats_t_…          mu    H0 Mean         0\n12    ARM      AGE stats_t_…      paired  Paired t…     FALSE\n13    ARM      AGE stats_t_…   var.equal  Equal Va…     FALSE\n14    ARM      AGE stats_t_…  conf.level  CI Confi…      0.95\n\n\nℹ 3 more variables: fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-t-test-example-1",
+    "href": "slides/02-intro-cardx/index.html#cardx-t-test-example-1",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} t-test Example",
+    "text": "{cardx} t-test Example\n\nWhat to do if a method you need is not implemented?\nIt’s simple to wrap existing frameworks to customize.\nOne-sample t-test example utilizing cards::ard_continuous().\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_continuous(\n    variables = AGE,\n    statistic = everything() ~ list(t_test = \\(x) t.test(x) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(context = \"t_test_one_sample\")\n\n{cards} data frame: 8 x 8\n\n\n  variable   context   stat_name stat_label      stat fmt_fn\n1      AGE t_test_o…    estimate   estimate    75.024      1\n2      AGE t_test_o…   statistic  statistic     120.2      1\n3      AGE t_test_o…     p.value    p.value         0      1\n4      AGE t_test_o…   parameter  parameter       167      1\n5      AGE t_test_o…    conf.low   conf.low    73.792      1\n6      AGE t_test_o…   conf.high  conf.high    76.256      1\n7      AGE t_test_o…      method     method One Samp…   &lt;fn&gt;\n8      AGE t_test_o… alternative  alternat… two.sided   &lt;fn&gt;\n\n\nℹ 2 more variables: warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-t-test-example-2",
+    "href": "slides/02-intro-cardx/index.html#cardx-t-test-example-2",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} t-test Example",
+    "text": "{cardx} t-test Example\n\nHow to modify if we need a two-sample test, or more generally accessing other columns in the data frame.\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_complex(\n    variables = AGE,\n    statistic = \n      ~ list(t_test = \\(x, data, ...) t.test(x ~ data$ARM) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(group1 = \"ARM\", context = \"t_test_two_sample\") |&gt; \n  cards::tidy_ard_column_order()\n\n{cards} data frame: 10 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE t_test_t…    estimate   estimate    -1.286\n2     ARM      AGE t_test_t…   estimate1  estimate1    74.381\n3     ARM      AGE t_test_t…   estimate2  estimate2    75.667\n4     ARM      AGE t_test_t…   statistic  statistic     -1.03\n5     ARM      AGE t_test_t…     p.value    p.value     0.304\n6     ARM      AGE t_test_t…   parameter  parameter   165.595\n7     ARM      AGE t_test_t…    conf.low   conf.low     -3.75\n8     ARM      AGE t_test_t…   conf.high  conf.high     1.179\n9     ARM      AGE t_test_t…      method     method Welch Tw…\n10    ARM      AGE t_test_t… alternative  alternat… two.sided\n\n\nℹ 3 more variables: fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-regression",
+    "href": "slides/02-intro-cardx/index.html#cardx-regression",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Regression",
+    "text": "{cardx} Regression\n\nIncludes functionality to summarize nearly every type of regression model in the R ecosystem:\n\n\nbetareg::betareg(), biglm::bigglm(), brms::brm(), cmprsk::crr(), fixest::feglm(), fixest::femlm(), fixest::feNmlm(), fixest::feols(), gam::gam(), geepack::geeglm(), glmmTMB::glmmTMB(), lavaan::lavaan(), lfe::felm(), lme4::glmer.nb(), lme4::glmer(), lme4::lmer(), logitr::logitr(), MASS::glm.nb(), MASS::polr(), mgcv::gam(), mice::mira, mmrm::mmrm(), multgee::nomLORgee(), multgee::ordLORgee(), nnet::multinom(), ordinal::clm(), ordinal::clmm(), parsnip::model_fit, plm::plm(), pscl::hurdle(), pscl::zeroinfl(), rstanarm::stan_glm(), stats::aov(), stats::glm(), stats::lm(), stats::nls(), survey::svycoxph(), survey::svyglm(), survey::svyolr(), survival::cch(), survival::clogit(), survival::coxph(), survival::survreg(), tidycmprsk::crr(), VGAM::vglm() (and more)"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-regression-example",
+    "href": "slides/02-intro-cardx/index.html#cardx-regression-example",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Regression Example",
+    "text": "{cardx} Regression Example\n\nlibrary(survival)\n\n# build model\nmod &lt;- pharmaverseadam::adtte_onco |&gt; \n  dplyr::filter(PARAM %in% \"Progression Free Survival\") |&gt;\n  coxph(ggsurvfit::Surv_CNSR() ~ ARM, data = _)\n\n# put model in a summary table\ntbl &lt;- gtsummary::tbl_regression(mod, exponentiate = TRUE) |&gt; \n  gtsummary::add_n(location = c('label', 'level')) |&gt; \n  gtsummary::add_nevent(location = c('label', 'level'))\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nEvent N\nHR1\n95% CI1\np-value\n\n\n\n\nDescription of Planned Arm\n254\n6\n\n\n\n\n\n\n\n\n    Placebo\n86\n3\n—\n—\n\n\n\n\n    Xanomeline High Dose\n84\n2\n3.00\n0.39, 22.9\n0.3\n\n\n    Xanomeline Low Dose\n84\n1\n1.27\n0.11, 14.3\n0.8\n\n\n\n1 HR = Hazard Ratio, CI = Confidence Interval"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-regression-example-1",
+    "href": "slides/02-intro-cardx/index.html#cardx-regression-example-1",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Regression Example",
+    "text": "{cardx} Regression Example\nThe cardx::ard_regression() does a lot for us in the background.\n\nIdentifies the variable from the regression terms (i.e. groups levels of the same variable)\nIdentifies reference groups from categorical covariates\nFinds variable labels from the source data frames\nKnows the total N of the model, the number of events, and can do the same for each level of categorical variables\nContextually aware of slopes, odds ratios, hazard ratios, and incidence rate ratios\nAnd much much more."
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-exercise",
+    "href": "slides/02-intro-cardx/index.html#cardx-exercise",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Exercise",
+    "text": "{cardx} Exercise\n\nOpen exercises/03-cardx.R\nCompute the demographic summaries as described\n\n\n\n\n−+\n08:00"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-exercise-solution",
+    "href": "slides/02-intro-cardx/index.html#cardx-exercise-solution",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Exercise Solution",
+    "text": "{cardx} Exercise Solution\nPrompt: Compare AGE, SEX, RACE distributions across treatment arms (TRT01A)\nA. First, compute the Kruskal-Wallis test for AGE by TRT01A\n\nadsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == \"Y\") \n\nkruskal_ard &lt;-  \n  cardx::ard_stats_kruskal_test( \n    data = adsl,  \n    by = TRT01A, \n    variables = AGE \n  ) \n\nkruskal_ard\n\n{cards} data frame: 4 x 9\n\n\n  group1 variable   context stat_name stat_label      stat\n1 TRT01A      AGE stats_kr… statistic  Kruskal-…     3.879\n2 TRT01A      AGE stats_kr…   p.value    p-value     0.144\n3 TRT01A      AGE stats_kr… parameter  Degrees …         2\n4 TRT01A      AGE stats_kr…    method     method Kruskal-…\n\n\nℹ 3 more variables: fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-exercise-solution-demographic-comparison-with-cardx",
+    "href": "slides/02-intro-cardx/index.html#cardx-exercise-solution-demographic-comparison-with-cardx",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Exercise Solution: Demographic comparison with {cardx}",
+    "text": "{cardx} Exercise Solution: Demographic comparison with {cardx}\nSecond, compute the Chi-squared test for SEX, RACE by TRT01A\n\n\nchisq_ard &lt;-  \n  cardx::ard_stats_chisq_test( \n    data = adsl,  \n    by = TRT01A, \n    variables = c(SEX, RACE) \n  ) \nchisq_ard |&gt; \n  dplyr::filter(!stat_name %in% c(\"p\", \"B\")) |&gt; \n  dplyr::select(-warning)\n\n{cards} data frame: 14 x 8\n\n\n   group1 variable   context        stat_name stat_label      stat\n1  TRT01A      SEX stats_ch…        statistic  X-square…     2.761\n2  TRT01A      SEX stats_ch…          p.value    p-value     0.251\n3  TRT01A      SEX stats_ch…        parameter  Degrees …         2\n4  TRT01A      SEX stats_ch…           method     method Pearson'…\n5  TRT01A      SEX stats_ch…          correct    correct      TRUE\n6  TRT01A      SEX stats_ch…        rescale.p  rescale.p     FALSE\n7  TRT01A      SEX stats_ch… simulate.p.value  simulate…     FALSE\n8  TRT01A     RACE stats_ch…        statistic  X-square…     4.577\n9  TRT01A     RACE stats_ch…          p.value    p-value     0.334\n10 TRT01A     RACE stats_ch…        parameter  Degrees …         4\n11 TRT01A     RACE stats_ch…           method     method Pearson'…\n12 TRT01A     RACE stats_ch…          correct    correct      TRUE\n13 TRT01A     RACE stats_ch…        rescale.p  rescale.p     FALSE\n14 TRT01A     RACE stats_ch… simulate.p.value  simulate…     FALSE\n\n\nℹ 2 more variables: fmt_fn, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#cardx-exercise-solution-demographic-comparison-with-cardx-1",
+    "href": "slides/02-intro-cardx/index.html#cardx-exercise-solution-demographic-comparison-with-cardx-1",
+    "title": "{cardx} & other extras",
+    "section": "{cardx} Exercise Solution: Demographic comparison with {cardx}",
+    "text": "{cardx} Exercise Solution: Demographic comparison with {cardx}\nCombine your results with cards::bind_ard() and subset the ARD to include the rows with p-values only\n\nfinal_ard &lt;-  \n  cards::bind_ard( \n    kruskal_ard,  \n    chisq_ard \n  ) |&gt;  \n  dplyr::filter(stat_name == \"p.value\") \n\nfinal_ard\n\n{cards} data frame: 3 x 9\n\n\n  group1 variable stat_name stat_label  stat   warning\n1 TRT01A      AGE   p.value    p-value 0.144          \n2 TRT01A      SEX   p.value    p-value 0.251          \n3 TRT01A     RACE   p.value    p-value 0.334 Chi-squa…\n\n\nℹ 3 more variables: context, fmt_fn, error\n\nfinal_ard$warning[[3]]\n\n[1] \"Chi-squared approximation may be incorrect\""
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#when-things-go-wrong",
+    "href": "slides/02-intro-cardx/index.html#when-things-go-wrong",
+    "title": "{cardx} & other extras",
+    "section": "When things go wrong 😱",
+    "text": "When things go wrong 😱\nWhat happens when statistics are un-calculable?\n\nard_gone_wrong &lt;- \n  cards::ADSL |&gt; \n  cards::ard_continuous(\n    by = ARM,\n    variable = AGEGR1,\n    statistic = ~list(kurtosis = \\(x) e1071::kurtosis(x))\n  ) |&gt; \n  cards::replace_null_statistic()\nard_gone_wrong\n\n{cards} data frame: 3 x 10\n\n\n  group1 group1_level variable stat_name stat_label stat   warning     error\n1    ARM      Placebo   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n2    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n3    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n\n\nℹ 2 more variables: context, fmt_fn\n\n\n\ncards::print_ard_conditions(ard_gone_wrong)\n\n\n\n\nWhere is the statistic? AGEGR1 is character\nEven when there are errors or warnings, we still get the ARD with the expected structure returned.\n\nTHIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.\nThis allows you to design everything up-front.\n\nWe can also report these warnings and errors back to users. &lt;!CLICK!&gt;"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#mock-ards",
+    "href": "slides/02-intro-cardx/index.html#mock-ards",
+    "title": "{cardx} & other extras",
+    "section": "Mock ARDs",
+    "text": "Mock ARDs\nLike mock tables, mock ARDs are often useful as well\n\ncards::bind_ard(\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\"))),\n  cards::mock_continuous(variables = \"AGE\")\n) |&gt; \n  cards::apply_fmt_fn()\n\n{cards} data frame: 14 x 10\n\n\n   variable variable_level stat_name stat_label stat stat_fmt\n1    AGEGR1            &lt;65         n          n            xx\n2    AGEGR1            &lt;65         p          %          xx.x\n3    AGEGR1            &lt;65         N          N            xx\n4    AGEGR1           &gt;=65         n          n            xx\n5    AGEGR1           &gt;=65         p          %          xx.x\n6    AGEGR1           &gt;=65         N          N            xx\n7       AGE                        N          N            xx\n8       AGE                     mean       Mean          xx.x\n9       AGE                       sd         SD          xx.x\n10      AGE                   median     Median          xx.x\n11      AGE                      p25         Q1          xx.x\n12      AGE                      p75         Q3          xx.x\n13      AGE                      min        Min          xx.x\n14      AGE                      max        Max          xx.x\n\n\nℹ 4 more variables: context, fmt_fn, warning, error"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#mock-ards-1",
+    "href": "slides/02-intro-cardx/index.html#mock-ards-1",
+    "title": "{cardx} & other extras",
+    "section": "Mock ARDs",
+    "text": "Mock ARDs\n\ncards::bind_ard(\n  cards::mock_continuous(variables = \"AGE\", \n                         by = list(ARM = c(\"Drug A\", \"Drug B\"))),\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\")),\n                          by = list(ARM = c(\"Drug A\", \"Drug B\")))\n) |&gt; \n  gtsummary::tbl_ard_summary(\n    by = ARM,\n    type  = AGE ~ \"continuous2\",\n    statistic = AGE ~ c(\"{N}\", \"{mean} ({sd})\", \"{median} ({p25}, {p75})\")\n  )\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nAGE\n\n\n\n\n\n\n    N\nxx\nxx\n\n\n    Mean (SD)\nxx.x (xx.x)\nxx.x (xx.x)\n\n\n    Median (Q1, Q3)\nxx.x (xx.x, xx.x)\nxx.x (xx.x, xx.x)\n\n\nAGEGR1\n\n\n\n\n\n\n    &lt;65\nxx (xx.x%)\nxx (xx.x%)\n\n\n    &gt;=65\nxx (xx.x%)\nxx (xx.x%)\n\n\n\n1 n (%)"
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#other-ard-representations",
+    "href": "slides/02-intro-cardx/index.html#other-ard-representations",
+    "title": "{cardx} & other extras",
+    "section": "Other ARD Representations",
+    "text": "Other ARD Representations\nWhile the data frame-based ARD is easy to work with, language-agnostic representations are often useful.\n\n\nYAML\n\ncards::as_nested_list(ard) |&gt; \n  yaml::as.yaml() |&gt; \n  cat()\n\nvariable:\n  AGE:\n    group1:\n      ARM:\n        group1_level:\n          Placebo:\n            stat_name:\n              'N':\n                stat: 86\n                stat_fmt: '86'\n                warning: ~\n                error: ~\n                context: continuous\n              mean:\n                stat: 75.2093023\n...\n\n\n\nJSON\n\ncards::as_nested_list(ard) |&gt; \n  jsonlite::toJSON(pretty = TRUE)\n\n{\n  \"variable\": {\n    \"AGE\": {\n      \"group1\": {\n        \"ARM\": {\n          \"group1_level\": {\n            \"Placebo\": {\n              \"stat_name\": {\n                \"N\": {\n                  \"stat\": [86],\n                  \"stat_fmt\": [\"86\"],\n                  \"warning\": {},\n                  \"error\": {},\n                  \"context\": [\"continuous\"]\n                },\n..."
+  },
+  {
+    "objectID": "slides/02-intro-cardx/index.html#break",
+    "href": "slides/02-intro-cardx/index.html#break",
+    "title": "{cardx} & other extras",
+    "section": "Break",
+    "text": "Break\n\n\n\n\n\n−+\n10:00\n\n\n\n\n\n\n\nbit.ly/rpharma-ard\n\n\n\nSister Act 2: Back in the Habit"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html",
+    "href": "slides/01-intro-cards/intro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "You want to learn about ARDs\nYou want to learn about new tools for working with ARDs\nYou want to learn how to make displays from ARDs\nYou want to practice coding with hands-on exercises\n\n\n\n\n\nWhat to do if you find a bug? 🐛\nAsk questions!\nLet us know in the chat if you need help\nBe respectful, follow the Terms and Conditions of R/Pharma https://rinpharma.com/terms/\n\n\n\n\n\nSlido quiz time!\n\n\n\n\n\nFor consistency, we will be working in RStudio Cloud\nEverything has been installed and set up for you\nYou can also opt to work in local RStudio\nFollowing the course, all content from this workshop will be available on the course website and GitHub\n\n\n\n\n\n\n\n−+\n05:00\n\n\n\n\nIf using Posit Cloud:\n\nNavigate to Posit Cloud link\nClick on the Project to make a personal copy\n\nIf using local RStudio:\n\nExercises can be found here: https://www.danieldsjoberg.com/ARD-RinPharma-workshop-2024/exercises.html\n\nOpen exercises/01-warmup.R\nComplete the exercise\n\n\n\n\nUsing dplyr:\n\nFrom the ADSL dataset:\nSubset to the safety population (SAFFL == “Y”)\ncalculate the number of unique subjects in each treatment group (TRT01A)\n\n\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\npharmaverseadam::adsl |&gt; \n  filter(SAFFL == \"Y\") |&gt; \n  count(TRT01A)\n\n# A tibble: 3 × 2\n  TRT01A                   n\n  &lt;chr&gt;                &lt;int&gt;\n1 Placebo                 86\n2 Xanomeline High Dose    72\n3 Xanomeline Low Dose     96"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#this-workshop-is-for-you-if",
+    "href": "slides/01-intro-cards/intro.html#this-workshop-is-for-you-if",
+    "title": "Introduction",
+    "section": "",
+    "text": "You want to learn about ARDs\nYou want to learn about new tools for working with ARDs\nYou want to learn how to make displays from ARDs\nYou want to practice coding with hands-on exercises"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#workshop-expectations",
+    "href": "slides/01-intro-cards/intro.html#workshop-expectations",
+    "title": "Introduction",
+    "section": "",
+    "text": "What to do if you find a bug? 🐛\nAsk questions!\nLet us know in the chat if you need help\nBe respectful, follow the Terms and Conditions of R/Pharma https://rinpharma.com/terms/"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#who-are-you",
+    "href": "slides/01-intro-cards/intro.html#who-are-you",
+    "title": "Introduction",
+    "section": "",
+    "text": "Slido quiz time!"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#working-environment",
+    "href": "slides/01-intro-cards/intro.html#working-environment",
+    "title": "Introduction",
+    "section": "",
+    "text": "For consistency, we will be working in RStudio Cloud\nEverything has been installed and set up for you\nYou can also opt to work in local RStudio\nFollowing the course, all content from this workshop will be available on the course website and GitHub"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#quick-warm-up",
+    "href": "slides/01-intro-cards/intro.html#quick-warm-up",
+    "title": "Introduction",
+    "section": "",
+    "text": "−+\n05:00\n\n\n\n\nIf using Posit Cloud:\n\nNavigate to Posit Cloud link\nClick on the Project to make a personal copy\n\nIf using local RStudio:\n\nExercises can be found here: https://www.danieldsjoberg.com/ARD-RinPharma-workshop-2024/exercises.html\n\nOpen exercises/01-warmup.R\nComplete the exercise"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#solution-for-00-warmup.r",
+    "href": "slides/01-intro-cards/intro.html#solution-for-00-warmup.r",
+    "title": "Introduction",
+    "section": "",
+    "text": "Using dplyr:\n\nFrom the ADSL dataset:\nSubset to the safety population (SAFFL == “Y”)\ncalculate the number of unique subjects in each treatment group (TRT01A)\n\n\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\npharmaverseadam::adsl |&gt; \n  filter(SAFFL == \"Y\") |&gt; \n  count(TRT01A)\n\n# A tibble: 3 × 2\n  TRT01A                   n\n  &lt;chr&gt;                &lt;int&gt;\n1 Placebo                 86\n2 Xanomeline High Dose    72\n3 Xanomeline Low Dose     96"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#analysis-results-standard-ars",
+    "href": "slides/01-intro-cards/intro.html#analysis-results-standard-ars",
+    "title": "Introduction",
+    "section": "Analysis Results Standard (ARS)",
+    "text": "Analysis Results Standard (ARS)"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-1",
+    "href": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-1",
+    "title": "Introduction",
+    "section": "Analysis Results Standard (ARS)",
+    "text": "Analysis Results Standard (ARS)\n\n\nEmerging standard for prospectively encoding statistical analysis reporting pipeline in a machine-readable format.\nLogical model that describes analysis results and associated metadata.\nPrimary objectives:\n\nLeverage analysis results metadata to drive automation of results\nSupport storage, access, processing, traceability and reproducibility of results\n\n\n\n\n\n\nLearn more at https://www.cdisc.org/events/webinar/analysis-results-standard-public-review"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-2",
+    "href": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-2",
+    "title": "Introduction",
+    "section": "Analysis Results Standard (ARS)",
+    "text": "Analysis Results Standard (ARS)\nExample ARS Flow\n\n\n\n\n\n\nThe ARS provides a metadata-driven infrastructure for analysis"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-3",
+    "href": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-3",
+    "title": "Introduction",
+    "section": "Analysis Results Standard (ARS)",
+    "text": "Analysis Results Standard (ARS)\nExample ARS Flow\n\n\n\n\n\n\nThe ARS provides a metadata-driven infrastructure for analysis\n{cards} serves as the engine for the analysis"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#analysis-results-data-ard",
+    "href": "slides/01-intro-cards/intro.html#analysis-results-data-ard",
+    "title": "Introduction",
+    "section": "Analysis Results Data (ARD)",
+    "text": "Analysis Results Data (ARD)\n\n\nEncodes statistical analysis outcomes in a machine-readable format.\nThe ARD model specifies how statistical results are saved into a structured format.\nThe ARD can be used to to subsequently create tables and figures.\nThe ARD does not describe the layout of the results"
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#analysis-results-data-ard-1",
+    "href": "slides/01-intro-cards/intro.html#analysis-results-data-ard-1",
+    "title": "Introduction",
+    "section": "Analysis Results Data (ARD)",
+    "text": "Analysis Results Data (ARD)\n\nAfter the initial creation of an ARD, the results can later be re-used again and again for subsequent reporting needs."
+  },
+  {
+    "objectID": "slides/01-intro-cards/intro.html#a-few-notes-about-ards",
+    "href": "slides/01-intro-cards/intro.html#a-few-notes-about-ards",
+    "title": "Introduction",
+    "section": "A few notes about ARDs",
+    "text": "A few notes about ARDs\n\n\nRethinking QC\n\nQC can be focused on the raw value, not the formatted display\n\nYou don’t have to waste time trying to match formatting to match QC\nBut…QC will be more sensitive to floating point\n\n\nFlexible data file types\n\nARD can be saved as a dataset (rds, xpt, etc) or json file"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/08-print_engines.html",
+    "href": "slides/03-tables-gtsummary/08-print_engines.html",
+    "title": "{gtsummary} print engines",
+    "section": "",
+    "text": "Use any print engine to customize table\n\nlibrary(gtsummary)\nlibrary(gt)\ntrial |&gt;\n  select(age, grade) |&gt;\n  tbl_summary() |&gt;\n  as_gt() |&gt;\n  cols_width(label ~ px(300)) |&gt;\n  cols_align(columns = stat_0, \n             align = \"left\")\n\n\n\n\n\n\n\nCharacteristic\nN = 2001\n\n\n\n\nAge\n47 (38, 57)\n\n\n    Unknown\n11\n\n\nGrade\n\n\n\n\n    I\n68 (34%)\n\n\n    II\n68 (34%)\n\n\n    III\n64 (32%)\n\n\n\n1 Median (Q1, Q3); n (%)"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/08-print_engines.html#gtsummary-print-engines-2",
+    "href": "slides/03-tables-gtsummary/08-print_engines.html#gtsummary-print-engines-2",
+    "title": "{gtsummary} print engines",
+    "section": "",
+    "text": "Use any print engine to customize table\n\nlibrary(gtsummary)\nlibrary(gt)\ntrial |&gt;\n  select(age, grade) |&gt;\n  tbl_summary() |&gt;\n  as_gt() |&gt;\n  cols_width(label ~ px(300)) |&gt;\n  cols_align(columns = stat_0, \n             align = \"left\")\n\n\n\n\n\n\n\nCharacteristic\nN = 2001\n\n\n\n\nAge\n47 (38, 57)\n\n\n    Unknown\n11\n\n\nGrade\n\n\n\n\n    I\n68 (34%)\n\n\n    II\n68 (34%)\n\n\n    III\n64 (32%)\n\n\n\n1 Median (Q1, Q3); n (%)"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/09-summary.html",
+    "href": "slides/03-tables-gtsummary/09-summary.html",
+    "title": "In Closing",
+    "section": "",
+    "text": "http://www.danieldsjoberg.com/gtsummary/\n\n\n\n\n\n\n\n\n\nDaniel D. Sjoberg\nJoseph Larmarange\nMichael Curry\nJessica Lavery\nKarissa Whiting\nEmily C. Zabor\nXing Bai\nEsther Drill\nJessica Flynn\nMargie Hannum\nStephanie Lobaugh\nShannon Pileggi\nAmy Tin\nGustavo Zapata Wainberg\n\n\n\n\n\n\n@abduazizR, @ablack3, @ABohynDOE, @ABorakati, @adilsonbauhofer, @aghaynes, @ahinton-mmc, @aito123, @akarsteve, @akefley, @albamrt, @albertostefanelli, @alecbiom, @alexandrayas, @alexis-catherine, @AlexZHENGH, @alnajar, @amygimma, @anaavu, @anddis, @andrader, @Andrzej-Andrzej, @angelgar, @arbet003, @arnmayer, @aspina7, @AurelienDasre, @awcm0n, @ayogasekaram, @barretmonchka, @barthelmes, @bc-teixeira, @bcjaeger, @BeauMeche, @benediktclaus, @benwhalley, @berg-michael, @bhattmaulik, @BioYork, @blue-abdur, @brachem-christian, @brianmsm, @browne123, @bwiernik, @bx259, @calebasaraba, @CarolineXGao, @CharlyMarie, @ChongTienGoh, @Chris-M-P, @chrisleitzinger, @cjprobst, @ClaudiaCampani, @clmawhorter, @CodieMonster, @coeusanalytics, @coreysparks, @CorradoLanera, @crystalluckett-sanofi, @ctlamb, @dafxy, @DanChaltiel, @DanielPark-MGH, @davideyre, @davidgohel, @davidkane9, @DavisVaughan, @dax44, @dchiu911, @ddsjoberg, @DeFilippis, @denis-or, @dereksonderegger, @derekstein, @DesiQuintans, @dieuv0, @dimbage, @discoleo, @djbirke, @dmenne, @DrDinhLuong, @edelarua, @edrill, @Eduardo-Auer, @ElfatihHasabo, @emilyvertosick, @eokoshi, @ercbk, @eremingt, @erikvona, @eugenividal, @eweisbrod, @fdehrich, @feizhadj, @fh-jsnider, @fh-mthomson, @FrancoisGhesquiere, @ge-generation, @Generalized, @ghost, @giorgioluciano, @giovannitinervia9, @gjones1219, @gorkang, @GuiMarthe, @gungorMetehan, @hass91, @hescalar, @HichemLa, @hichew22, @hr70, @huftis, @hughjonesd, @iaingallagher, @ilyamusabirov, @IndrajeetPatil, @irene9116, @IsadoraBM, @j-tamad, @jalavery, @jaromilfrossard, @JBarsotti, @jbtov, @jeanmanguy, @jemus42, @jenifav, @jennybc, @JeremyPasco, @jerrodanzalone, @JesseRop, @jflynn264, @jhchou, @jhelvy, @jhk0530, @jjallaire, @jkylearmstrong, @jmbarajas, @jmbarbone, @JoanneF1229, @joelgautschi, @johnryan412, @JohnSodling, @jonasrekdalmathisen, @JonGretar, @jordan49er, @jsavinc, @jthomasmock, @juseer, @jwilliman, @karissawhiting, @karl-an, @kendonB, @kentm4, @klh281, @kmdono02, @kristyrobledo, @kwakuduahc1, @lamberp6, @lamhine, @larmarange, @ledermanr, @leejasme, @leslem, @levossen, @lngdet, @longjp, @lorenzoFabbri, @loukesio, @love520lfh, @lspeetluk, @ltin1214, @ltj-github, @lucavd, @LucyMcGowan, @LuiNov, @lukejenner6, @maciekbanas, @maia-sh, @malcolmbarrett, @mariamaseng, @Marsus1972, @martsobm, @Mathicaa, @matthieu-faron, @maxanes, @mayazadok2, @mbac, @mdidish, @medewitt, @meenakshi-kushwaha, @melindahiggins2000, @MelissaAssel, @Melkiades, @mfansler, @michaelcurry1123, @mikemazzucco, @mlamias, @mljaniczek, @moleps, @monitoringhsd, @motocci, @mrmvergeer, @msberends, @mvuorre, @myamortor, @myensr, @MyKo101, @nalimilan, @ndunnewind, @nikostr, @ningyile, @O16789, @oliviercailloux, @oranwutang, @palantre, @parmsam, @Pascal-Schmidt, @PaulC91, @paulduf, @pedersebastian, @perlatex, @pgseye, @philippemichel, @philsf, @polc1410, @Polperobis, @postgres-newbie, @proshano, @raphidoc, @RaviBot, @rawand-hanna, @rbcavanaugh, @remlapmot, @rich-iannone, @RiversPharmD, @rmgpanw, @roaldarbol, @roman2023, @ryzhu75, @s-j-choi, @sachijay, @saifelayan, @sammo3182, @samrodgersmelnick, @samuele-mercan, @sandhyapc, @sbalci, @sda030, @shah-in-boots, @shannonpileggi, @shaunporwal, @shengchaohou, @ShixiangWang, @simonpcouch, @slb2240, @slobaugh, @spiralparagon, @Spring75xx, @StaffanBetner, @steenharsted, @stenw, @Stephonomon, @storopoli, @stratopopolis, @strengejacke, @szimmer, @tamytsujimoto, @TAOS25, @TarJae, @themichjam, @THIB20, @tibirkrajc, @tjmeyers, @tldrcharlene, @tormodb, @toshifumikuroda, @TPDeramus, @UAB-BST-680, @uakimix, @uriahf, @Valja64, @viola-hilbert, @violet-nova, @vvm02, @will-gt, @xkcococo, @xtimbeau, @yatirbe, @yihunzeleke, @yonicd, @yoursdearboy, @YousufMohammed2002, @yuryzablotski, @zabore, @zachariae, @zaddyzad, @zawkzaw, @zdz2101, @zeyunlu, @zhangkaicr, @zhaohongxin0, @zheer-kejlberg, @zhengnow, @zhonghua723, @zlkrvsm, @zongell-star, and @Zoulf001.\n\n\n\n\n\n\n\n\n\n\nr fontawesome::fa(\"stack-overflow\", fill = fa_fill) Ask on stackoverflow.com\nr fontawesome::fa(\"align-justify\", fill = fa_fill) Use the gtsummary tag\nr fontawesome::fa(\"fire\", fill = fa_fill) Thousands of posts!\n\nr fontawesome::fa(\"link\", fill = fa_fill) danieldsjoberg.com\nr fontawesome::fa(\"mastodon\", fill = fa_fill) mastodon.social/@ddsjoberg\nr fontawesome::fa(\"linkedin\", fill = fa_fill) linkedin.com/in/ddsjoberg/\nr fontawesome::fa(\"github\", fill = fa_fill) github.com/ddsjoberg"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/09-summary.html#gtsummary-website",
+    "href": "slides/03-tables-gtsummary/09-summary.html#gtsummary-website",
+    "title": "In Closing",
+    "section": "",
+    "text": "http://www.danieldsjoberg.com/gtsummary/"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/09-summary.html#section",
+    "href": "slides/03-tables-gtsummary/09-summary.html#section",
+    "title": "In Closing",
+    "section": "",
+    "text": "Daniel D. Sjoberg\nJoseph Larmarange\nMichael Curry\nJessica Lavery\nKarissa Whiting\nEmily C. Zabor\nXing Bai\nEsther Drill\nJessica Flynn\nMargie Hannum\nStephanie Lobaugh\nShannon Pileggi\nAmy Tin\nGustavo Zapata Wainberg\n\n\n\n\n\n\n@abduazizR, @ablack3, @ABohynDOE, @ABorakati, @adilsonbauhofer, @aghaynes, @ahinton-mmc, @aito123, @akarsteve, @akefley, @albamrt, @albertostefanelli, @alecbiom, @alexandrayas, @alexis-catherine, @AlexZHENGH, @alnajar, @amygimma, @anaavu, @anddis, @andrader, @Andrzej-Andrzej, @angelgar, @arbet003, @arnmayer, @aspina7, @AurelienDasre, @awcm0n, @ayogasekaram, @barretmonchka, @barthelmes, @bc-teixeira, @bcjaeger, @BeauMeche, @benediktclaus, @benwhalley, @berg-michael, @bhattmaulik, @BioYork, @blue-abdur, @brachem-christian, @brianmsm, @browne123, @bwiernik, @bx259, @calebasaraba, @CarolineXGao, @CharlyMarie, @ChongTienGoh, @Chris-M-P, @chrisleitzinger, @cjprobst, @ClaudiaCampani, @clmawhorter, @CodieMonster, @coeusanalytics, @coreysparks, @CorradoLanera, @crystalluckett-sanofi, @ctlamb, @dafxy, @DanChaltiel, @DanielPark-MGH, @davideyre, @davidgohel, @davidkane9, @DavisVaughan, @dax44, @dchiu911, @ddsjoberg, @DeFilippis, @denis-or, @dereksonderegger, @derekstein, @DesiQuintans, @dieuv0, @dimbage, @discoleo, @djbirke, @dmenne, @DrDinhLuong, @edelarua, @edrill, @Eduardo-Auer, @ElfatihHasabo, @emilyvertosick, @eokoshi, @ercbk, @eremingt, @erikvona, @eugenividal, @eweisbrod, @fdehrich, @feizhadj, @fh-jsnider, @fh-mthomson, @FrancoisGhesquiere, @ge-generation, @Generalized, @ghost, @giorgioluciano, @giovannitinervia9, @gjones1219, @gorkang, @GuiMarthe, @gungorMetehan, @hass91, @hescalar, @HichemLa, @hichew22, @hr70, @huftis, @hughjonesd, @iaingallagher, @ilyamusabirov, @IndrajeetPatil, @irene9116, @IsadoraBM, @j-tamad, @jalavery, @jaromilfrossard, @JBarsotti, @jbtov, @jeanmanguy, @jemus42, @jenifav, @jennybc, @JeremyPasco, @jerrodanzalone, @JesseRop, @jflynn264, @jhchou, @jhelvy, @jhk0530, @jjallaire, @jkylearmstrong, @jmbarajas, @jmbarbone, @JoanneF1229, @joelgautschi, @johnryan412, @JohnSodling, @jonasrekdalmathisen, @JonGretar, @jordan49er, @jsavinc, @jthomasmock, @juseer, @jwilliman, @karissawhiting, @karl-an, @kendonB, @kentm4, @klh281, @kmdono02, @kristyrobledo, @kwakuduahc1, @lamberp6, @lamhine, @larmarange, @ledermanr, @leejasme, @leslem, @levossen, @lngdet, @longjp, @lorenzoFabbri, @loukesio, @love520lfh, @lspeetluk, @ltin1214, @ltj-github, @lucavd, @LucyMcGowan, @LuiNov, @lukejenner6, @maciekbanas, @maia-sh, @malcolmbarrett, @mariamaseng, @Marsus1972, @martsobm, @Mathicaa, @matthieu-faron, @maxanes, @mayazadok2, @mbac, @mdidish, @medewitt, @meenakshi-kushwaha, @melindahiggins2000, @MelissaAssel, @Melkiades, @mfansler, @michaelcurry1123, @mikemazzucco, @mlamias, @mljaniczek, @moleps, @monitoringhsd, @motocci, @mrmvergeer, @msberends, @mvuorre, @myamortor, @myensr, @MyKo101, @nalimilan, @ndunnewind, @nikostr, @ningyile, @O16789, @oliviercailloux, @oranwutang, @palantre, @parmsam, @Pascal-Schmidt, @PaulC91, @paulduf, @pedersebastian, @perlatex, @pgseye, @philippemichel, @philsf, @polc1410, @Polperobis, @postgres-newbie, @proshano, @raphidoc, @RaviBot, @rawand-hanna, @rbcavanaugh, @remlapmot, @rich-iannone, @RiversPharmD, @rmgpanw, @roaldarbol, @roman2023, @ryzhu75, @s-j-choi, @sachijay, @saifelayan, @sammo3182, @samrodgersmelnick, @samuele-mercan, @sandhyapc, @sbalci, @sda030, @shah-in-boots, @shannonpileggi, @shaunporwal, @shengchaohou, @ShixiangWang, @simonpcouch, @slb2240, @slobaugh, @spiralparagon, @Spring75xx, @StaffanBetner, @steenharsted, @stenw, @Stephonomon, @storopoli, @stratopopolis, @strengejacke, @szimmer, @tamytsujimoto, @TAOS25, @TarJae, @themichjam, @THIB20, @tibirkrajc, @tjmeyers, @tldrcharlene, @tormodb, @toshifumikuroda, @TPDeramus, @UAB-BST-680, @uakimix, @uriahf, @Valja64, @viola-hilbert, @violet-nova, @vvm02, @will-gt, @xkcococo, @xtimbeau, @yatirbe, @yihunzeleke, @yonicd, @yoursdearboy, @YousufMohammed2002, @yuryzablotski, @zabore, @zachariae, @zaddyzad, @zawkzaw, @zdz2101, @zeyunlu, @zhangkaicr, @zhaohongxin0, @zheer-kejlberg, @zhengnow, @zhonghua723, @zlkrvsm, @zongell-star, and @Zoulf001."
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/09-summary.html#thank-you",
+    "href": "slides/03-tables-gtsummary/09-summary.html#thank-you",
+    "title": "In Closing",
+    "section": "",
+    "text": "r fontawesome::fa(\"stack-overflow\", fill = fa_fill) Ask on stackoverflow.com\nr fontawesome::fa(\"align-justify\", fill = fa_fill) Use the gtsummary tag\nr fontawesome::fa(\"fire\", fill = fa_fill) Thousands of posts!\n\nr fontawesome::fa(\"link\", fill = fa_fill) danieldsjoberg.com\nr fontawesome::fa(\"mastodon\", fill = fa_fill) mastodon.social/@ddsjoberg\nr fontawesome::fa(\"linkedin\", fill = fa_fill) linkedin.com/in/ddsjoberg/\nr fontawesome::fa(\"github\", fill = fa_fill) github.com/ddsjoberg"
+  },
+  {
+    "objectID": "slides/04-tables-tfrmt/wrapup.html",
+    "href": "slides/04-tables-tfrmt/wrapup.html",
+    "title": "Workshop recap",
+    "section": "",
+    "text": "Introduction to the Analysis Results Standard and {cards}\nIntroduction to the {cardx} Package and ARD Extras\nARD to Tables with {gtsummary}\nARD to Tables with {tfrmt}\n\n\n\n\nWrap-up slido quiz\n\n\n\n\n{cards}: https://insightsengineering.github.io/cards/\n{cardx}: https://insightsengineering.github.io/cardx/\n{gtsummary}: https://www.danieldsjoberg.com/gtsummary/\n{tfrmt}: https://gsk-biostatistics.github.io/tfrmt/\n{tfrmtbuilder}: https://gsk-biostatistics.github.io/tfrmtbuilder/"
+  },
+  {
+    "objectID": "slides/04-tables-tfrmt/wrapup.html#workshop-recap-1",
+    "href": "slides/04-tables-tfrmt/wrapup.html#workshop-recap-1",
+    "title": "Workshop recap",
+    "section": "",
+    "text": "Introduction to the Analysis Results Standard and {cards}\nIntroduction to the {cardx} Package and ARD Extras\nARD to Tables with {gtsummary}\nARD to Tables with {tfrmt}"
+  },
+  {
+    "objectID": "slides/04-tables-tfrmt/wrapup.html#slido",
+    "href": "slides/04-tables-tfrmt/wrapup.html#slido",
+    "title": "Workshop recap",
+    "section": "",
+    "text": "Wrap-up slido quiz"
+  },
+  {
+    "objectID": "slides/04-tables-tfrmt/wrapup.html#learning-more",
+    "href": "slides/04-tables-tfrmt/wrapup.html#learning-more",
+    "title": "Workshop recap",
+    "section": "",
+    "text": "{cards}: https://insightsengineering.github.io/cards/\n{cardx}: https://insightsengineering.github.io/cardx/\n{gtsummary}: https://www.danieldsjoberg.com/gtsummary/\n{tfrmt}: https://gsk-biostatistics.github.io/tfrmt/\n{tfrmtbuilder}: https://gsk-biostatistics.github.io/tfrmtbuilder/"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/01-background.html",
+    "href": "slides/03-tables-gtsummary/01-background.html",
+    "title": "Analysis Results Datasets",
+    "section": "",
+    "text": "Began to address reproducible issues while working in academia\nGoal was to build a package to summarize study results with code that was both simple and customizable\nFirst release in May 2019\n\n\n\n\n\n\n\n\nThe stats\n\n1,000,000+ installations from CRAN\n1000+ GitHub stars\n300+ contributors\n~50 code contributors\n\nWon the 2021 American Statistical Association (ASA) Innovation in Programming Award\nWon the 2024 Posit Pharma Table Contest"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/01-background.html#section",
+    "href": "slides/03-tables-gtsummary/01-background.html#section",
+    "title": "Analysis Results Datasets",
+    "section": "",
+    "text": "Began to address reproducible issues while working in academia\nGoal was to build a package to summarize study results with code that was both simple and customizable\nFirst release in May 2019\n\n\n\n\n\n\n\n\nThe stats\n\n1,000,000+ installations from CRAN\n1000+ GitHub stars\n300+ contributors\n~50 code contributors\n\nWon the 2021 American Statistical Association (ASA) Innovation in Programming Award\nWon the 2024 Posit Pharma Table Contest"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/01-background.html#gtsummary-overview",
+    "href": "slides/03-tables-gtsummary/01-background.html#gtsummary-overview",
+    "title": "Analysis Results Datasets",
+    "section": "{gtsummary} overview",
+    "text": "{gtsummary} overview\n\n\n\nCreate tabular summaries with sensible defaults but highly customizable\nTypes of summaries:\n\nDemographic- or “Table 1”-types\nCross-tabulation\nRegression models\nSurvival data\nSurvey data\nCustom tables\n\n\n\n\nReport statistics from {gtsummary} tables inline in R Markdown\nStack and/or merge any table type\nUse themes to standardize across tables\nChoose from different print engines"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/01-background.html#gtsummary-runs-on-ards",
+    "href": "slides/03-tables-gtsummary/01-background.html#gtsummary-runs-on-ards",
+    "title": "Analysis Results Datasets",
+    "section": "{gtsummary} runs on ARDs!",
+    "text": "{gtsummary} runs on ARDs!"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/01-background.html#gtsummary-overview-1",
+    "href": "slides/03-tables-gtsummary/01-background.html#gtsummary-overview-1",
+    "title": "Analysis Results Datasets",
+    "section": "{gtsummary} overview",
+    "text": "{gtsummary} overview\nFor our workshop, we will focus on the following summary types as well as themes and print engines.\n\ntbl_summary()\ntbl_cross()\ntbl_continuous()\ntbl_wide_summary()"
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
+    "crumbs": [
+      "License"
+    ]
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/00-setup.html",
+    "href": "slides/03-tables-gtsummary/00-setup.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n\n\n Please ask questions at any time!"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/00-setup.html#questions",
+    "href": "slides/03-tables-gtsummary/00-setup.html#questions",
+    "title": "Introduction",
+    "section": "",
+    "text": "Please ask questions at any time!"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "",
+    "text": "🗓️ October 28, 2024 | 13:00-16:00 EDT\n📝 R in Pharma & Workshop Registration\n🌐 Virtual and FREE!",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#description",
+    "href": "index.html#description",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Description",
+    "text": "Description\nThe CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis summaries in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability. The newly released {cards} R package, a collaborative effort including Roche, GSK, and Novartis, offers a variety of functions for ARD generation. These range from basic univariate summaries like means and tabulations to complex multivariable summaries encompassing regression models and statistical tests. In this interactive workshop, attendees will learn about ARDs and how they fit into the larger CDISC Analysis Results Standard. They will get hands-on experience using {cards} to build ARDs for both simple and complex statistical summaries. Lastly, attendees will also be introduced to open-source tools for converting their ARDs into tables using the {gtsummary} and {tfrmt} R packages. Attendees will leave with a solid understanding of ARDs and the knowledge of how to integrate them into their daily work using open-source tools.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\n\n\n\n\n\nSection\nTopic\n\n\n\n\nSection 1\nIntroduction to the Analysis Results Standard and {cards}\n\n\nSection 2\nIntroduction to the {cardx} Package and ARD Extras\n\n\nSection 3\nARD to Tables with {gtsummary}\n\n\nSection 4\nARD to Tables with {tfrmt}",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#pre-work",
+    "href": "index.html#pre-work",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Pre-work",
+    "text": "Pre-work\n\nBookmark this site. You’ll reference it throughout the workshop.\nSign up for a free Posit Cloud account.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#instructors",
+    "href": "index.html#instructors",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Instructors",
+    "text": "Instructors\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.\n   \n\nBecca Krouse is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 14+ years in the field of clinical research and specializes in developing R-based tools.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#workshop-assistant",
+    "href": "index.html#workshop-assistant",
+    "title": "Unlocking Analysis Results Datasets (ARDs)",
+    "section": "Workshop Assistant",
+    "text": "Workshop Assistant\n\nJack Talboys is a Software Developer at Novartis, recently joining their Open-Source Enablement team. Before that he worked as a Data Scientist for Ascent, a Software Consultancy, building Shiny apps and R packages for companies across a range of industries including Insurance, Finance, and Pharma.",
+    "crumbs": [
+      "Home"
+    ]
   },
   {
     "objectID": "slides/01-intro-cards/index.html#instructors",
@@ -1358,66 +1764,6 @@
     "text": "Solutions for 01-cards-partB.R\n\nCalculate the number and percentage of unique subjects (USUBJID) with at least one AE:\n\nOverall\nBy each SOC (AESOC)\nBy each Preferred term (AEDECOD) within SOC (AESOC)\n\nBy every combination of treatment group (TRT01A) and severity (AESEV)\n\n\nard_stack_hierarchical(\n  data = adae,\n  variables = c(AESOC, AEDECOD),\n  by = c(TRT01A, AESEV), \n  id = USUBJID,\n  denominator = adsl\n)\n\n   group1 group1_level group2 group2_level group3 group3_level variable\n1  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n2  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n3  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n4  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n5  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n6  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n7  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n8  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n9  TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n10 TRT01A      Placebo  AESEV         MILD   &lt;NA&gt;                 AESOC\n   variable_level stat_name stat_label  stat\n1       CARDIAC …         n          n     8\n2       CARDIAC …         N          N    86\n3       CARDIAC …         p          % 0.093\n4       CONGENIT…         n          n     0\n5       CONGENIT…         N          N    86\n6       CONGENIT…         p          %     0\n7       EAR AND …         n          n     1\n8       EAR AND …         N          N    86\n9       EAR AND …         p          % 0.012\n10      EYE DISO…         n          n     2\n\n\n\n\n\n\nbit.ly/rpharma-ard"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "",
-    "text": "🗓️ October 28, 2024 | 13:00-16:00 EDT\n📝 R in Pharma & Workshop Registration\n🌐 Virtual and FREE!",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#description",
-    "href": "index.html#description",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Description",
-    "text": "Description\nThe CDISC Analysis Results Data (ARD) Model is an emerging standard for encoding statistical analysis summaries in a machine-readable format. Its primary objective is to streamline the processes of automation, ensuring reproducibility, promoting reusability, and enhancing traceability. The newly released {cards} R package, a collaborative effort including Roche, GSK, and Novartis, offers a variety of functions for ARD generation. These range from basic univariate summaries like means and tabulations to complex multivariable summaries encompassing regression models and statistical tests. In this interactive workshop, attendees will learn about ARDs and how they fit into the larger CDISC Analysis Results Standard. They will get hands-on experience using {cards} to build ARDs for both simple and complex statistical summaries. Lastly, attendees will also be introduced to open-source tools for converting their ARDs into tables using the {gtsummary} and {tfrmt} R packages. Attendees will leave with a solid understanding of ARDs and the knowledge of how to integrate them into their daily work using open-source tools.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#schedule",
-    "href": "index.html#schedule",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\n\n\n\n\n\nSection\nTopic\n\n\n\n\nSection 1\nIntroduction to the Analysis Results Standard and {cards}\n\n\nSection 2\nIntroduction to the {cardx} Package and ARD Extras\n\n\nSection 3\nARD to Tables with {gtsummary}\n\n\nSection 4\nARD to Tables with {tfrmt}",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#pre-work",
-    "href": "index.html#pre-work",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Pre-work",
-    "text": "Pre-work\n\nBookmark this site. You’ll reference it throughout the workshop.\nSign up for a free Posit Cloud account.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#instructors",
-    "href": "index.html#instructors",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Instructors",
-    "text": "Instructors\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.\n   \n\nBecca Krouse is a data scientist in GSK’s Statistics and Data Science Innovation Hub. A biostatistician by training, she has experience spanning 14+ years in the field of clinical research and specializes in developing R-based tools.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#workshop-assistant",
-    "href": "index.html#workshop-assistant",
-    "title": "Unlocking Analysis Results Datasets (ARDs)",
-    "section": "Workshop Assistant",
-    "text": "Workshop Assistant\n\nJack Talboys is a Software Developer at Novartis, recently joining their Open-Source Enablement team. Before that he worked as a Data Scientist for Ascent, a Software Consultancy, building Shiny apps and R packages for companies across a range of industries including Insurance, Finance, and Pharma.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
     "objectID": "slides/04-tables-tfrmt/index.html#workshop-outline",
     "href": "slides/04-tables-tfrmt/index.html#workshop-outline",
     "title": "ARD to Tables with {tfrmt}",
@@ -1597,409 +1943,84 @@
     "href": "slides/04-tables-tfrmt/index.html#exercise",
     "title": "ARD to Tables with {tfrmt}",
     "section": "Exercise 🏃‍➡️",
-    "text": "Exercise 🏃‍➡️\n\nOpen R file exercises/04-tables-tfrmt.R\nRun the provided code, which will open the app in your browser\nComplete the steps to further customize the table (hint: Edit tab):\n\nSwitch the order of treatment columns so Active is first (hint: Column Plan)\nChange the footnote marks to letters instead of numbers (hint: Footnote Plan)\nSplit the table into 2 parts by setting a maximum of 3 rows (hint: Page Plan)\nExport the table (hint: Export Tab)\n\n\n\n\n\n\nbit.ly/rpharma-ard"
+    "text": "Exercise 🏃‍➡️\n\nOpen R file exercises/04-tables-tfrmt.R\nRun the provided code, which will open the app in your browser\nComplete the steps to further customize the table (hint: Edit tab):\n\nSwitch the order of treatment columns so Active is first (hint: Column Plan)\nChange the footnote marks to letters instead of numbers (hint: Footnote Plan)\nSplit the table into 2 parts by setting a maximum of 3 rows (hint: Page Plan)\nExport the table (hint: Export Tab)"
   },
   {
-    "objectID": "slides/03-tables-gtsummary/00-setup.html",
-    "href": "slides/03-tables-gtsummary/00-setup.html",
-    "title": "Introduction",
-    "section": "",
-    "text": "── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n\n\n Please ask questions at any time!"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/00-setup.html#questions",
-    "href": "slides/03-tables-gtsummary/00-setup.html#questions",
-    "title": "Introduction",
-    "section": "",
-    "text": "Please ask questions at any time!"
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
-    "crumbs": [
-      "License"
-    ]
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/01-background.html",
-    "href": "slides/03-tables-gtsummary/01-background.html",
-    "title": "Analysis Results Datasets",
-    "section": "",
-    "text": "Began to address reproducible issues while working in academia\nGoal was to build a package to summarize study results with code that was both simple and customizable\nFirst release in May 2019\n\n\n\n\n\n\n\n\nThe stats\n\n1,000,000+ installations from CRAN\n1000+ GitHub stars\n300+ contributors\n~50 code contributors\n\nWon the 2021 American Statistical Association (ASA) Innovation in Programming Award\nWon the 2024 Posit Pharma Table Contest"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/01-background.html#section",
-    "href": "slides/03-tables-gtsummary/01-background.html#section",
-    "title": "Analysis Results Datasets",
-    "section": "",
-    "text": "Began to address reproducible issues while working in academia\nGoal was to build a package to summarize study results with code that was both simple and customizable\nFirst release in May 2019\n\n\n\n\n\n\n\n\nThe stats\n\n1,000,000+ installations from CRAN\n1000+ GitHub stars\n300+ contributors\n~50 code contributors\n\nWon the 2021 American Statistical Association (ASA) Innovation in Programming Award\nWon the 2024 Posit Pharma Table Contest"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/01-background.html#gtsummary-overview",
-    "href": "slides/03-tables-gtsummary/01-background.html#gtsummary-overview",
-    "title": "Analysis Results Datasets",
-    "section": "{gtsummary} overview",
-    "text": "{gtsummary} overview\n\n\n\nCreate tabular summaries with sensible defaults but highly customizable\nTypes of summaries:\n\nDemographic- or “Table 1”-types\nCross-tabulation\nRegression models\nSurvival data\nSurvey data\nCustom tables\n\n\n\n\nReport statistics from {gtsummary} tables inline in R Markdown\nStack and/or merge any table type\nUse themes to standardize across tables\nChoose from different print engines"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/01-background.html#gtsummary-runs-on-ards",
-    "href": "slides/03-tables-gtsummary/01-background.html#gtsummary-runs-on-ards",
-    "title": "Analysis Results Datasets",
-    "section": "{gtsummary} runs on ARDs!",
-    "text": "{gtsummary} runs on ARDs!"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/01-background.html#gtsummary-overview-1",
-    "href": "slides/03-tables-gtsummary/01-background.html#gtsummary-overview-1",
-    "title": "Analysis Results Datasets",
-    "section": "{gtsummary} overview",
-    "text": "{gtsummary} overview\nFor our workshop, we will focus on the following summary types as well as themes and print engines.\n\ntbl_summary()\ntbl_cross()\ntbl_continuous()\ntbl_wide_summary()"
-  },
-  {
-    "objectID": "slides/05-wrap-up/wrapup.html",
-    "href": "slides/05-wrap-up/wrapup.html",
-    "title": "Thank you for coming! 🎉",
-    "section": "",
-    "text": "Introduction to the Analysis Results Standard and {cards}\nIntroduction to the {cardx} Package and ARD Extras\nARD to Tables with {gtsummary}\nARD to Tables with {tfrmt}"
-  },
-  {
-    "objectID": "slides/05-wrap-up/wrapup.html#workshop-recap",
-    "href": "slides/05-wrap-up/wrapup.html#workshop-recap",
-    "title": "Thank you for coming! 🎉",
-    "section": "",
-    "text": "Introduction to the Analysis Results Standard and {cards}\nIntroduction to the {cardx} Package and ARD Extras\nARD to Tables with {gtsummary}\nARD to Tables with {tfrmt}"
-  },
-  {
-    "objectID": "slides/05-wrap-up/wrapup.html#slido",
-    "href": "slides/05-wrap-up/wrapup.html#slido",
-    "title": "Thank you for coming! 🎉",
-    "section": "Slido",
-    "text": "Slido\nWrap-up slido quiz"
-  },
-  {
-    "objectID": "slides/05-wrap-up/wrapup.html#learning-more",
-    "href": "slides/05-wrap-up/wrapup.html#learning-more",
-    "title": "Thank you for coming! 🎉",
-    "section": "Learning more",
-    "text": "Learning more\n\nhttps://insightsengineering.github.io/cards/\nhttps://insightsengineering.github.io/cardx/\nhttps://www.danieldsjoberg.com/gtsummary/\nhttps://gsk-biostatistics.github.io/tfrmt/\nhttps://gsk-biostatistics.github.io/tfrmtbuilder/"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/09-summary.html",
-    "href": "slides/03-tables-gtsummary/09-summary.html",
-    "title": "In Closing",
-    "section": "",
-    "text": "http://www.danieldsjoberg.com/gtsummary/\n\n\n\n\n\n\n\n\n\nDaniel D. Sjoberg\nJoseph Larmarange\nMichael Curry\nJessica Lavery\nKarissa Whiting\nEmily C. Zabor\nXing Bai\nEsther Drill\nJessica Flynn\nMargie Hannum\nStephanie Lobaugh\nShannon Pileggi\nAmy Tin\nGustavo Zapata Wainberg\n\n\n\n\n\n\n@abduazizR, @ablack3, @ABohynDOE, @ABorakati, @adilsonbauhofer, @aghaynes, @ahinton-mmc, @aito123, @akarsteve, @akefley, @albamrt, @albertostefanelli, @alecbiom, @alexandrayas, @alexis-catherine, @AlexZHENGH, @alnajar, @amygimma, @anaavu, @anddis, @andrader, @Andrzej-Andrzej, @angelgar, @arbet003, @arnmayer, @aspina7, @AurelienDasre, @awcm0n, @ayogasekaram, @barretmonchka, @barthelmes, @bc-teixeira, @bcjaeger, @BeauMeche, @benediktclaus, @benwhalley, @berg-michael, @bhattmaulik, @BioYork, @blue-abdur, @brachem-christian, @brianmsm, @browne123, @bwiernik, @bx259, @calebasaraba, @CarolineXGao, @CharlyMarie, @ChongTienGoh, @Chris-M-P, @chrisleitzinger, @cjprobst, @ClaudiaCampani, @clmawhorter, @CodieMonster, @coeusanalytics, @coreysparks, @CorradoLanera, @crystalluckett-sanofi, @ctlamb, @dafxy, @DanChaltiel, @DanielPark-MGH, @davideyre, @davidgohel, @davidkane9, @DavisVaughan, @dax44, @dchiu911, @ddsjoberg, @DeFilippis, @denis-or, @dereksonderegger, @derekstein, @DesiQuintans, @dieuv0, @dimbage, @discoleo, @djbirke, @dmenne, @DrDinhLuong, @edelarua, @edrill, @Eduardo-Auer, @ElfatihHasabo, @emilyvertosick, @eokoshi, @ercbk, @eremingt, @erikvona, @eugenividal, @eweisbrod, @fdehrich, @feizhadj, @fh-jsnider, @fh-mthomson, @FrancoisGhesquiere, @ge-generation, @Generalized, @ghost, @giorgioluciano, @giovannitinervia9, @gjones1219, @gorkang, @GuiMarthe, @gungorMetehan, @hass91, @hescalar, @HichemLa, @hichew22, @hr70, @huftis, @hughjonesd, @iaingallagher, @ilyamusabirov, @IndrajeetPatil, @irene9116, @IsadoraBM, @j-tamad, @jalavery, @jaromilfrossard, @JBarsotti, @jbtov, @jeanmanguy, @jemus42, @jenifav, @jennybc, @JeremyPasco, @jerrodanzalone, @JesseRop, @jflynn264, @jhchou, @jhelvy, @jhk0530, @jjallaire, @jkylearmstrong, @jmbarajas, @jmbarbone, @JoanneF1229, @joelgautschi, @johnryan412, @JohnSodling, @jonasrekdalmathisen, @JonGretar, @jordan49er, @jsavinc, @jthomasmock, @juseer, @jwilliman, @karissawhiting, @karl-an, @kendonB, @kentm4, @klh281, @kmdono02, @kristyrobledo, @kwakuduahc1, @lamberp6, @lamhine, @larmarange, @ledermanr, @leejasme, @leslem, @levossen, @lngdet, @longjp, @lorenzoFabbri, @loukesio, @love520lfh, @lspeetluk, @ltin1214, @ltj-github, @lucavd, @LucyMcGowan, @LuiNov, @lukejenner6, @maciekbanas, @maia-sh, @malcolmbarrett, @mariamaseng, @Marsus1972, @martsobm, @Mathicaa, @matthieu-faron, @maxanes, @mayazadok2, @mbac, @mdidish, @medewitt, @meenakshi-kushwaha, @melindahiggins2000, @MelissaAssel, @Melkiades, @mfansler, @michaelcurry1123, @mikemazzucco, @mlamias, @mljaniczek, @moleps, @monitoringhsd, @motocci, @mrmvergeer, @msberends, @mvuorre, @myamortor, @myensr, @MyKo101, @nalimilan, @ndunnewind, @nikostr, @ningyile, @O16789, @oliviercailloux, @oranwutang, @palantre, @parmsam, @Pascal-Schmidt, @PaulC91, @paulduf, @pedersebastian, @perlatex, @pgseye, @philippemichel, @philsf, @polc1410, @Polperobis, @postgres-newbie, @proshano, @raphidoc, @RaviBot, @rawand-hanna, @rbcavanaugh, @remlapmot, @rich-iannone, @RiversPharmD, @rmgpanw, @roaldarbol, @roman2023, @ryzhu75, @s-j-choi, @sachijay, @saifelayan, @sammo3182, @samrodgersmelnick, @samuele-mercan, @sandhyapc, @sbalci, @sda030, @shah-in-boots, @shannonpileggi, @shaunporwal, @shengchaohou, @ShixiangWang, @simonpcouch, @slb2240, @slobaugh, @spiralparagon, @Spring75xx, @StaffanBetner, @steenharsted, @stenw, @Stephonomon, @storopoli, @stratopopolis, @strengejacke, @szimmer, @tamytsujimoto, @TAOS25, @TarJae, @themichjam, @THIB20, @tibirkrajc, @tjmeyers, @tldrcharlene, @tormodb, @toshifumikuroda, @TPDeramus, @UAB-BST-680, @uakimix, @uriahf, @Valja64, @viola-hilbert, @violet-nova, @vvm02, @will-gt, @xkcococo, @xtimbeau, @yatirbe, @yihunzeleke, @yonicd, @yoursdearboy, @YousufMohammed2002, @yuryzablotski, @zabore, @zachariae, @zaddyzad, @zawkzaw, @zdz2101, @zeyunlu, @zhangkaicr, @zhaohongxin0, @zheer-kejlberg, @zhengnow, @zhonghua723, @zlkrvsm, @zongell-star, and @Zoulf001.\n\n\n\n\n\n\n\n\n\n\nr fontawesome::fa(\"stack-overflow\", fill = fa_fill) Ask on stackoverflow.com\nr fontawesome::fa(\"align-justify\", fill = fa_fill) Use the gtsummary tag\nr fontawesome::fa(\"fire\", fill = fa_fill) Thousands of posts!\n\nr fontawesome::fa(\"link\", fill = fa_fill) danieldsjoberg.com\nr fontawesome::fa(\"mastodon\", fill = fa_fill) mastodon.social/@ddsjoberg\nr fontawesome::fa(\"linkedin\", fill = fa_fill) linkedin.com/in/ddsjoberg/\nr fontawesome::fa(\"github\", fill = fa_fill) github.com/ddsjoberg"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/09-summary.html#gtsummary-website",
-    "href": "slides/03-tables-gtsummary/09-summary.html#gtsummary-website",
-    "title": "In Closing",
-    "section": "",
-    "text": "http://www.danieldsjoberg.com/gtsummary/"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/09-summary.html#section",
-    "href": "slides/03-tables-gtsummary/09-summary.html#section",
-    "title": "In Closing",
-    "section": "",
-    "text": "Daniel D. Sjoberg\nJoseph Larmarange\nMichael Curry\nJessica Lavery\nKarissa Whiting\nEmily C. Zabor\nXing Bai\nEsther Drill\nJessica Flynn\nMargie Hannum\nStephanie Lobaugh\nShannon Pileggi\nAmy Tin\nGustavo Zapata Wainberg\n\n\n\n\n\n\n@abduazizR, @ablack3, @ABohynDOE, @ABorakati, @adilsonbauhofer, @aghaynes, @ahinton-mmc, @aito123, @akarsteve, @akefley, @albamrt, @albertostefanelli, @alecbiom, @alexandrayas, @alexis-catherine, @AlexZHENGH, @alnajar, @amygimma, @anaavu, @anddis, @andrader, @Andrzej-Andrzej, @angelgar, @arbet003, @arnmayer, @aspina7, @AurelienDasre, @awcm0n, @ayogasekaram, @barretmonchka, @barthelmes, @bc-teixeira, @bcjaeger, @BeauMeche, @benediktclaus, @benwhalley, @berg-michael, @bhattmaulik, @BioYork, @blue-abdur, @brachem-christian, @brianmsm, @browne123, @bwiernik, @bx259, @calebasaraba, @CarolineXGao, @CharlyMarie, @ChongTienGoh, @Chris-M-P, @chrisleitzinger, @cjprobst, @ClaudiaCampani, @clmawhorter, @CodieMonster, @coeusanalytics, @coreysparks, @CorradoLanera, @crystalluckett-sanofi, @ctlamb, @dafxy, @DanChaltiel, @DanielPark-MGH, @davideyre, @davidgohel, @davidkane9, @DavisVaughan, @dax44, @dchiu911, @ddsjoberg, @DeFilippis, @denis-or, @dereksonderegger, @derekstein, @DesiQuintans, @dieuv0, @dimbage, @discoleo, @djbirke, @dmenne, @DrDinhLuong, @edelarua, @edrill, @Eduardo-Auer, @ElfatihHasabo, @emilyvertosick, @eokoshi, @ercbk, @eremingt, @erikvona, @eugenividal, @eweisbrod, @fdehrich, @feizhadj, @fh-jsnider, @fh-mthomson, @FrancoisGhesquiere, @ge-generation, @Generalized, @ghost, @giorgioluciano, @giovannitinervia9, @gjones1219, @gorkang, @GuiMarthe, @gungorMetehan, @hass91, @hescalar, @HichemLa, @hichew22, @hr70, @huftis, @hughjonesd, @iaingallagher, @ilyamusabirov, @IndrajeetPatil, @irene9116, @IsadoraBM, @j-tamad, @jalavery, @jaromilfrossard, @JBarsotti, @jbtov, @jeanmanguy, @jemus42, @jenifav, @jennybc, @JeremyPasco, @jerrodanzalone, @JesseRop, @jflynn264, @jhchou, @jhelvy, @jhk0530, @jjallaire, @jkylearmstrong, @jmbarajas, @jmbarbone, @JoanneF1229, @joelgautschi, @johnryan412, @JohnSodling, @jonasrekdalmathisen, @JonGretar, @jordan49er, @jsavinc, @jthomasmock, @juseer, @jwilliman, @karissawhiting, @karl-an, @kendonB, @kentm4, @klh281, @kmdono02, @kristyrobledo, @kwakuduahc1, @lamberp6, @lamhine, @larmarange, @ledermanr, @leejasme, @leslem, @levossen, @lngdet, @longjp, @lorenzoFabbri, @loukesio, @love520lfh, @lspeetluk, @ltin1214, @ltj-github, @lucavd, @LucyMcGowan, @LuiNov, @lukejenner6, @maciekbanas, @maia-sh, @malcolmbarrett, @mariamaseng, @Marsus1972, @martsobm, @Mathicaa, @matthieu-faron, @maxanes, @mayazadok2, @mbac, @mdidish, @medewitt, @meenakshi-kushwaha, @melindahiggins2000, @MelissaAssel, @Melkiades, @mfansler, @michaelcurry1123, @mikemazzucco, @mlamias, @mljaniczek, @moleps, @monitoringhsd, @motocci, @mrmvergeer, @msberends, @mvuorre, @myamortor, @myensr, @MyKo101, @nalimilan, @ndunnewind, @nikostr, @ningyile, @O16789, @oliviercailloux, @oranwutang, @palantre, @parmsam, @Pascal-Schmidt, @PaulC91, @paulduf, @pedersebastian, @perlatex, @pgseye, @philippemichel, @philsf, @polc1410, @Polperobis, @postgres-newbie, @proshano, @raphidoc, @RaviBot, @rawand-hanna, @rbcavanaugh, @remlapmot, @rich-iannone, @RiversPharmD, @rmgpanw, @roaldarbol, @roman2023, @ryzhu75, @s-j-choi, @sachijay, @saifelayan, @sammo3182, @samrodgersmelnick, @samuele-mercan, @sandhyapc, @sbalci, @sda030, @shah-in-boots, @shannonpileggi, @shaunporwal, @shengchaohou, @ShixiangWang, @simonpcouch, @slb2240, @slobaugh, @spiralparagon, @Spring75xx, @StaffanBetner, @steenharsted, @stenw, @Stephonomon, @storopoli, @stratopopolis, @strengejacke, @szimmer, @tamytsujimoto, @TAOS25, @TarJae, @themichjam, @THIB20, @tibirkrajc, @tjmeyers, @tldrcharlene, @tormodb, @toshifumikuroda, @TPDeramus, @UAB-BST-680, @uakimix, @uriahf, @Valja64, @viola-hilbert, @violet-nova, @vvm02, @will-gt, @xkcococo, @xtimbeau, @yatirbe, @yihunzeleke, @yonicd, @yoursdearboy, @YousufMohammed2002, @yuryzablotski, @zabore, @zachariae, @zaddyzad, @zawkzaw, @zdz2101, @zeyunlu, @zhangkaicr, @zhaohongxin0, @zheer-kejlberg, @zhengnow, @zhonghua723, @zlkrvsm, @zongell-star, and @Zoulf001."
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/09-summary.html#thank-you",
-    "href": "slides/03-tables-gtsummary/09-summary.html#thank-you",
-    "title": "In Closing",
-    "section": "",
-    "text": "r fontawesome::fa(\"stack-overflow\", fill = fa_fill) Ask on stackoverflow.com\nr fontawesome::fa(\"align-justify\", fill = fa_fill) Use the gtsummary tag\nr fontawesome::fa(\"fire\", fill = fa_fill) Thousands of posts!\n\nr fontawesome::fa(\"link\", fill = fa_fill) danieldsjoberg.com\nr fontawesome::fa(\"mastodon\", fill = fa_fill) mastodon.social/@ddsjoberg\nr fontawesome::fa(\"linkedin\", fill = fa_fill) linkedin.com/in/ddsjoberg/\nr fontawesome::fa(\"github\", fill = fa_fill) github.com/ddsjoberg"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/08-print_engines.html",
-    "href": "slides/03-tables-gtsummary/08-print_engines.html",
-    "title": "{gtsummary} print engines",
-    "section": "",
-    "text": "Use any print engine to customize table\n\nlibrary(gtsummary)\nlibrary(gt)\ntrial |&gt;\n  select(age, grade) |&gt;\n  tbl_summary() |&gt;\n  as_gt() |&gt;\n  cols_width(label ~ px(300)) |&gt;\n  cols_align(columns = stat_0, \n             align = \"left\")\n\n\n\n\n\n\n\nCharacteristic\nN = 2001\n\n\n\n\nAge\n47 (38, 57)\n\n\n    Unknown\n11\n\n\nGrade\n\n\n\n\n    I\n68 (34%)\n\n\n    II\n68 (34%)\n\n\n    III\n64 (32%)\n\n\n\n1 Median (Q1, Q3); n (%)"
-  },
-  {
-    "objectID": "slides/03-tables-gtsummary/08-print_engines.html#gtsummary-print-engines-2",
-    "href": "slides/03-tables-gtsummary/08-print_engines.html#gtsummary-print-engines-2",
-    "title": "{gtsummary} print engines",
-    "section": "",
-    "text": "Use any print engine to customize table\n\nlibrary(gtsummary)\nlibrary(gt)\ntrial |&gt;\n  select(age, grade) |&gt;\n  tbl_summary() |&gt;\n  as_gt() |&gt;\n  cols_width(label ~ px(300)) |&gt;\n  cols_align(columns = stat_0, \n             align = \"left\")\n\n\n\n\n\n\n\nCharacteristic\nN = 2001\n\n\n\n\nAge\n47 (38, 57)\n\n\n    Unknown\n11\n\n\nGrade\n\n\n\n\n    I\n68 (34%)\n\n\n    II\n68 (34%)\n\n\n    III\n64 (32%)\n\n\n\n1 Median (Q1, Q3); n (%)"
-  },
-  {
-    "objectID": "slides/05-wrap-up/index.html#workshop-recap",
-    "href": "slides/05-wrap-up/index.html#workshop-recap",
-    "title": "Unlocking Analysis Results Datasets",
+    "objectID": "slides/04-tables-tfrmt/index.html#workshop-recap-1",
+    "href": "slides/04-tables-tfrmt/index.html#workshop-recap-1",
+    "title": "ARD to Tables with {tfrmt}",
     "section": "Workshop recap",
     "text": "Workshop recap\n\nIntroduction to the Analysis Results Standard and {cards}\nIntroduction to the {cardx} Package and ARD Extras\nARD to Tables with {gtsummary}\nARD to Tables with {tfrmt}"
   },
   {
-    "objectID": "slides/05-wrap-up/index.html#slido",
-    "href": "slides/05-wrap-up/index.html#slido",
-    "title": "Unlocking Analysis Results Datasets",
+    "objectID": "slides/04-tables-tfrmt/index.html#slido",
+    "href": "slides/04-tables-tfrmt/index.html#slido",
+    "title": "ARD to Tables with {tfrmt}",
     "section": "Slido",
     "text": "Slido\nWrap-up slido quiz"
   },
   {
-    "objectID": "slides/05-wrap-up/index.html#learning-more",
-    "href": "slides/05-wrap-up/index.html#learning-more",
-    "title": "Unlocking Analysis Results Datasets",
+    "objectID": "slides/04-tables-tfrmt/index.html#learning-more",
+    "href": "slides/04-tables-tfrmt/index.html#learning-more",
+    "title": "ARD to Tables with {tfrmt}",
     "section": "Learning more",
-    "text": "Learning more\n\nhttps://insightsengineering.github.io/cards/\nhttps://insightsengineering.github.io/cardx/\nhttps://www.danieldsjoberg.com/gtsummary/\nhttps://gsk-biostatistics.github.io/tfrmt/\nhttps://gsk-biostatistics.github.io/tfrmtbuilder/"
+    "text": "Learning more\n\n{cards}: https://insightsengineering.github.io/cards/\n{cardx}: https://insightsengineering.github.io/cardx/\n{gtsummary}: https://www.danieldsjoberg.com/gtsummary/\n{tfrmt}: https://gsk-biostatistics.github.io/tfrmt/\n{tfrmtbuilder}: https://gsk-biostatistics.github.io/tfrmtbuilder/"
   },
   {
-    "objectID": "slides/01-intro-cards/intro.html",
-    "href": "slides/01-intro-cards/intro.html",
-    "title": "Introduction",
+    "objectID": "slides/04-tables-tfrmt/index.html#thank-you-for-coming",
+    "href": "slides/04-tables-tfrmt/index.html#thank-you-for-coming",
+    "title": "ARD to Tables with {tfrmt}",
+    "section": "Thank you for coming! 🎉",
+    "text": "Thank you for coming! 🎉\n\n\n\n\n\n\n\n\n\nbit.ly/rpharma-ard"
+  },
+  {
+    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html",
+    "href": "slides/03-tables-gtsummary/04-tbl_merge.html",
+    "title": "tbl_merge()/tbl_stack()",
     "section": "",
-    "text": "You want to learn about ARDs\nYou want to learn about new tools for working with ARDs\nYou want to learn how to make displays from ARDs\nYou want to practice coding with hands-on exercises\n\n\n\n\n\nWhat to do if you find a bug? 🐛\nAsk questions!\nLet us know in the chat if you need help\nBe respectful, follow the Terms and Conditions of R/Pharma https://rinpharma.com/terms/\n\n\n\n\n\nSlido quiz time!\n\n\n\n\n\nFor consistency, we will be working in RStudio Cloud\nEverything has been installed and set up for you\nYou can also opt to work in local RStudio\nFollowing the course, all content from this workshop will be available on the course website and GitHub\n\n\n\n\n\n\n\n−+\n05:00\n\n\n\n\nIf using Posit Cloud:\n\nNavigate to Posit Cloud link\nClick on the Project to make a personal copy\n\nIf using local RStudio:\n\nExercises can be found here: https://www.danieldsjoberg.com/ARD-RinPharma-workshop-2024/exercises.html\n\nOpen exercises/01-warmup.R\nComplete the exercise\n\n\n\n\nUsing dplyr:\n\nFrom the ADSL dataset:\nSubset to the safety population (SAFFL == “Y”)\ncalculate the number of unique subjects in each treatment group (TRT01A)\n\n\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\npharmaverseadam::adsl |&gt; \n  filter(SAFFL == \"Y\") |&gt; \n  count(TRT01A)\n\n# A tibble: 3 × 2\n  TRT01A                   n\n  &lt;chr&gt;                &lt;int&gt;\n1 Placebo                 86\n2 Xanomeline High Dose    72\n3 Xanomeline Low Dose     96"
+    "text": "library(gtsummary)\ntbl_n &lt;- \n  tbl_summary(\n    trial, \n    include = grade, \n    statistic = grade ~ \"{n}\"\n  ) |&gt; \n  modify_header( # update header\n    all_stat_cols() ~ \"**N**\"\n  ) |&gt; \n  modify_footnote( # rm footnote\n    all_stat_cols() ~ NA\n  ) \ntbl_n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\n\n\n\n\nGrade\n\n\n\n\n    I\n68\n\n\n    II\n68\n\n\n    III\n64\n\n\n\n\n\n\n\n\n\n\ntbl_age &lt;-\n  tbl_continuous(\n    trial, \n    include = grade, \n    variable = age, \n    by = trt\n  ) |&gt; \n  modify_header( # update header\n    all_stat_cols() ~ \"**{level}**\"\n  ) \n\n\n\ntbl_age\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nGrade\n\n\n\n\n\n\n    I\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# combine the tables side by side\nlist(tbl_n, tbl_age) |&gt; \n  tbl_merge(tab_spanner = FALSE) # suppress default header\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nDrug A1\nDrug B1\n\n\n\n\nGrade\n\n\n\n\n\n\n\n\n    I\n68\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n68\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n64\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)\n\n\n\n\n\n\n\n\n\n\n\n\ntbl_drug_a &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug A\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\ntbl_drug_b &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug B\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\n\n# stack the two tables \nlist(tbl_drug_a, tbl_drug_b) |&gt; \n  tbl_stack(group_header = c(\"Drug A\", \"Drug B\")) |&gt; # optionally include headers for each table\n  modify_header(all_stat_cols() ~ \"**Outcome Rates**\")\n\nColumn headers among stacked tables differ. Headers from the first table are\nused.\nℹ Use `quiet = TRUE` to suppress this message.\n\n\n\n\n\n\n\n\nCharacteristic\nOutcome Rates1\n\n\n\n\nDrug A\n\n\nTumor Response\n28 (29%)\n\n\nPatient Died\n52 (53%)\n\n\nDrug B\n\n\nTumor Response\n33 (34%)\n\n\nPatient Died\n60 (59%)\n\n\n\n1 n (%)\n\n\n\n\n\n\n\n\n\n\n\n\ntbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death))\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\n\nDrug A\n\n\nDrug B\n\n\n\nn\n%\nn\n%\n\n\n\n\nTumor Response\n28\n29%\n33\n34%\n\n\nPatient Died\n52\n53%\n60\n59%\n\n\n\n\n\n\n\nThe default is to combine stratified tables with tbl_merge().\n\n\n\nWe can also stack the tables.\n\ntbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death)),\n  .combine_with = \"tbl_stack\"\n)\n\n\n\n\n\n\n\nCharacteristic\nn\n%\n\n\n\n\nDrug A\n\n\nTumor Response\n28\n29%\n\n\nPatient Died\n52\n53%\n\n\nDrug B\n\n\nTumor Response\n33\n34%\n\n\nPatient Died\n60\n59%\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMost of the tables we create in the pharma space come from a catalog of standard tables.\nCustom or one-off tables are often quite difficult and time intensive to create.\nThe {gtsummary} package makes it simple to break complex tables into their simple parts and cobble them together in the end.\nMoreover, the internal structure of a gtsummary table is super simple: a data frame and instructions on how to print that data frame to make it cute. If needed, you can directly modify the underlying data frame with modify_table_body().\n\n\n\ntrial |&gt; tbl_summary(include = c(age, grade), by = trt) |&gt; purrr::pluck(\"table_body\")\n\n# A tibble: 6 × 7\n  variable var_type    row_type var_label label   stat_1      stat_2     \n  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      \n1 age      continuous  label    Age       Age     46 (37, 60) 48 (39, 56)\n2 age      continuous  missing  Age       Unknown 7           4          \n3 grade    categorical label    Grade     Grade   &lt;NA&gt;        &lt;NA&gt;       \n4 grade    categorical level    Grade     I       35 (36%)    33 (32%)   \n5 grade    categorical level    Grade     II      32 (33%)    36 (35%)   \n6 grade    categorical level    Grade     III     31 (32%)    33 (32%)"
   },
   {
-    "objectID": "slides/01-intro-cards/intro.html#this-workshop-is-for-you-if",
-    "href": "slides/01-intro-cards/intro.html#this-workshop-is-for-you-if",
-    "title": "Introduction",
+    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_merge-for-side-by-side-tables",
+    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_merge-for-side-by-side-tables",
+    "title": "tbl_merge()/tbl_stack()",
     "section": "",
-    "text": "You want to learn about ARDs\nYou want to learn about new tools for working with ARDs\nYou want to learn how to make displays from ARDs\nYou want to practice coding with hands-on exercises"
+    "text": "library(gtsummary)\ntbl_n &lt;- \n  tbl_summary(\n    trial, \n    include = grade, \n    statistic = grade ~ \"{n}\"\n  ) |&gt; \n  modify_header( # update header\n    all_stat_cols() ~ \"**N**\"\n  ) |&gt; \n  modify_footnote( # rm footnote\n    all_stat_cols() ~ NA\n  ) \ntbl_n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\n\n\n\n\nGrade\n\n\n\n\n    I\n68\n\n\n    II\n68\n\n\n    III\n64\n\n\n\n\n\n\n\n\n\n\ntbl_age &lt;-\n  tbl_continuous(\n    trial, \n    include = grade, \n    variable = age, \n    by = trt\n  ) |&gt; \n  modify_header( # update header\n    all_stat_cols() ~ \"**{level}**\"\n  ) \n\n\n\ntbl_age\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nGrade\n\n\n\n\n\n\n    I\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)"
   },
   {
-    "objectID": "slides/01-intro-cards/intro.html#workshop-expectations",
-    "href": "slides/01-intro-cards/intro.html#workshop-expectations",
-    "title": "Introduction",
+    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_merge-for-side-by-side-tables-1",
+    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_merge-for-side-by-side-tables-1",
+    "title": "tbl_merge()/tbl_stack()",
     "section": "",
-    "text": "What to do if you find a bug? 🐛\nAsk questions!\nLet us know in the chat if you need help\nBe respectful, follow the Terms and Conditions of R/Pharma https://rinpharma.com/terms/"
+    "text": "# combine the tables side by side\nlist(tbl_n, tbl_age) |&gt; \n  tbl_merge(tab_spanner = FALSE) # suppress default header\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nDrug A1\nDrug B1\n\n\n\n\nGrade\n\n\n\n\n\n\n\n\n    I\n68\n46 (36, 60)\n48 (42, 55)\n\n\n    II\n68\n45 (31, 55)\n51 (42, 58)\n\n\n    III\n64\n52 (42, 61)\n45 (36, 52)\n\n\n\n1 Age: Median (Q1, Q3)"
   },
   {
-    "objectID": "slides/01-intro-cards/intro.html#who-are-you",
-    "href": "slides/01-intro-cards/intro.html#who-are-you",
-    "title": "Introduction",
+    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_stack-to-combine-vertically",
+    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_stack-to-combine-vertically",
+    "title": "tbl_merge()/tbl_stack()",
     "section": "",
-    "text": "Slido quiz time!"
+    "text": "tbl_drug_a &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug A\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\ntbl_drug_b &lt;- trial |&gt; \n  dplyr::filter(trt == \"Drug B\") |&gt; \n  tbl_summary(include = c(response, death), missing = \"no\")\n\n# stack the two tables \nlist(tbl_drug_a, tbl_drug_b) |&gt; \n  tbl_stack(group_header = c(\"Drug A\", \"Drug B\")) |&gt; # optionally include headers for each table\n  modify_header(all_stat_cols() ~ \"**Outcome Rates**\")\n\nColumn headers among stacked tables differ. Headers from the first table are\nused.\nℹ Use `quiet = TRUE` to suppress this message.\n\n\n\n\n\n\n\n\nCharacteristic\nOutcome Rates1\n\n\n\n\nDrug A\n\n\nTumor Response\n28 (29%)\n\n\nPatient Died\n52 (53%)\n\n\nDrug B\n\n\nTumor Response\n33 (34%)\n\n\nPatient Died\n60 (59%)\n\n\n\n1 n (%)"
   },
   {
-    "objectID": "slides/01-intro-cards/intro.html#working-environment",
-    "href": "slides/01-intro-cards/intro.html#working-environment",
-    "title": "Introduction",
+    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_strata-for-stratified-tables",
+    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_strata-for-stratified-tables",
+    "title": "tbl_merge()/tbl_stack()",
     "section": "",
-    "text": "For consistency, we will be working in RStudio Cloud\nEverything has been installed and set up for you\nYou can also opt to work in local RStudio\nFollowing the course, all content from this workshop will be available on the course website and GitHub"
+    "text": "tbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death))\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\n\nDrug A\n\n\nDrug B\n\n\n\nn\n%\nn\n%\n\n\n\n\nTumor Response\n28\n29%\n33\n34%\n\n\nPatient Died\n52\n53%\n60\n59%\n\n\n\n\n\n\n\nThe default is to combine stratified tables with tbl_merge()."
   },
   {
-    "objectID": "slides/01-intro-cards/intro.html#quick-warm-up",
-    "href": "slides/01-intro-cards/intro.html#quick-warm-up",
-    "title": "Introduction",
+    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_strata-for-stratified-tables-1",
+    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#tbl_strata-for-stratified-tables-1",
+    "title": "tbl_merge()/tbl_stack()",
     "section": "",
-    "text": "−+\n05:00\n\n\n\n\nIf using Posit Cloud:\n\nNavigate to Posit Cloud link\nClick on the Project to make a personal copy\n\nIf using local RStudio:\n\nExercises can be found here: https://www.danieldsjoberg.com/ARD-RinPharma-workshop-2024/exercises.html\n\nOpen exercises/01-warmup.R\nComplete the exercise"
+    "text": "We can also stack the tables.\n\ntbl_strata(\n  trial, \n  strata = trt, \n  ~ .x |&gt; \n    tbl_wide_summary(include = c(response, death)),\n  .combine_with = \"tbl_stack\"\n)\n\n\n\n\n\n\n\nCharacteristic\nn\n%\n\n\n\n\nDrug A\n\n\nTumor Response\n28\n29%\n\n\nPatient Died\n52\n53%\n\n\nDrug B\n\n\nTumor Response\n33\n34%\n\n\nPatient Died\n60\n59%"
   },
   {
-    "objectID": "slides/01-intro-cards/intro.html#solution-for-00-warmup.r",
-    "href": "slides/01-intro-cards/intro.html#solution-for-00-warmup.r",
-    "title": "Introduction",
+    "objectID": "slides/03-tables-gtsummary/04-tbl_merge.html#cobbling-tables-together",
+    "href": "slides/03-tables-gtsummary/04-tbl_merge.html#cobbling-tables-together",
+    "title": "tbl_merge()/tbl_stack()",
     "section": "",
-    "text": "Using dplyr:\n\nFrom the ADSL dataset:\nSubset to the safety population (SAFFL == “Y”)\ncalculate the number of unique subjects in each treatment group (TRT01A)\n\n\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\npharmaverseadam::adsl |&gt; \n  filter(SAFFL == \"Y\") |&gt; \n  count(TRT01A)\n\n# A tibble: 3 × 2\n  TRT01A                   n\n  &lt;chr&gt;                &lt;int&gt;\n1 Placebo                 86\n2 Xanomeline High Dose    72\n3 Xanomeline Low Dose     96"
-  },
-  {
-    "objectID": "slides/01-intro-cards/intro.html#analysis-results-standard-ars",
-    "href": "slides/01-intro-cards/intro.html#analysis-results-standard-ars",
-    "title": "Introduction",
-    "section": "Analysis Results Standard (ARS)",
-    "text": "Analysis Results Standard (ARS)"
-  },
-  {
-    "objectID": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-1",
-    "href": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-1",
-    "title": "Introduction",
-    "section": "Analysis Results Standard (ARS)",
-    "text": "Analysis Results Standard (ARS)\n\n\nEmerging standard for prospectively encoding statistical analysis reporting pipeline in a machine-readable format.\nLogical model that describes analysis results and associated metadata.\nPrimary objectives:\n\nLeverage analysis results metadata to drive automation of results\nSupport storage, access, processing, traceability and reproducibility of results\n\n\n\n\n\n\nLearn more at https://www.cdisc.org/events/webinar/analysis-results-standard-public-review"
-  },
-  {
-    "objectID": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-2",
-    "href": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-2",
-    "title": "Introduction",
-    "section": "Analysis Results Standard (ARS)",
-    "text": "Analysis Results Standard (ARS)\nExample ARS Flow\n\n\n\n\n\n\nThe ARS provides a metadata-driven infrastructure for analysis"
-  },
-  {
-    "objectID": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-3",
-    "href": "slides/01-intro-cards/intro.html#analysis-results-standard-ars-3",
-    "title": "Introduction",
-    "section": "Analysis Results Standard (ARS)",
-    "text": "Analysis Results Standard (ARS)\nExample ARS Flow\n\n\n\n\n\n\nThe ARS provides a metadata-driven infrastructure for analysis\n{cards} serves as the engine for the analysis"
-  },
-  {
-    "objectID": "slides/01-intro-cards/intro.html#analysis-results-data-ard",
-    "href": "slides/01-intro-cards/intro.html#analysis-results-data-ard",
-    "title": "Introduction",
-    "section": "Analysis Results Data (ARD)",
-    "text": "Analysis Results Data (ARD)\n\n\nEncodes statistical analysis outcomes in a machine-readable format.\nThe ARD model specifies how statistical results are saved into a structured format.\nThe ARD can be used to to subsequently create tables and figures.\nThe ARD does not describe the layout of the results"
-  },
-  {
-    "objectID": "slides/01-intro-cards/intro.html#analysis-results-data-ard-1",
-    "href": "slides/01-intro-cards/intro.html#analysis-results-data-ard-1",
-    "title": "Introduction",
-    "section": "Analysis Results Data (ARD)",
-    "text": "Analysis Results Data (ARD)\n\nAfter the initial creation of an ARD, the results can later be re-used again and again for subsequent reporting needs."
-  },
-  {
-    "objectID": "slides/01-intro-cards/intro.html#a-few-notes-about-ards",
-    "href": "slides/01-intro-cards/intro.html#a-few-notes-about-ards",
-    "title": "Introduction",
-    "section": "A few notes about ARDs",
-    "text": "A few notes about ARDs\n\n\nRethinking QC\n\nQC can be focused on the raw value, not the formatted display\n\nYou don’t have to waste time trying to match formatting to match QC\nBut…QC will be more sensitive to floating point\n\n\nFlexible data file types\n\nARD can be saved as a dataset (rds, xpt, etc) or json file"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#workshop-outline",
-    "href": "slides/02-intro-cardx/index.html#workshop-outline",
-    "title": "{cardx} & other extras",
-    "section": "Workshop outline",
-    "text": "Workshop outline\n\n\nIntroduction to the Analysis Results Standard and {cards}\nIntroduction to the {cardx} Package and ARD Extras\nARD to Tables with {gtsummary}\nARD to Tables with {tfrmt}"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx",
-    "href": "slides/02-intro-cardx/index.html#cardx",
-    "title": "{cardx} & other extras",
-    "section": "{cardx}",
-    "text": "{cardx}\n\nExtension of the {cards} package, providing additional functions to create Analysis Results Datasets (ARDs)\nThe {cardx} package exports many ard_*() function for statistical methods."
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-1",
-    "href": "slides/02-intro-cardx/index.html#cardx-1",
-    "title": "{cardx} & other extras",
-    "section": "{cardx}",
-    "text": "{cardx}\n\nExports ARD frameworks for statistical analyses from many packages\n\n\n  - {stats}\n  - {car}\n  - {effectsize}\n  - {emmeans}\n  - {geepack}\n  - {lme4}\n  - {parameters}\n  - {smd}\n  - {survey}\n  - {survival}\n\n\nThis list is growing (rather quickly) 🌱"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-t-test-example",
-    "href": "slides/02-intro-cardx/index.html#cardx-t-test-example",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} t-test Example",
-    "text": "{cardx} t-test Example\n\n\nWe see the results like the mean difference, the confidence interval, and p-value as expected.\nAnd we also see the function’s inputs, which is incredibly useful for re-use, e.g. we know the we did not use equal variances.\n\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cardx::ard_stats_t_test(by = ARM, variables = AGE)\n\n{cards} data frame: 14 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE stats_t_…    estimate  Mean Dif…    -1.286\n2     ARM      AGE stats_t_…   estimate1  Group 1 …    74.381\n3     ARM      AGE stats_t_…   estimate2  Group 2 …    75.667\n4     ARM      AGE stats_t_…   statistic  t Statis…     -1.03\n5     ARM      AGE stats_t_…     p.value    p-value     0.304\n6     ARM      AGE stats_t_…   parameter  Degrees …   165.595\n7     ARM      AGE stats_t_…    conf.low  CI Lower…     -3.75\n8     ARM      AGE stats_t_…   conf.high  CI Upper…     1.179\n9     ARM      AGE stats_t_…      method     method Welch Tw…\n10    ARM      AGE stats_t_… alternative  alternat… two.sided\n11    ARM      AGE stats_t_…          mu    H0 Mean         0\n12    ARM      AGE stats_t_…      paired  Paired t…     FALSE\n13    ARM      AGE stats_t_…   var.equal  Equal Va…     FALSE\n14    ARM      AGE stats_t_…  conf.level  CI Confi…      0.95\n\n\nℹ 3 more variables: fmt_fn, warning, error"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-t-test-example-1",
-    "href": "slides/02-intro-cardx/index.html#cardx-t-test-example-1",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} t-test Example",
-    "text": "{cardx} t-test Example\n\nWhat to do if a method you need is not implemented?\nIt’s simple to wrap existing frameworks to customize.\nOne-sample t-test example utilizing cards::ard_continuous().\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_continuous(\n    variables = AGE,\n    statistic = everything() ~ list(t_test = \\(x) t.test(x) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(context = \"t_test_one_sample\")\n\n{cards} data frame: 8 x 8\n\n\n  variable   context   stat_name stat_label      stat fmt_fn\n1      AGE t_test_o…    estimate   estimate    75.024      1\n2      AGE t_test_o…   statistic  statistic     120.2      1\n3      AGE t_test_o…     p.value    p.value         0      1\n4      AGE t_test_o…   parameter  parameter       167      1\n5      AGE t_test_o…    conf.low   conf.low    73.792      1\n6      AGE t_test_o…   conf.high  conf.high    76.256      1\n7      AGE t_test_o…      method     method One Samp…   &lt;fn&gt;\n8      AGE t_test_o… alternative  alternat… two.sided   &lt;fn&gt;\n\n\nℹ 2 more variables: warning, error"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-t-test-example-2",
-    "href": "slides/02-intro-cardx/index.html#cardx-t-test-example-2",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} t-test Example",
-    "text": "{cardx} t-test Example\n\nHow to modify if we need a two-sample test, or more generally accessing other columns in the data frame.\n\n\npharmaverseadam::adsl |&gt; \n  dplyr::filter(ARM %in% c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")) |&gt;\n  cards::ard_complex(\n    variables = AGE,\n    statistic = \n      ~ list(t_test = \\(x, data, ...) t.test(x ~ data$ARM) |&gt; broom::tidy())\n  ) |&gt; \n  dplyr::mutate(group1 = \"ARM\", context = \"t_test_two_sample\") |&gt; \n  cards::tidy_ard_column_order()\n\n{cards} data frame: 10 x 9\n\n\n   group1 variable   context   stat_name stat_label      stat\n1     ARM      AGE t_test_t…    estimate   estimate    -1.286\n2     ARM      AGE t_test_t…   estimate1  estimate1    74.381\n3     ARM      AGE t_test_t…   estimate2  estimate2    75.667\n4     ARM      AGE t_test_t…   statistic  statistic     -1.03\n5     ARM      AGE t_test_t…     p.value    p.value     0.304\n6     ARM      AGE t_test_t…   parameter  parameter   165.595\n7     ARM      AGE t_test_t…    conf.low   conf.low     -3.75\n8     ARM      AGE t_test_t…   conf.high  conf.high     1.179\n9     ARM      AGE t_test_t…      method     method Welch Tw…\n10    ARM      AGE t_test_t… alternative  alternat… two.sided\n\n\nℹ 3 more variables: fmt_fn, warning, error"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-regression",
-    "href": "slides/02-intro-cardx/index.html#cardx-regression",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} Regression",
-    "text": "{cardx} Regression\n\nIncludes functionality to summarize nearly every type of regression model in the R ecosystem:\n\n\nbetareg::betareg(), biglm::bigglm(), brms::brm(), cmprsk::crr(), fixest::feglm(), fixest::femlm(), fixest::feNmlm(), fixest::feols(), gam::gam(), geepack::geeglm(), glmmTMB::glmmTMB(), lavaan::lavaan(), lfe::felm(), lme4::glmer.nb(), lme4::glmer(), lme4::lmer(), logitr::logitr(), MASS::glm.nb(), MASS::polr(), mgcv::gam(), mice::mira, mmrm::mmrm(), multgee::nomLORgee(), multgee::ordLORgee(), nnet::multinom(), ordinal::clm(), ordinal::clmm(), parsnip::model_fit, plm::plm(), pscl::hurdle(), pscl::zeroinfl(), rstanarm::stan_glm(), stats::aov(), stats::glm(), stats::lm(), stats::nls(), survey::svycoxph(), survey::svyglm(), survey::svyolr(), survival::cch(), survival::clogit(), survival::coxph(), survival::survreg(), tidycmprsk::crr(), VGAM::vglm() (and more)"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-regression-example",
-    "href": "slides/02-intro-cardx/index.html#cardx-regression-example",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} Regression Example",
-    "text": "{cardx} Regression Example\n\nlibrary(survival)\n\n# build model\nmod &lt;- pharmaverseadam::adtte_onco |&gt; \n  dplyr::filter(PARAM %in% \"Progression Free Survival\") |&gt;\n  coxph(ggsurvfit::Surv_CNSR() ~ ARM, data = _)\n\n# put model in a summary table\ntbl &lt;- gtsummary::tbl_regression(mod, exponentiate = TRUE) |&gt; \n  gtsummary::add_n(location = c('label', 'level')) |&gt; \n  gtsummary::add_nevent(location = c('label', 'level'))\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN\nEvent N\nHR1\n95% CI1\np-value\n\n\n\n\nDescription of Planned Arm\n254\n6\n\n\n\n\n\n\n\n\n    Placebo\n86\n3\n—\n—\n\n\n\n\n    Xanomeline High Dose\n84\n2\n3.00\n0.39, 22.9\n0.3\n\n\n    Xanomeline Low Dose\n84\n1\n1.27\n0.11, 14.3\n0.8\n\n\n\n1 HR = Hazard Ratio, CI = Confidence Interval"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-regression-example-1",
-    "href": "slides/02-intro-cardx/index.html#cardx-regression-example-1",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} Regression Example",
-    "text": "{cardx} Regression Example\nThe cardx::ard_regression() does a lot for us in the background.\n\nIdentifies the variable from the regression terms (i.e. groups levels of the same variable)\nIdentifies reference groups from categorical covariates\nFinds variable labels from the source data frames\nKnows the total N of the model, the number of events, and can do the same for each level of categorical variables\nContextually aware of slopes, odds ratios, hazard ratios, and incidence rate ratios\nAnd much much more."
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-exercise",
-    "href": "slides/02-intro-cardx/index.html#cardx-exercise",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} Exercise",
-    "text": "{cardx} Exercise\n\nOpen exercises/03-cardx.R\nCompute the demographic summaries as described\n\n\n\n\n−+\n08:00"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-exercise-solution",
-    "href": "slides/02-intro-cardx/index.html#cardx-exercise-solution",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} Exercise Solution",
-    "text": "{cardx} Exercise Solution\nPrompt: Compare AGE, SEX, RACE distributions across treatment arms (TRT01A)\nA. First, compute the Kruskal-Wallis test for AGE by TRT01A\n\nadsl &lt;- pharmaverseadam::adsl |&gt; dplyr::filter(SAFFL == \"Y\") \n\nkruskal_ard &lt;-  \n  cardx::ard_stats_kruskal_test( \n    data = adsl,  \n    by = TRT01A, \n    variables = AGE \n  ) \n\nkruskal_ard\n\n{cards} data frame: 4 x 9\n\n\n  group1 variable   context stat_name stat_label      stat\n1 TRT01A      AGE stats_kr… statistic  Kruskal-…     3.879\n2 TRT01A      AGE stats_kr…   p.value    p-value     0.144\n3 TRT01A      AGE stats_kr… parameter  Degrees …         2\n4 TRT01A      AGE stats_kr…    method     method Kruskal-…\n\n\nℹ 3 more variables: fmt_fn, warning, error"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-exercise-solution-demographic-comparison-with-cardx",
-    "href": "slides/02-intro-cardx/index.html#cardx-exercise-solution-demographic-comparison-with-cardx",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} Exercise Solution: Demographic comparison with {cardx}",
-    "text": "{cardx} Exercise Solution: Demographic comparison with {cardx}\nSecond, compute the Chi-squared test for SEX, RACE by TRT01A\n\n\nchisq_ard &lt;-  \n  cardx::ard_stats_chisq_test( \n    data = adsl,  \n    by = TRT01A, \n    variables = c(SEX, RACE) \n  ) \nchisq_ard |&gt; \n  dplyr::filter(!stat_name %in% c(\"p\", \"B\")) |&gt; \n  dplyr::select(-warning)\n\n{cards} data frame: 14 x 8\n\n\n   group1 variable   context        stat_name stat_label      stat\n1  TRT01A      SEX stats_ch…        statistic  X-square…     2.761\n2  TRT01A      SEX stats_ch…          p.value    p-value     0.251\n3  TRT01A      SEX stats_ch…        parameter  Degrees …         2\n4  TRT01A      SEX stats_ch…           method     method Pearson'…\n5  TRT01A      SEX stats_ch…          correct    correct      TRUE\n6  TRT01A      SEX stats_ch…        rescale.p  rescale.p     FALSE\n7  TRT01A      SEX stats_ch… simulate.p.value  simulate…     FALSE\n8  TRT01A     RACE stats_ch…        statistic  X-square…     4.577\n9  TRT01A     RACE stats_ch…          p.value    p-value     0.334\n10 TRT01A     RACE stats_ch…        parameter  Degrees …         4\n11 TRT01A     RACE stats_ch…           method     method Pearson'…\n12 TRT01A     RACE stats_ch…          correct    correct      TRUE\n13 TRT01A     RACE stats_ch…        rescale.p  rescale.p     FALSE\n14 TRT01A     RACE stats_ch… simulate.p.value  simulate…     FALSE\n\n\nℹ 2 more variables: fmt_fn, error"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#cardx-exercise-solution-demographic-comparison-with-cardx-1",
-    "href": "slides/02-intro-cardx/index.html#cardx-exercise-solution-demographic-comparison-with-cardx-1",
-    "title": "{cardx} & other extras",
-    "section": "{cardx} Exercise Solution: Demographic comparison with {cardx}",
-    "text": "{cardx} Exercise Solution: Demographic comparison with {cardx}\nCombine your results with cards::bind_ard() and subset the ARD to include the rows with p-values only\n\nfinal_ard &lt;-  \n  cards::bind_ard( \n    kruskal_ard,  \n    chisq_ard \n  ) |&gt;  \n  dplyr::filter(stat_name == \"p.value\") \n\nfinal_ard\n\n{cards} data frame: 3 x 9\n\n\n  group1 variable stat_name stat_label  stat   warning\n1 TRT01A      AGE   p.value    p-value 0.144          \n2 TRT01A      SEX   p.value    p-value 0.251          \n3 TRT01A     RACE   p.value    p-value 0.334 Chi-squa…\n\n\nℹ 3 more variables: context, fmt_fn, error\n\nfinal_ard$warning[[3]]\n\n[1] \"Chi-squared approximation may be incorrect\""
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#when-things-go-wrong",
-    "href": "slides/02-intro-cardx/index.html#when-things-go-wrong",
-    "title": "{cardx} & other extras",
-    "section": "When things go wrong 😱",
-    "text": "When things go wrong 😱\nWhat happens when statistics are un-calculable?\n\nard_gone_wrong &lt;- \n  cards::ADSL |&gt; \n  cards::ard_continuous(\n    by = ARM,\n    variable = AGEGR1,\n    statistic = ~list(kurtosis = \\(x) e1071::kurtosis(x))\n  ) |&gt; \n  cards::replace_null_statistic()\nard_gone_wrong\n\n{cards} data frame: 3 x 10\n\n\n  group1 group1_level variable stat_name stat_label stat   warning     error\n1    ARM      Placebo   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n2    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n3    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n\n\nℹ 2 more variables: context, fmt_fn\n\n\n\ncards::print_ard_conditions(ard_gone_wrong)\n\n\n\n\nWhere is the statistic? AGEGR1 is character\nEven when there are errors or warnings, we still get the ARD with the expected structure returned.\n\nTHIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.\nThis allows you to design everything up-front.\n\nWe can also report these warnings and errors back to users. &lt;!CLICK!&gt;"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#mock-ards",
-    "href": "slides/02-intro-cardx/index.html#mock-ards",
-    "title": "{cardx} & other extras",
-    "section": "Mock ARDs",
-    "text": "Mock ARDs\nLike mock tables, mock ARDs are often useful as well\n\ncards::bind_ard(\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\"))),\n  cards::mock_continuous(variables = \"AGE\")\n) |&gt; \n  cards::apply_fmt_fn()\n\n{cards} data frame: 14 x 10\n\n\n   variable variable_level stat_name stat_label stat stat_fmt\n1    AGEGR1            &lt;65         n          n            xx\n2    AGEGR1            &lt;65         p          %          xx.x\n3    AGEGR1            &lt;65         N          N            xx\n4    AGEGR1           &gt;=65         n          n            xx\n5    AGEGR1           &gt;=65         p          %          xx.x\n6    AGEGR1           &gt;=65         N          N            xx\n7       AGE                        N          N            xx\n8       AGE                     mean       Mean          xx.x\n9       AGE                       sd         SD          xx.x\n10      AGE                   median     Median          xx.x\n11      AGE                      p25         Q1          xx.x\n12      AGE                      p75         Q3          xx.x\n13      AGE                      min        Min          xx.x\n14      AGE                      max        Max          xx.x\n\n\nℹ 4 more variables: context, fmt_fn, warning, error"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#mock-ards-1",
-    "href": "slides/02-intro-cardx/index.html#mock-ards-1",
-    "title": "{cardx} & other extras",
-    "section": "Mock ARDs",
-    "text": "Mock ARDs\n\ncards::bind_ard(\n  cards::mock_continuous(variables = \"AGE\", \n                         by = list(ARM = c(\"Drug A\", \"Drug B\"))),\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\")),\n                          by = list(ARM = c(\"Drug A\", \"Drug B\")))\n) |&gt; \n  gtsummary::tbl_ard_summary(\n    by = ARM,\n    type  = AGE ~ \"continuous2\",\n    statistic = AGE ~ c(\"{N}\", \"{mean} ({sd})\", \"{median} ({p25}, {p75})\")\n  )\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nAGE\n\n\n\n\n\n\n    N\nxx\nxx\n\n\n    Mean (SD)\nxx.x (xx.x)\nxx.x (xx.x)\n\n\n    Median (Q1, Q3)\nxx.x (xx.x, xx.x)\nxx.x (xx.x, xx.x)\n\n\nAGEGR1\n\n\n\n\n\n\n    &lt;65\nxx (xx.x%)\nxx (xx.x%)\n\n\n    &gt;=65\nxx (xx.x%)\nxx (xx.x%)\n\n\n\n1 n (%)"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/index.html#other-ard-representations",
-    "href": "slides/02-intro-cardx/index.html#other-ard-representations",
-    "title": "{cardx} & other extras",
-    "section": "Other ARD Representations",
-    "text": "Other ARD Representations\nWhile the data frame-based ARD is easy to work with, language-agnostic representations are often useful.\n\n\nYAML\n\ncards::as_nested_list(ard) |&gt; \n  yaml::as.yaml() |&gt; \n  cat()\n\nvariable:\n  AGE:\n    group1:\n      ARM:\n        group1_level:\n          Placebo:\n            stat_name:\n              'N':\n                stat: 86\n                stat_fmt: '86'\n                warning: ~\n                error: ~\n                context: continuous\n              mean:\n                stat: 75.2093023\n...\n\n\n\nJSON\n\ncards::as_nested_list(ard) |&gt; \n  jsonlite::toJSON(pretty = TRUE)\n\n{\n  \"variable\": {\n    \"AGE\": {\n      \"group1\": {\n        \"ARM\": {\n          \"group1_level\": {\n            \"Placebo\": {\n              \"stat_name\": {\n                \"N\": {\n                  \"stat\": [86],\n                  \"stat_fmt\": [\"86\"],\n                  \"warning\": {},\n                  \"error\": {},\n                  \"context\": [\"continuous\"]\n                },\n...\n\n\n\n\n\n\n\nbit.ly/rpharma-ard"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/02-extras.html",
-    "href": "slides/02-intro-cardx/02-extras.html",
-    "title": "Analysis Results Datasets",
-    "section": "",
-    "text": "What happens when statistics are un-calculable?\n\nard_gone_wrong &lt;- \n  cards::ADSL |&gt; \n  cards::ard_continuous(\n    by = ARM,\n    variable = AGEGR1,\n    statistic = ~list(kurtosis = \\(x) e1071::kurtosis(x))\n  ) |&gt; \n  cards::replace_null_statistic()\nard_gone_wrong\n\n{cards} data frame: 3 x 10\n\n\n  group1 group1_level variable stat_name stat_label stat   warning     error\n1    ARM      Placebo   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n2    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n3    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n\n\nℹ 2 more variables: context, fmt_fn\n\n\n\ncards::print_ard_conditions(ard_gone_wrong)\n\n\n\n\nWhere is the statistic? AGEGR1 is character\nEven when there are errors or warnings, we still get the ARD with the expected structure returned.\n\nTHIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.\nThis allows you to design everything up-front.\n\nWe can also report these warnings and errors back to users. &lt;!CLICK!&gt;"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/02-extras.html#when-things-go-wrong",
-    "href": "slides/02-intro-cardx/02-extras.html#when-things-go-wrong",
-    "title": "Analysis Results Datasets",
-    "section": "",
-    "text": "What happens when statistics are un-calculable?\n\nard_gone_wrong &lt;- \n  cards::ADSL |&gt; \n  cards::ard_continuous(\n    by = ARM,\n    variable = AGEGR1,\n    statistic = ~list(kurtosis = \\(x) e1071::kurtosis(x))\n  ) |&gt; \n  cards::replace_null_statistic()\nard_gone_wrong\n\n{cards} data frame: 3 x 10\n\n\n  group1 group1_level variable stat_name stat_label stat   warning     error\n1    ARM      Placebo   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n2    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n3    ARM    Xanomeli…   AGEGR1  kurtosis   kurtosis   NA argument… non-nume…\n\n\nℹ 2 more variables: context, fmt_fn\n\n\n\ncards::print_ard_conditions(ard_gone_wrong)\n\n\n\n\nWhere is the statistic? AGEGR1 is character\nEven when there are errors or warnings, we still get the ARD with the expected structure returned.\n\nTHIS IS BIG! There are MANY circumstances, when you are designing TLGs early in a study when you do not have all the data required to calculate every statistic.\nThis allows you to design everything up-front.\n\nWe can also report these warnings and errors back to users. &lt;!CLICK!&gt;"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/02-extras.html#mock-ards",
-    "href": "slides/02-intro-cardx/02-extras.html#mock-ards",
-    "title": "Analysis Results Datasets",
-    "section": "Mock ARDs",
-    "text": "Mock ARDs\nLike mock tables, mock ARDs are often useful as well\n\ncards::bind_ard(\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\"))),\n  cards::mock_continuous(variables = \"AGE\")\n) |&gt; \n  cards::apply_fmt_fn()\n\n{cards} data frame: 14 x 10\n\n\n   variable variable_level stat_name stat_label stat stat_fmt\n1    AGEGR1            &lt;65         n          n            xx\n2    AGEGR1            &lt;65         p          %          xx.x\n3    AGEGR1            &lt;65         N          N            xx\n4    AGEGR1           &gt;=65         n          n            xx\n5    AGEGR1           &gt;=65         p          %          xx.x\n6    AGEGR1           &gt;=65         N          N            xx\n7       AGE                        N          N            xx\n8       AGE                     mean       Mean          xx.x\n9       AGE                       sd         SD          xx.x\n10      AGE                   median     Median          xx.x\n11      AGE                      p25         Q1          xx.x\n12      AGE                      p75         Q3          xx.x\n13      AGE                      min        Min          xx.x\n14      AGE                      max        Max          xx.x\n\n\nℹ 4 more variables: context, fmt_fn, warning, error"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/02-extras.html#mock-ards-1",
-    "href": "slides/02-intro-cardx/02-extras.html#mock-ards-1",
-    "title": "Analysis Results Datasets",
-    "section": "Mock ARDs",
-    "text": "Mock ARDs\n\ncards::bind_ard(\n  cards::mock_continuous(variables = \"AGE\", \n                         by = list(ARM = c(\"Drug A\", \"Drug B\"))),\n  cards::mock_categorical(variables = list(AGEGR1 = c(\"&lt;65\", \"&gt;=65\")),\n                          by = list(ARM = c(\"Drug A\", \"Drug B\")))\n) |&gt; \n  gtsummary::tbl_ard_summary(\n    by = ARM,\n    type  = AGE ~ \"continuous2\",\n    statistic = AGE ~ c(\"{N}\", \"{mean} ({sd})\", \"{median} ({p25}, {p75})\")\n  )\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nDrug A1\nDrug B1\n\n\n\n\nAGE\n\n\n\n\n\n\n    N\nxx\nxx\n\n\n    Mean (SD)\nxx.x (xx.x)\nxx.x (xx.x)\n\n\n    Median (Q1, Q3)\nxx.x (xx.x, xx.x)\nxx.x (xx.x, xx.x)\n\n\nAGEGR1\n\n\n\n\n\n\n    &lt;65\nxx (xx.x%)\nxx (xx.x%)\n\n\n    &gt;=65\nxx (xx.x%)\nxx (xx.x%)\n\n\n\n1 n (%)"
-  },
-  {
-    "objectID": "slides/02-intro-cardx/02-extras.html#other-ard-representations",
-    "href": "slides/02-intro-cardx/02-extras.html#other-ard-representations",
-    "title": "Analysis Results Datasets",
-    "section": "Other ARD Representations",
-    "text": "Other ARD Representations\nWhile the data frame-based ARD is easy to work with, language-agnostic representations are often useful.\n\n\nYAML\n\ncards::as_nested_list(ard) |&gt; \n  yaml::as.yaml() |&gt; \n  cat()\n\nvariable:\n  AGE:\n    group1:\n      ARM:\n        group1_level:\n          Placebo:\n            stat_name:\n              'N':\n                stat: 86\n                stat_fmt: '86'\n                warning: ~\n                error: ~\n                context: continuous\n              mean:\n                stat: 75.2093023\n...\n\n\n\nJSON\n\ncards::as_nested_list(ard) |&gt; \n  jsonlite::toJSON(pretty = TRUE)\n\n{\n  \"variable\": {\n    \"AGE\": {\n      \"group1\": {\n        \"ARM\": {\n          \"group1_level\": {\n            \"Placebo\": {\n              \"stat_name\": {\n                \"N\": {\n                  \"stat\": [86],\n                  \"stat_fmt\": [\"86\"],\n                  \"warning\": {},\n                  \"error\": {},\n                  \"context\": [\"continuous\"]\n                },\n..."
+    "text": "Most of the tables we create in the pharma space come from a catalog of standard tables.\nCustom or one-off tables are often quite difficult and time intensive to create.\nThe {gtsummary} package makes it simple to break complex tables into their simple parts and cobble them together in the end.\nMoreover, the internal structure of a gtsummary table is super simple: a data frame and instructions on how to print that data frame to make it cute. If needed, you can directly modify the underlying data frame with modify_table_body().\n\n\n\ntrial |&gt; tbl_summary(include = c(age, grade), by = trt) |&gt; purrr::pluck(\"table_body\")\n\n# A tibble: 6 × 7\n  variable var_type    row_type var_label label   stat_1      stat_2     \n  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      \n1 age      continuous  label    Age       Age     46 (37, 60) 48 (39, 56)\n2 age      continuous  missing  Age       Unknown 7           4          \n3 grade    categorical label    Grade     Grade   &lt;NA&gt;        &lt;NA&gt;       \n4 grade    categorical level    Grade     I       35 (36%)    33 (32%)   \n5 grade    categorical level    Grade     II      32 (33%)    36 (35%)   \n6 grade    categorical level    Grade     III     31 (32%)    33 (32%)"
   },
   {
     "objectID": "slides/03-tables-gtsummary/07-themes.html",
