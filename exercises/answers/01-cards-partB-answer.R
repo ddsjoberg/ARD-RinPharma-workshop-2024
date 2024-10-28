@@ -18,6 +18,7 @@ ard_stack_hierarchical(
   variables = c(AESOC, AEDECOD),
   by = c(TRT01A, AESEV), 
   id = USUBJID,
-  denominator = adsl
+  denominator = adsl,
+  over_variables = TRUE
 )
  
