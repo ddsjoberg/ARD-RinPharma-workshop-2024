@@ -139,5 +139,6 @@ cards::as_nested_list(ard) |>
 ```{r}
 #| echo: false
 #| cache: false
+library(countdown)
 countdown(minutes = 10)
 ```
