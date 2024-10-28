@@ -3,6 +3,7 @@ title: "Unlocking Analysis Results Datasets"
 subtitle: "Wrap-up"
 author: "Daniel D. Sjoberg and Becca Krouse"
 logo: "images/cards-hex.png"
+footer: "[bit.ly/rpharma-ard](https://bit.ly/rpharma-ard)"
 editor: source
 engine: knitr
 format: 

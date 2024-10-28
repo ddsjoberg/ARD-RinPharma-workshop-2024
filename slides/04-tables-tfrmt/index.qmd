@@ -2,6 +2,7 @@
 title: "ARD to Tables with {tfrmt}" 
 author: "Daniel D. Sjoberg and Becca Krouse"
 logo: "images/tfrmt-hex.png"
+footer: "[bit.ly/rpharma-ard](https://bit.ly/rpharma-ard)"
 editor: source
 engine: knitr
 format: 
