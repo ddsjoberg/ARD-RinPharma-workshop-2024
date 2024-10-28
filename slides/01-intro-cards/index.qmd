@@ -17,7 +17,36 @@ execute:
 cache: false
 ---
 
-# Introduction
+## Instructors
+
+:::: {.columns}
+
+::: {.column}
+:::{.larger}
+Who are we? 
+
+What do we do? 
+
+Why are we here?
+:::
+:::
+
+::: {.column}
+
+![Daniel Sjoberg, Genentech](images/dan-circle.png){fig-alt="Headshot of Daniel Sjoberg" width="300"}
+:::
+::: {.column}
+
+![Becca Krouse, GSK](images/becca.png){fig-alt="Headshot of Becca Krouse" width="200"}
+:::
+
+::: {.column}
+
+![Jack Talboys, Novartis](images/jack-circle.png){fig-alt="Headshot of Jack Talboys" width="200"}
+
+:::
+
+::::
 
 
 {{< include intro.qmd >}}
