@@ -20,5 +20,6 @@ ard_stack_hierarchical(
   variables = ,
   by = , 
   id = ,
-  denominator = 
+  denominator = ,
+  over_variables = 
 ) 

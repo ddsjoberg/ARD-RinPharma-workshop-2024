@@ -34,7 +34,7 @@ Slido quiz time!
 
 ## Working environment
 
--   For consistency, we will be working in RStudio Cloud  
+-   For consistency, we will be working in Posit Cloud  
 
 -   Everything has been installed and set up for you 
 
