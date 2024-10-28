@@ -32,3 +32,5 @@ cache: false
 
 
 {{< include tfrmt.qmd >}}
+
+{{< include wrapup.qmd >}}
