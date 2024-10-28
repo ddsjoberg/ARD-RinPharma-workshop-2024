@@ -48,7 +48,17 @@ Why are we here?
 
 ::::
 
+## Workshop outline
+
+1. Introduction to the Analysis Results Standard and {cards}
+
+2. Introduction to the {cardx} Package and ARD Extras
+
+3. ARD to Tables with {gtsummary}
+
+4. ARD to Tables with {tfrmt}
 
 {{< include intro.qmd >}}
+
 {{< include cards.qmd >}}
  

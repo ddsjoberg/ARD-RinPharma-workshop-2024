@@ -32,16 +32,6 @@ Slido quiz time!
 
 :::
 
-## Workshop outline
-
-1. Introduction to the Analysis Results Standard and {cards}
-
-2. Introduction to the {cardx} Package and ARD Extras
-
-3. ARD to Tables with {gtsummary}
-
-4. ARD to Tables with {tfrmt}
-
 ## Working environment
 
 -   For consistency, we will be working in RStudio Cloud  
